@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://jordonwu.github.io/atom.xml" rel="self"/>
   <link href="http://jordonwu.github.io/"/>
-  <updated>2015-04-15T13:51:27+08:00</updated>
+  <updated>2015-04-15T13:55:32+08:00</updated>
   <id>http://jordonwu.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Octopress Install and Usage on Windows 7]]></title>
-    <link href="http://jordonwu.github.io/blog/2014/04/14/install-octopress-on-windows-7/"/>
-    <updated>2014-04-14T09:15:12+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2014/04/14/install-octopress-on-windows-7</id>
+    <link href="http://jordonwu.github.io/blog/2015/04/14/install-octopress-on-windows-7/"/>
+    <updated>2015-04-14T09:15:12+08:00</updated>
+    <id>http://jordonwu.github.io/blog/2015/04/14/install-octopress-on-windows-7</id>
     <content type="html"><![CDATA[<ol>
 <li><p>Install git</p>
 
