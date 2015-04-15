@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Jordon Wu's Blog]]></title>
   <link href="http://jordonwu.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://jordonwu.github.io/"/>
-  <updated>2015-04-15T18:10:34+08:00</updated>
+  <updated>2015-04-15T18:18:31+08:00</updated>
   <id>http://jordonwu.github.io/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
@@ -400,15 +400,13 @@ disqus_show_comment_count: true
 
 <h3>14.4 Enable comment on your blog as below</h3>
 
-<pre><code>`
----
+<pre><code>---
 layout: post
 title: "title name"
 date: 2015-04-15 14:51:54 +0800
 comments: true
 categories: category1, category2 
 ---
-`
 </code></pre>
 ]]></content>
   </entry>
