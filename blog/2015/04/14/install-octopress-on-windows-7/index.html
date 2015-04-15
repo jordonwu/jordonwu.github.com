@@ -416,7 +416,7 @@
     #now you can access you blog using github address on any browser: http://username.github.com
 </code></pre>
 
-<h2>13.  Management blog source code</h2>
+<h2>13. Management blog source code</h2>
 
 <h3>13.1 Add file to local repo</h3>
 
@@ -453,6 +453,32 @@
 </code></pre>
 
 <p>=<a href="../images/test.txt---">Attached file here(test.txt)</a></p>
+
+<h2>14  Enable comment</h2>
+
+<h3>14.1 Register an account on www.disqus.com</h3>
+
+<h3>14.2 Register &ldquo;unique Disqus URL&rdquo; for github blog</h3>
+
+<h3>14.3 Edit _config.yml as below</h3>
+
+<pre><code># Disqus Comments
+disqus_short_name: site_short_name_register_on_disqus
+disqus_show_comment_count: true
+</code></pre>
+
+<h3>14.4 Enable comment on your blog as below</h3>
+
+<pre><code>`
+---
+layout: post
+title: "title name"
+date: 2015-04-15 14:51:54 +0800
+comments: true
+categories: category1, category2 
+---
+`
+</code></pre>
 </div>
 
 
