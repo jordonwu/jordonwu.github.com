@@ -9,8 +9,8 @@
   <meta name="author" content="Jordon Wu">
 
   
-  <meta name="description" content="
-">
+  <meta name="description" content="1. Get u-boot source git clone https://github.com/Freescale/u-boot-fslc.git 2. make &amp; build $cd u-boot-fslc
+$export ARCH=arm $export &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -72,7 +72,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/04/15/build-u-boot-for-riot-board/">Build-u-boot-for-riot-board</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/04/15/build-u-boot-for-riot-board/">Build U-boot for Riot Board</a></h1>
     
     
       <p class="meta">
@@ -81,14 +81,32 @@
 
 
 
-<time class='entry-date' datetime='2015-04-15T15:00:39+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:00 pm</span></time>
+<time class='entry-date' datetime='2015-04-15T14:52:23+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:52 pm</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content">
+  <div class="entry-content"><h2>1. Get u-boot source</h2>
+
+<pre><code>git clone https://github.com/Freescale/u-boot-fslc.git
+</code></pre>
+
+<h2>2. make &amp; build</h2>
+
+<pre><code>$cd u-boot-fslc
+$export ARCH=arm 
+$export CROSS_COMPILE=arm-linux-gnueabihf-
+$make riotboard_defconfig 
+$make
+$ls ls -l u-boot.*
+    -rw-rw-r-- 1 jordon jordon 331492 Dec  7 05:44 u-boot.bin
+    -rw-rw-r-- 1 jordon jordon 334848 Dec  7 05:44 u-boot.imx
+    -rw-rw-r-- 1 jordon jordon   1286 Dec  7 05:44 u-boot.lds
+    -rw-rw-r-- 1 jordon jordon 317244 Dec  7 05:44 u-boot.map
+    -rw-rw-r-- 1 jordon jordon 994618 Dec  7 05:44 u-boot.srec
+</code></pre>
 </div>
   
   
@@ -576,7 +594,7 @@ comments: true</p>
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2015/04/15/build-u-boot-for-riot-board/">Build-u-boot-for-riot-board</a>
+        <a href="/blog/2015/04/15/build-u-boot-for-riot-board/">Build U-boot for Riot Board</a>
       </li>
     
       <li class="post">
