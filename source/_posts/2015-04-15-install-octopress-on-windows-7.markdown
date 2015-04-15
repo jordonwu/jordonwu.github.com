@@ -320,9 +320,9 @@ categories: octopress github blog
         
         #now you can access you blog using github address on any browser: http://username.github.com
                 
-## 13. 	Management blog source code	 ##
+## 	13. Management blog source code	 ##
         
-### 13.1 Add file to local repo ###
+###	13.1 Add file to local repo ###
         
         $ git add .
         
@@ -350,7 +350,31 @@ categories: octopress github blog
     	1) add attach file to source/images folder
     	2) add a hyperlink and link address point to your file(such as ../images/test.txt)
 
-=[Attached file here(test.txt)][1]              
+=[Attached file here(test.txt)][1]
+
+
+## 	14	Enable comment ##
+
+### 14.1 Register an account on www.disqus.com ###
+
+### 14.2 Register "unique Disqus URL" for github blog ###
+
+### 14.3 Edit _config.yml as below###
+	
+	# Disqus Comments
+	disqus_short_name: site_short_name_register_on_disqus
+	disqus_show_comment_count: true
+              
+### 14.4 Enable comment on your blog as below ###
+	
+	---
+	layout: post
+	title: "title name"
+	date: 2015-04-15 14:51:54 +0800
+	comments: true
+	categories: category1, category2 
+	---
+		
 
   [1]: ../images/test.txt---
 
