@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Jordon Wu's Blog]]></title>
   <link href="http://jordonwu.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://jordonwu.github.io/"/>
-  <updated>2015-04-15T18:18:31+08:00</updated>
+  <updated>2015-04-15T18:48:34+08:00</updated>
   <id>http://jordonwu.github.io/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
@@ -383,7 +383,7 @@
     2) add a hyperlink and link address point to your file(such as ../images/test.txt)
 </code></pre>
 
-<p>=<a href="../images/test.txt---">Attached file here(test.txt)</a></p>
+<p>=<a href="../images/test.txt">Attached file here(test.txt)</a></p>
 
 <h2>14  Enable comment</h2>
 
