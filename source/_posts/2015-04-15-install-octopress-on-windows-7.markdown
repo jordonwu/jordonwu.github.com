@@ -376,5 +376,5 @@ categories: octopress github blog
 	---
 		
 
-  [1]: ../images/test.txt---
+  [1]: ../images/test.txt
 
