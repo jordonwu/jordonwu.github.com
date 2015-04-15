@@ -2,30 +2,30 @@
 layout: post
 title: Octopress Install and Usage on Windows 7
 date: 2015-04-14 09:15:12 +0800
-categories: octopress, github, blog
+categories: octopress github blog
 ---
 
-1. Install git
+## 1. 	Install git ##
  	
-    Version : Git-1.9.2-preview20140411.exe
+    	Version : Git-1.9.2-preview20140411.exe
     
- 2. Install RubyInstaller
+## 2. 	Install RubyInstaller ##
  
-    Version: rubyinstaller-2.1.5-x64
+    	Version: rubyinstaller-2.1.5-x64
     
- 3. Add Ruby install path(Example: D:\Ruby\Ruby21-x64\bin) to user's PATH Environment Variable
+## 3. 	Add Ruby install path(Example: D:\Ruby\Ruby21-x64\bin) to user's PATH Environment Variable ##
     
- 4. Install RubyInstaller DevKit
+## 4. 	Install RubyInstaller DevKit ##
     
-    Version: DevKit-mingw64-64-4.7.2-20130224-1432-sfx.exe
+    	Version: DevKit-mingw64-64-4.7.2-20130224-1432-sfx.exe
     
- 5. RubyInstaller DevKit configure
+## 5. 	RubyInstaller DevKit configure ##
 
-        1) change to DevKit install dir
+### 5.1	change to DevKit install dir ###
     
         D:\> cd d:\Ruby\DevKit
     
-        2) ruby dk.rb init
+### 5.2	ruby dk.rb init ###
     
         d:\Ruby\DevKit> ruby dk.rb init
 
@@ -49,12 +49,12 @@ categories: octopress, github, blog
         ######################################################################
     
         
-        3) ruby dk.rb install
+### 5.3	ruby dk.rb install ###
     
         d:\Ruby\DevKit> ruby dk.rb install
     
 
- 6. Change ruby sources to "http://ruby.taobao.org/"
+## 6. 	Change ruby sources to "http://ruby.taobao.org/" ##
     
         D:\> cd d:\Ruby\DevKit
         
@@ -71,7 +71,8 @@ categories: octopress, github, blog
         http://ruby.taobao.org/
     
 
- 7. Install rdoc and bundler
+## 7. 	Install rdoc and bundler ##
+
      
         D:\> cd d:\Ruby\DevKit
         
@@ -92,17 +93,17 @@ categories: octopress, github, blog
         2 gems installed
     
     
-8       Install Octopress blog if you first using it on github
+## 8	Install Octopress blog if you first using it on github ##
 
-8.1     Create repo on your github
+### 8.1	Create repo on your github ###
 
         Create a repo named username.github.com.git on your github
 
-8.2     Clone octopress.git
+### 8.2 Clone octopress.git ###
         
         $ git clone git://github.com/imathis/octopress.git username.github.com
         
-8.3     Modify octopress GEM Source
+### 8.3 Modify octopress GEM Source ###
 
         $cd username.github.com
         
@@ -110,7 +111,7 @@ categories: octopress, github, blog
         
         source "http://ruby.taobao.org/"
         
-8.4     Install GEM component
+### 8.4	Install GEM component ###
 
         $ bundle install
         
@@ -189,7 +190,7 @@ categories: octopress, github, blog
         http://rubydoc.info/github/haml/haml/file/CHANGELOG.md
         
         
-8.5     Install Octopress template file
+### 8.5	Install Octopress template file ###
 
         $ rake install
         
@@ -208,9 +209,9 @@ categories: octopress, github, blog
         $ rake install
 
 
-9       Clone your Octopress if you had used it on github
+## 9 	Clone your Octopress if you had used it on github ##
     
-9.1     Clone your Octopress repo
+### 9.1	Clone your Octopress repo ###
     
         $ git clone -b source https://github.com/username/username.github.com.git username.github.com.git   # replace username using yours
         
@@ -221,7 +222,7 @@ categories: octopress, github, blog
         Resolving deltas: 100% (2537/2537), done.
         Checking connectivity... done.
 
-9.2     Install Octopress GEM component
+### 9.2	Install Octopress GEM component ###
         
         $ cd username.github.com.git
         
@@ -262,7 +263,7 @@ categories: octopress, github, blog
         Use `bundle show [gemname]` to see where a bundled gem is installed.
         
         
-9.3     Install Octopress template file
+### 9.3	Install Octopress template file ###
 
         $ rake install
         
@@ -280,7 +281,7 @@ categories: octopress, github, blog
         $ aliasalias rake='bundle exec rake'
         $ rake install
     
-10      Add a remote name(default is origin) for the repository git@github.com:username/username.github.com.git
+## 10	Add a remote name(default is origin) for the repository git@github.com:username/username.github.com.git ##
     
         $ cd username.github.com.git
         $ git remote
@@ -289,72 +290,67 @@ categories: octopress, github, blog
         
         $ git remote add origin git@github.com:username/username.github.com.git #default name is origin, you can change it
         
-11      setup octopress and github
+## 11	setup octopress and github ##
 
         $ cd username.github.com.git
         $ rake setup_github_pages       #you need input username and password of you github account and blog url(https://github.com/username/username.github.com.git)
         
 
-12. Management blog
+## 12.	Management blog ##
 
         $ cd username.github.com.git
     
-12.1    Add blog
+### 12.1 Add blog ###
 
         $ rake new_post["blog_name"]
     
-12.2    Generate static file
+### 12.2 Generate static file ###
 
         $ rake generate
     
-12.3    Preview blog
+### 12.3 Preview blog ###
 
         $ rake preview
     
         #now you can preview blog using local address on any browser: http://localhost:4000
     
-12.4    Deploy blog to github
+### 12.4 Deploy blog to github ###
 
         $rake deploy
         
         #now you can access you blog using github address on any browser: http://username.github.com
                 
-13. Management blog source code	
+## 13. 	Management blog source code	 ##
         
-13.1    Add file to local repo
+### 13.1 Add file to local repo ###
         
         $ git add .
         
-13.2    Commit file to repo
+### 13.2 Commit file to repo ###
 
         $ git commit -m "commit file comment"
         
-13.3    Push local repo file to remote
+### 13.3 Push local repo file to remote ###
 
         $ git push origin source #origin is local repo name, source is branch name
         
-13.4    Pull last remote repo file to local
+### 13.4 Pull last remote repo file to local ###
 	
         $ git pull orign source
 
-13.5 	Add a image to your blog
+### 13.5 Add a image to your blog ###
 
-	1) add image file to source/images folder
-	2) add below code to you blog
+		1) add image file to source/images folder
+		2) add below code to you blog
 	
-	![a brick](../images/a_brick.png "A brick")
+		![a brick](../images/a_brick.png "A brick")
 
-13.6 	Add attach file to your blog
+### 13.6 Add attach file to your blog ###
 
-    1) add attach file to source/images folder
-    2) add a hyperlink and link address point to your file(such as ../images/test.txt)
+    	1) add attach file to source/images folder
+    	2) add a hyperlink and link address point to your file(such as ../images/test.txt)
 
 =[Attached file here(test.txt)][1]              
 
   [1]: ../images/test.txt---
-layout: post
-title: "install octopress on windows 7"
-date: 2015-04-15 13:50:07 +0800
-comments: true
-categories: 
----
+

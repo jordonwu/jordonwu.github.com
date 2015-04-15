@@ -5,7 +5,9 @@ date: 2015-04-15 14:51:54 +0800
 comments: true
 categories: openwrt wrtnode u-boot linux
 ---
+
 # 1. Hardware #
+
 wrtnode board [http://cn.wrtnode.com/](http://cn.wrtnode.com/)
 
 # 2. Backup firmware #
