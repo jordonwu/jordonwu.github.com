@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ltib | Jordon Wu's Blog]]></title>
   <link href="http://jordonwu.github.io/blog/categories/ltib/atom.xml" rel="self"/>
   <link href="http://jordonwu.github.io/"/>
-  <updated>2015-04-24T16:31:29+08:00</updated>
+  <updated>2015-04-24T16:38:07+08:00</updated>
   <id>http://jordonwu.github.io/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
@@ -770,7 +770,8 @@ $ make busybox-menuconfig
     ......
 
     [*] getty
-    [ ] login                                                                                                                       [ ]   Run logged in session in a child process
+    [ ] login                                                                                                                      
+    [ ] Run logged in session in a child process
 
     ......
 
@@ -788,8 +789,13 @@ $ make menuconfig
 
             [*] Freescale i.MX libraries  ---&gt;
 
-    --- Freescale i.MX libraries                                                                                            i.MX platform (imx6q)  ---&gt;                                                                                         *** imx-lib needs an imx-specific Linux kernel to be built ***                                                      *** imx-vpu needs an imx-specific Linux kernel to be built *** |
-    [ ]   firmware-imx (NEW)                                                                                              [*]   gpu-viv-bin-mx6q                                                                                                [*]     install examples 
+    --- Freescale i.MX libraries                                                                                            
+    i.MX platform (imx6q)  ---&gt;                                                                                     
+    *** imx-lib needs an imx-specific Linux kernel to be built ***                                                      
+    *** imx-vpu needs an imx-specific Linux kernel to be built ***
+    [ ]   firmware-imx (NEW)
+    [*]   gpu-viv-bin-mx6q                                                                                                
+    [*]     install examples 
 </code></pre>
 ]]></content>
   </entry>
