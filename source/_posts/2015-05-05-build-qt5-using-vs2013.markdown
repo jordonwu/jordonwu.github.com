@@ -1,0 +1,225 @@
+---
+layout: post
+title: "build qt5 using vs2013"
+date: 2015-05-05 15:09:56 +0800
+comments: true
+categories: qt5 qt3d vs2013
+---
+
+# 1. Install required tools #
+1) Install ActivePerl-5.20.2.2001-MSWin32-x86-64int-298913.msi
+2) Install PowerVRSDKSetup-3.4.exe
+3) Install gingkoVG SDK
+
+# 2. Get qt5 source code #
+
+    Version: qt-everywhere-opensource-src-5.5.0-alpha.tar.xz
+
+# 3. Extract source code and configure #
+    Source dir: F:\download\qt-everywhere-opensource-src-5.5.0-alpha
+	Build dir: F:\download\qt-everywhere-opensource-src-5.5.0-alpha-build
+	
+	start cmd from "Developer Command Prompt for VS2013"
+
+	D:\Microsoft Visual Studio 12.0>
+
+	> set path=D:\perl\bin;%path%
+	> 
+	> set INCLUDE=D:\Imagination\PowerVR_Graphics\PowerVR_SDK\SDK_3.4\Builds\Include;%INCLUDE%
+	> set LIB=D:\Imagination\PowerVR_Graphics\PowerVR_SDK\SDK_3.4\Builds\Windows\x86_64\Lib;%LIB%
+	>
+	> set INCLUDE=D:\assimp-3.1.1-win-binaries\include;%INCLUDE%
+	> set lIB=D:\assimp-3.1.1-win-binaries\lib64;%LIB%
+	>  
+	> F:
+	> cd F:\download\qt-everywhere-opensource-src-5.5.0-alpha\qtbase
+	> Add .gitignore file, contain "foo"
+	> 
+	> cd F:\download\qt-everywhere-opensource-src-5.5.0-alpha-build
+	> 
+	> ..\qt-everywhere-opensource-src-5.5.0-alpha\configure -debug-and-release -confirm-license -opensource -platform win32-msvc2013 -prefix "D:\Qt\Qt5.5.0" -qt-libpng -qt-libjpeg -qt-freetype -opengl desktop -openvg -nomake tests -make examples -skip qtwebkit -skip qtwebengine
+	
+	//configure output
+        copy qmake.exe ..\bin\qmake.exe
+	已复制         1 个文件。
+	Running configuration tests...
+	Environment:
+	    INCLUDE=
+	      D:\Imagination\PowerVR_Graphics\PowerVR_SDK\SDK_3.4\Builds\Include
+	      D:\Microsoft Visual Studio 12.0\VC\INCLUDE
+	      D:\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE
+	      C:\Program Files (x86)\Windows Kits\8.1\include\shared
+	      C:\Program Files (x86)\Windows Kits\8.1\include\um
+	      C:\Program Files (x86)\Windows Kits\8.1\include\winrt
+	
+	    LIB=
+	      D:\Imagination\PowerVR_Graphics\PowerVR_SDK\SDK_3.4\Builds\Windows\x86_64\Lib
+	      D:\Microsoft Visual Studio 12.0\VC\LIB
+	      D:\Microsoft Visual Studio 12.0\VC\ATLMFC\LIB
+	      C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86
+	
+	    PATH=
+	      D:\perl\bin
+	      D:\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow
+	      C:\Program Files (x86)\Microsoft SDKs\F#\3.1\Framework\v4.0\
+	      C:\Program Files (x86)\MSBuild\12.0\bin
+	      D:\Microsoft Visual Studio 12.0\Common7\IDE\
+	      D:\Microsoft Visual Studio 12.0\VC\BIN
+	      D:\Microsoft Visual Studio 12.0\Common7\Tools
+	      C:\Windows\Microsoft.NET\Framework\v4.0.30319
+	      D:\Microsoft Visual Studio 12.0\VC\VCPackages
+	      C:\Program Files (x86)\HTML Help Workshop
+	      D:\Microsoft Visual Studio 12.0\Team Tools\Performance Tools
+	      C:\Program Files (x86)\Windows Kits\8.1\bin\x86
+	      C:\Program Files (x86)\Microsoft SDKs\Windows\v8.1A\bin\NETFX 4.5.1 Tools\
+	      D:\Python27\
+	      D:\Python27\Scripts
+	      D:\Qt\Qt5.4.1\5.4\msvc2013_64\bin
+	      d:\Ruby\Ruby21-x64\bin
+	      C:\ProgramData\Oracle\Java\javapath
+	      C:\Windows\system32
+	      C:\Windows
+	      C:\Windows\System32\Wbem
+	      C:\Windows\System32\WindowsPowerShell\v1.0\
+	      C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\
+	      C:\Program Files\Microsoft SQL Server\110\Tools\Binn\
+	      D:\GL_Studio_3.2\\bin
+	      d:\Git\cmd
+	      D:\TortoiseSVN\bin
+	Configuration:
+	    pcre
+	    debug
+	    compile_examples
+	Qt Configuration:
+	    minimal-config
+	    small-config
+	    medium-config
+	    large-config
+	    full-config
+	    debug_and_release build_all release
+	    debug
+	    shared
+	    zlib
+	    png
+	    freetype
+	    harfbuzz
+	    build_all
+	    accessibility
+	    opengl
+	    openvg
+	    egl
+	    audio-backend
+	    wmf-backend
+	    native-gestures
+	    qpa
+	    concurrent
+	
+	QMAKESPEC...................win32-msvc2013 (commandline)
+	Architecture................i386, features: sse sse2
+	Host Architecture...........i386, features: sse sse2
+	Maketool....................nmake
+	Debug build.................yes (combined)
+	Default build...............debug
+	Force debug info............no
+	C++11 support...............auto
+	Link Time Code Generation...no
+	Accessibility support.......yes
+	RTTI support................yes
+	SSE2 support................yes
+	SSE3 support................yes
+	SSSE3 support...............yes
+	SSE4.1 support..............yes
+	SSE4.2 support..............yes
+	AVX support.................yes
+	AVX2 support................yes
+	NEON support................no
+	OpenGL support..............yes
+	Large File support..........yes
+	NIS support.................no
+	Iconv support...............no
+	Evdev support...............no
+	Mtdev support...............no
+	Inotify support.............no
+	eventfd(7) support..........no
+	Glib support................no
+	CUPS support................no
+	OpenVG support..............yes
+	SSL support.................no
+	OpenSSL support.............no
+	libproxy support............no
+	Qt D-Bus support............no
+	Qt Widgets module support...yes
+	Qt GUI module support.......yes
+	QML debugging...............yes
+	DirectWrite support.........no
+	Use system proxies..........no
+	
+	QPA Backends:
+	    GDI.....................yes
+	    Direct2D................no
+	
+	Third Party Libraries:
+	    ZLIB support............qt
+	    GIF support.............plugin
+	    JPEG support............plugin
+	    PNG support.............yes
+	    FreeType support........yes
+	    Fontconfig support......no
+	    HarfBuzz support........qt
+	    PCRE support............qt
+	    ICU support.............no
+	    ANGLE...................no
+	    Dynamic OpenGL..........no
+	
+	Styles:
+	    Windows.................yes
+	    Windows XP..............yes
+	    Windows Vista...........yes
+	    Fusion..................yes
+	    Windows CE..............no
+	    Windows Mobile..........no
+	
+	Sql Drivers:
+	    ODBC....................no
+	    MySQL...................no
+	    OCI.....................no
+	    PostgreSQL..............no
+	    TDS.....................no
+	    DB2.....................no
+	    SQLite..................plugin (qt)
+	    SQLite2.................no
+	    InterBase...............no
+	
+	Sources are in..............F:\download\qt-everywhere-opensource-src-5.5.0-alpha\qtbase
+	Build is done in............F:\download\qt-everywhere-opensource-src-5.5.0-alpha-build\qtbase
+	Install prefix..............D:\Qt\Qt5.5.0
+	Headers installed to........D:\Qt\Qt5.5.0\include
+	Libraries installed to......D:\Qt\Qt5.5.0\lib
+	Arch-dep. data to...........D:\Qt\Qt5.5.0
+	Plugins installed to........D:\Qt\Qt5.5.0\plugins
+	Library execs installed to..D:\Qt\Qt5.5.0\bin
+	QML1 imports installed to...D:\Qt\Qt5.5.0\imports
+	QML2 imports installed to...D:\Qt\Qt5.5.0\qml
+	Binaries installed to.......D:\Qt\Qt5.5.0\bin
+	Arch-indep. data to.........D:\Qt\Qt5.5.0
+	Docs installed to...........D:\Qt\Qt5.5.0\doc
+	Translations installed to...D:\Qt\Qt5.5.0\translations
+	Examples installed to.......D:\Qt\Qt5.5.0\examples
+	Tests installed to..........D:\Qt\Qt5.5.0\tests
+	
+	Info: creating super cache file F:\download\qt-everywhere-opensource-src-5.5.0-alpha-build\.qmake.super
+	
+	
+	Qt is now configured for building. Just run nmake.
+	To reconfigure, run nmake confclean and configure.	
+
+
+## Make and Install ##
+	> nmake module-qtbase         // make qtbase module
+	>
+	> nmake module-qtdeclarative  // make qtdeclarative module
+	>
+	> nmake
+	>
+	> namke install
+	>   
