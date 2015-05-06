@@ -6,10 +6,10 @@ comments: true
 categories: qt5 qt3d vs2013
 ---
 
-# 1. Install required tools #
-1) Install ActivePerl-5.20.2.2001-MSWin32-x86-64int-298913.msi
-2) Install PowerVRSDKSetup-3.4.exe
-3) Install gingkoVG SDK
+# 1. Install required tools #	
+- 1) Install ActivePerl-5.20.2.2001-MSWin32-x86-64int-298913.msi
+- 2) Install PowerVRSDKSetup-3.4.exe	
+- 3) Install gingkoVG SDK
 
 # 2. Get qt5 source code #
 
@@ -214,7 +214,7 @@ categories: qt5 qt3d vs2013
 	To reconfigure, run nmake confclean and configure.	
 
 
-## Make and Install ##
+# 4. Make and Install #
 	> nmake module-qtbase         // make qtbase module
 	>
 	> nmake module-qtdeclarative  // make qtdeclarative module
