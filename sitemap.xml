@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://jordonwu.github.io/blog/2015/05/05/build-qt5-using-vs2013/</loc>
+    <lastmod>2015-05-05T15:09:56+08:00</lastmod>
+  </url>
+  <url>
     <loc>http://jordonwu.github.io/blog/2015/04/16/build-linux-for-imx6/</loc>
     <lastmod>2015-04-16T19:26:06+08:00</lastmod>
   </url>
@@ -60,5 +64,14 @@
   </url>
   <url>
     <loc>http://jordonwu.github.io/blog/categories/qml/</loc>
+  </url>
+  <url>
+    <loc>http://jordonwu.github.io/blog/categories/qt5/</loc>
+  </url>
+  <url>
+    <loc>http://jordonwu.github.io/blog/categories/qt3d/</loc>
+  </url>
+  <url>
+    <loc>http://jordonwu.github.io/blog/categories/vs2013/</loc>
   </url>
 </urlset>

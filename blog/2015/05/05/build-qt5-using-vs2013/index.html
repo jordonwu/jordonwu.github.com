@@ -1,0 +1,451 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Build Qt5 Using Vs2013 - Jordon Wu&#8217;s Blog</title>
+  <meta name="author" content="Jordon Wu">
+
+  
+  <meta name="description" content="1. Install required tools 1) Install ActivePerl-5.20.2.2001-MSWin32-x86-64int-298913.msi
+2) Install PowerVRSDKSetup-3.4.exe
+3) Install gingkoVG SDK 2 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jordonwu.github.io/blog/2015/05/05/build-qt5-using-vs2013/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Jordon Wu's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Jordon Wu&#8217;s Blog</a></h1>
+  
+    <h2>A blog for recording something</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="jordonwu.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Build Qt5 Using Vs2013</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-05T15:09:56+08:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:09 pm</span></time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://jordonwu.github.io">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h1>1. Install required tools</h1>
+
+<p>1) Install ActivePerl-5.20.2.2001-MSWin32-x86-64int-298913.msi
+2) Install PowerVRSDKSetup-3.4.exe
+3) Install gingkoVG SDK</p>
+
+<h1>2. Get qt5 source code</h1>
+
+<pre><code>Version: qt-everywhere-opensource-src-5.5.0-alpha.tar.xz
+</code></pre>
+
+<h1>3. Extract source code and configure</h1>
+
+<pre><code>Source dir: F:\download\qt-everywhere-opensource-src-5.5.0-alpha
+Build dir: F:\download\qt-everywhere-opensource-src-5.5.0-alpha-build
+
+start cmd from "Developer Command Prompt for VS2013"
+
+D:\Microsoft Visual Studio 12.0&gt;
+
+&gt; set path=D:\perl\bin;%path%
+&gt; 
+&gt; set INCLUDE=D:\Imagination\PowerVR_Graphics\PowerVR_SDK\SDK_3.4\Builds\Include;%INCLUDE%
+&gt; set LIB=D:\Imagination\PowerVR_Graphics\PowerVR_SDK\SDK_3.4\Builds\Windows\x86_64\Lib;%LIB%
+&gt;
+&gt; set INCLUDE=D:\assimp-3.1.1-win-binaries\include;%INCLUDE%
+&gt; set lIB=D:\assimp-3.1.1-win-binaries\lib64;%LIB%
+&gt;  
+&gt; F:
+&gt; cd F:\download\qt-everywhere-opensource-src-5.5.0-alpha\qtbase
+&gt; Add .gitignore file, contain "foo"
+&gt; 
+&gt; cd F:\download\qt-everywhere-opensource-src-5.5.0-alpha-build
+&gt; 
+&gt; ..\qt-everywhere-opensource-src-5.5.0-alpha\configure -debug-and-release -confirm-license -opensource -platform win32-msvc2013 -prefix "D:\Qt\Qt5.5.0" -qt-libpng -qt-libjpeg -qt-freetype -opengl desktop -openvg -nomake tests -make examples -skip qtwebkit -skip qtwebengine
+
+//configure output
+    copy qmake.exe ..\bin\qmake.exe
+已复制         1 个文件。
+Running configuration tests...
+Environment:
+    INCLUDE=
+      D:\Imagination\PowerVR_Graphics\PowerVR_SDK\SDK_3.4\Builds\Include
+      D:\Microsoft Visual Studio 12.0\VC\INCLUDE
+      D:\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE
+      C:\Program Files (x86)\Windows Kits\8.1\include\shared
+      C:\Program Files (x86)\Windows Kits\8.1\include\um
+      C:\Program Files (x86)\Windows Kits\8.1\include\winrt
+
+    LIB=
+      D:\Imagination\PowerVR_Graphics\PowerVR_SDK\SDK_3.4\Builds\Windows\x86_64\Lib
+      D:\Microsoft Visual Studio 12.0\VC\LIB
+      D:\Microsoft Visual Studio 12.0\VC\ATLMFC\LIB
+      C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86
+
+    PATH=
+      D:\perl\bin
+      D:\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow
+      C:\Program Files (x86)\Microsoft SDKs\F#\3.1\Framework\v4.0\
+      C:\Program Files (x86)\MSBuild\12.0\bin
+      D:\Microsoft Visual Studio 12.0\Common7\IDE\
+      D:\Microsoft Visual Studio 12.0\VC\BIN
+      D:\Microsoft Visual Studio 12.0\Common7\Tools
+      C:\Windows\Microsoft.NET\Framework\v4.0.30319
+      D:\Microsoft Visual Studio 12.0\VC\VCPackages
+      C:\Program Files (x86)\HTML Help Workshop
+      D:\Microsoft Visual Studio 12.0\Team Tools\Performance Tools
+      C:\Program Files (x86)\Windows Kits\8.1\bin\x86
+      C:\Program Files (x86)\Microsoft SDKs\Windows\v8.1A\bin\NETFX 4.5.1 Tools\
+      D:\Python27\
+      D:\Python27\Scripts
+      D:\Qt\Qt5.4.1\5.4\msvc2013_64\bin
+      d:\Ruby\Ruby21-x64\bin
+      C:\ProgramData\Oracle\Java\javapath
+      C:\Windows\system32
+      C:\Windows
+      C:\Windows\System32\Wbem
+      C:\Windows\System32\WindowsPowerShell\v1.0\
+      C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\
+      C:\Program Files\Microsoft SQL Server\110\Tools\Binn\
+      D:\GL_Studio_3.2\\bin
+      d:\Git\cmd
+      D:\TortoiseSVN\bin
+Configuration:
+    pcre
+    debug
+    compile_examples
+Qt Configuration:
+    minimal-config
+    small-config
+    medium-config
+    large-config
+    full-config
+    debug_and_release build_all release
+    debug
+    shared
+    zlib
+    png
+    freetype
+    harfbuzz
+    build_all
+    accessibility
+    opengl
+    openvg
+    egl
+    audio-backend
+    wmf-backend
+    native-gestures
+    qpa
+    concurrent
+
+QMAKESPEC...................win32-msvc2013 (commandline)
+Architecture................i386, features: sse sse2
+Host Architecture...........i386, features: sse sse2
+Maketool....................nmake
+Debug build.................yes (combined)
+Default build...............debug
+Force debug info............no
+C++11 support...............auto
+Link Time Code Generation...no
+Accessibility support.......yes
+RTTI support................yes
+SSE2 support................yes
+SSE3 support................yes
+SSSE3 support...............yes
+SSE4.1 support..............yes
+SSE4.2 support..............yes
+AVX support.................yes
+AVX2 support................yes
+NEON support................no
+OpenGL support..............yes
+Large File support..........yes
+NIS support.................no
+Iconv support...............no
+Evdev support...............no
+Mtdev support...............no
+Inotify support.............no
+eventfd(7) support..........no
+Glib support................no
+CUPS support................no
+OpenVG support..............yes
+SSL support.................no
+OpenSSL support.............no
+libproxy support............no
+Qt D-Bus support............no
+Qt Widgets module support...yes
+Qt GUI module support.......yes
+QML debugging...............yes
+DirectWrite support.........no
+Use system proxies..........no
+
+QPA Backends:
+    GDI.....................yes
+    Direct2D................no
+
+Third Party Libraries:
+    ZLIB support............qt
+    GIF support.............plugin
+    JPEG support............plugin
+    PNG support.............yes
+    FreeType support........yes
+    Fontconfig support......no
+    HarfBuzz support........qt
+    PCRE support............qt
+    ICU support.............no
+    ANGLE...................no
+    Dynamic OpenGL..........no
+
+Styles:
+    Windows.................yes
+    Windows XP..............yes
+    Windows Vista...........yes
+    Fusion..................yes
+    Windows CE..............no
+    Windows Mobile..........no
+
+Sql Drivers:
+    ODBC....................no
+    MySQL...................no
+    OCI.....................no
+    PostgreSQL..............no
+    TDS.....................no
+    DB2.....................no
+    SQLite..................plugin (qt)
+    SQLite2.................no
+    InterBase...............no
+
+Sources are in..............F:\download\qt-everywhere-opensource-src-5.5.0-alpha\qtbase
+Build is done in............F:\download\qt-everywhere-opensource-src-5.5.0-alpha-build\qtbase
+Install prefix..............D:\Qt\Qt5.5.0
+Headers installed to........D:\Qt\Qt5.5.0\include
+Libraries installed to......D:\Qt\Qt5.5.0\lib
+Arch-dep. data to...........D:\Qt\Qt5.5.0
+Plugins installed to........D:\Qt\Qt5.5.0\plugins
+Library execs installed to..D:\Qt\Qt5.5.0\bin
+QML1 imports installed to...D:\Qt\Qt5.5.0\imports
+QML2 imports installed to...D:\Qt\Qt5.5.0\qml
+Binaries installed to.......D:\Qt\Qt5.5.0\bin
+Arch-indep. data to.........D:\Qt\Qt5.5.0
+Docs installed to...........D:\Qt\Qt5.5.0\doc
+Translations installed to...D:\Qt\Qt5.5.0\translations
+Examples installed to.......D:\Qt\Qt5.5.0\examples
+Tests installed to..........D:\Qt\Qt5.5.0\tests
+
+Info: creating super cache file F:\download\qt-everywhere-opensource-src-5.5.0-alpha-build\.qmake.super
+
+
+Qt is now configured for building. Just run nmake.
+To reconfigure, run nmake confclean and configure.  
+</code></pre>
+
+<h2>Make and Install</h2>
+
+<pre><code>&gt; nmake module-qtbase         // make qtbase module
+&gt;
+&gt; nmake module-qtdeclarative  // make qtdeclarative module
+&gt;
+&gt; nmake
+&gt;
+&gt; namke install
+&gt;   
+</code></pre>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jordon Wu</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-05-05T15:09:56+08:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:09 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/qt3d/'>qt3d</a>, <a class='category' href='/blog/categories/qt5/'>qt5</a>, <a class='category' href='/blog/categories/vs2013/'>vs2013</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://jordonwu.github.io/blog/2015/05/05/build-qt5-using-vs2013/" data-via="" data-counturl="http://jordonwu.github.io/blog/2015/05/05/build-qt5-using-vs2013/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/04/16/build-linux-for-imx6/" title="Previous Post: build linux for imx6">&laquo; build linux for imx6</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/05/05/build-qt5-using-vs2013/">Build Qt5 Using Vs2013</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/04/16/build-linux-for-imx6/">Build Linux for Imx6</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/04/15/build-u-boot-for-riot-board/">Build U-boot for Riot Board</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/04/15/build-openwrt-firmware/">Build Openwrt Firmware</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/04/14/install-octopress-on-windows-7/">Octopress Install and Usage on Windows 7</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Jordon Wu -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'jordonwu';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://jordonwu.github.io/blog/2015/05/05/build-qt5-using-vs2013/';
+        var disqus_url = 'http://jordonwu.github.io/blog/2015/05/05/build-qt5-using-vs2013/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
