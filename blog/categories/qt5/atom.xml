@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Qt5 | Jordon Wu's Blog]]></title>
   <link href="http://jordonwu.github.io/blog/categories/qt5/atom.xml" rel="self"/>
   <link href="http://jordonwu.github.io/"/>
-  <updated>2015-05-06T08:01:11+08:00</updated>
+  <updated>2015-05-06T08:05:57+08:00</updated>
   <id>http://jordonwu.github.io/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
@@ -18,11 +18,14 @@
     <link href="http://jordonwu.github.io/blog/2015/05/05/build-qt5-using-vs2013/"/>
     <updated>2015-05-05T15:09:56+08:00</updated>
     <id>http://jordonwu.github.io/blog/2015/05/05/build-qt5-using-vs2013</id>
-    <content type="html"><![CDATA[<h1>1. Install required tools</h1>
+    <content type="html"><![CDATA[<h1>1. Install required tools #</h1>
 
-<p>1) Install ActivePerl-5.20.2.2001-MSWin32-x86-64int-298913.msi
-2) Install PowerVRSDKSetup-3.4.exe
-3) Install gingkoVG SDK</p>
+<ul>
+<li>1) Install ActivePerl-5.20.2.2001-MSWin32-x86-64int-298913.msi</li>
+<li>2) Install PowerVRSDKSetup-3.4.exe</li>
+<li>3) Install gingkoVG SDK</li>
+</ul>
+
 
 <h1>2. Get qt5 source code</h1>
 
@@ -229,7 +232,7 @@ Qt is now configured for building. Just run nmake.
 To reconfigure, run nmake confclean and configure.  
 </code></pre>
 
-<h2>Make and Install</h2>
+<h1>4. Make and Install</h1>
 
 <pre><code>&gt; nmake module-qtbase         // make qtbase module
 &gt;
