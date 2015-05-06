@@ -6,7 +6,7 @@ comments: true
 categories: qt5 qt3d vs2013
 ---
 
-# 1. Install required tools #	
+# 1. Install required tools #
 - 1) Install ActivePerl-5.20.2.2001-MSWin32-x86-64int-298913.msi
 - 2) Install PowerVRSDKSetup-3.4.exe	
 - 3) Install gingkoVG SDK
