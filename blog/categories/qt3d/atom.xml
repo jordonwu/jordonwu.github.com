@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Qt3d | Jordon Wu's Blog]]></title>
   <link href="http://jordonwu.github.io/blog/categories/qt3d/atom.xml" rel="self"/>
   <link href="http://jordonwu.github.io/"/>
-  <updated>2015-05-06T08:24:15+08:00</updated>
+  <updated>2015-05-07T10:24:45+08:00</updated>
   <id>http://jordonwu.github.io/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
@@ -14,10 +14,10 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Build Qt5 Using Vs2013]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/05/05/build-qt5-using-vs2013/"/>
+    <title type="html"><![CDATA[Build qt5.5.0 Using Vs2013]]></title>
+    <link href="http://jordonwu.github.io/blog/2015/05/05/build-qt5.5.0-using-vs2013/"/>
     <updated>2015-05-05T15:09:56+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/05/05/build-qt5-using-vs2013</id>
+    <id>http://jordonwu.github.io/blog/2015/05/05/build-qt5.5.0-using-vs2013</id>
     <content type="html"><![CDATA[<h1>1. Install required tools</h1>
 
 <ul>
@@ -35,7 +35,7 @@
 <h1>3. Extract source code and configure</h1>
 
 <pre><code>Source dir: F:\download\qt-everywhere-opensource-src-5.5.0-alpha
-Build dir: F:\download\qt-everywhere-opensource-src-5.5.0-alpha-build
+Build  dir: F:\download\qt-everywhere-opensource-src-5.5.0-alpha-build
 
 start cmd from "Developer Command Prompt for VS2013"
 
@@ -47,11 +47,20 @@ D:\Microsoft Visual Studio 12.0&gt;
 &gt; set LIB=D:\Imagination\PowerVR_Graphics\PowerVR_SDK\SDK_3.4\Builds\Windows\x86_64\Lib;%LIB%
 &gt;
 &gt; set INCLUDE=D:\assimp-3.1.1-win-binaries\include;%INCLUDE%
-&gt; set lIB=D:\assimp-3.1.1-win-binaries\lib64;%LIB%
+&gt; set LIB=D:\assimp-3.1.1-win-binaries\lib32;%LIB%
+&gt; set PATH=D:\assimp-3.1.1-win-binaries\bin32;%PATH%
 &gt;  
 &gt; F:
 &gt; cd F:\download\qt-everywhere-opensource-src-5.5.0-alpha\qtbase
 &gt; Add .gitignore file, contain "foo"
+&gt;
+&gt; Modify qt3d\config.tests\assimp\assimp.pro, add below config
+&gt;
+&gt;
+    win32 {
+        CONFIG += console
+    }  
+&gt;
 &gt; 
 &gt; cd F:\download\qt-everywhere-opensource-src-5.5.0-alpha-build
 &gt; 

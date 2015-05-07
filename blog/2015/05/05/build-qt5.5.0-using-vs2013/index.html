@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Build Qt5 Using Vs2013 - Jordon Wu&#8217;s Blog</title>
+  <title>Build qt5.5.0 Using Vs2013 - Jordon Wu&#8217;s Blog</title>
   <meta name="author" content="Jordon Wu">
 
   
@@ -20,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://jordonwu.github.io/blog/2015/05/05/build-qt5-using-vs2013/">
+  <link rel="canonical" href="http://jordonwu.github.io/blog/2015/05/05/build-qt5.5.0-using-vs2013/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Jordon Wu's Blog" type="application/atom+xml">
@@ -70,7 +70,7 @@
   
   <header>
     
-      <h1 class="entry-title">Build Qt5 Using Vs2013</h1>
+      <h1 class="entry-title">Build qt5.5.0 Using Vs2013</h1>
     
     
       <p class="meta">
@@ -106,7 +106,7 @@
 <h1>3. Extract source code and configure</h1>
 
 <pre><code>Source dir: F:\download\qt-everywhere-opensource-src-5.5.0-alpha
-Build dir: F:\download\qt-everywhere-opensource-src-5.5.0-alpha-build
+Build  dir: F:\download\qt-everywhere-opensource-src-5.5.0-alpha-build
 
 start cmd from "Developer Command Prompt for VS2013"
 
@@ -118,11 +118,20 @@ D:\Microsoft Visual Studio 12.0&gt;
 &gt; set LIB=D:\Imagination\PowerVR_Graphics\PowerVR_SDK\SDK_3.4\Builds\Windows\x86_64\Lib;%LIB%
 &gt;
 &gt; set INCLUDE=D:\assimp-3.1.1-win-binaries\include;%INCLUDE%
-&gt; set lIB=D:\assimp-3.1.1-win-binaries\lib64;%LIB%
+&gt; set LIB=D:\assimp-3.1.1-win-binaries\lib32;%LIB%
+&gt; set PATH=D:\assimp-3.1.1-win-binaries\bin32;%PATH%
 &gt;  
 &gt; F:
 &gt; cd F:\download\qt-everywhere-opensource-src-5.5.0-alpha\qtbase
 &gt; Add .gitignore file, contain "foo"
+&gt;
+&gt; Modify qt3d\config.tests\assimp\assimp.pro, add below config
+&gt;
+&gt;
+    win32 {
+        CONFIG += console
+    }  
+&gt;
 &gt; 
 &gt; cd F:\download\qt-everywhere-opensource-src-5.5.0-alpha-build
 &gt; 
@@ -343,7 +352,7 @@ To reconfigure, run nmake confclean and configure.
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://jordonwu.github.io/blog/2015/05/05/build-qt5-using-vs2013/" data-via="" data-counturl="http://jordonwu.github.io/blog/2015/05/05/build-qt5-using-vs2013/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://jordonwu.github.io/blog/2015/05/05/build-qt5.5.0-using-vs2013/" data-via="" data-counturl="http://jordonwu.github.io/blog/2015/05/05/build-qt5.5.0-using-vs2013/" >Tweet</a>
   
   
   
@@ -354,6 +363,8 @@ To reconfigure, run nmake confclean and configure.
       
         <a class="basic-alignment left" href="/blog/2015/04/16/build-linux-for-imx6/" title="Previous Post: build linux for imx6">&laquo; build linux for imx6</a>
       
+      
+        <a class="basic-alignment right" href="/blog/2015/05/07/build-qt5.4.1-and-qt3d-using-vs2013/" title="Next Post: build qt5.4.1 and qt3d using vs2013">build qt5.4.1 and qt3d using vs2013 &raquo;</a>
       
     </p>
   </footer>
@@ -374,7 +385,11 @@ To reconfigure, run nmake confclean and configure.
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2015/05/05/build-qt5-using-vs2013/">Build Qt5 Using Vs2013</a>
+        <a href="/blog/2015/05/07/build-qt5.4.1-and-qt3d-using-vs2013/">Build qt5.4.1 and Qt3d Using Vs2013</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/05/build-qt5.5.0-using-vs2013/">Build qt5.5.0 Using Vs2013</a>
       </li>
     
       <li class="post">
@@ -387,10 +402,6 @@ To reconfigure, run nmake confclean and configure.
     
       <li class="post">
         <a href="/blog/2015/04/15/build-openwrt-firmware/">Build Openwrt Firmware</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/04/14/install-octopress-on-windows-7/">Octopress Install and Usage on Windows 7</a>
       </li>
     
   </ul>
@@ -419,8 +430,8 @@ To reconfigure, run nmake confclean and configure.
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://jordonwu.github.io/blog/2015/05/05/build-qt5-using-vs2013/';
-        var disqus_url = 'http://jordonwu.github.io/blog/2015/05/05/build-qt5-using-vs2013/';
+        var disqus_identifier = 'http://jordonwu.github.io/blog/2015/05/05/build-qt5.5.0-using-vs2013/';
+        var disqus_url = 'http://jordonwu.github.io/blog/2015/05/05/build-qt5.5.0-using-vs2013/';
         var disqus_script = 'embed.js';
       
     (function () {
