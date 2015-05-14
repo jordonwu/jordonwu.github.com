@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Build Openwrt Firmware - Jordon Wu&#8217;s Blog</title>
+  <title>Build Ltib for Sabre Sdb on ubuntu14.04 - Jordon Wu&#8217;s Blog</title>
   <meta name="author" content="Jordon Wu">
 
   
-  <meta name="description" content="1. Hardware wrtnode board http://cn.wrtnode.com/ 2. Backup firmware 1) ssh to wrtnode board root@OpenWrt:/tmp# cat /proc/mtd
-dev: size erasesize name &hellip;">
+  <meta name="description" content="1. Package 1) L3.0.35_4.1.0_130816_source.gz
+2) 0001_make_L3.0.35_4.1.0_compile_on_Ubuntu_14.04_64bit_OS.patch.zip 2. Install LTIB and Apply Patch $ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@ dev: size erasesize name &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://jordonwu.github.io/blog/2015/04/15/build-openwrt-firmware/">
+  <link rel="canonical" href="http://jordonwu.github.io/blog/2015/05/11/build-ltib-for-sabre-sdb-on-ubuntu14-dot-04/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Jordon Wu's Blog" type="application/atom+xml">
@@ -69,7 +69,7 @@ dev: size erasesize name &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Build Openwrt Firmware</h1>
+      <h1 class="entry-title">Build Ltib for Sabre Sdb on ubuntu14.04</h1>
     
     
       <p class="meta">
@@ -78,7 +78,7 @@ dev: size erasesize name &hellip;">
 
 
 
-<time class='entry-date' datetime='2015-04-15T14:51:54+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:51 pm</span></time>
+<time class='entry-date' datetime='2015-05-11T14:48:34+08:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:48 pm</span></time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://jordonwu.github.io">Comments</a>
@@ -88,45 +88,116 @@ dev: size erasesize name &hellip;">
   </header>
 
 
-<div class="entry-content"><h1>1. Hardware</h1>
+<div class="entry-content"><h1>1. Package</h1>
 
-<p>wrtnode board <a href="http://cn.wrtnode.com/">http://cn.wrtnode.com/</a></p>
-
-<h1>2. Backup firmware</h1>
-
-<h2>1) ssh to wrtnode board</h2>
-
-<pre><code>root@OpenWrt:/tmp# cat /proc/mtd
-dev:    size   erasesize  name
-mtd0: 00030000 00010000 "u-boot"
-mtd1: 00010000 00010000 "u-boot-env"
-mtd2: 00010000 00010000 "factory"
-mtd3: 00fb0000 00010000 "firmware"
-mtd4: 00e96447 00010000 "rootfs"
-mtd5: 00780000 00010000 "rootfs_data"
+<pre><code>1) L3.0.35_4.1.0_130816_source.gz
+2) 0001_make_L3.0.35_4.1.0_compile_on_Ubuntu_14.04_64bit_OS.patch.zip
 </code></pre>
 
-<h2>2) back up u-boot and factory partition to /tmp</h2>
+<h1>2. Install LTIB and Apply Patch</h1>
 
-<pre><code>root@OpenWrt:/tmp# dd if=/dev/mtd0 of=/tmp/wrtnode_u-boot.backup
-root@OpenWrt:/tmp# dd if=/dev/mtd1 of=/tmp/wrtnode_u-boot-env.backup
-root@OpenWrt:/tmp# dd if=/dev/mtd2 of=/tmp/wrtnode_factory.backup
-root@OpenWrt:/tmp# cat /proc/mtd &gt; wrtnode_mtd_info.txt
+<pre><code>$ cd ~
+$ tar zxvf L3.0.35_4.1.0_130816_source.tar.gz
+$ ./L3.0.35_4.1.0_130816_source/install     #suggest install ltib to none root user directory
+
+$ cd /home/vmuser/ltib_src/ltib
+$ wget https://community.freescale.com/servlet/JiveServlet/download/100725-3-274381/0001_make_L3.0.35_4.1.0_compile_on_Ubuntu_14.04_64bit_OS.patch.zip
+$ unzip 0001_make_L3.0.35_4.1.0_compile_on_Ubuntu_14.04_64bit_OS.patch.zip
+$ git apply 0001_make_L3.0.35_4.1.0_compile_on_Ubuntu_14.04_64bit_OS.patch
 </code></pre>
 
-<h2>3) scp backup firmware to local pc</h2>
+<h1>3. Configure and build LTIB for imx6q-sdb</h1>
 
-<pre><code>$ scp root@192.168.8.1:/tmp/wrtnode_u-boot.backup .
-$ scp root@192.168.8.1:/tmp/wrtnode_u-boot-env.backup .
-$ scp root@192.168.8.1:/tmp/wrtnode_factory.backup .
-$ scp root@192.168.8.1:/tmp/wrtnode_mtd_info.txt .
+<pre><code>$ cd /home/vmuser/ltib_src/ltib
+
+$ ./ltib -m config
+
+Platform choice (Freescale iMX reference boards)  ---&gt;
+
+
+Choose the platform type
+Selection (imx6q)  ---&gt;
+
+
+Choose the packages profile
+Selection (use packages in preconfig (Min profile))  ---&gt;
+
+
+(imx6q) Platform
+--- LTIB settings
+     System features  ---&gt;
+--- Choose the target C library type
+    Target C library type (glibc)  ---&gt;
+    C library package (from toolchain only)  ---&gt;
+    Toolchain component options  ---&gt;
+--- Toolchain selection.
+    Toolchain (ARM, gcc-4.6.2, multilib, neon optimized, gnueabi/eglibc2.13)  ---&gt;
+(-O2 -march=armv7-a -mfpu=vfpv3 -mfloat-abi=softfp) Enter any CFLAGS for gcc/g++ (NEW)
+--- Choose your bootloader for U-Boot
+    bootloader (u-boot)  ---&gt;
+    u-boot version (u-boot v2009.08)  ---&gt;
+--- Choose your board for u-boot
+    board (mx6q_sabresd)  ---&gt;
+--- Choose your Kernel
+    kernel (Linux 3.0.35-imx)  ---&gt;
+[ ] Always rebuild the kernel
+[ ] Produce cscope index
+--- Include kernel headers
+[*] Configure the kernel
+
+...
+
+--- Package selection 
+    Package list  ---&gt;
+--- Target System Configuration
+    Options  ---&gt;
+--- Target Image Generation
+    Options  ---&gt;
+---
+Load an Alternate Configuration File
+Save Configuration to an Alternate File
+
+
+--- Platform specific package selection
+
+[*] gpu-viv-bin-mx6q
+
+[*] dbus
+
+[*] expat
+
+[*] libjpeg
+
+[*] libpng
+
+
+$ ./ltib
+
+$ config kernel 
+
+Device Driver ---&gt;
+MXC support drivers ---&gt;
+        MXC Vivante GPU Support ---&gt;
+    &lt;*&gt; MXC vivante GPU support
 </code></pre>
 
-<h1>3. Build u-boot</h1>
+<h1>4. Create device node</h1>
 
-<h1>4. Build kernel</h1>
+<pre><code>$ cd /home/vmuser/ltib_src/ltib
+$ cd rootfs/dev
+$ sudo mknod null c 1 3
+$ sudo chmod 666 null
 
-<h1>5. Build openwrt image</h1>
+$ sudo mknod console c 5 1
+$ sudo chmod 777 console
+
+$ for i in 0 1 2 3 4 5 6 7 8 9 10 11 12; do sudo mknod fb$i c 29 $i; done
+$ sudo mknod mxc_ipu c 253 0
+$ sudo mknod mxc_vpu c 252 0
+$ sudo mknod ttymxc0 c 207 16
+$ sudo mknod video0 c 81 0
+$ sudo mknod galcore c 199 0
+</code></pre>
 </div>
 
 
@@ -142,21 +213,15 @@ $ scp root@192.168.8.1:/tmp/wrtnode_mtd_info.txt .
 
 
 
-<time class='entry-date' datetime='2015-04-15T14:51:54+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:51 pm</span></time>
+<time class='entry-date' datetime='2015-05-11T14:48:34+08:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:48 pm</span></time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/openwrt/'>openwrt</a>, <a class='category' href='/blog/categories/u-boot/'>u-boot</a>, <a class='category' href='/blog/categories/wrtnode/'>wrtnode</a>
-  
-</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://jordonwu.github.io/blog/2015/04/15/build-openwrt-firmware/" data-via="" data-counturl="http://jordonwu.github.io/blog/2015/04/15/build-openwrt-firmware/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://jordonwu.github.io/blog/2015/05/11/build-ltib-for-sabre-sdb-on-ubuntu14-dot-04/" data-via="" data-counturl="http://jordonwu.github.io/blog/2015/05/11/build-ltib-for-sabre-sdb-on-ubuntu14-dot-04/" >Tweet</a>
   
   
   
@@ -165,10 +230,10 @@ $ scp root@192.168.8.1:/tmp/wrtnode_mtd_info.txt .
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2015/04/14/install-octopress-on-windows-7/" title="Previous Post: Octopress Install and Usage on Windows 7">&laquo; Octopress Install and Usage on Windows 7</a>
+        <a class="basic-alignment left" href="/blog/2015/05/07/build-qt5.4.1-and-qt3d-using-vs2013/" title="Previous Post: build qt5.4.1 and qt3d using vs2013">&laquo; build qt5.4.1 and qt3d using vs2013</a>
       
       
-        <a class="basic-alignment right" href="/blog/2015/04/15/build-u-boot-for-riot-board/" title="Next Post: build u-boot for riot board">build u-boot for riot board &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2015/05/14/using-ltibs-u-boot-kernel-and-rootfs-to-boot-board-step-by-step/" title="Next Post: using ltib's u-boot kernel and rootfs to boot board step by step">using ltib&#8217;s u-boot kernel and rootfs to boot board step by step &raquo;</a>
       
     </p>
   </footer>
@@ -234,8 +299,8 @@ $ scp root@192.168.8.1:/tmp/wrtnode_mtd_info.txt .
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://jordonwu.github.io/blog/2015/04/15/build-openwrt-firmware/';
-        var disqus_url = 'http://jordonwu.github.io/blog/2015/04/15/build-openwrt-firmware/';
+        var disqus_identifier = 'http://jordonwu.github.io/blog/2015/05/11/build-ltib-for-sabre-sdb-on-ubuntu14-dot-04/';
+        var disqus_url = 'http://jordonwu.github.io/blog/2015/05/11/build-ltib-for-sabre-sdb-on-ubuntu14-dot-04/';
         var disqus_script = 'embed.js';
       
     (function () {

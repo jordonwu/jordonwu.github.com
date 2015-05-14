@@ -9,9 +9,7 @@
   <meta name="author" content="Jordon Wu">
 
   
-  <meta name="description" content="1. Install required tools 1) Install ActivePerl-5.20.2.2001-MSWin32-x86-64int-298913.msi
-2) Install PowerVRSDKSetup-3.4.exe
-3) Install gingkoVG SDK 2 &hellip;">
+  <meta name="description" content="1. Config and build ltib for sabre sdb imx6q 2. Get source code $ cd path/ltib $ ./ltib -m prep -p u-boot $ cd path/ltib $ ./ltib -m prep -p kernel 3 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +65,316 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/05/14/using-ltibs-u-boot-kernel-and-rootfs-to-boot-board-step-by-step/">Using Ltib&#8217;s U-boot Kernel and Rootfs to Boot Board Step by Step</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-14T14:47:48+08:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:47 pm</span></time>
+        
+           | <a href="/blog/2015/05/14/using-ltibs-u-boot-kernel-and-rootfs-to-boot-board-step-by-step/#disqus_thread"
+             data-disqus-identifier="http://jordonwu.github.io/blog/2015/05/14/using-ltibs-u-boot-kernel-and-rootfs-to-boot-board-step-by-step/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>1. Config and build ltib for sabre sdb imx6q</h1>
+
+<h1>2. Get source code</h1>
+
+<pre><code>$ cd path/ltib
+
+$ ./ltib -m prep -p u-boot
+
+$ cd path/ltib
+
+$ ./ltib -m prep -p kernel
+</code></pre>
+
+<h1>3. Modify and build u-boot</h1>
+
+<pre><code>$ cd path/ltib/rpm/BUILD/u-boot-2009.08
+
+$ modify inlcude/configs/mx6q_sabresd.h as below
+
+////////////////////////////////////////////////////////////////////
+
+#if 0 //ltib default nfs boot
+#define CONFIG_EXTRA_ENV_SETTINGS                   \
+        "netdev=eth0\0"                     \
+        "ethprime=FEC0\0"                   \
+        "uboot=u-boot.bin\0"            \
+        "kernel=uImage\0"               \
+        "nfsroot=/opt/eldk/arm\0"               \
+        "bootargs_base=setenv bootargs console=ttymxc0,115200\0"\
+        "bootargs_nfs=setenv bootargs ${bootargs} root=/dev/nfs "\
+            "ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0"\
+        "bootcmd_net=run bootargs_base bootargs_nfs; "      \
+            "tftpboot ${loadaddr} ${kernel}; bootm\0"   \
+        "bootargs_mmc=setenv bootargs ${bootargs} ip=dhcp "     \
+            "root=/dev/mmcblk0p1 rootwait\0"                \
+        "bootcmd_mmc=run bootargs_base bootargs_mmc; "   \
+        "mmc dev 3; "   \
+        "mmc read ${loadaddr} 0x800 0x2000; bootm\0"    \
+        "bootcmd=run bootcmd_net\0"                             \
+
+#else // for mmc boot
+#define CONFIG_EXTRA_ENV_SETTINGS                   \
+        "netdev=eth0\0"                     \
+        "ethprime=FEC0\0"                   \
+        "uboot=u-boot.bin\0"            \
+        "kernel=uImage\0"               \
+        "nfsroot=/opt/eldk/arm\0"               \
+        "bootargs_base=setenv bootargs console=ttymxc0,115200 \0"\
+        "bootargs_nfs=setenv bootargs ${bootargs} root=/dev/nfs "\
+            "ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0"\
+        "bootcmd_net=run bootargs_base bootargs_nfs; "      \
+            "tftpboot ${loadaddr} ${kernel}; bootm\0"   \
+        "bootargs_mmc=setenv bootargs ${bootargs} "     \
+            "root=/dev/mmcblk0p1 rootfstype=ext4 rootwait rw " \
+            " ldb=spl0 video=mxcfb0:dev=ldb,LDB-1080P60,if=RGB24,bpp=32 video=mxcfb1:off\0" \
+        "bootcmd_mmc=run bootargs_base bootargs_mmc; " \
+        "mmc dev 3; " \
+        "mmc read ${loadaddr} 0x800 0x2000; bootm\0" \
+        "bootcmd=run bootcmd_mmc\0" \
+
+#endif
+
+/////////////////////////////////////////////////////////////////////////
+
+$ export ARCH=arm
+$ export CROSS_COMPILE=/opt/gcc-linaro-arm-linux-gnueabi-2012.04-20120426_linux/bin/arm-linux-gnueabi-
+
+$ make mx6q_sabresd_config
+
+$ make
+</code></pre>
+
+<h1>4. Modify and build kernel</h1>
+
+<pre><code>$ cd path/ltib/rpm/BUILD/linux-3.0.35
+
+$ export ARCH=arm
+
+$ export CROSS_COMPILE=/opt/gcc-linaro-arm-linux-gnueabi-2012.04-20120426_linux/bin/arm-linux-gnueabi-
+
+$ make imx6_defconfig
+
+$ make uImage
+</code></pre>
+
+<h1>5. Reduce rootfs</h1>
+
+<pre><code>$ cd path/ltib/rootfs
+
+$ add post_build.sh
+##########################################
+#!/bin/sh
+cd dev
+sudo mknod null c 1 3
+sudo chmod 666 null
+
+sudo mknod console c 5 1
+sudo chmod 777 console
+
+for i in 0 1 2 3 4 5 6 7 8 9 10 11 12; do sudo mknod fb$i c 29 $i; done
+
+sudo mknod mxc_ipu c 253 0
+sudo mknod mxc_vpu c 252 0
+sudo mknod ttymxc0 c 207 16
+sudo mknod video0 c 81 0
+sudo mknod galcore c 199 0
+
+cd ..
+sudo rm -rf unit_tests
+sudo rm -rf boot
+sudo rm -rf opt/fsl_samples
+sudo rm -rf opt/viv_samples
+sudo rm -rf share
+
+sudo rm -rf usr/include
+sudo rm -rf usr/info
+sudo rm -rf usr/man
+sudo rm -rf usr/src
+sudo rm -rf usr/share
+
+sudo rm -rf var/spool
+sudo rm -rf var/ftp
+sudo rm -rf var/log
+sudo rm -rf var/run
+sudo rm -rf var/mail
+sudo rm -rf var/lock
+sudo rm -rf var/lib
+sudo rm -rf var/www
+###############################################
+
+$ ./post_build.sh
+
+$ sudo tar -cjvf ../rootfs.tar.bz2 ./*
+</code></pre>
+
+<h1>6. Flash u-boot.bin, uImage and rootfs.tar.bz2 to board mmc</h1>
+
+<h1>7. Reset board. Done!</h1>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/05/11/build-ltib-for-sabre-sdb-on-ubuntu14-dot-04/">Build Ltib for Sabre Sdb on ubuntu14.04</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-11T14:48:34+08:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:48 pm</span></time>
+        
+           | <a href="/blog/2015/05/11/build-ltib-for-sabre-sdb-on-ubuntu14-dot-04/#disqus_thread"
+             data-disqus-identifier="http://jordonwu.github.io/blog/2015/05/11/build-ltib-for-sabre-sdb-on-ubuntu14-dot-04/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>1. Package</h1>
+
+<pre><code>1) L3.0.35_4.1.0_130816_source.gz
+2) 0001_make_L3.0.35_4.1.0_compile_on_Ubuntu_14.04_64bit_OS.patch.zip
+</code></pre>
+
+<h1>2. Install LTIB and Apply Patch</h1>
+
+<pre><code>$ cd ~
+$ tar zxvf L3.0.35_4.1.0_130816_source.tar.gz
+$ ./L3.0.35_4.1.0_130816_source/install     #suggest install ltib to none root user directory
+
+$ cd /home/vmuser/ltib_src/ltib
+$ wget https://community.freescale.com/servlet/JiveServlet/download/100725-3-274381/0001_make_L3.0.35_4.1.0_compile_on_Ubuntu_14.04_64bit_OS.patch.zip
+$ unzip 0001_make_L3.0.35_4.1.0_compile_on_Ubuntu_14.04_64bit_OS.patch.zip
+$ git apply 0001_make_L3.0.35_4.1.0_compile_on_Ubuntu_14.04_64bit_OS.patch
+</code></pre>
+
+<h1>3. Configure and build LTIB for imx6q-sdb</h1>
+
+<pre><code>$ cd /home/vmuser/ltib_src/ltib
+
+$ ./ltib -m config
+
+Platform choice (Freescale iMX reference boards)  ---&gt;
+
+
+Choose the platform type
+Selection (imx6q)  ---&gt;
+
+
+Choose the packages profile
+Selection (use packages in preconfig (Min profile))  ---&gt;
+
+
+(imx6q) Platform
+--- LTIB settings
+     System features  ---&gt;
+--- Choose the target C library type
+    Target C library type (glibc)  ---&gt;
+    C library package (from toolchain only)  ---&gt;
+    Toolchain component options  ---&gt;
+--- Toolchain selection.
+    Toolchain (ARM, gcc-4.6.2, multilib, neon optimized, gnueabi/eglibc2.13)  ---&gt;
+(-O2 -march=armv7-a -mfpu=vfpv3 -mfloat-abi=softfp) Enter any CFLAGS for gcc/g++ (NEW)
+--- Choose your bootloader for U-Boot
+    bootloader (u-boot)  ---&gt;
+    u-boot version (u-boot v2009.08)  ---&gt;
+--- Choose your board for u-boot
+    board (mx6q_sabresd)  ---&gt;
+--- Choose your Kernel
+    kernel (Linux 3.0.35-imx)  ---&gt;
+[ ] Always rebuild the kernel
+[ ] Produce cscope index
+--- Include kernel headers
+[*] Configure the kernel
+
+...
+
+--- Package selection 
+    Package list  ---&gt;
+--- Target System Configuration
+    Options  ---&gt;
+--- Target Image Generation
+    Options  ---&gt;
+---
+Load an Alternate Configuration File
+Save Configuration to an Alternate File
+
+
+--- Platform specific package selection
+
+[*] gpu-viv-bin-mx6q
+
+[*] dbus
+
+[*] expat
+
+[*] libjpeg
+
+[*] libpng
+
+
+$ ./ltib
+
+$ config kernel 
+
+Device Driver ---&gt;
+MXC support drivers ---&gt;
+        MXC Vivante GPU Support ---&gt;
+    &lt;*&gt; MXC vivante GPU support
+</code></pre>
+
+<h1>4. Create device node</h1>
+
+<pre><code>$ cd /home/vmuser/ltib_src/ltib
+$ cd rootfs/dev
+$ sudo mknod null c 1 3
+$ sudo chmod 666 null
+
+$ sudo mknod console c 5 1
+$ sudo chmod 777 console
+
+$ for i in 0 1 2 3 4 5 6 7 8 9 10 11 12; do sudo mknod fb$i c 29 $i; done
+$ sudo mknod mxc_ipu c 253 0
+$ sudo mknod mxc_vpu c 252 0
+$ sudo mknod ttymxc0 c 207 16
+$ sudo mknod video0 c 81 0
+$ sudo mknod galcore c 199 0
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1952,6 +2260,14 @@ categories: category1, category2
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/14/using-ltibs-u-boot-kernel-and-rootfs-to-boot-board-step-by-step/">Using Ltib&#8217;s U-boot Kernel and Rootfs to Boot Board Step by Step</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/11/build-ltib-for-sabre-sdb-on-ubuntu14-dot-04/">Build Ltib for Sabre Sdb on ubuntu14.04</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/07/build-qt5.4.1-and-qt3d-using-vs2013/">Build qt5.4.1 and Qt3d Using Vs2013</a>
       </li>
     
@@ -1961,14 +2277,6 @@ categories: category1, category2
     
       <li class="post">
         <a href="/blog/2015/04/16/build-linux-for-imx6/">Build Linux for Imx6</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/04/15/build-u-boot-for-riot-board/">Build U-boot for Riot Board</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/04/15/build-openwrt-firmware/">Build Openwrt Firmware</a>
       </li>
     
   </ul>
