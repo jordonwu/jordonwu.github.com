@@ -109,43 +109,44 @@ $ modify inlcude/configs/mx6q_sabresd.h as below
 ////////////////////////////////////////////////////////////////////
 
 #if 0 //ltib default nfs boot
-#define CONFIG_EXTRA_ENV_SETTINGS                   \
-        "netdev=eth0\0"                     \
-        "ethprime=FEC0\0"                   \
-        "uboot=u-boot.bin\0"            \
-        "kernel=uImage\0"               \
-        "nfsroot=/opt/eldk/arm\0"               \
-        "bootargs_base=setenv bootargs console=ttymxc0,115200\0"\
-        "bootargs_nfs=setenv bootargs ${bootargs} root=/dev/nfs "\
-            "ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0"\
-        "bootcmd_net=run bootargs_base bootargs_nfs; "      \
-            "tftpboot ${loadaddr} ${kernel}; bootm\0"   \
-        "bootargs_mmc=setenv bootargs ${bootargs} ip=dhcp "     \
-            "root=/dev/mmcblk0p1 rootwait\0"                \
-        "bootcmd_mmc=run bootargs_base bootargs_mmc; "   \
-        "mmc dev 3; "   \
+#define CONFIG_EXTRA_ENV_SETTINGS \
+        "netdev=eth0\0" \
+        "ethprime=FEC0\0" \
+        "uboot=u-boot.bin\0" \
+        "kernel=uImage\0" \
+        "nfsroot=/opt/eldk/arm\0" \
+        "bootargs_base=setenv bootargs console=ttymxc0,115200\0" \
+        "bootargs_nfs=setenv bootargs ${bootargs} root=/dev/nfs " \
+            "ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0" \
+        "bootcmd_net=run bootargs_base bootargs_nfs; " \
+            "tftpboot ${loadaddr} ${kernel}; bootm\0" \
+        "bootargs_mmc=setenv bootargs ${bootargs} ip=dhcp " \
+            "root=/dev/mmcblk0p1 rootwait\0" \
+        "bootcmd_mmc=run bootargs_base bootargs_mmc; " \
+        "mmc dev 3; " \
         "mmc read ${loadaddr} 0x800 0x2000; bootm\0"    \
         "bootcmd=run bootcmd_net\0"                             \
 
 #else // for mmc boot
-#define CONFIG_EXTRA_ENV_SETTINGS                   \
-        "netdev=eth0\0"                     \
-        "ethprime=FEC0\0"                   \
-        "uboot=u-boot.bin\0"            \
-        "kernel=uImage\0"               \
-        "nfsroot=/opt/eldk/arm\0"               \
-        "bootargs_base=setenv bootargs console=ttymxc0,115200 \0"\
-        "bootargs_nfs=setenv bootargs ${bootargs} root=/dev/nfs "\
-            "ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0"\
-        "bootcmd_net=run bootargs_base bootargs_nfs; "      \
-            "tftpboot ${loadaddr} ${kernel}; bootm\0"   \
-        "bootargs_mmc=setenv bootargs ${bootargs} "     \
-            "root=/dev/mmcblk0p1 rootfstype=ext4 rootwait rw " \
-            " ldb=spl0 video=mxcfb0:dev=ldb,LDB-1080P60,if=RGB24,bpp=32 video=mxcfb1:off\0" \
-        "bootcmd_mmc=run bootargs_base bootargs_mmc; " \
-        "mmc dev 3; " \
-        "mmc read ${loadaddr} 0x800 0x2000; bootm\0" \
-        "bootcmd=run bootcmd_mmc\0" \
+
+#define CONFIG_EXTRA_ENV_SETTINGS \
+    "netdev=eth0\0" \
+    "ethprime=FEC0\0" \
+    "uboot=u-boot.bin\0" \
+    "kernel=uImage\0" \
+    "nfsroot=/opt/eldk/arm\0" \
+    "bootargs_base=setenv bootargs console=ttymxc0,115200 \0" \
+    "bootargs_nfs=setenv bootargs ${bootargs} root=/dev/nfs " \
+        "ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0" \
+    "bootcmd_net=run bootargs_base bootargs_nfs; " \
+        "tftpboot ${loadaddr} ${kernel}; bootm\0" \
+    "bootargs_mmc=setenv bootargs ${bootargs} " \
+        "root=/dev/mmcblk0p1 rootfstype=ext4 rootwait rw lpj=7905280 printk.time=1 verify=no" \
+        " ldb=spl0 video=mxcfb0:dev=ldb,LDB-1080P60,if=RGB24,bpp=32 video=mxcfb1:off consoleblank=0 \0" \
+    "bootcmd_mmc=run bootargs_base bootargs_mmc; " \
+    "mmc dev 3; " \
+    "mmc read ${loadaddr} 0x800 0x2000; bootm\0" \
+    "bootcmd=run bootcmd_mmc\0" \
 
 #endif
 
@@ -157,6 +158,41 @@ $ export CROSS_COMPILE=/opt/gcc-linaro-arm-linux-gnueabi-2012.04-20120426_linux/
 $ make mx6q_sabresd_config
 
 $ make
+
+////////////////////////////Note/////////////////////////////////
+
+uboot mmc read/write命令用法
+
+mmc read用来读取mmc内容到内存，
+
+mmc write用来写入内存内容到mmc中
+
+具体用法,
+
+mmc read &lt;device num&gt; addr blk# cnt [partition]
+
+mmc write &lt;device num&gt; addr blk# cnt [partition]
+
+mmc list
+
+device num是mmc的设备号，可以通过mmc list查询
+
+addr是内存地址
+
+blk# 是mmc内的块号
+
+cnt 块数目 ( 块大小为512Byte )
+
+使用范例：
+
+mmc write 2 0x90000000 0x600 0x10
+
+把内存0x90000000开始，长度为16x512大小的数据，写入到第2个mmc设备块偏移位置为0x600处
+
+mmc read 2 0x90000000 0x600 0x10
+
+把第二个mmc设备块偏移为0x600处开始，长度为16x512大小的数据，读出到内存0x90000000处
+///////////////////////////////////////////////
 </code></pre>
 
 <h1>4. Modify and build kernel</h1>
