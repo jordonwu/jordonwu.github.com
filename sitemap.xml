@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://jordonwu.github.io/blog/2015/05/14/mfgtool-emmc-mksdcard-dot-sh/</loc>
+    <lastmod>2015-05-14T19:07:18+08:00</lastmod>
+  </url>
+  <url>
     <loc>http://jordonwu.github.io/blog/2015/05/14/using-ltibs-u-boot-kernel-and-rootfs-to-boot-board-step-by-step/</loc>
     <lastmod>2015-05-14T14:47:48+08:00</lastmod>
   </url>
