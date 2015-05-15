@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "MFGTool emmc mksdcard.sh"
+title: "MFGTool Emmc mksdcard.sh comment"
 date: 2015-05-14 19:07:18 +0800
 comments: true
-categories: 
+categories:imx6 freescale shell 
 ---
 
-# MFGTool emmc mksdcard.sh comment #
+# MFGTool Emmc mksdcard.sh comment #
 
 ## 1.烧写脚本： ##
 
