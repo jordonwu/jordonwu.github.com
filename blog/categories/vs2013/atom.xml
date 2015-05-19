@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Vs2013 | Jordon Wu's Blog]]></title>
   <link href="http://jordonwu.github.io/blog/categories/vs2013/atom.xml" rel="self"/>
   <link href="http://jordonwu.github.io/"/>
-  <updated>2015-05-15T09:16:54+08:00</updated>
+  <updated>2015-05-19T16:48:45+08:00</updated>
   <id>http://jordonwu.github.io/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
@@ -22,20 +22,20 @@
 
 <ul>
 <li>1) Install ActivePerl-5.20.2.2001-MSWin32-x86-64int-298913.msi</li>
-<li>2) Install PowerVRSDKSetup-3.4.exe</li>
-<li>3) Install gingkoVG SDK</li>
+<li>2) Install PowerVRSDKSetup-3.4.exe(for opengl)</li>
+<li>3) Install gingkoVG SDK (for openvg,optinal)</li>
 </ul>
 
 
-<h1>2. Get qt5 source code</h1>
+<h1>2. Get qt5.5 source code and unzip</h1>
 
-<pre><code>Version: qt-everywhere-opensource-src-5.5.0-alpha.tar.xz
+<pre><code>Version: http://download.qt.io/development_releases/qt/5.5/5.5.0-beta/single/qt-everywhere-opensource-src-5.5.0-beta.zip
 </code></pre>
 
 <h1>3. Extract source code and configure</h1>
 
-<pre><code>Source dir: F:\download\qt-everywhere-opensource-src-5.5.0-alpha
-Build  dir: F:\download\qt-everywhere-opensource-src-5.5.0-alpha-build
+<pre><code>Source dir: F:\download\qt-everywhere-opensource-src-5.5.0-beta
+Build  dir: F:\download\qt-everywhere-opensource-src-5.5.0-beta-build
 
 start cmd from "Developer Command Prompt for VS2013"
 
@@ -51,8 +51,7 @@ D:\Microsoft Visual Studio 12.0&gt;
 &gt; set PATH=D:\assimp-3.1.1-win-binaries\bin32;%PATH%
 &gt;  
 &gt; F:
-&gt; cd F:\download\qt-everywhere-opensource-src-5.5.0-alpha\qtbase
-&gt; Add .gitignore file, contain "foo"
+&gt; cd F:\download\qt-everywhere-opensource-src-5.5.0-beta
 &gt;
 &gt; Modify qt3d\config.tests\assimp\assimp.pro, add below config
 &gt;
@@ -62,16 +61,19 @@ D:\Microsoft Visual Studio 12.0&gt;
     }  
 &gt;
 &gt; 
-&gt; cd F:\download\qt-everywhere-opensource-src-5.5.0-alpha-build
-&gt; 
-&gt; ..\qt-everywhere-opensource-src-5.5.0-alpha\configure -debug-and-release -confirm-license -opensource -platform win32-msvc2013 -prefix "D:\Qt\Qt5.5.0" -qt-libpng -qt-libjpeg -qt-freetype -opengl desktop -openvg -nomake tests -make examples -skip qtwebkit -skip qtwebengine
+&gt; cd F:\download\qt-everywhere-opensource-src-5.5.0-beta-build
+&gt;
+&gt; ..\qt-everywhere-opensource-src-5.5.0-beta\configure -debug-and-release -confirm-license -opensource -platform win32-msvc2013 -prefix "D:\Qt\Qt5.5.0_x86_vs2013_development" -qt-libpng -qt-libjpeg -qt-freetype -opengl desktop -openvg -nomake tests -make examples -skip qtwebkit -skip qtwebengine 
+&gt;
+&gt;        
 
 //configure output
-    copy qmake.exe ..\bin\qmake.exe
+copy qmake.exe ..\bin\qmake.exe
 已复制         1 个文件。
 Running configuration tests...
 Environment:
     INCLUDE=
+      D:\assimp-3.1.1-win-binaries\include
       D:\Imagination\PowerVR_Graphics\PowerVR_SDK\SDK_3.4\Builds\Include
       D:\Microsoft Visual Studio 12.0\VC\INCLUDE
       D:\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE
@@ -80,12 +82,14 @@ Environment:
       C:\Program Files (x86)\Windows Kits\8.1\include\winrt
 
     LIB=
+      D:\assimp-3.1.1-win-binaries\lib32
       D:\Imagination\PowerVR_Graphics\PowerVR_SDK\SDK_3.4\Builds\Windows\x86_64\Lib
       D:\Microsoft Visual Studio 12.0\VC\LIB
       D:\Microsoft Visual Studio 12.0\VC\ATLMFC\LIB
       C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86
 
     PATH=
+      D:\assimp-3.1.1-win-binaries\bin32
       D:\perl\bin
       D:\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow
       C:\Program Files (x86)\Microsoft SDKs\F#\3.1\Framework\v4.0\
@@ -99,6 +103,8 @@ Environment:
       D:\Microsoft Visual Studio 12.0\Team Tools\Performance Tools
       C:\Program Files (x86)\Windows Kits\8.1\bin\x86
       C:\Program Files (x86)\Microsoft SDKs\Windows\v8.1A\bin\NETFX 4.5.1 Tools\
+      D:\Perl\site\bin
+      D:\Perl\bin
       D:\Python27\
       D:\Python27\Scripts
       D:\Qt\Qt5.4.1\5.4\msvc2013_64\bin
@@ -217,28 +223,31 @@ Sql Drivers:
     SQLite2.................no
     InterBase...............no
 
-Sources are in..............F:\download\qt-everywhere-opensource-src-5.5.0-alpha\qtbase
-Build is done in............F:\download\qt-everywhere-opensource-src-5.5.0-alpha-build\qtbase
-Install prefix..............D:\Qt\Qt5.5.0
-Headers installed to........D:\Qt\Qt5.5.0\include
-Libraries installed to......D:\Qt\Qt5.5.0\lib
-Arch-dep. data to...........D:\Qt\Qt5.5.0
-Plugins installed to........D:\Qt\Qt5.5.0\plugins
-Library execs installed to..D:\Qt\Qt5.5.0\bin
-QML1 imports installed to...D:\Qt\Qt5.5.0\imports
-QML2 imports installed to...D:\Qt\Qt5.5.0\qml
-Binaries installed to.......D:\Qt\Qt5.5.0\bin
-Arch-indep. data to.........D:\Qt\Qt5.5.0
-Docs installed to...........D:\Qt\Qt5.5.0\doc
-Translations installed to...D:\Qt\Qt5.5.0\translations
-Examples installed to.......D:\Qt\Qt5.5.0\examples
-Tests installed to..........D:\Qt\Qt5.5.0\tests
+Sources are in..............F:\download\qt-everywhere-opensource-src-5.5.0-beta\qtbase
+Build is done in............F:\download\qt-everywhere-opensource-src-5.5.0-beta-build\qtbase
+Install prefix..............D:\Qt\Qt5.5.0_x86_vs2013_development
+Headers installed to........D:\Qt\Qt5.5.0_x86_vs2013_development\include
+Libraries installed to......D:\Qt\Qt5.5.0_x86_vs2013_development\lib
+Arch-dep. data to...........D:\Qt\Qt5.5.0_x86_vs2013_development
+Plugins installed to........D:\Qt\Qt5.5.0_x86_vs2013_development\plugins
+Library execs installed to..D:\Qt\Qt5.5.0_x86_vs2013_development\bin
+QML1 imports installed to...D:\Qt\Qt5.5.0_x86_vs2013_development\imports
+QML2 imports installed to...D:\Qt\Qt5.5.0_x86_vs2013_development\qml
+Binaries installed to.......D:\Qt\Qt5.5.0_x86_vs2013_development\bin
+Arch-indep. data to.........D:\Qt\Qt5.5.0_x86_vs2013_development
+Docs installed to...........D:\Qt\Qt5.5.0_x86_vs2013_development\doc
+Translations installed to...D:\Qt\Qt5.5.0_x86_vs2013_development\translations
+Examples installed to.......D:\Qt\Qt5.5.0_x86_vs2013_development\examples
+Tests installed to..........D:\Qt\Qt5.5.0_x86_vs2013_development\tests
 
-Info: creating super cache file F:\download\qt-everywhere-opensource-src-5.5.0-alpha-build\.qmake.super
+Info: creating super cache file F:\download\qt-everywhere-opensource-src-5.5.0-beta-build\.qmake.super
 
 
 Qt is now configured for building. Just run nmake.
-To reconfigure, run nmake confclean and configure.  
+To reconfigure, run nmake confclean and configure.
+
+
+f:\download\qt-everywhere-opensource-src-5.5.0-beta-build&gt; 
 </code></pre>
 
 <h1>4. Make and Install</h1>
@@ -250,7 +259,7 @@ To reconfigure, run nmake confclean and configure.
 &gt; nmake
 &gt;
 &gt; namke install
-&gt;   
+&gt; 
 </code></pre>
 ]]></content>
   </entry>
