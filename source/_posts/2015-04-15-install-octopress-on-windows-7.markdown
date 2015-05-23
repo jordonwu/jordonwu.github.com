@@ -54,7 +54,7 @@ categories: octopress github blog
         d:\Ruby\DevKit> ruby dk.rb install
     
 
-## 6. 	Change ruby sources to "http://ruby.taobao.org/" ##
+## 6. 	Change ruby sources to http://ruby.taobao.org/ ##
     
         D:\> cd d:\Ruby\DevKit
         

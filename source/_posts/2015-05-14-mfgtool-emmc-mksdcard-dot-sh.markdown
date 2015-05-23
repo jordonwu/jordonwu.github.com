@@ -3,7 +3,7 @@ layout: post
 title: "MFGTool Emmc mksdcard.sh"
 date: 2015-05-14 19:07:18 +0800
 comments: true
-categories:imx6 freescale shell 
+categories: imx6 freescale shell 
 ---
 
 # MFGTool Emmc mksdcard.sh comment #
