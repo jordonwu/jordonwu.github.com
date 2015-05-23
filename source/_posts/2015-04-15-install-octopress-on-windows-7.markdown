@@ -295,6 +295,7 @@ categories: octopress github blog
 ## 11	setup octopress and github ##
 
         $ cd username.github.com.git
+		# Note: Needn't this step if you clone an existed octopress repo
         $ rake setup_github_pages       #you need input username and password of you github account and blog url(https://github.com/username/username.github.com.git)
         
 
