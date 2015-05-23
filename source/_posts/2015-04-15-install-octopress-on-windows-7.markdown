@@ -221,6 +221,8 @@ categories: octopress github blog
         Receiving objects: 100% (5279/5279), 1.37 MiB | 129.00 KiB/s, done.
         Resolving deltas: 100% (2537/2537), done.
         Checking connectivity... done.
+		
+		$ git clone -b master https://github.com/username/username.github.com.git _deploy  # replace username using yours
 
 ### 9.2	Install Octopress GEM component ###
         
