@@ -4,7 +4,7 @@
   <title><![CDATA[Jordon Wu's Blog]]></title>
   <link href="http://jordonwu.github.io/atom.xml" rel="self"/>
   <link href="http://jordonwu.github.io/"/>
-  <updated>2015-05-23T21:46:43+08:00</updated>
+  <updated>2015-05-23T21:54:00+08:00</updated>
   <id>http://jordonwu.github.io/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
@@ -2040,6 +2040,7 @@ $ scp root@192.168.8.1:/tmp/wrtnode_mtd_info.txt .
 <h2>11   setup octopress and github</h2>
 
 <pre><code>    $ cd username.github.com.git
+    # Note: Needn't this step if you clone an existed octopress repo
     $ rake setup_github_pages       #you need input username and password of you github account and blog url(https://github.com/username/username.github.com.git)
 </code></pre>
 
