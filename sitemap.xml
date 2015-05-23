@@ -5,12 +5,12 @@
     <lastmod>2015-05-15T16:18:48+08:00</lastmod>
   </url>
   <url>
-    <loc>http://jordonwu.github.io/blog/2015/05/14/using-ltibs-u-boot-kernel-and-rootfs-to-boot-board-step-by-step/</loc>
-    <lastmod>2015-05-14T14:47:48+08:00</lastmod>
+    <loc>http://jordonwu.github.io/blog/2015/05/14/mfgtool-emmc-mksdcard-dot-sh/</loc>
+    <lastmod>2015-05-14T19:07:18+08:00</lastmod>
   </url>
   <url>
-    <loc>http://jordonwu.github.io/blog/2015/05/14/mfgtool-emmc-mksdcard-dot-sh/</loc>
-    <lastmod>2015-05-14T00:00:00+08:00</lastmod>
+    <loc>http://jordonwu.github.io/blog/2015/05/14/using-ltibs-u-boot-kernel-and-rootfs-to-boot-board-step-by-step/</loc>
+    <lastmod>2015-05-14T14:47:48+08:00</lastmod>
   </url>
   <url>
     <loc>http://jordonwu.github.io/blog/2015/05/11/build-ltib-for-sabre-sdb-on-ubuntu14-dot-04/</loc>
@@ -93,5 +93,11 @@
   </url>
   <url>
     <loc>http://jordonwu.github.io/blog/categories/vs2013/</loc>
+  </url>
+  <url>
+    <loc>http://jordonwu.github.io/blog/categories/freescale/</loc>
+  </url>
+  <url>
+    <loc>http://jordonwu.github.io/blog/categories/shell/</loc>
   </url>
 </urlset>

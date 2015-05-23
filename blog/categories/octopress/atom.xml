@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Jordon Wu's Blog]]></title>
   <link href="http://jordonwu.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://jordonwu.github.io/"/>
-  <updated>2015-05-19T16:48:45+08:00</updated>
+  <updated>2015-05-23T21:46:43+08:00</updated>
   <id>http://jordonwu.github.io/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
@@ -71,7 +71,7 @@
 <pre><code>    d:\Ruby\DevKit&gt; ruby dk.rb install
 </code></pre>
 
-<h2>6.   Change ruby sources to &ldquo;<a href="http://ruby.taobao.org/">http://ruby.taobao.org/</a>&rdquo;</h2>
+<h2>6.   Change ruby sources to <a href="http://ruby.taobao.org/">http://ruby.taobao.org/</a></h2>
 
 <pre><code>    D:\&gt; cd d:\Ruby\DevKit
 
@@ -240,6 +240,8 @@
     Receiving objects: 100% (5279/5279), 1.37 MiB | 129.00 KiB/s, done.
     Resolving deltas: 100% (2537/2537), done.
     Checking connectivity... done.
+
+    $ git clone -b master https://github.com/username/username.github.com.git _deploy  # replace username using yours
 </code></pre>
 
 <h3>9.2 Install Octopress GEM component</h3>
