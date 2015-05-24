@@ -208,6 +208,10 @@ categories: octopress github blog
         $ aliasalias rake='bundle exec rake'
         $ rake install
 
+### 8.6	setup octopress and github ##
+
+        $ cd username.github.com.git
+        $ rake setup_github_pages       #you need input username and password of you github account and blog url(https://github.com/username/username.github.com.git)
 
 ## 9 	Clone your Octopress if you had used it on github ##
     
@@ -263,25 +267,6 @@ categories: octopress github blog
         Using bundler 1.9.3
         Bundle complete! 15 Gemfile dependencies, 28 gems now installed.
         Use `bundle show [gemname]` to see where a bundled gem is installed.
-        
-        
-### 9.3	Install Octopress template file ###
-
-        $ rake install
-        
-        rake aborted!
-        You have already activated rake 10.1.0, but your Gemfile requires rake 0.9.6. Prepending `bundle exec` to your command may solve this.
-        e:/study/username.github.com/Rakefile:2:in `<top (required)>'
-        (See full trace by running task with --trace)
-        
-        
-        #add "aliasalias rake='bundle exec rake'" to git bash bash_profile if display error as above
-        
-        $ echo "alias rake='bundle exec rake'" >> ~/.bash_profile
-        
-        $ . ~/.bash_profile
-        $ aliasalias rake='bundle exec rake'
-        $ rake install
     
 ## 10	Add a remote name(default is origin) for the repository git@github.com:username/username.github.com.git ##
     
@@ -290,65 +275,58 @@ categories: octopress github blog
         
         origin
         
-        $ git remote add origin git@github.com:username/username.github.com.git #default name is origin, you can change it
+        $ git remote add origin git@github.com:username/username.github.com.git #default name is origin, you can change it       
         
-## 11	setup octopress and github ##
-
-        $ cd username.github.com.git
-		# Note: Needn't this step if you clone an existed octopress repo
-        $ rake setup_github_pages       #you need input username and password of you github account and blog url(https://github.com/username/username.github.com.git)
-        
-
-## 12.	Management blog ##
+## 11.	Management blog ##
 
         $ cd username.github.com.git
     
-### 12.1 Add blog ###
+### 11.1 Add blog ###
 
         $ rake new_post["blog_name"]
     
-### 12.2 Generate static file ###
+### 11.2 Generate static file ###
 
         $ rake generate
     
-### 12.3 Preview blog ###
+### 11.3 Preview blog ###
 
         $ rake preview
     
         #now you can preview blog using local address on any browser: http://localhost:4000
     
-### 12.4 Deploy blog to github ###
+### 11.4 Deploy blog to github ###
 
         $rake deploy
         
         #now you can access you blog using github address on any browser: http://username.github.com
                 
-## 	13. Management blog source code	 ##
+## 	12. Management blog source code	 ##
         
-###	13.1 Add file to local repo ###
+###	12.1 Add file to local repo ###
         
         $ git add .
         
-### 13.2 Commit file to repo ###
+### 12.2 Commit file to repo ###
 
         $ git commit -m "commit file comment"
         
-### 13.3 Push local repo file to remote ###
+### 12.3 Push local repo file to remote ###
 
         $ git push origin source #origin is local repo name, source is branch name
         
-### 13.4 Pull last remote repo file to local ###
+### 12.4 Pull last remote repo file to local ###
 	
         $ git pull orign source
 
-### 13.5 Add a image to your blog ###
+### 12.5 Add a image to your blog ###
 
 		1) add image file to source/images folder
 		2) add below code to you blog
 	
 		![a brick](../images/a_brick.png "A brick")
 
-### 13.6 Add attach file to your blog ###
+### 12.6 Add attach file to your blog ###
 
     	1) add attach file to source/images folder
     	2) add a hyperlink and link address point to your file(such as ../images/test.txt)
@@ -356,19 +334,19 @@ categories: octopress github blog
 =[Attached file here(test.txt)][1]
 
 
-## 	14	Enable comment ##
+## 	13	Enable comment ##
 
-### 14.1 Register an account on www.disqus.com ###
+### 13.1 Register an account on www.disqus.com ###
 
-### 14.2 Register "unique Disqus URL" for github blog ###
+### 13.2 Register "unique Disqus URL" for github blog ###
 
-### 14.3 Edit _config.yml as below###
+### 13.3 Edit _config.yml as below###
 	
 	# Disqus Comments
 	disqus_short_name: site_short_name_register_on_disqus
 	disqus_show_comment_count: true
               
-### 14.4 Enable comment on your blog as below ###
+### 13.4 Enable comment on your blog as below ###
 	
 	---
 	layout: post
