@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Github | Jordon Wu's Blog]]></title>
   <link href="http://jordonwu.github.io/blog/categories/github/atom.xml" rel="self"/>
   <link href="http://jordonwu.github.io/"/>
-  <updated>2015-05-24T19:27:59+08:00</updated>
+  <updated>2015-05-24T19:37:51+08:00</updated>
   <id>http://jordonwu.github.io/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
@@ -390,6 +390,25 @@ date: 2015-04-15 14:51:54 +0800
 comments: true
 categories: category1, category2 
 ---
+</code></pre>
+
+<h2>14  Pushing changes from two different machines</h2>
+
+<p>If you want to blog from more than one computer, you need to make sure that you push everything before switching computers. From the first machine do the following whenever you’ve made changes:</p>
+
+<pre><code>$ rake generate
+$ git add .
+$ git commit -am "Some comment here." 
+$ git push origin source  # update the remote source branch 
+$ rake deploy             # update the remote master branch
+</code></pre>
+
+<p>Then on the other machine, you need to pull those changes.</p>
+
+<pre><code>$ cd octopress
+$ git pull origin source  # update the local source branch
+$ cd ./_deploy
+$ git pull origin master  # update the local master branch
 </code></pre>
 ]]></content>
   </entry>
