@@ -2231,6 +2231,12 @@ $ scp root@192.168.8.1:/tmp/wrtnode_mtd_info.txt .
     $ rake install
 </code></pre>
 
+<h3>8.6 setup octopress and github</h3>
+
+<pre><code>    $ cd username.github.com.git
+    $ rake setup_github_pages       #you need input username and password of you github account and blog url(https://github.com/username/username.github.com.git)
+</code></pre>
+
 <h2>9    Clone your Octopress if you had used it on github</h2>
 
 <h3>9.1 Clone your Octopress repo</h3>
@@ -2288,25 +2294,6 @@ $ scp root@192.168.8.1:/tmp/wrtnode_mtd_info.txt .
     Use `bundle show [gemname]` to see where a bundled gem is installed.
 </code></pre>
 
-<h3>9.3 Install Octopress template file</h3>
-
-<pre><code>    $ rake install
-
-    rake aborted!
-    You have already activated rake 10.1.0, but your Gemfile requires rake 0.9.6. Prepending `bundle exec` to your command may solve this.
-    e:/study/username.github.com/Rakefile:2:in `&lt;top (required)&gt;'
-    (See full trace by running task with --trace)
-
-
-    #add "aliasalias rake='bundle exec rake'" to git bash bash_profile if display error as above
-
-    $ echo "alias rake='bundle exec rake'" &gt;&gt; ~/.bash_profile
-
-    $ . ~/.bash_profile
-    $ aliasalias rake='bundle exec rake'
-    $ rake install
-</code></pre>
-
 <h2>10   Add a remote name(default is origin) for the repository git@github.com:username/username.github.com.git</h2>
 
 <pre><code>    $ cd username.github.com.git
@@ -2314,68 +2301,61 @@ $ scp root@192.168.8.1:/tmp/wrtnode_mtd_info.txt .
 
     origin
 
-    $ git remote add origin git@github.com:username/username.github.com.git #default name is origin, you can change it
+    $ git remote add origin git@github.com:username/username.github.com.git #default name is origin, you can change it       
 </code></pre>
 
-<h2>11   setup octopress and github</h2>
-
-<pre><code>    $ cd username.github.com.git
-    # Note: Needn't this step if you clone an existed octopress repo
-    $ rake setup_github_pages       #you need input username and password of you github account and blog url(https://github.com/username/username.github.com.git)
-</code></pre>
-
-<h2>12.  Management blog</h2>
+<h2>11.  Management blog</h2>
 
 <pre><code>    $ cd username.github.com.git
 </code></pre>
 
-<h3>12.1 Add blog</h3>
+<h3>11.1 Add blog</h3>
 
 <pre><code>    $ rake new_post["blog_name"]
 </code></pre>
 
-<h3>12.2 Generate static file</h3>
+<h3>11.2 Generate static file</h3>
 
 <pre><code>    $ rake generate
 </code></pre>
 
-<h3>12.3 Preview blog</h3>
+<h3>11.3 Preview blog</h3>
 
 <pre><code>    $ rake preview
 
     #now you can preview blog using local address on any browser: http://localhost:4000
 </code></pre>
 
-<h3>12.4 Deploy blog to github</h3>
+<h3>11.4 Deploy blog to github</h3>
 
 <pre><code>    $rake deploy
 
     #now you can access you blog using github address on any browser: http://username.github.com
 </code></pre>
 
-<h2>13. Management blog source code</h2>
+<h2>12. Management blog source code</h2>
 
-<h3>13.1 Add file to local repo</h3>
+<h3>12.1 Add file to local repo</h3>
 
 <pre><code>    $ git add .
 </code></pre>
 
-<h3>13.2 Commit file to repo</h3>
+<h3>12.2 Commit file to repo</h3>
 
 <pre><code>    $ git commit -m "commit file comment"
 </code></pre>
 
-<h3>13.3 Push local repo file to remote</h3>
+<h3>12.3 Push local repo file to remote</h3>
 
 <pre><code>    $ git push origin source #origin is local repo name, source is branch name
 </code></pre>
 
-<h3>13.4 Pull last remote repo file to local</h3>
+<h3>12.4 Pull last remote repo file to local</h3>
 
 <pre><code>    $ git pull orign source
 </code></pre>
 
-<h3>13.5 Add a image to your blog</h3>
+<h3>12.5 Add a image to your blog</h3>
 
 <pre><code>    1) add image file to source/images folder
     2) add below code to you blog
@@ -2383,7 +2363,7 @@ $ scp root@192.168.8.1:/tmp/wrtnode_mtd_info.txt .
     ![a brick](../images/a_brick.png "A brick")
 </code></pre>
 
-<h3>13.6 Add attach file to your blog</h3>
+<h3>12.6 Add attach file to your blog</h3>
 
 <pre><code>    1) add attach file to source/images folder
     2) add a hyperlink and link address point to your file(such as ../images/test.txt)
@@ -2391,20 +2371,20 @@ $ scp root@192.168.8.1:/tmp/wrtnode_mtd_info.txt .
 
 <p>=<a href="../images/test.txt">Attached file here(test.txt)</a></p>
 
-<h2>14  Enable comment</h2>
+<h2>13  Enable comment</h2>
 
-<h3>14.1 Register an account on www.disqus.com</h3>
+<h3>13.1 Register an account on www.disqus.com</h3>
 
-<h3>14.2 Register &ldquo;unique Disqus URL&rdquo; for github blog</h3>
+<h3>13.2 Register &ldquo;unique Disqus URL&rdquo; for github blog</h3>
 
-<h3>14.3 Edit _config.yml as below</h3>
+<h3>13.3 Edit _config.yml as below</h3>
 
 <pre><code># Disqus Comments
 disqus_short_name: site_short_name_register_on_disqus
 disqus_show_comment_count: true
 </code></pre>
 
-<h3>14.4 Enable comment on your blog as below</h3>
+<h3>13.4 Enable comment on your blog as below</h3>
 
 <pre><code>---
 layout: post
