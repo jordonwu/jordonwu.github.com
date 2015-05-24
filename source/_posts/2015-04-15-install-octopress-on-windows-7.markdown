@@ -359,3 +359,19 @@ categories: octopress github blog
 
   [1]: ../images/test.txt
 
+
+## 	14 	Pushing changes from two different machines ##
+If you want to blog from more than one computer, you need to make sure that you push everything before switching computers. From the first machine do the following whenever you’ve made changes:
+
+	$ rake generate
+	$ git add .
+	$ git commit -am "Some comment here." 
+	$ git push origin source  # update the remote source branch 
+	$ rake deploy             # update the remote master branch
+
+Then on the other machine, you need to pull those changes.
+
+	$ cd octopress
+	$ git pull origin source  # update the local source branch
+	$ cd ./_deploy
+	$ git pull origin master  # update the local master branch
