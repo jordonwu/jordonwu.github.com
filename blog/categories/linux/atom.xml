@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | Jordon Wu's Blog]]></title>
   <link href="http://jordonwu.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://jordonwu.github.io/"/>
-  <updated>2015-05-26T08:40:46+08:00</updated>
+  <updated>2015-05-26T08:52:53+08:00</updated>
   <id>http://jordonwu.github.io/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
@@ -12,6 +12,68 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Imx6 Summary Linux Host Environment Setup]]></title>
+    <link href="http://jordonwu.github.io/blog/2015/05/26/imx6-summary-linux-host-environment-setup/"/>
+    <updated>2015-05-26T08:52:12+08:00</updated>
+    <id>http://jordonwu.github.io/blog/2015/05/26/imx6-summary-linux-host-environment-setup</id>
+    <content type="html"><![CDATA[<h1>1.  Install Host OS</h1>
+
+<h2>1.1 Install VMware</h2>
+
+<pre><code>Version: VMware10.03
+</code></pre>
+
+<h2>1.2 Install ubuntu server on VMware</h2>
+
+<pre><code>Version: ubuntu-14.04.2-server-amd64
+</code></pre>
+
+<h2>1.3 Update Sources</h2>
+
+<pre><code>$sudo apt-get update
+</code></pre>
+
+<h1>2.  Install Host OS Service</h1>
+
+<h2>2.1 Install ssh service</h2>
+
+<pre><code>$ sudo apt-get install openssh-client openssh-server
+</code></pre>
+
+<h2>2.2 Install samba service</h2>
+
+<pre><code>$ sudo apt-get install samba
+
+$ sudo vim /etc/samba/smb.conf and add below section to the file end
+
+[home]
+comment = samba share path /home
+browseable = yes
+writeable = yes
+path = /home
+valid users = smb
+
+$ sudo useradd smb          //add user smb
+
+$ sudo smbpasswd -a smb     //set password for smb user
+
+$ /etc/init.d/smbd restart  //restart smbd service
+</code></pre>
+
+<h1>3.  Install Host OS build essential</h1>
+
+<pre><code>$ sudo apt-get install gawk wget git-core diffstat unzip texinfo gcc-multilib \
+    build-essential chrpath socat libsdl1.2-dev xterm curl tcl rpm bison m4 \
+    zlib1g zlib1g-dev libncurses5-dev liblzo2-dev uuid-dev lzop texi2html texinfo \
+    texlive gettext libgtk2.0-dev rpm bison m4 libfreetype6-dev libdbus-glib-1-dev \
+    liborbit2-dev intltool ccache libtool uuid-dev liblzo2-dev tcl dpkg asciidoc \
+    texlive-latex-base dblatex xutils-dev texlive texinfo lib32z1 lib32ncurses5 \
+    lib32bz2-1.0 libc6-dev-i386 u-boot-tools scrollkeeper dos2unix
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Build Linux for Imx6]]></title>

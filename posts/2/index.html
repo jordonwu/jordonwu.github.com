@@ -9,7 +9,8 @@
   <meta name="author" content="Jordon Wu">
 
   
-  <meta name="description" content="1. Install git Version : Git-1.9.2-preview20140411.exe 2. Install RubyInstaller Version: rubyinstaller-2.1.5-x64 3. Add Ruby install path(Example: D &hellip;">
+  <meta name="description" content="1. Hardware wrtnode board http://cn.wrtnode.com/ 2. Backup firmware 1) ssh to wrtnode board root@OpenWrt:/tmp# cat /proc/mtd
+dev: size erasesize name &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +66,76 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/15/build-openwrt-firmware/">Build Openwrt Firmware</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-15T14:51:54+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:51 pm</span></time>
+        
+           | <a href="/blog/2015/04/15/build-openwrt-firmware/#disqus_thread"
+             data-disqus-identifier="http://jordonwu.github.io/blog/2015/04/15/build-openwrt-firmware/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>1. Hardware</h1>
+
+<p>wrtnode board <a href="http://cn.wrtnode.com/">http://cn.wrtnode.com/</a></p>
+
+<h1>2. Backup firmware</h1>
+
+<h2>1) ssh to wrtnode board</h2>
+
+<pre><code>root@OpenWrt:/tmp# cat /proc/mtd
+dev:    size   erasesize  name
+mtd0: 00030000 00010000 "u-boot"
+mtd1: 00010000 00010000 "u-boot-env"
+mtd2: 00010000 00010000 "factory"
+mtd3: 00fb0000 00010000 "firmware"
+mtd4: 00e96447 00010000 "rootfs"
+mtd5: 00780000 00010000 "rootfs_data"
+</code></pre>
+
+<h2>2) back up u-boot and factory partition to /tmp</h2>
+
+<pre><code>root@OpenWrt:/tmp# dd if=/dev/mtd0 of=/tmp/wrtnode_u-boot.backup
+root@OpenWrt:/tmp# dd if=/dev/mtd1 of=/tmp/wrtnode_u-boot-env.backup
+root@OpenWrt:/tmp# dd if=/dev/mtd2 of=/tmp/wrtnode_factory.backup
+root@OpenWrt:/tmp# cat /proc/mtd &gt; wrtnode_mtd_info.txt
+</code></pre>
+
+<h2>3) scp backup firmware to local pc</h2>
+
+<pre><code>$ scp root@192.168.8.1:/tmp/wrtnode_u-boot.backup .
+$ scp root@192.168.8.1:/tmp/wrtnode_u-boot-env.backup .
+$ scp root@192.168.8.1:/tmp/wrtnode_factory.backup .
+$ scp root@192.168.8.1:/tmp/wrtnode_mtd_info.txt .
+</code></pre>
+
+<h1>3. Build u-boot</h1>
+
+<h1>4. Build kernel</h1>
+
+<h1>5. Build openwrt image</h1>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -504,6 +575,10 @@ $ git pull origin master  # update the local master branch
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/26/imx6-summary-linux-host-environment-setup/">Imx6 Summary Linux Host Environment Setup</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/26/adding-an-existing-project-to-github/">Adding an Existing Project to Github</a>
       </li>
     
@@ -517,10 +592,6 @@ $ git pull origin master  # update the local master branch
     
       <li class="post">
         <a href="/blog/2015/05/14/using-ltibs-u-boot-kernel-and-rootfs-to-boot-board-step-by-step/">Using Ltib&#8217;s U-boot Kernel and Rootfs to Boot Board Step by Step</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/11/build-ltib-for-sabre-sdb-on-ubuntu14-dot-04/">Build Ltib for Sabre Sdb on ubuntu14.04</a>
       </li>
     
   </ul>

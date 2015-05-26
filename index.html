@@ -9,7 +9,7 @@
   <meta name="author" content="Jordon Wu">
 
   
-  <meta name="description" content="1. Create a new repository on Github Example repo: https://github.com/github-username/test-repo.git #To avoid errors, do not initialize the new &hellip;">
+  <meta name="description" content="1. Install Host OS 1.1 Install VMware Version: VMware10.03 1.2 Install ubuntu server on VMware Version: ubuntu-14.04.2-server-amd64 1.3 Update &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,91 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/05/26/imx6-summary-linux-host-environment-setup/">Imx6 Summary Linux Host Environment Setup</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-26T08:52:12+08:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:52 am</span></time>
+        
+           | <a href="/blog/2015/05/26/imx6-summary-linux-host-environment-setup/#disqus_thread"
+             data-disqus-identifier="http://jordonwu.github.io/blog/2015/05/26/imx6-summary-linux-host-environment-setup/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>1.  Install Host OS</h1>
+
+<h2>1.1 Install VMware</h2>
+
+<pre><code>Version: VMware10.03
+</code></pre>
+
+<h2>1.2 Install ubuntu server on VMware</h2>
+
+<pre><code>Version: ubuntu-14.04.2-server-amd64
+</code></pre>
+
+<h2>1.3 Update Sources</h2>
+
+<pre><code>$sudo apt-get update
+</code></pre>
+
+<h1>2.  Install Host OS Service</h1>
+
+<h2>2.1 Install ssh service</h2>
+
+<pre><code>$ sudo apt-get install openssh-client openssh-server
+</code></pre>
+
+<h2>2.2 Install samba service</h2>
+
+<pre><code>$ sudo apt-get install samba
+
+$ sudo vim /etc/samba/smb.conf and add below section to the file end
+
+[home]
+comment = samba share path /home
+browseable = yes
+writeable = yes
+path = /home
+valid users = smb
+
+$ sudo useradd smb          //add user smb
+
+$ sudo smbpasswd -a smb     //set password for smb user
+
+$ /etc/init.d/smbd restart  //restart smbd service
+</code></pre>
+
+<h1>3.  Install Host OS build essential</h1>
+
+<pre><code>$ sudo apt-get install gawk wget git-core diffstat unzip texinfo gcc-multilib \
+    build-essential chrpath socat libsdl1.2-dev xterm curl tcl rpm bison m4 \
+    zlib1g zlib1g-dev libncurses5-dev liblzo2-dev uuid-dev lzop texi2html texinfo \
+    texlive gettext libgtk2.0-dev rpm bison m4 libfreetype6-dev libdbus-glib-1-dev \
+    liborbit2-dev intltool ccache libtool uuid-dev liblzo2-dev tcl dpkg asciidoc \
+    texlive-latex-base dblatex xutils-dev texlive texinfo lib32z1 lib32ncurses5 \
+    lib32bz2-1.0 libc6-dev-i386 u-boot-tools scrollkeeper dos2unix
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1994,76 +2079,6 @@ $ls ls -l u-boot.*
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/04/15/build-openwrt-firmware/">Build Openwrt Firmware</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-04-15T14:51:54+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:51 pm</span></time>
-        
-           | <a href="/blog/2015/04/15/build-openwrt-firmware/#disqus_thread"
-             data-disqus-identifier="http://jordonwu.github.io/blog/2015/04/15/build-openwrt-firmware/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h1>1. Hardware</h1>
-
-<p>wrtnode board <a href="http://cn.wrtnode.com/">http://cn.wrtnode.com/</a></p>
-
-<h1>2. Backup firmware</h1>
-
-<h2>1) ssh to wrtnode board</h2>
-
-<pre><code>root@OpenWrt:/tmp# cat /proc/mtd
-dev:    size   erasesize  name
-mtd0: 00030000 00010000 "u-boot"
-mtd1: 00010000 00010000 "u-boot-env"
-mtd2: 00010000 00010000 "factory"
-mtd3: 00fb0000 00010000 "firmware"
-mtd4: 00e96447 00010000 "rootfs"
-mtd5: 00780000 00010000 "rootfs_data"
-</code></pre>
-
-<h2>2) back up u-boot and factory partition to /tmp</h2>
-
-<pre><code>root@OpenWrt:/tmp# dd if=/dev/mtd0 of=/tmp/wrtnode_u-boot.backup
-root@OpenWrt:/tmp# dd if=/dev/mtd1 of=/tmp/wrtnode_u-boot-env.backup
-root@OpenWrt:/tmp# dd if=/dev/mtd2 of=/tmp/wrtnode_factory.backup
-root@OpenWrt:/tmp# cat /proc/mtd &gt; wrtnode_mtd_info.txt
-</code></pre>
-
-<h2>3) scp backup firmware to local pc</h2>
-
-<pre><code>$ scp root@192.168.8.1:/tmp/wrtnode_u-boot.backup .
-$ scp root@192.168.8.1:/tmp/wrtnode_u-boot-env.backup .
-$ scp root@192.168.8.1:/tmp/wrtnode_factory.backup .
-$ scp root@192.168.8.1:/tmp/wrtnode_mtd_info.txt .
-</code></pre>
-
-<h1>3. Build u-boot</h1>
-
-<h1>4. Build kernel</h1>
-
-<h1>5. Build openwrt image</h1>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -2079,6 +2094,10 @@ $ scp root@192.168.8.1:/tmp/wrtnode_mtd_info.txt .
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/26/imx6-summary-linux-host-environment-setup/">Imx6 Summary Linux Host Environment Setup</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/26/adding-an-existing-project-to-github/">Adding an Existing Project to Github</a>
       </li>
     
@@ -2092,10 +2111,6 @@ $ scp root@192.168.8.1:/tmp/wrtnode_mtd_info.txt .
     
       <li class="post">
         <a href="/blog/2015/05/14/using-ltibs-u-boot-kernel-and-rootfs-to-boot-board-step-by-step/">Using Ltib&#8217;s U-boot Kernel and Rootfs to Boot Board Step by Step</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/11/build-ltib-for-sabre-sdb-on-ubuntu14-dot-04/">Build Ltib for Sabre Sdb on ubuntu14.04</a>
       </li>
     
   </ul>
