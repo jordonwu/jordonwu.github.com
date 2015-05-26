@@ -9,8 +9,8 @@
   <meta name="author" content="Jordon Wu">
 
   
-  <meta name="description" content="1. Hardware wrtnode board http://cn.wrtnode.com/ 2. Backup firmware 1) ssh to wrtnode board root@OpenWrt:/tmp# cat /proc/mtd
-dev: size erasesize name &hellip;">
+  <meta name="description" content="1. Get u-boot source git clone https://github.com/Freescale/u-boot-fslc.git 2. make &amp; build $cd u-boot-fslc
+$export ARCH=arm $export &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,56 @@ dev: size erasesize name &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/15/build-u-boot-for-riot-board/">Build U-boot for Riot Board</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-15T14:52:23+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:52 pm</span></time>
+        
+           | <a href="/blog/2015/04/15/build-u-boot-for-riot-board/#disqus_thread"
+             data-disqus-identifier="http://jordonwu.github.io/blog/2015/04/15/build-u-boot-for-riot-board/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>1. Get u-boot source</h2>
+
+<pre><code>git clone https://github.com/Freescale/u-boot-fslc.git
+</code></pre>
+
+<h2>2. make &amp; build</h2>
+
+<pre><code>$cd u-boot-fslc
+$export ARCH=arm 
+$export CROSS_COMPILE=arm-linux-gnueabihf-
+$make riotboard_defconfig 
+$make
+$ls ls -l u-boot.*
+    -rw-rw-r-- 1 jordon jordon 331492 Dec  7 05:44 u-boot.bin
+    -rw-rw-r-- 1 jordon jordon 334848 Dec  7 05:44 u-boot.imx
+    -rw-rw-r-- 1 jordon jordon   1286 Dec  7 05:44 u-boot.lds
+    -rw-rw-r-- 1 jordon jordon 317244 Dec  7 05:44 u-boot.map
+    -rw-rw-r-- 1 jordon jordon 994618 Dec  7 05:44 u-boot.srec
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -575,6 +625,10 @@ $ git pull origin master  # update the local master branch
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/26/imx6-summary-build-image-for-imx6-using-yocto/">Imx6 Summary Build Image for Imx6 Using Yocto</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/26/imx6-summary-linux-host-environment-setup/">Imx6 Summary Linux Host Environment Setup</a>
       </li>
     
@@ -588,10 +642,6 @@ $ git pull origin master  # update the local master branch
     
       <li class="post">
         <a href="/blog/2015/05/14/mfgtool-emmc-mksdcard-dot-sh/">MFGTool Emmc mksdcard.sh</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/14/using-ltibs-u-boot-kernel-and-rootfs-to-boot-board-step-by-step/">Using Ltib&#8217;s U-boot Kernel and Rootfs to Boot Board Step by Step</a>
       </li>
     
   </ul>
