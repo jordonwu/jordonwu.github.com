@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://jordonwu.github.io/blog/2015/05/26/adding-an-existing-project-to-github/</loc>
+    <lastmod>2015-05-26T08:12:55+08:00</lastmod>
+  </url>
+  <url>
     <loc>http://jordonwu.github.io/blog/2015/05/15/build-qt5-dot-5-0-for-imx6/</loc>
     <lastmod>2015-05-15T16:18:48+08:00</lastmod>
   </url>
@@ -99,5 +103,8 @@
   </url>
   <url>
     <loc>http://jordonwu.github.io/blog/categories/shell/</loc>
+  </url>
+  <url>
+    <loc>http://jordonwu.github.io/blog/categories/git/</loc>
   </url>
 </urlset>
