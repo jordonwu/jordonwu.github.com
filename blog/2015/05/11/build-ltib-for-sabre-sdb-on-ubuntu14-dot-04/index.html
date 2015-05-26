@@ -10,7 +10,7 @@
 
   
   <meta name="description" content="1. Package 1) L3.0.35_4.1.0_130816_source.gz
-2) 0001_make_L3.0.35_4.1.0_compile_on_Ubuntu_14.04_64bit_OS.patch.zip 2. Install LTIB and Apply Patch $ &hellip;">
+2) 0001_make_L3.0.35_4.1.0_compile_on_Ubuntu_14.04_64bit_OS.patch.zip 2. Add user super privilege to &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,7 +94,15 @@
 2) 0001_make_L3.0.35_4.1.0_compile_on_Ubuntu_14.04_64bit_OS.patch.zip
 </code></pre>
 
-<h1>2. Install LTIB and Apply Patch</h1>
+<h1>2. Add user super privilege to visudo</h1>
+
+<pre><code>$sudo /usr/sbin/visudo
+
+#add below line for vmuser account super privilege
+vmuser ALL = NOPASSWD: /usr/bin/rpm, /opt/freescale/ltib/usr/bin/rpm
+</code></pre>
+
+<h1>3. Install LTIB and Apply Patch</h1>
 
 <pre><code>$ cd ~
 $ tar zxvf L3.0.35_4.1.0_130816_source.tar.gz
@@ -106,7 +114,7 @@ $ unzip 0001_make_L3.0.35_4.1.0_compile_on_Ubuntu_14.04_64bit_OS.patch.zip
 $ git apply 0001_make_L3.0.35_4.1.0_compile_on_Ubuntu_14.04_64bit_OS.patch
 </code></pre>
 
-<h1>3. Configure and build LTIB for imx6q-sdb</h1>
+<h1>4. Configure and build LTIB for imx6q-sdb</h1>
 
 <pre><code>$ cd /home/vmuser/ltib_src/ltib
 
@@ -181,7 +189,7 @@ MXC support drivers ---&gt;
     &lt;*&gt; MXC vivante GPU support
 </code></pre>
 
-<h1>4. Create device node</h1>
+<h1>5. Create device node</h1>
 
 <pre><code>$ cd /home/vmuser/ltib_src/ltib
 $ cd rootfs/dev

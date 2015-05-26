@@ -389,6 +389,68 @@ $ modify inlcude/configs/mx6q_sabresd.h as below
 
 ////////////////////////////////////////////////////////////////////
 
+#if 0   //boot from nfs
+#define CONFIG_EXTRA_ENV_SETTINGS                   \
+        "netdev=eth0\0"                     \
+        "ethprime=FEC0\0"                   \
+        "uboot=u-boot.bin\0"            \
+        "kernel=uImage\0"               \
+        "nfsroot=/opt/eldk/arm\0"               \
+        "bootargs_base=setenv bootargs console=ttymxc0,115200\0"\
+        "bootargs_nfs=setenv bootargs ${bootargs} root=/dev/nfs "\
+            "ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0"\
+        "bootcmd_net=run bootargs_base bootargs_nfs; "      \
+            "tftpboot ${loadaddr} ${kernel}; bootm\0"   \
+        "bootargs_mmc=setenv bootargs ${bootargs} ip=dhcp "     \
+            "root=/dev/mmcblk0p1 rootwait\0"                \
+        "bootcmd_mmc=run bootargs_base bootargs_mmc; "   \
+        "mmc dev 3; "   \
+        "mmc read ${loadaddr} 0x800 0x2000; bootm\0"    \
+        "bootcmd=run bootcmd_net\0"
+#endif
+
+#if 1   //boot from mmc and display on lvds1 to LDB-CLAA(1280x420)
+#define CONFIG_EXTRA_ENV_SETTINGS                   \
+        "netdev=eth0\0"                     \
+        "ethprime=FEC0\0"                   \
+        "uboot=u-boot.bin\0"                    \
+        "kernel=uImage\0"                   \
+        "nfsroot=/opt/eldk/arm\0"               \
+        "bootargs_base=setenv bootargs console=ttymxc0,115200 \0"\
+        "bootargs_nfs=setenv bootargs ${bootargs} root=/dev/nfs "\
+            "ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0"\
+        "bootcmd_net=run bootargs_base bootargs_nfs; "      \
+            "tftpboot ${loadaddr} ${kernel}; bootm\0"   \
+        "bootargs_mmc=setenv bootargs ${bootargs} "     \
+            "root=/dev/mmcblk0p1 rootfstype=ext4 rootwait rw lpj=7905280 printk.time=1 verify=no" \
+            " ldb=sin1 video=mxcfb0:dev=ldb,LDB-CLAA,if=RGB666,bpp=32 video=mxcfb1:off consoleblank=0 \0"\
+        "bootcmd_mmc=run bootargs_base bootargs_mmc; "  \
+        "mmc dev 3; "                   \
+        "mmc read ${loadaddr} 0x800 0x2000; bootm\0"    \
+        "bootcmd=run bootcmd_mmc\0"
+#endif
+
+#if 0   //boot from mmc and display on twice lvds to LDB-1080P60(1920x720)
+#define CONFIG_EXTRA_ENV_SETTINGS                   \
+        "netdev=eth0\0"                     \
+        "ethprime=FEC0\0"                   \
+        "uboot=u-boot.bin\0"            \
+        "kernel=uImage\0"               \
+        "nfsroot=/opt/eldk/arm\0"               \
+        "bootargs_base=setenv bootargs console=ttymxc0,115200 \0"\
+        "bootargs_nfs=setenv bootargs ${bootargs} root=/dev/nfs "\
+            "ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0"\
+        "bootcmd_net=run bootargs_base bootargs_nfs; "      \
+            "tftpboot ${loadaddr} ${kernel}; bootm\0"   \
+        "bootargs_mmc=setenv bootargs ${bootargs} "     \
+            "root=/dev/mmcblk0p1 rootfstype=ext4 rootwait rw lpj=7905280 printk.time=1 verify=no" \
+            " ldb=spl0 video=mxcfb0:dev=ldb,LDB-1080P60,if=RGB24,bpp=32 video=mxcfb1:off consoleblank=0 \0"                \
+        "bootcmd_mmc=run bootargs_base bootargs_mmc; "   \
+        "mmc dev 3; "   \
+        "mmc read ${loadaddr} 0x800 0x2000; bootm\0"    \
+        "bootcmd=run bootcmd_mmc\0"
+#endif
+
 #if 0 //ltib default nfs boot
 #define CONFIG_EXTRA_ENV_SETTINGS \
         "netdev=eth0\0" \
@@ -579,7 +641,15 @@ $ sudo tar -cjvf ../rootfs.tar.bz2 ./*
 2) 0001_make_L3.0.35_4.1.0_compile_on_Ubuntu_14.04_64bit_OS.patch.zip
 </code></pre>
 
-<h1>2. Install LTIB and Apply Patch</h1>
+<h1>2. Add user super privilege to visudo</h1>
+
+<pre><code>$sudo /usr/sbin/visudo
+
+#add below line for vmuser account super privilege
+vmuser ALL = NOPASSWD: /usr/bin/rpm, /opt/freescale/ltib/usr/bin/rpm
+</code></pre>
+
+<h1>3. Install LTIB and Apply Patch</h1>
 
 <pre><code>$ cd ~
 $ tar zxvf L3.0.35_4.1.0_130816_source.tar.gz
@@ -591,7 +661,7 @@ $ unzip 0001_make_L3.0.35_4.1.0_compile_on_Ubuntu_14.04_64bit_OS.patch.zip
 $ git apply 0001_make_L3.0.35_4.1.0_compile_on_Ubuntu_14.04_64bit_OS.patch
 </code></pre>
 
-<h1>3. Configure and build LTIB for imx6q-sdb</h1>
+<h1>4. Configure and build LTIB for imx6q-sdb</h1>
 
 <pre><code>$ cd /home/vmuser/ltib_src/ltib
 
@@ -666,7 +736,7 @@ MXC support drivers ---&gt;
     &lt;*&gt; MXC vivante GPU support
 </code></pre>
 
-<h1>4. Create device node</h1>
+<h1>5. Create device node</h1>
 
 <pre><code>$ cd /home/vmuser/ltib_src/ltib
 $ cd rootfs/dev
