@@ -26,6 +26,68 @@ categories: ltib imx6
     
     ////////////////////////////////////////////////////////////////////
     
+	#if 0	//boot from nfs
+	#define	CONFIG_EXTRA_ENV_SETTINGS					\
+			"netdev=eth0\0"						\
+			"ethprime=FEC0\0"					\
+			"uboot=u-boot.bin\0"			\
+			"kernel=uImage\0"				\
+			"nfsroot=/opt/eldk/arm\0"				\
+			"bootargs_base=setenv bootargs console=ttymxc0,115200\0"\
+			"bootargs_nfs=setenv bootargs ${bootargs} root=/dev/nfs "\
+				"ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0"\
+			"bootcmd_net=run bootargs_base bootargs_nfs; "		\
+				"tftpboot ${loadaddr} ${kernel}; bootm\0"	\
+			"bootargs_mmc=setenv bootargs ${bootargs} ip=dhcp "     \
+				"root=/dev/mmcblk0p1 rootwait\0"                \
+			"bootcmd_mmc=run bootargs_base bootargs_mmc; "   \
+			"mmc dev 3; "	\
+			"mmc read ${loadaddr} 0x800 0x2000; bootm\0"	\
+			"bootcmd=run bootcmd_net\0"
+	#endif
+	
+	#if 1	//boot from mmc and display on lvds1 to LDB-CLAA(1280x420)
+	#define	CONFIG_EXTRA_ENV_SETTINGS					\
+			"netdev=eth0\0"						\
+			"ethprime=FEC0\0"					\
+			"uboot=u-boot.bin\0"					\
+			"kernel=uImage\0"					\
+			"nfsroot=/opt/eldk/arm\0"				\
+			"bootargs_base=setenv bootargs console=ttymxc0,115200 \0"\
+			"bootargs_nfs=setenv bootargs ${bootargs} root=/dev/nfs "\
+				"ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0"\
+			"bootcmd_net=run bootargs_base bootargs_nfs; "		\
+				"tftpboot ${loadaddr} ${kernel}; bootm\0"	\
+			"bootargs_mmc=setenv bootargs ${bootargs} "     \
+				"root=/dev/mmcblk0p1 rootfstype=ext4 rootwait rw lpj=7905280 printk.time=1 verify=no" \
+				" ldb=sin1 video=mxcfb0:dev=ldb,LDB-CLAA,if=RGB666,bpp=32 video=mxcfb1:off consoleblank=0 \0"\
+			"bootcmd_mmc=run bootargs_base bootargs_mmc; "	\
+			"mmc dev 3; "					\
+			"mmc read ${loadaddr} 0x800 0x2000; bootm\0"	\
+			"bootcmd=run bootcmd_mmc\0"
+	#endif
+	
+	#if 0	//boot from mmc and display on twice lvds to LDB-1080P60(1920x720)
+	#define	CONFIG_EXTRA_ENV_SETTINGS					\
+			"netdev=eth0\0"						\
+			"ethprime=FEC0\0"					\
+			"uboot=u-boot.bin\0"			\
+			"kernel=uImage\0"				\
+			"nfsroot=/opt/eldk/arm\0"				\
+			"bootargs_base=setenv bootargs console=ttymxc0,115200 \0"\
+			"bootargs_nfs=setenv bootargs ${bootargs} root=/dev/nfs "\
+				"ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0"\
+			"bootcmd_net=run bootargs_base bootargs_nfs; "		\
+				"tftpboot ${loadaddr} ${kernel}; bootm\0"	\
+			"bootargs_mmc=setenv bootargs ${bootargs} "     \
+				"root=/dev/mmcblk0p1 rootfstype=ext4 rootwait rw lpj=7905280 printk.time=1 verify=no" \
+				" ldb=spl0 video=mxcfb0:dev=ldb,LDB-1080P60,if=RGB24,bpp=32 video=mxcfb1:off consoleblank=0 \0"                \
+			"bootcmd_mmc=run bootargs_base bootargs_mmc; "   \
+			"mmc dev 3; "	\
+			"mmc read ${loadaddr} 0x800 0x2000; bootm\0"	\
+			"bootcmd=run bootcmd_mmc\0"
+	#endif
+
     #if 0 //ltib default nfs boot
     #define	CONFIG_EXTRA_ENV_SETTINGS \
     		"netdev=eth0\0" \
