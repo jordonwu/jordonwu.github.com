@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Github | Jordon Wu's Blog]]></title>
   <link href="http://jordonwu.github.io/blog/categories/github/atom.xml" rel="self"/>
   <link href="http://jordonwu.github.io/"/>
-  <updated>2015-05-26T19:10:20+08:00</updated>
+  <updated>2015-05-27T14:23:30+08:00</updated>
   <id>http://jordonwu.github.io/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
@@ -18,7 +18,9 @@
     <link href="http://jordonwu.github.io/blog/2015/05/26/adding-an-existing-project-to-github/"/>
     <updated>2015-05-26T08:12:55+08:00</updated>
     <id>http://jordonwu.github.io/blog/2015/05/26/adding-an-existing-project-to-github</id>
-    <content type="html"><![CDATA[<h1>1. Create a new repository on Github</h1>
+    <content type="html"><![CDATA[<p>Ref: <a href="https://help.github.com/articles/pushing-to-a-remote/">https://help.github.com/articles/pushing-to-a-remote/</a></p>
+
+<h1>1. Create a new repository on Github</h1>
 
 <pre><code>Example repo: https://github.com/github-username/test-repo.git
 
@@ -55,6 +57,117 @@ $ git remote -v
 
 <pre><code>$ git push origin master
 </code></pre>
+
+<h1>5. Renaming branches (remote)</h1>
+
+<p>To rename a branch, you&rsquo;d use the same git push command, but you would add one more argument: the name of the new branch. For example:</p>
+
+<pre><code>git push  &lt;REMOTENAME&gt; &lt;LOCALBRANCHNAME&gt;:&lt;REMOTEBRANCHNAME&gt;
+</code></pre>
+
+<p>This pushes the LOCALBRANCHNAME to your REMOTENAME, but it is renamed to REMOTEBRANCHNAME.</p>
+
+<h1>6. Pushing tags</h1>
+
+<p>By default, and without additional parameters, git push sends all matching branches that have the same names as remote branches.</p>
+
+<p>To push a single tag, you can issue the same command as pushing a branch:</p>
+
+<pre><code>git push  &lt;REMOTENAME&gt; &lt;TAGNAME&gt;
+</code></pre>
+
+<p>To push all your tags, you can type the command:</p>
+
+<pre><code>git push  &lt;REMOTENAME&gt; --tags
+</code></pre>
+
+<h1>7. Deleting a remote branch or tag</h1>
+
+<p>The syntax to delete a branch is a bit arcane at first glance:</p>
+
+<pre><code>git push  &lt;REMOTENAME&gt; :&lt;BRANCHNAME&gt; 
+</code></pre>
+
+<p>Note that there is a space before the colon. The command resembles the same steps you&rsquo;d take to rename a branch. However, here, you&rsquo;re telling Git to push nothing into BRANCHNAME on REMOTENAME. Because of this, git push deletes the branch on the remote repository.</p>
+
+<h2>7.1 Deleting your master branch</h2>
+
+<p>You’ve forked some project on github.</p>
+
+<p>You clone your fork.</p>
+
+<p>Now you’ve got a master branch. It’s the master branch of your fork.</p>
+
+<p>It can be tempting to do work in the master branch and ask for a pull request.</p>
+
+<p>That is best avoided because:</p>
+
+<p>It’s natural to carry on working in your master and that will pollute your pull request with other commits
+master is not a descriptive name for a set of changes. It’s easier for the person reviewing your code to have something like fix-for-issue-12.
+You may well also have a tracking branch pointing to the main upstream repo. You might call that something like upstream-master. It’s easy to lose concentration and forget you are on upstream-master instead of your master, and nasty errors can result.
+To avoid this, I delete the master branch from my forked copy. However, to make that work, you have to tell github not to monitor your master branch.</p>
+
+<h2>7.2 How to delete master</h2>
+
+<p>First you delete master in your local clone. To do this we first make a new branch called placeholder or similar, and delete master from there:</p>
+
+<pre><code>git branch placeholder
+git checkout placeholder
+git branch -D master
+</code></pre>
+
+<p>All good so far. We next want to delete the branch on github. However, if we do this the naive way:</p>
+
+<pre><code>git push origin :master
+</code></pre>
+
+<p>we just get an error like this:</p>
+
+<pre><code>remote: error: refusing to delete the current branch: refs/heads/master
+To git@github.com:matthew-brett/datarray.git
+! [remote rejected] master (deletion of the current branch prohibited)
+error: failed to push some refs to 'git@github.com:matthew-brett/datarray.git'
+</code></pre>
+
+<p>That is because github is looking at the master branch to provide the web content when you browse that repository. So we first have to make github look at our placeholder branch instead, then delete master.</p>
+
+<p>First push up the placeholder branch:</p>
+
+<pre><code>git checkout placeholder # if not on placeholder already
+git push origin placeholder
+</code></pre>
+
+<p>Then set placeholder to be the github default branch. Go to the main github page for your forked repository, and click on the “Admin” button.</p>
+
+<p>There’s a “Default branch” dropdown list near the top of the screen. From there, select placeholder. On the interface I’m looking at, a green tick appears above the dropdown list. Now you can do (from the command line):</p>
+
+<pre><code>git push origin :master
+</code></pre>
+
+<p>and - no master branch&hellip;</p>
+
+<h1>8. Remotes and forks</h1>
+
+<p>You might already know that you can &ldquo;fork&rdquo; repositories on GitHub.</p>
+
+<p>When you clone a repository you own, you provide it with a remote URL that tells Git where to fetch and push updates. If you want to collaborate with the original repository, you&rsquo;d add a new remote URL, typically called upstream, to your local Git clone:</p>
+
+<pre><code>git remote set-url upstream  &lt;THEIR_REMOTE_URL&gt;
+</code></pre>
+
+<p>Now, you can fetch updates and branches from their fork:</p>
+
+<pre><code>git fetch upstream branch
+# Grab the upstream remote's branches
+# remote: Counting objects: 75, done.
+# remote: Compressing objects: 100% (53/53), done.
+# remote: Total 62 (delta 27), reused 44 (delta 9)
+# Unpacking objects: 100% (62/62), done.
+# From https://github.com/octocat/repo
+#  * [new branch]      master     -&gt; upstream/master
+</code></pre>
+
+<p>When you&rsquo;re done making local changes, you can push your local branch to GitHub and initiate a pull request.</p>
 ]]></content>
   </entry>
   
