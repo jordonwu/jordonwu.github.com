@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ltib | Jordon Wu's Blog]]></title>
   <link href="http://jordonwu.github.io/blog/categories/ltib/atom.xml" rel="self"/>
   <link href="http://jordonwu.github.io/"/>
-  <updated>2015-05-27T14:23:30+08:00</updated>
+  <updated>2015-05-28T15:02:46+08:00</updated>
   <id>http://jordonwu.github.io/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
@@ -12,6 +12,69 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Imx6 Summary Upgrade Ltib L3.0.35_4.1.0 to L3.0.101_4.1.1]]></title>
+    <link href="http://jordonwu.github.io/blog/2015/05/28/imx6-summary-upgrade-ltib-l3-dot-0-35-4-dot-1-0-to-l3-dot-0-101-4-dot-1-1/"/>
+    <updated>2015-05-28T10:50:25+08:00</updated>
+    <id>http://jordonwu.github.io/blog/2015/05/28/imx6-summary-upgrade-ltib-l3-dot-0-35-4-dot-1-0-to-l3-dot-0-101-4-dot-1-1</id>
+    <content type="html"><![CDATA[<h1>1. Setup and build ltib using bsp L3.0.35_4.1.0_130816</h1>
+
+<h1>2. Download L3.0.101_4.1.1 package</h1>
+
+<pre><code>Version: 
+    L3.0.101_4.1.1_141016_source.gz
+    IMX_MMCODEC_3.0.101_4.1.1_Bundle.gz
+</code></pre>
+
+<h1>3. Upgrade to L3.0.101_4.1.1</h1>
+
+<h2>3.1 Copy the following packages to host /opt/freescale/pkgs</h2>
+
+<pre><code>firmware-imx-3.0.101-4.1.1.tar.gz
+imx-vpu-lib-3.0.101-4.1.1.tar.gz
+libfslcodec-3.0.11.tar.gz
+libfslparser-3.0.11.tar.gz
+libfslvpuwrap-1.0.46.tar.gz
+gst-fsl-plugins-3.0.11.tar.gz
+gst-fsl-plugins-3.0.11-configure.patch
+glib2-2.12.1-atomic.patch
+gpu-viv-bin-mx6q-3.0.101-4.1.1.tar.gz
+gpu-viv-bin-mx6s-3.0.101-4.1.1.tar.gz
+gpu-viv-wl-bin-mx6q-3.0.101-4.1.1.tar.gz
+gpu-viv-wl-bin-mx6s-3.0.101-4.1.1.tar.gz
+linux-3.0.101.tar.bz2 
+linux-3.0.101-imx_4.1.1.bz2
+u-boot-v2009.08-imx_3.0.101_4.1.1.tar.bz2
+</code></pre>
+
+<h2>3.2 Patch ltib_config_platform_imx.patch</h2>
+
+<pre><code>$ cp ltib_config_platform_imx.patch Ltib_installed/config/platform/imx
+$ cd Ltib_installed/config/platform/imx
+$ patch -p1 –i ltib_config_platform_imx.patch
+</code></pre>
+
+<h2>3.3 Patch ltib_dist_lfs-5.1.patch</h2>
+
+<pre><code>$ cp ltib_dist_lfs-5.1.patch Ltib_installed/dist
+$ cd Ltib_installed/dist
+$ patch -p1 –i ltib_dist_lfs-5.1.patch
+</code></pre>
+
+<h1>4. Config and build ltib</h1>
+
+<pre><code>$ cd Ltib_installed/
+$ ./ltib –config
+$ ./ltib
+
+$ ./ltib -m prep -p u-boot  # fetch u-boot sourc code
+$ ./ltib -m prep -p kernel  # fetch kernel souce code
+</code></pre>
+
+<p>Done!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using Ltib's U-boot Kernel and Rootfs to Boot Board Step by Step]]></title>
