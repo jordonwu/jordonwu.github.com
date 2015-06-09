@@ -26,11 +26,11 @@ categories: qt5 qt3d vs2013
 	> set path=D:\perl\bin;%path%
 	> 
 	> set INCLUDE=D:\Imagination\PowerVR_Graphics\PowerVR_SDK\SDK_3.4\Builds\Include;%INCLUDE%
-	> set LIB=D:\Imagination\PowerVR_Graphics\PowerVR_SDK\SDK_3.4\Builds\Windows\x86_64\Lib;%LIB%
+	> set LIB=D:\Imagination\PowerVR_Graphics\PowerVR_SDK\SDK_3.4\Builds\Windows\x86_32\Lib;%LIB%
 	>
-	> set INCLUDE=D:\assimp-3.1.1-win-binaries\include;%INCLUDE%
-	> set LIB=D:\assimp-3.1.1-win-binaries\lib32;%LIB%
-	> set PATH=D:\assimp-3.1.1-win-binaries\bin32;%PATH%
+	> set INCLUDE=D:\assimp-3.1.1\include;%INCLUDE%
+	> set LIB=D:\assimp-3.1.1\lib32;%LIB%
+	> set PATH=D:\assimp-3.1.1\bin32;%PATH%
 	>  
 	> F:
 	> cd F:\download\qt-everywhere-opensource-src-5.5.0-beta
