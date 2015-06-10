@@ -9,7 +9,7 @@
   <meta name="author" content="Jordon Wu">
 
   
-  <meta name="description" content="1. Setup and build ltib using bsp L3.0.35_4.1.0_130816 2. Download L3.0.101_4.1.1 package Version: L3.0.101_4.1.1_141016_source.gz IMX_MMCODEC_3.0. &hellip;">
+  <meta name="description" content="1. Configuring a remote for a fork To sync changes you make in a fork with the original repository, you must configure a remote that points to the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,112 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/10/sync-a-fork-of-a-repository-to-keep-it-up-to-date-with-the-upstream-repository/">Sync a Fork of a Repository to Keep It Up-to-date With the Upstream Repository</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-10T15:05:40+08:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:05 pm</span></time>
+        
+           | <a href="/blog/2015/06/10/sync-a-fork-of-a-repository-to-keep-it-up-to-date-with-the-upstream-repository/#disqus_thread"
+             data-disqus-identifier="http://jordonwu.github.io/blog/2015/06/10/sync-a-fork-of-a-repository-to-keep-it-up-to-date-with-the-upstream-repository/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>1. Configuring a remote for a fork</h1>
+
+<p>To sync changes you make in a fork with the original repository, you must configure a remote that points to the upstream repository in Git.</p>
+
+<h2>1.1 Open Terminal (for Mac users) or the command prompt (for Windows and Linux users)</h2>
+
+<h2>1.2 List the current configured remote repository for your fork</h2>
+
+<pre><code>$ git remote -v
+  origin  https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch)
+  origin  https://github.com/YOUR_USERNAME/YOUR_FORK.git (push)
+</code></pre>
+
+<h2>1.3 Specify a new remote upstream repository that will be synced with the fork</h2>
+
+<pre><code>$ git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git
+</code></pre>
+
+<h2>1.4 Verify the new upstream repository you&rsquo;ve specified for your fork</h2>
+
+<pre><code>$ git remote -v
+  origin    https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch)
+  origin    https://github.com/YOUR_USERNAME/YOUR_FORK.git (push)
+  upstream  https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (fetch)
+  upstream  https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (push)
+</code></pre>
+
+<h1>2. Syncing a fork</h1>
+
+<p>Sync a fork of a repository to keep it up-to-date with the upstream repository</p>
+
+<p>2.1 Change the current working directory to your local project</p>
+
+<p>2.2 Fetch the branches and their respective commits from the upstream repository. Commits to master will be stored in a local branch, upstream/master.</p>
+
+<pre><code>$ git fetch upstream
+  remote: Counting objects: 75, done.
+  remote: Compressing objects: 100% (53/53), done.
+  remote: Total 62 (delta 27), reused 44 (delta 9)
+  Unpacking objects: 100% (62/62), done.
+  From https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY
+   * [new branch]      master     -&gt; upstream/master
+</code></pre>
+
+<p>2.3 Check out your fork&rsquo;s local master branch</p>
+
+<pre><code>$ git checkout master
+  Switched to branch 'master'
+</code></pre>
+
+<p>2.4 Merge the changes from upstream/master into your local master branch. This brings your fork&rsquo;s master branch into sync with the upstream repository, without losing your local changes.</p>
+
+<pre><code>$ git merge upstream/master
+  Updating a422352..5fdff0f
+  Fast-forward
+  README                    |    9 -------
+  README.md                 |    7 ++++++
+  2 files changed, 7 insertions(+), 9 deletions(-)
+  delete mode 100644 README
+  create mode 100644 README.md
+</code></pre>
+
+<p>2.5 If your local branch didn&rsquo;t have any unique commits, Git will instead perform a &ldquo;fast-forward&rdquo;:</p>
+
+<pre><code>$ git merge upstream/master
+  Updating 34e91da..16c56ad
+  Fast-forward
+  README.md                 |    5 +++--
+  1 file changed, 3 insertions(+), 2 deletions(-)
+</code></pre>
+
+<h1>3. Pushing to a remote</h1>
+
+<pre><code>$ git push  &lt;REMOTENAME&gt; &lt;BRANCHNAME&gt;   
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1484,280 +1590,6 @@ To reconfigure, run nmake confclean and configure.
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/05/05/build-qt5.5.0-using-vs2013/">Build qt5.5.0 Using Vs2013</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-05-05T15:09:56+08:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:09 pm</span></time>
-        
-           | <a href="/blog/2015/05/05/build-qt5.5.0-using-vs2013/#disqus_thread"
-             data-disqus-identifier="http://jordonwu.github.io/blog/2015/05/05/build-qt5.5.0-using-vs2013/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h1>1. Install required tools</h1>
-
-<ul>
-<li>1) Install ActivePerl-5.20.2.2001-MSWin32-x86-64int-298913.msi</li>
-<li>2) Install PowerVRSDKSetup-3.4.exe(for opengl)</li>
-<li>3) Install gingkoVG SDK (for openvg,optinal)</li>
-</ul>
-
-
-<h1>2. Get qt5.5 source code and unzip</h1>
-
-<pre><code>Version: http://download.qt.io/development_releases/qt/5.5/5.5.0-beta/single/qt-everywhere-opensource-src-5.5.0-beta.zip
-</code></pre>
-
-<h1>3. Extract source code and configure</h1>
-
-<pre><code>Source dir: F:\download\qt-everywhere-opensource-src-5.5.0-beta
-Build  dir: F:\download\qt-everywhere-opensource-src-5.5.0-beta-build
-
-start cmd from "Developer Command Prompt for VS2013"
-
-D:\Microsoft Visual Studio 12.0&gt;
-
-&gt; set path=D:\perl\bin;%path%
-&gt; 
-&gt; set INCLUDE=D:\Imagination\PowerVR_Graphics\PowerVR_SDK\SDK_3.4\Builds\Include;%INCLUDE%
-&gt; set LIB=D:\Imagination\PowerVR_Graphics\PowerVR_SDK\SDK_3.4\Builds\Windows\x86_32\Lib;%LIB%
-&gt;
-&gt; set INCLUDE=D:\assimp-3.1.1\include;%INCLUDE%
-&gt; set LIB=D:\assimp-3.1.1\lib32;%LIB%
-&gt; set PATH=D:\assimp-3.1.1\bin32;%PATH%
-&gt;  
-&gt; F:
-&gt; cd F:\download\qt-everywhere-opensource-src-5.5.0-beta
-&gt;
-&gt; Modify qt3d\config.tests\assimp\assimp.pro, add below config
-&gt;
-&gt;
-    win32 {
-        CONFIG += console
-    }  
-&gt;
-&gt; 
-&gt; cd F:\download\qt-everywhere-opensource-src-5.5.0-beta-build
-&gt;
-&gt; ..\qt-everywhere-opensource-src-5.5.0-beta\configure -debug-and-release -confirm-license -opensource -platform win32-msvc2013 -prefix "D:\Qt\Qt5.5.0_x86_vs2013_development" -qt-libpng -qt-libjpeg -qt-freetype -opengl desktop -openvg -nomake tests -make examples -skip qtwebkit -skip qtwebengine 
-&gt;
-&gt;        
-
-//configure output
-copy qmake.exe ..\bin\qmake.exe
-已复制         1 个文件。
-Running configuration tests...
-Environment:
-    INCLUDE=
-      D:\assimp-3.1.1-win-binaries\include
-      D:\Imagination\PowerVR_Graphics\PowerVR_SDK\SDK_3.4\Builds\Include
-      D:\Microsoft Visual Studio 12.0\VC\INCLUDE
-      D:\Microsoft Visual Studio 12.0\VC\ATLMFC\INCLUDE
-      C:\Program Files (x86)\Windows Kits\8.1\include\shared
-      C:\Program Files (x86)\Windows Kits\8.1\include\um
-      C:\Program Files (x86)\Windows Kits\8.1\include\winrt
-
-    LIB=
-      D:\assimp-3.1.1-win-binaries\lib32
-      D:\Imagination\PowerVR_Graphics\PowerVR_SDK\SDK_3.4\Builds\Windows\x86_64\Lib
-      D:\Microsoft Visual Studio 12.0\VC\LIB
-      D:\Microsoft Visual Studio 12.0\VC\ATLMFC\LIB
-      C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86
-
-    PATH=
-      D:\assimp-3.1.1-win-binaries\bin32
-      D:\perl\bin
-      D:\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow
-      C:\Program Files (x86)\Microsoft SDKs\F#\3.1\Framework\v4.0\
-      C:\Program Files (x86)\MSBuild\12.0\bin
-      D:\Microsoft Visual Studio 12.0\Common7\IDE\
-      D:\Microsoft Visual Studio 12.0\VC\BIN
-      D:\Microsoft Visual Studio 12.0\Common7\Tools
-      C:\Windows\Microsoft.NET\Framework\v4.0.30319
-      D:\Microsoft Visual Studio 12.0\VC\VCPackages
-      C:\Program Files (x86)\HTML Help Workshop
-      D:\Microsoft Visual Studio 12.0\Team Tools\Performance Tools
-      C:\Program Files (x86)\Windows Kits\8.1\bin\x86
-      C:\Program Files (x86)\Microsoft SDKs\Windows\v8.1A\bin\NETFX 4.5.1 Tools\
-      D:\Perl\site\bin
-      D:\Perl\bin
-      D:\Python27\
-      D:\Python27\Scripts
-      D:\Qt\Qt5.4.1\5.4\msvc2013_64\bin
-      d:\Ruby\Ruby21-x64\bin
-      C:\ProgramData\Oracle\Java\javapath
-      C:\Windows\system32
-      C:\Windows
-      C:\Windows\System32\Wbem
-      C:\Windows\System32\WindowsPowerShell\v1.0\
-      C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\
-      C:\Program Files\Microsoft SQL Server\110\Tools\Binn\
-      D:\GL_Studio_3.2\\bin
-      d:\Git\cmd
-      D:\TortoiseSVN\bin
-Configuration:
-    pcre
-    debug
-    compile_examples
-Qt Configuration:
-    minimal-config
-    small-config
-    medium-config
-    large-config
-    full-config
-    debug_and_release build_all release
-    debug
-    shared
-    zlib
-    png
-    freetype
-    harfbuzz
-    build_all
-    accessibility
-    opengl
-    openvg
-    egl
-    audio-backend
-    wmf-backend
-    native-gestures
-    qpa
-    concurrent
-
-QMAKESPEC...................win32-msvc2013 (commandline)
-Architecture................i386, features: sse sse2
-Host Architecture...........i386, features: sse sse2
-Maketool....................nmake
-Debug build.................yes (combined)
-Default build...............debug
-Force debug info............no
-C++11 support...............auto
-Link Time Code Generation...no
-Accessibility support.......yes
-RTTI support................yes
-SSE2 support................yes
-SSE3 support................yes
-SSSE3 support...............yes
-SSE4.1 support..............yes
-SSE4.2 support..............yes
-AVX support.................yes
-AVX2 support................yes
-NEON support................no
-OpenGL support..............yes
-Large File support..........yes
-NIS support.................no
-Iconv support...............no
-Evdev support...............no
-Mtdev support...............no
-Inotify support.............no
-eventfd(7) support..........no
-Glib support................no
-CUPS support................no
-OpenVG support..............yes
-SSL support.................no
-OpenSSL support.............no
-libproxy support............no
-Qt D-Bus support............no
-Qt Widgets module support...yes
-Qt GUI module support.......yes
-QML debugging...............yes
-DirectWrite support.........no
-Use system proxies..........no
-
-QPA Backends:
-    GDI.....................yes
-    Direct2D................no
-
-Third Party Libraries:
-    ZLIB support............qt
-    GIF support.............plugin
-    JPEG support............plugin
-    PNG support.............yes
-    FreeType support........yes
-    Fontconfig support......no
-    HarfBuzz support........qt
-    PCRE support............qt
-    ICU support.............no
-    ANGLE...................no
-    Dynamic OpenGL..........no
-
-Styles:
-    Windows.................yes
-    Windows XP..............yes
-    Windows Vista...........yes
-    Fusion..................yes
-    Windows CE..............no
-    Windows Mobile..........no
-
-Sql Drivers:
-    ODBC....................no
-    MySQL...................no
-    OCI.....................no
-    PostgreSQL..............no
-    TDS.....................no
-    DB2.....................no
-    SQLite..................plugin (qt)
-    SQLite2.................no
-    InterBase...............no
-
-Sources are in..............F:\download\qt-everywhere-opensource-src-5.5.0-beta\qtbase
-Build is done in............F:\download\qt-everywhere-opensource-src-5.5.0-beta-build\qtbase
-Install prefix..............D:\Qt\Qt5.5.0_x86_vs2013_development
-Headers installed to........D:\Qt\Qt5.5.0_x86_vs2013_development\include
-Libraries installed to......D:\Qt\Qt5.5.0_x86_vs2013_development\lib
-Arch-dep. data to...........D:\Qt\Qt5.5.0_x86_vs2013_development
-Plugins installed to........D:\Qt\Qt5.5.0_x86_vs2013_development\plugins
-Library execs installed to..D:\Qt\Qt5.5.0_x86_vs2013_development\bin
-QML1 imports installed to...D:\Qt\Qt5.5.0_x86_vs2013_development\imports
-QML2 imports installed to...D:\Qt\Qt5.5.0_x86_vs2013_development\qml
-Binaries installed to.......D:\Qt\Qt5.5.0_x86_vs2013_development\bin
-Arch-indep. data to.........D:\Qt\Qt5.5.0_x86_vs2013_development
-Docs installed to...........D:\Qt\Qt5.5.0_x86_vs2013_development\doc
-Translations installed to...D:\Qt\Qt5.5.0_x86_vs2013_development\translations
-Examples installed to.......D:\Qt\Qt5.5.0_x86_vs2013_development\examples
-Tests installed to..........D:\Qt\Qt5.5.0_x86_vs2013_development\tests
-
-Info: creating super cache file F:\download\qt-everywhere-opensource-src-5.5.0-beta-build\.qmake.super
-
-
-Qt is now configured for building. Just run nmake.
-To reconfigure, run nmake confclean and configure.
-
-
-f:\download\qt-everywhere-opensource-src-5.5.0-beta-build&gt; 
-</code></pre>
-
-<h1>4. Make and Install</h1>
-
-<pre><code>&gt; nmake module-qtbase         // make qtbase module
-&gt;
-&gt; nmake module-qtdeclarative  // make qtdeclarative module
-&gt;
-&gt; nmake
-&gt;
-&gt; namke install
-&gt; 
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -1773,6 +1605,10 @@ f:\download\qt-everywhere-opensource-src-5.5.0-beta-build&gt;
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/06/10/sync-a-fork-of-a-repository-to-keep-it-up-to-date-with-the-upstream-repository/">Sync a Fork of a Repository to Keep It Up-to-date With the Upstream Repository</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/28/imx6-summary-upgrade-ltib-l3-dot-0-35-4-dot-1-0-to-l3-dot-0-101-4-dot-1-1/">Imx6 Summary Upgrade Ltib L3.0.35_4.1.0 to L3.0.101_4.1.1</a>
       </li>
     
@@ -1786,10 +1622,6 @@ f:\download\qt-everywhere-opensource-src-5.5.0-beta-build&gt;
     
       <li class="post">
         <a href="/blog/2015/05/26/adding-an-existing-project-to-github/">Adding an Existing Project to Github</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/15/build-qt5-dot-5-0-for-imx6/">Build Qt5.5.0 for Imx6</a>
       </li>
     
   </ul>
