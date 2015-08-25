@@ -100,6 +100,7 @@ categories:
 	    <*> MXC vivante GPU support
 
 # 5. Create device node #
+## 5.1 Create device node manual ##
     $ cd /home/vmuser/ltib_src/ltib
     $ cd rootfs/dev
     $ sudo mknod null c 1 3
@@ -114,3 +115,80 @@ categories:
     $ sudo mknod ttymxc0 c 207 16
     $ sudo mknod video0 c 81 0
     $ sudo mknod galcore c 199 0
+
+## 5.2 Create device node via device_table.txt  ##
+	$ edit ltib/bin/device_table.txt to add your device node as below
+
+	......
+	# Normal system devices
+	/dev/mem	c	640	0	0	1	1	0	0	-
+	/dev/kmem	c	640	0	0	1	2	0	0	-
+	/dev/null	c	666	0	0	1	3	0	0	-
+	/dev/zero	c	666	0	0	1	5	0	0	-
+	/dev/random	c	666	0	0	1	8	0	0	-
+	/dev/urandom	c	666	0	0	1	9	0	0	-
+	/dev/ram	b	640	0	0	1	1	0	0	-
+	/dev/ram	b	640	0	0	1	0	0	1	4
+	/dev/loop	b	640	0	0	7	0	0	1	2
+	/dev/rtc	c	640	0	0	10	135	-	-	-
+	/dev/console	c	666	0	0	5	1	-	-	-
+	/dev/tty	c	666	0	0	5	0	-	-	-
+	/dev/tty	c	666	0	0	4	0	0	1	8
+	/dev/ttyp	c	666	0	0	3	0	0	1	10
+	/dev/ptyp	c       666     0       0       2       0       0       1       10
+	/dev/ptmx	c	666	0	0	5	2	-	-	-
+	/dev/ttyP	c	666	0	0	57	0	0	1	4
+	/dev/ttyS	c	666	0	0	4	64	0	1	4
+	/dev/fb		c	640	0	5	29	0	0	32	4
+	#/dev/ttySA	c	666	0	0	204	5	0	1	3
+	/dev/psaux	c	666	0	0	10	1	0	0	-
+	/dev/ppp	c	666	0	0	108	0	-	-	-
+	/dev/ttyAM	c	666	0	0	204	16	0	1	4
+	/dev/ttyCPM	c	666	0	0	204	46	0	1	2
+	
+	# iMX use /dev/ttymxc0 as default console
+	/dev/ttymxc	c	660	0	0	207	16	0	0	1
+	......
+
+	$  ./ltib -p dev -f //to add dev node to rootfs 
+
+# 6. Modify /etc/inittab #
+	//copy from buildroot
+
+	# /etc/inittab
+	#
+	# Copyright (C) 2001 Erik Andersen <andersen@codepoet.org>
+	#
+	# Note: BusyBox init doesn't support runlevels.  The runlevels field is
+	# completely ignored by BusyBox init. If you want runlevels, use
+	# sysvinit.
+	#
+	# Format for each entry: <id>:<runlevels>:<action>:<process>
+	#
+	# id        == tty to run on, or empty for /dev/console
+	# runlevels == ignored
+	# action    == one of sysinit, respawn, askfirst, wait, and once
+	# process   == program to run
+	
+	# Startup the system
+	null::sysinit:/bin/mount -t proc proc /proc
+	null::sysinit:/bin/mount -o remount,rw /
+	null::sysinit:/bin/mkdir -p /dev/pts
+	null::sysinit:/bin/mkdir -p /dev/shm
+	null::sysinit:/bin/mount -a
+	null::sysinit:/bin/hostname -F /etc/hostname
+	# now run any rc scripts
+	::sysinit:/etc/init.d/rcS
+	
+	# Put a getty on the serial port
+	ttymxc0::respawn:/sbin/getty -L  ttymxc0 0 vt100 # GENERIC_SERIAL
+	
+	# Stuff to do for the 3-finger salute
+	::ctrlaltdel:/sbin/reboot
+	
+	# Stuff to do before rebooting
+	::shutdown:/etc/init.d/rcK
+	::shutdown:/sbin/swapoff -a
+	::shutdown:/bin/umount -a -r
+
+# 7. ltib/rootfs is your rootfs #
