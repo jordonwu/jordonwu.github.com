@@ -4,7 +4,7 @@
   <title><![CDATA[Jordon Wu's Blog]]></title>
   <link href="http://jordonwu.github.io/atom.xml" rel="self"/>
   <link href="http://jordonwu.github.io/"/>
-  <updated>2015-09-07T09:40:41+08:00</updated>
+  <updated>2015-09-07T21:21:48+08:00</updated>
   <id>http://jordonwu.github.io/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
@@ -1756,36 +1756,77 @@ $ sudo mknod galcore c 199 0
 
 <pre><code>$ edit ltib/bin/device_table.txt to add your device node as below
 
-......
-# Normal system devices
-/dev/mem        c   640 0   0   1   1   0   0   -
-/dev/kmem       c   640 0   0   1   2   0   0   -
-/dev/null       c   666 0   0   1   3   0   0   -
-/dev/zero       c   666 0   0   1   5   0   0   -
-/dev/random     c   666 0   0   1   8   0   0   -
-/dev/urandom    c   666 0   0   1   9   0   0   -
-/dev/ram        b   640 0   0   1   1   0   0   -
-/dev/ram        b   640 0   0   1   0   0   1   4
-/dev/loop       b   640 0   0   7   0   0   1   2
-/dev/rtc        c   640 0   0   10  135 -   -   -
+# Based on: buildroot/target/generic/device_table.txt
+# see: http://buildroot.uclibc.org/
+#
+# When building a target filesystem, it is desirable to not have to
+# become root and then run 'mknod' a thousand times.  Using a device 
+# table you can create device nodes and directories "on the fly".
+#
+# This is a sample device table file for use with genext2fs.  You can
+# do all sorts of interesting things with a device table file.  For
+# example, if you want to adjust the permissions on a particular file
+# you can just add an entry like:
+#   /sbin/foobar        f       2755    0       0       -       -       -       -       -
+# and (assuming the file /sbin/foobar exists) it will be made setuid
+# root (regardless of what its permissions are on the host filesystem.
+# Furthermore, you can use a single table entry to create a many device
+# minors.  For example, if I wanted to create /dev/hda and /dev/hda[0-15]
+# I could just use the following two table entries:
+#   /dev/hda    b       640     0       0       3       0       0       0       -
+#   /dev/hda    b       640     0       0       3       1       1       1       15
+# 
+# Device table entries take the form of:
+# &lt;name&gt;    &lt;type&gt;      &lt;mode&gt;  &lt;uid&gt;   &lt;gid&gt;   &lt;major&gt; &lt;minor&gt; &lt;start&gt; &lt;inc&gt;   &lt;count&gt;
+# where name is the file name,  type can be one of: 
+#       f       A regular file
+#       d       Directory
+#       c       Character special device file
+#       b       Block special device file
+#       p       Fifo (named pipe)
+# uid is the user id for the target file, gid is the group id for the
+# target file.  The rest of the entries (major, minor, etc) apply only 
+# to device special files.
+
+# Have fun
+# -Erik Andersen &lt;andersen@codepoet.org&gt;
+#
+
+#&lt;name&gt;     &lt;type&gt;  &lt;mode&gt;  &lt;uid&gt;   &lt;gid&gt;   &lt;major&gt; &lt;minor&gt; &lt;start&gt; &lt;inc&gt;   &lt;count&gt;
+/dev        d   755 0   0   -   -   -   -   -
+/dev/null   c   666 0   0   1   3   0   0   -
+/dev/zero   c   666 0   0   1   5   0   0   -
 /dev/console    c   666 0   0   5   1   -   -   -
-/dev/tty        c   666 0   0   5   0   -   -   -
-/dev/tty        c   666 0   0   4   0   0   1   8
-/dev/ttyp       c   666 0   0   3   0   0   1   10
-/dev/ptyp       c   666 0   0   2   0   0   1   10
-/dev/ptmx       c   666 0   0   5   2   -   -   -
-/dev/ttyP       c   666 0   0   57  0   0   1   4
-/dev/ttyS       c   666 0   0   4   64  0   1   4
-/dev/fb         c   640 0   5   29  0   0   32  4
-#/dev/ttySA     c   666 0   0   204 5   0   1   3
-/dev/psaux      c   666 0   0   10  1   0   0   -
-/dev/ppp        c   666 0   0   108 0   -   -   -
-/dev/ttyAM      c   666 0   0   204 16  0   1   4
-/dev/ttyCPM     c   666 0   0   204 46  0   1   2
+/dev/fb     c   640 0   5   29  0   0   1   13
 
 # iMX use /dev/ttymxc0 as default console
-/dev/ttymxc     c   660 0   0   207 16  0   0   1
-......
+/dev/ttymxc c   660 0   0   207 16  0   1   3
+
+
+# MTD stuff
+/dev/mtd    c   640 0   0   90  0   0   2   7
+/dev/mtdblock   b   640 0   0   31  0   0   1   7
+
+# SD stuff
+/dev/mmcblk0    b   640 0   0   179 0   -   -   -
+/dev/mmcblk0p1  b   640 0   0   179 1   -   -   -
+
+#video
+/dev/video  c   640 0   0   81  0   0   1   2
+/dev/video  c   640 0   0   81  2   16  1   4
+
+#mmcblk
+/dev/mmcblk0    b   640 0   0   179 0   -   -   -       
+/dev/mmcblk0p   b   640 0   0   179 1   1   1   2
+/dev/mmcblk0boot0 b 640 0   0   179 8   -   -   -
+/dev/mmcblk0boot1 b 640 0   0   179 16  -   -   -
+
+#mxc
+/dev/mxc_asrc   c   640 0   0   250 0   -   -   -
+/dev/mxc_vpu    c   640 0   0   251 0   -   -   -
+/dev/mxc_hdmi   c   640 0   0   252 0   -   -   -
+/dev/mxc_ipu    c   640 0   0   253 0   -   -   -
+
 
 $  ./ltib -p dev -f //refresh dev node to rootfs 
 </code></pre>
