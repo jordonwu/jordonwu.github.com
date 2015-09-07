@@ -4,7 +4,7 @@
   <title><![CDATA[Jordon Wu's Blog]]></title>
   <link href="http://jordonwu.github.io/atom.xml" rel="self"/>
   <link href="http://jordonwu.github.io/"/>
-  <updated>2015-09-06T13:40:02+08:00</updated>
+  <updated>2015-09-07T09:40:41+08:00</updated>
   <id>http://jordonwu.github.io/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
@@ -12,6 +12,19 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Linux Command Summary]]></title>
+    <link href="http://jordonwu.github.io/blog/2015/09/07/linux-command-summary/"/>
+    <updated>2015-09-07T09:18:08+08:00</updated>
+    <id>http://jordonwu.github.io/blog/2015/09/07/linux-command-summary</id>
+    <content type="html"><![CDATA[<h1>1. How to find files by content</h1>
+
+<pre><code>$ find "main(" string in *.c file of current path
+$ find . -name "*.c" -print | xargs grep "main("
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Sync a Fork of a Repository to Keep It Up-to-date With the Upstream Repository]]></title>
