@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: U-boot | Jordon Wu's Blog]]></title>
+  <title><![CDATA[Category: u-boot | Jordon Wu's Blog]]></title>
   <link href="http://jordonwu.github.io/blog/categories/u-boot/atom.xml" rel="self"/>
   <link href="http://jordonwu.github.io/"/>
-  <updated>2015-09-07T21:21:48+08:00</updated>
+  <updated>2015-09-23T14:33:52+08:00</updated>
   <id>http://jordonwu.github.io/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Build U-boot for Riot Board]]></title>
+    <title type="html"><![CDATA[build u-boot for riot board]]></title>
     <link href="http://jordonwu.github.io/blog/2015/04/15/build-u-boot-for-riot-board/"/>
     <updated>2015-04-15T14:52:23+08:00</updated>
     <id>http://jordonwu.github.io/blog/2015/04/15/build-u-boot-for-riot-board</id>
@@ -41,7 +41,7 @@ $ls ls -l u-boot.*
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Build Openwrt Firmware]]></title>
+    <title type="html"><![CDATA[build openwrt firmware]]></title>
     <link href="http://jordonwu.github.io/blog/2015/04/15/build-openwrt-firmware/"/>
     <updated>2015-04-15T14:51:54+08:00</updated>
     <id>http://jordonwu.github.io/blog/2015/04/15/build-openwrt-firmware</id>

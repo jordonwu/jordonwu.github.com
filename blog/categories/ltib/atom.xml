@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Ltib | Jordon Wu's Blog]]></title>
+  <title><![CDATA[Category: ltib | Jordon Wu's Blog]]></title>
   <link href="http://jordonwu.github.io/blog/categories/ltib/atom.xml" rel="self"/>
   <link href="http://jordonwu.github.io/"/>
-  <updated>2015-09-07T21:21:48+08:00</updated>
+  <updated>2015-09-23T14:33:52+08:00</updated>
   <id>http://jordonwu.github.io/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Imx6 Summary Upgrade Ltib L3.0.35_4.1.0 to L3.0.101_4.1.1]]></title>
+    <title type="html"><![CDATA[imx6 summary upgrade ltib L3.0.35_4.1.0 to L3.0.101_4.1.1]]></title>
     <link href="http://jordonwu.github.io/blog/2015/05/28/imx6-summary-upgrade-ltib-l3-dot-0-35-4-dot-1-0-to-l3-dot-0-101-4-dot-1-1/"/>
     <updated>2015-05-28T10:50:25+08:00</updated>
     <id>http://jordonwu.github.io/blog/2015/05/28/imx6-summary-upgrade-ltib-l3-dot-0-35-4-dot-1-0-to-l3-dot-0-101-4-dot-1-1</id>
@@ -77,7 +77,7 @@ $ ./ltib -m prep -p kernel  # fetch kernel souce code
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Using Ltib's U-boot Kernel and Rootfs to Boot Board Step by Step]]></title>
+    <title type="html"><![CDATA[using ltib's u-boot kernel and rootfs to boot board step by step]]></title>
     <link href="http://jordonwu.github.io/blog/2015/05/14/using-ltibs-u-boot-kernel-and-rootfs-to-boot-board-step-by-step/"/>
     <updated>2015-05-14T14:47:48+08:00</updated>
     <id>http://jordonwu.github.io/blog/2015/05/14/using-ltibs-u-boot-kernel-and-rootfs-to-boot-board-step-by-step</id>
@@ -321,7 +321,7 @@ $ sudo tar -cjvf ../rootfs.tar.bz2 ./*
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Build Linux for Imx6]]></title>
+    <title type="html"><![CDATA[build linux for imx6]]></title>
     <link href="http://jordonwu.github.io/blog/2015/04/16/build-linux-for-imx6/"/>
     <updated>2015-04-16T19:26:06+08:00</updated>
     <id>http://jordonwu.github.io/blog/2015/04/16/build-linux-for-imx6</id>

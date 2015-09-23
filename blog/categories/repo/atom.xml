@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Repo | Jordon Wu's Blog]]></title>
+  <title><![CDATA[Category: repo | Jordon Wu's Blog]]></title>
   <link href="http://jordonwu.github.io/blog/categories/repo/atom.xml" rel="self"/>
   <link href="http://jordonwu.github.io/"/>
-  <updated>2015-09-07T21:21:48+08:00</updated>
+  <updated>2015-09-23T14:33:52+08:00</updated>
   <id>http://jordonwu.github.io/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>

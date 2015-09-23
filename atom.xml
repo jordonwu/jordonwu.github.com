@@ -4,7 +4,7 @@
   <title><![CDATA[Jordon Wu's Blog]]></title>
   <link href="http://jordonwu.github.io/atom.xml" rel="self"/>
   <link href="http://jordonwu.github.io/"/>
-  <updated>2015-09-07T21:21:48+08:00</updated>
+  <updated>2015-09-23T14:33:52+08:00</updated>
   <id>http://jordonwu.github.io/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Linux Command Summary]]></title>
+    <title type="html"><![CDATA[linux command summary]]></title>
     <link href="http://jordonwu.github.io/blog/2015/09/07/linux-command-summary/"/>
     <updated>2015-09-07T09:18:08+08:00</updated>
     <id>http://jordonwu.github.io/blog/2015/09/07/linux-command-summary</id>
@@ -27,7 +27,7 @@ $ find . -name "*.c" -print | xargs grep "main("
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Sync a Fork of a Repository to Keep It Up-to-date With the Upstream Repository]]></title>
+    <title type="html"><![CDATA[sync a fork of a repository to keep it up-to-date with the upstream repository]]></title>
     <link href="http://jordonwu.github.io/blog/2015/06/10/sync-a-fork-of-a-repository-to-keep-it-up-to-date-with-the-upstream-repository/"/>
     <updated>2015-06-10T15:05:40+08:00</updated>
     <id>http://jordonwu.github.io/blog/2015/06/10/sync-a-fork-of-a-repository-to-keep-it-up-to-date-with-the-upstream-repository</id>
@@ -110,7 +110,7 @@ $ find . -name "*.c" -print | xargs grep "main("
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Imx6 Summary Upgrade Ltib L3.0.35_4.1.0 to L3.0.101_4.1.1]]></title>
+    <title type="html"><![CDATA[imx6 summary upgrade ltib L3.0.35_4.1.0 to L3.0.101_4.1.1]]></title>
     <link href="http://jordonwu.github.io/blog/2015/05/28/imx6-summary-upgrade-ltib-l3-dot-0-35-4-dot-1-0-to-l3-dot-0-101-4-dot-1-1/"/>
     <updated>2015-05-28T10:50:25+08:00</updated>
     <id>http://jordonwu.github.io/blog/2015/05/28/imx6-summary-upgrade-ltib-l3-dot-0-35-4-dot-1-0-to-l3-dot-0-101-4-dot-1-1</id>
@@ -420,7 +420,7 @@ $ bitbake core-image-base
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Imx6 Summary Linux Host Environment Setup]]></title>
+    <title type="html"><![CDATA[imx6 summary linux host environment setup]]></title>
     <link href="http://jordonwu.github.io/blog/2015/05/26/imx6-summary-linux-host-environment-setup/"/>
     <updated>2015-05-26T08:52:12+08:00</updated>
     <id>http://jordonwu.github.io/blog/2015/05/26/imx6-summary-linux-host-environment-setup</id>
@@ -482,7 +482,7 @@ $ /etc/init.d/smbd restart  //restart smbd service
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Adding an Existing Project to Github]]></title>
+    <title type="html"><![CDATA[Adding an existing project to Github]]></title>
     <link href="http://jordonwu.github.io/blog/2015/05/26/adding-an-existing-project-to-github/"/>
     <updated>2015-05-26T08:12:55+08:00</updated>
     <id>http://jordonwu.github.io/blog/2015/05/26/adding-an-existing-project-to-github</id>
@@ -719,7 +719,7 @@ EOF
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Using Ltib's U-boot Kernel and Rootfs to Boot Board Step by Step]]></title>
+    <title type="html"><![CDATA[using ltib's u-boot kernel and rootfs to boot board step by step]]></title>
     <link href="http://jordonwu.github.io/blog/2015/05/14/using-ltibs-u-boot-kernel-and-rootfs-to-boot-board-step-by-step/"/>
     <updated>2015-05-14T14:47:48+08:00</updated>
     <id>http://jordonwu.github.io/blog/2015/05/14/using-ltibs-u-boot-kernel-and-rootfs-to-boot-board-step-by-step</id>
@@ -963,7 +963,7 @@ $ sudo tar -cjvf ../rootfs.tar.bz2 ./*
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Build Ltib for Sabre Sdb on ubuntu14.04]]></title>
+    <title type="html"><![CDATA[build ltib for sabre sdb on ubuntu14.04]]></title>
     <link href="http://jordonwu.github.io/blog/2015/05/11/build-ltib-for-sabre-sdb-on-ubuntu14-dot-04/"/>
     <updated>2015-05-11T14:48:34+08:00</updated>
     <id>http://jordonwu.github.io/blog/2015/05/11/build-ltib-for-sabre-sdb-on-ubuntu14-dot-04</id>
@@ -1875,7 +1875,7 @@ ttymxc0::respawn:/sbin/getty -L  ttymxc0 0 vt100 # GENERIC_SERIAL
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Build qt5.4.1 and Qt3d Using Vs2013]]></title>
+    <title type="html"><![CDATA[build qt5.4.1 and qt3d using vs2013]]></title>
     <link href="http://jordonwu.github.io/blog/2015/05/07/build-qt5.4.1-and-qt3d-using-vs2013/"/>
     <updated>2015-05-07T09:55:40+08:00</updated>
     <id>http://jordonwu.github.io/blog/2015/05/07/build-qt5.4.1-and-qt3d-using-vs2013</id>
@@ -2107,7 +2107,7 @@ To reconfigure, run nmake confclean and configure.
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Build qt5.5.0 Using Vs2013]]></title>
+    <title type="html"><![CDATA[build qt5.5.0 using vs2013]]></title>
     <link href="http://jordonwu.github.io/blog/2015/05/05/build-qt5.5.0-using-vs2013/"/>
     <updated>2015-05-05T15:09:56+08:00</updated>
     <id>http://jordonwu.github.io/blog/2015/05/05/build-qt5.5.0-using-vs2013</id>
@@ -2358,7 +2358,7 @@ f:\download\qt-everywhere-opensource-src-5.5.0-beta-build&gt;
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Build Linux for Imx6]]></title>
+    <title type="html"><![CDATA[build linux for imx6]]></title>
     <link href="http://jordonwu.github.io/blog/2015/04/16/build-linux-for-imx6/"/>
     <updated>2015-04-16T19:26:06+08:00</updated>
     <id>http://jordonwu.github.io/blog/2015/04/16/build-linux-for-imx6</id>
@@ -3145,7 +3145,7 @@ $ make menuconfig
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Build U-boot for Riot Board]]></title>
+    <title type="html"><![CDATA[build u-boot for riot board]]></title>
     <link href="http://jordonwu.github.io/blog/2015/04/15/build-u-boot-for-riot-board/"/>
     <updated>2015-04-15T14:52:23+08:00</updated>
     <id>http://jordonwu.github.io/blog/2015/04/15/build-u-boot-for-riot-board</id>
@@ -3172,7 +3172,7 @@ $ls ls -l u-boot.*
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Build Openwrt Firmware]]></title>
+    <title type="html"><![CDATA[build openwrt firmware]]></title>
     <link href="http://jordonwu.github.io/blog/2015/04/15/build-openwrt-firmware/"/>
     <updated>2015-04-15T14:51:54+08:00</updated>
     <id>http://jordonwu.github.io/blog/2015/04/15/build-openwrt-firmware</id>

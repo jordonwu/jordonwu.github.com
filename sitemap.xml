@@ -68,7 +68,16 @@
     <loc>http://jordonwu.github.io/blog/archives/</loc>
   </url>
   <url>
+    <loc>http://jordonwu.github.io/archives/</loc>
+  </url>
+  <url>
+    <loc>http://jordonwu.github.io/categories/</loc>
+  </url>
+  <url>
     <loc>http://jordonwu.github.io/</loc>
+  </url>
+  <url>
+    <loc>http://jordonwu.github.io/posts/</loc>
   </url>
   <url>
     <loc>http://jordonwu.github.io/blog/categories/octopress/</loc>
