@@ -1,0 +1,9 @@
+[submodule ".themes/whitespace"]
+	path = .themes/whitespace
+	url = https://github.com/lucaslew/whitespace
+[submodule ".themes/hpstr"]
+	path = .themes/hpstr
+	url = https://github.com/jez/hpstr-theme.git
+[submodule ".themes/venice"]
+	path = .themes/venice
+	url = git://github.com/octothemes/venice.git
