@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://jordonwu.github.io/blog/2015/09/29/v4l-and-gstreamer/</loc>
+    <lastmod>2015-09-29T11:05:58+08:00</lastmod>
+  </url>
+  <url>
+    <loc>http://jordonwu.github.io/blog/2015/09/28/upgrade-ltib-gstreamer/</loc>
+    <lastmod>2015-09-28T15:54:48+08:00</lastmod>
+  </url>
+  <url>
     <loc>http://jordonwu.github.io/blog/2015/09/07/linux-command-summary/</loc>
     <lastmod>2015-09-07T09:18:08+08:00</lastmod>
   </url>
@@ -138,5 +146,23 @@
   </url>
   <url>
     <loc>http://jordonwu.github.io/blog/categories/repo/</loc>
+  </url>
+  <url>
+    <loc>http://jordonwu.github.io/blog/categories/gstreamer/</loc>
+  </url>
+  <url>
+    <loc>http://jordonwu.github.io/blog/categories/v4l/</loc>
+  </url>
+  <url>
+    <loc>http://jordonwu.github.io/blog/categories/ipu/</loc>
+  </url>
+  <url>
+    <loc>http://jordonwu.github.io/blog/categories/csi/</loc>
+  </url>
+  <url>
+    <loc>http://jordonwu.github.io/blog/categories/camera/</loc>
+  </url>
+  <url>
+    <loc>http://jordonwu.github.io/posts/2/</loc>
   </url>
 </urlset>

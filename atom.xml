@@ -4,7 +4,7 @@
   <title><![CDATA[Jordon Wu's Blog]]></title>
   <link href="http://jordonwu.github.io/atom.xml" rel="self"/>
   <link href="http://jordonwu.github.io/"/>
-  <updated>2015-09-23T14:33:52+08:00</updated>
+  <updated>2015-10-09T15:24:01+08:00</updated>
   <id>http://jordonwu.github.io/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
@@ -12,6 +12,567 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[v4l and gstreamer]]></title>
+    <link href="http://jordonwu.github.io/blog/2015/09/29/v4l-and-gstreamer/"/>
+    <updated>2015-09-29T11:05:58+08:00</updated>
+    <id>http://jordonwu.github.io/blog/2015/09/29/v4l-and-gstreamer</id>
+    <content type="html"><![CDATA[<h1>1. V4L Test commmand</h1>
+
+<h2>1.1 Overlay</h2>
+
+<pre><code>root@freescale ~$ cd /unit_tests/
+root@freescale /unit_tests$ ./mxc_v4l2_overlay.out -iw 720 -ih 480 -it 0 -il 0 -ow 720 -oh 420 -ot 50 -ol 200
+</code></pre>
+
+<h2>1.2 TVIN</h2>
+
+<pre><code>root@freescale ~$ cd /unit_tests/
+root@freescale /unit_tests$ ./mxc_v4l2_tvin.out -ow 720 -oh 480 -ot 20 -ol 20 -c 10 -m 0 -tb -f YUYV
+</code></pre>
+
+<h1>2. GStreamer Test Command</h1>
+
+<h1>1. Display videotest pattern</h1>
+
+<pre><code>$ gst-launch -v videotestsrc ! mfw_v4lsink
+</code></pre>
+
+<h1>2. Video loopback</h1>
+
+<h2>2.1 Single Camera</h2>
+
+<pre><code>$ gst-launch -v mfw_v4lsrc ! mfw_v4lsink
+
+$ gst-launch -v mfw_v4lsrc device=/dev/video0 ! mfw_v4lsink disp-width=720 disp-height=480
+
+$ gst-launch -v mfw_v4lsrc device=/dev/video0 ! video-sink="mfw_isink axis-top=0 axis-left=0 disp-width=720 disp-height=420"
+
+$ gst-launch -v mfw_v4lsrc device=/dev/video0 ! mfw_isink disp-width=720 disp-height=480
+</code></pre>
+
+<h2>2.1 Single TV Decoder</h2>
+
+<pre><code>$ gst-launch -v tvsrc ! mfw_v4lsink
+
+$ gst-launch -v tvsrc ! mfw_isink
+
+$ gst-launch -v tvsrc ! mfw_v4lsink axis-top=50 axis-left=100  disp-width=720 disp-height=480
+
+$ gst-launch -v tvsrc device=/dev/video0 ! mfw_v4lsink axis-top=50 axis-left=100  disp-width=720 disp-height=480
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[upgrade ltib gstreamer]]></title>
+    <link href="http://jordonwu.github.io/blog/2015/09/28/upgrade-ltib-gstreamer/"/>
+    <updated>2015-09-28T15:54:48+08:00</updated>
+    <id>http://jordonwu.github.io/blog/2015/09/28/upgrade-ltib-gstreamer</id>
+    <content type="html"><![CDATA[<h1>1. Upgrade glib2 to 2.28.8</h1>
+
+<h2>1.1 Copy glib2 spec to dist/lfs/5.1/glib2/glib2.spec</h2>
+
+<h1>for glib2-2.28</h1>
+
+<pre><code>%define pfx /opt/freescale/rootfs/%{_target_cpu}
+
+Summary         : A library of functions used by GDK, GTK+, and many applications
+Name            : glib2
+Version         : 2.28.8
+Release         : 1
+License         : LGPL
+Vendor          : Freescale
+Packager        : Stuart Hughes/Kurt Mahan
+Group           : System Environment/Libraries
+Source          : glib-%{version}.tar.bz2
+Patch1          : glib2-2.12.11-relink.patch
+BuildRoot       : %{_tmppath}/%{name}
+Prefix          : %{pfx}
+
+%Description
+%{summary}
+
+%Prep
+%setup -n glib-%{version}
+#%patch1 -p1
+
+%Build
+# prevent configure from trying to compile and
+# run test binaries for the target.
+glib_cv_stack_grows=no \
+glib_cv_uscore=no \
+ac_cv_func_posix_getpwuid_r=yes \
+ac_cv_func_posix_getgrgid_r=yes \
+./configure --prefix=%{_prefix} --host=$CFGHOST --build=%{_build}
+make
+
+%Install
+rm -rf $RPM_BUILD_ROOT
+make install DESTDIR=$RPM_BUILD_ROOT/%{pfx}
+find $RPM_BUILD_ROOT/%{pfx}/%{_prefix}/lib -name "*.la" | xargs rm -f
+
+%Clean
+rm -rf $RPM_BUILD_ROOT
+
+%Files
+%defattr(-,root,root)
+%{pfx}/*
+</code></pre>
+
+<h1>for glib2-2.30.2</h1>
+
+<pre><code>%define pfx /opt/freescale/rootfs/%{_target_cpu}
+
+Summary         : A library of functions used by GDK, GTK+, and many applications
+Name            : glib2
+Version         : 2.30.2
+Release         : 1
+License         : LGPL
+Vendor          : Freescale
+Packager        : Stuart Hughes/Kurt Mahan
+Group           : System Environment/Libraries
+Source          : glib-%{version}.tar.bz2
+Patch1          : glib2-2.12.11-relink.patch
+BuildRoot       : %{_tmppath}/%{name}
+Prefix          : %{pfx}
+
+%Description
+%{summary}
+
+%Prep
+%setup -n glib-%{version}
+#%patch1 -p1
+
+%Build
+# prevent configure from trying to compile and
+# run test binaries for the target.
+glib_cv_stack_grows=no \
+glib_cv_uscore=no \
+glib_cv_have_qsort_r=yes \
+ac_cv_func_posix_getpwuid_r=yes \
+ac_cv_func_posix_getgrgid_r=yes \
+./configure --prefix=%{_prefix} --host=$CFGHOST --build=%{_build}
+make
+
+%Install
+rm -rf $RPM_BUILD_ROOT
+make install DESTDIR=$RPM_BUILD_ROOT/%{pfx}
+find $RPM_BUILD_ROOT/%{pfx}/%{_prefix}/lib -name "*.la" | xargs rm -f
+
+%Clean
+rm -rf $RPM_BUILD_ROOT
+
+%Files
+%defattr(-,root,root)
+%{pfx}/*
+</code></pre>
+
+<h2>1.2 Download glib2-2.28.8.tar.bz2 from the web and copy it to /opt/freescale/pkgs</h2>
+
+<pre><code>$ ./ltib -p glib2 -m clean
+$ ./ltib -p glib2 -m prep
+$ ./ltib -p glib2 -m scbuild
+$ ./ltib -p glib2 -m scdeploy
+</code></pre>
+
+<h1>2. Upgrade gstreamer-core</h1>
+
+<h2>2.1 Copy gstreamer-core spec to dist/lfs/5.1/gstreamer-core/gstreamer-core.spec</h2>
+
+<pre><code>%define pfx /opt/freescale/rootfs/%{_target_cpu}
+
+Summary         : GStreamer Core
+Name            : gstreamer-core
+Version         : 0.10.35
+Release         : 2
+License         : LGPL
+Vendor          : Freescale Semiconductor
+Packager        : Kurt Mahan, Dexter Ji
+Group           : Applications/System
+Source          : gstreamer-%{version}.tar.gz
+BuildRoot       : %{_tmppath}/%{name}
+Prefix          : %{pfx}
+
+%Description
+%{summary}
+
+%Prep
+%setup -n gstreamer-%{version}
+
+%Build
+./configure --prefix=%{_prefix} --host=$CFGHOST --build=%{_build} \
+            --disable-valgrind --without-check NM=nm
+make
+
+%Install
+rm -rf $RPM_BUILD_ROOT
+make install DESTDIR=$RPM_BUILD_ROOT/%{pfx}
+find $RPM_BUILD_ROOT/%{pfx}/%{_prefix}/lib/ -name "*.la" | xargs rm -f
+
+%Clean
+rm -rf $RPM_BUILD_ROOT
+
+%Files
+%defattr(-,root,root)
+%{pfx}/*
+</code></pre>
+
+<h2>2.2 Download gstreamer-core-0.10.35.tar.gz from the web and copy it to /opt/freescale/pkgs</h2>
+
+<pre><code>$ ./ltib -p gstreamer-core -m clean
+$ ./ltib -p gstreamer-core -m prep
+$ ./ltib -p gstreamer-core -m scbuild
+$ ./ltib -p gstreamer-core -m scdeploy
+</code></pre>
+
+<h1>3. Upgrade gstreamer-base</h1>
+
+<h2>3.1 Copy gstreamer-base spec to dist/lfs/5.1/gst-plugins-base/gst-plugins-base.spec</h2>
+
+<pre><code>%define pfx /opt/freescale/rootfs/%{_target_cpu}
+
+Summary         : GStreamer Plugins Base
+Name            : gst-plugins-base
+Version         : 0.10.35
+Release         : 1
+License         : LGPL
+Vendor          : Freescale
+Packager        : Kurt Mahan, Dexter Ji
+Group           : Applications/System
+Source          : %{name}-%{version}.tar.gz
+Patch1          : %{name}-0.10.12-relink.patch
+Patch2          : %{name}0.10_%{version}-gstplaybin2_rawvideo_support.patch
+Patch3          : %{name}0.10_%{version}-fix-gstaudiobuild.patch
+BuildRoot       : %{_tmppath}/%{name}
+Prefix          : %{pfx}
+
+%Description
+%{summary}
+
+%Prep
+%setup
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
+
+
+%Build
+export NM=nm
+if [ -z "$PKG_LIBX11" ]
+then
+    XTRA_OPTS="$XTRA_OPTS --without-x"
+fi
+./configure --prefix=%{_prefix} --host=$CFGHOST --build=%{_build} \
+        --disable-vorbis --disable-vorbistest --disable-freetypetest \
+        --disable-theora --disable-ogg --disable-oggtest --disable-pango\
+        --disable-libvisual --disable-cdparanoia --disable-failing-tests --disable-examples $XTRA_OPTS
+make
+
+
+%Install
+rm -rf $RPM_BUILD_ROOT
+make install DESTDIR=$RPM_BUILD_ROOT/%{pfx}
+find $RPM_BUILD_ROOT/%{pfx}/%{_prefix}/lib/ -name "*.la" | xargs rm -f
+
+%Clean
+rm -rf $RPM_BUILD_ROOT
+
+%Files
+%defattr(-,root,root)
+%{pfx}/*
+</code></pre>
+
+<h2>3.2 Download gst-plugins-base-0.10.35.tar.gz from the web and copy it to /opt/freescale/pkgs</h2>
+
+<pre><code>./ltib -p gst-plugins-base -m clean
+./ltib -p gst-plugins-base -m prep
+./ltib -p gst-plugins-base -m scbuild
+./ltib -p gst-plugins-base -m scdeploy
+</code></pre>
+
+<h1>4. Upgrade gstreamer-bad</h1>
+
+<h2>4.1 Copy gst-plugins-bad spec to dist/lfs/5.1/gst-plugins-bad/gst-plugins-bad.spec</h2>
+
+<pre><code>%define pfx /opt/freescale/rootfs/%{_target_cpu}
+
+Summary         : GStreamer Plugins Bad
+Name            : gst-plugins-bad
+Version         : 0.10.22
+Release         : 1
+License         : LGPL
+Vendor          : Freescale
+Packager        : Kurt Mahan
+Group           : Applications/System
+Source          : gst-plugins-bad-%{version}.tar.gz
+Patch1          : gst-plugins-bad-0.10.4-relink.patch
+BuildRoot       : %{_tmppath}/%{name}
+Prefix          : %{pfx}
+
+%Description
+%{summary}
+
+%Prep
+%setup
+%patch1 -p1
+
+%Build
+./configure --prefix=%{_prefix} --host=$CFGHOST \
+        --build=%{_build} --disable-valgrind \
+        --disable-x --disable-xvid \
+        --disable-ximagesrc --disable-jack \
+        --disable-sdl --disable-sdltest \
+        --x-includes= --x-libraries= \gst-plugins-bad-0.10.4-relink.patch \
+        --without-check NM=nm
+make
+
+%Install
+rm -rf $RPM_BUILD_ROOT
+make install DESTDIR=$RPM_BUILD_ROOT/%{pfx}
+find $RPM_BUILD_ROOT/%{pfx}/%{_prefix}/lib -name "*.la" | xargs rm -f
+
+%Clean
+rm -rf $RPM_BUILD_ROOT
+
+%Files
+%defattr(-,root,root)
+%{pfx}/*
+</code></pre>
+
+<h2>4.2 Download gst-plugins-bad-0.10.22.tar.gz  from the web and copy it to /opt/freescale/pkgs</h2>
+
+<pre><code>./ltib -p gst-plugins-bad -m clean
+./ltib -p gst-plugins-bad -m prep
+./ltib -p gst-plugins-bad -m scbuild
+./ltib -p gst-plugins-bad -m scdeploy
+</code></pre>
+
+<h1>4. Upgrade gst-plugins-good</h1>
+
+<h2>4.1 Copy gst-plugins-good spec to dist/lfs/5.1/gst-plugins-good/gst-plugins-good.spec</h2>
+
+<pre><code>%define pfx /opt/freescale/rootfs/%{_target_cpu}
+
+Summary         : GStreamer Plugins Good
+Name            : gst-plugins-good
+Version         : 0.10.30
+Release         : 1
+License         : LGPL
+Vendor          : Freescale
+Packager        : Dexter Ji
+Group           : Applications/System
+Source          : %{name}-%{version}.tar.gz
+Patch1          : %{name}-0.10.5-relink.patch
+BuildRoot       : %{_tmppath}/%{name}
+Prefix          : %{pfx}
+
+%Description
+%{summary}
+
+%Prep
+%setup
+%patch1 -p1
+
+%Build
+#export CAIRO_CFLAGS="-I${DEV_IMAGE}/usr/include/cairo"
+#export CAIRO_LIBS="-L${DEV_IMAGE}/usr/lib/cairo"
+#export LIBS="-lcairo"
+
+./configure --prefix=%{_prefix} --host=$CFGHOST \
+        --build=%{_build} --without-check \
+        --disable-speex \
+        --disable-shout2test --disable-shout2 \
+        --disable-dv1394 --disable-libpng \
+        --disable-libdv --disable-libcaca \
+        --disable-ladspa --disable-jpeg \
+        --disable-flac \
+        --disable-esd --disable-esdtest \
+        --disable-cairo --disable-aalib \
+        --disable-aalibtest --disable-x \
+        --disable-xvideo --disable-hal NM=nm
+make
+
+%Install
+rm -rf $RPM_BUILD_ROOT
+make install DESTDIR=$RPM_BUILD_ROOT/%{pfx}
+find $RPM_BUILD_ROOT/%{pfx}/%{_prefix}/lib/ -name "*.la" | xargs rm -f
+
+%Clean
+rm -rf $RPM_BUILD_ROOT
+
+%Files
+%defattr(-,root,root)
+%{pfx}/*    
+</code></pre>
+
+<h2>4.2 Download gst-plugins-good-0.10.30.tar.gz  from the web and copy it to /opt/freescale/pkgs</h2>
+
+<pre><code>./ltib -p gst-plugins-good -m clean
+./ltib -p gst-plugins-good -m prep
+./ltib -p gst-plugins-good -m scbuild
+./ltib -p gst-plugins-good -m scdeploy
+</code></pre>
+
+<h1>5. Upgrade gst-plugins-ugly</h1>
+
+<h2>5.1 Copy gst-plugins-ugly spec to dist/lfs/5.1/gst-plugins-ugly/gst-plugins-ugly.spec</h2>
+
+<pre><code>%define pfx /opt/freescale/rootfs/%{_target_cpu}
+
+Summary         : GStreamer Plugins Ugly
+Name            : gst-plugins-ugly
+Version         : 0.10.18
+Release         : 1
+License         : LGPL
+Vendor          : Freescale
+Packager        : Kurt Mahan
+Group           : Applications/System
+Source          : gst-plugins-ugly-%{version}.tar.gz
+Patch1          : gst-plugins-ugly-0.10.5-relink.patch
+BuildRoot       : %{_tmppath}/%{name}
+Prefix          : %{pfx}
+
+%Description
+%{summary}
+
+%Prep
+%setup
+%patch1 -p1
+
+%Build
+./configure --prefix=%{_prefix} --host=$CFGHOST --build=%{_build} NM=nm
+make
+
+%Install
+rm -rf $RPM_BUILD_ROOT
+make install DESTDIR=$RPM_BUILD_ROOT/%{pfx}
+find $RPM_BUILD_ROOT/%{pfx}/%{_prefix}/lib/ -name "*.la" | xargs rm -f
+
+%Clean
+rm -rf $RPM_BUILD_ROOT
+
+%Files
+%defattr(-,root,root)
+%{pfx}/*    
+</code></pre>
+
+<h2>5.2 Download gst-plugins-ugly-0.10.18.tar.gz  from the web and copy it to /opt/freescale/pkgs</h2>
+
+<pre><code>./ltib -p gst-plugins-ugly -m clean
+./ltib -p gst-plugins-ugly -m prep
+./ltib -p gst-plugins-ugly -m scbuild
+./ltib -p gst-plugins-ugly -m scdeploy
+</code></pre>
+
+<h1>6. Upgrade gst-ffmpeg</h1>
+
+<h2>6.1 Copy gst-ffmpeg spec to dist/lfs/5.1/gst-ffmpge/gst-ffmpeg.spec</h2>
+
+<pre><code>%define pfx /opt/freescale/rootfs/%{_target_cpu}
+
+Summary         : GStreamer plugin for FFmpeg codecs
+Name            : gst-ffmpeg
+Version         : 0.10.12
+Release         : 1
+License         : LGPL
+Vendor          : Freescale
+Packager        : John Faith
+Group           : Applications/System
+Source          : %{name}-%{version}.tar.gz
+Patch1          : gst-ffmpeg-0.10.3-relink.patch
+BuildRoot       : %{_tmppath}/%{name}
+Prefix          : %{pfx}
+URL             : http://gstreamer.freedesktop.org/src/gst-ffmpeg
+
+%Description
+%{summary}
+
+%Prep
+%setup
+%patch1 -p1
+
+%Build
+ac_cv_func_register_printf_function=no \
+./configure --prefix=%{_prefix} --host=$CFGHOST --build=%{_build} --without-check --disable-altivec
+DEBUG_CFLAGS="-g" make
+#make
+
+
+%Install
+rm -rf $RPM_BUILD_ROOT
+make install DESTDIR=$RPM_BUILD_ROOT/%{pfx}
+find $RPM_BUILD_ROOT/%{pfx}/%{_prefix}/lib/ -name "*.la" | xargs rm -f
+
+%Clean
+rm -rf $RPM_BUILD_ROOT
+
+%Files
+%defattr(-,root,root)
+%{pfx}/*
+</code></pre>
+
+<h2>6.2 Download gst-ffmpeg-0.10.12.tar.gz  from the web and copy it to /opt/freescale/pkgs</h2>
+
+<pre><code>./ltib -p gst-ffmpeg -m clean
+./ltib -p gst-ffmpeg -m prep
+./ltib -p gst-ffmpeg -m scbuild
+./ltib -p gst-ffmpeg -m scdeploy
+</code></pre>
+
+<h1>7. Upgrade gst-plugins-farsight</h1>
+
+<h2>7.1 Copy gst-plugins-farsight spec to dist/lfs/5.1/gst-plugins-farsight/gst-plugins-farsight.spec</h2>
+
+<pre><code>%define pfx /opt/freescale/rootfs/%{_target_cpu}
+
+Summary         : Set of plugins for Gstreamer used Audio/Video conferencing
+Name            : gst-plugins-farsight
+Version         : 0.12.11
+Release         : 1
+License         : LGPL
+Packager        : Fadi Souilem/Stuart Hughes
+Group           : Applications/System
+Source          : %{name}-%{version}.tar.gz
+BuildRoot       : %{_tmppath}/%{name}
+Prefix          : %{pfx}
+
+%Description
+%{summary}
+
+%Prep
+%setup
+
+%Build
+./configure --prefix=%{_prefix} --host=$CFGHOST \
+        --disable-jingle-p2p \
+        --with-plugins=rtpmux,rtpdemux,rtpssrcdemux,rtppayloads
+
+make
+
+%Install
+rm -rf $RPM_BUILD_ROOT
+make install DESTDIR=$RPM_BUILD_ROOT/%{pfx}
+find $RPM_BUILD_ROOT/%{pfx}/%{_prefix}/lib -name "*.la" | xargs rm -f
+
+%Clean
+rm -rf $RPM_BUILD_ROOT
+
+%Files
+%defattr(-,root,root)
+%{pfx}/*
+</code></pre>
+
+<h2>7.2 Download gst-plugins-farsight-0.12.11.tar.gz  from the web and copy it to /opt/freescale/pkgs</h2>
+
+<pre><code>./ltib -p gst-plugins-farsight -m clean
+./ltib -p gst-plugins-farsight -m prep
+./ltib -p gst-plugins-farsight -m scbuild
+./ltib -p gst-plugins-farsight -m scdeploy
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[linux command summary]]></title>

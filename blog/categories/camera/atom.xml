@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: camera | Jordon Wu's Blog]]></title>
+  <link href="http://jordonwu.github.io/blog/categories/camera/atom.xml" rel="self"/>
+  <link href="http://jordonwu.github.io/"/>
+  <updated>2015-10-09T15:24:01+08:00</updated>
+  <id>http://jordonwu.github.io/</id>
+  <author>
+    <name><![CDATA[Jordon Wu]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[v4l and gstreamer]]></title>
+    <link href="http://jordonwu.github.io/blog/2015/09/29/v4l-and-gstreamer/"/>
+    <updated>2015-09-29T11:05:58+08:00</updated>
+    <id>http://jordonwu.github.io/blog/2015/09/29/v4l-and-gstreamer</id>
+    <content type="html"><![CDATA[<h1>1. V4L Test commmand</h1>
+
+<h2>1.1 Overlay</h2>
+
+<pre><code>root@freescale ~$ cd /unit_tests/
+root@freescale /unit_tests$ ./mxc_v4l2_overlay.out -iw 720 -ih 480 -it 0 -il 0 -ow 720 -oh 420 -ot 50 -ol 200
+</code></pre>
+
+<h2>1.2 TVIN</h2>
+
+<pre><code>root@freescale ~$ cd /unit_tests/
+root@freescale /unit_tests$ ./mxc_v4l2_tvin.out -ow 720 -oh 480 -ot 20 -ol 20 -c 10 -m 0 -tb -f YUYV
+</code></pre>
+
+<h1>2. GStreamer Test Command</h1>
+
+<h1>1. Display videotest pattern</h1>
+
+<pre><code>$ gst-launch -v videotestsrc ! mfw_v4lsink
+</code></pre>
+
+<h1>2. Video loopback</h1>
+
+<h2>2.1 Single Camera</h2>
+
+<pre><code>$ gst-launch -v mfw_v4lsrc ! mfw_v4lsink
+
+$ gst-launch -v mfw_v4lsrc device=/dev/video0 ! mfw_v4lsink disp-width=720 disp-height=480
+
+$ gst-launch -v mfw_v4lsrc device=/dev/video0 ! video-sink="mfw_isink axis-top=0 axis-left=0 disp-width=720 disp-height=420"
+
+$ gst-launch -v mfw_v4lsrc device=/dev/video0 ! mfw_isink disp-width=720 disp-height=480
+</code></pre>
+
+<h2>2.1 Single TV Decoder</h2>
+
+<pre><code>$ gst-launch -v tvsrc ! mfw_v4lsink
+
+$ gst-launch -v tvsrc ! mfw_isink
+
+$ gst-launch -v tvsrc ! mfw_v4lsink axis-top=50 axis-left=100  disp-width=720 disp-height=480
+
+$ gst-launch -v tvsrc device=/dev/video0 ! mfw_v4lsink axis-top=50 axis-left=100  disp-width=720 disp-height=480
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>
