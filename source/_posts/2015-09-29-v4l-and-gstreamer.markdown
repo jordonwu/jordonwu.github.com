@@ -10,11 +10,17 @@ categories: v4l gstreamer ipu csi camera
 
 ## 1.1 Overlay ##
 	root@freescale ~$ cd /unit_tests/
-	root@freescale /unit_tests$ ./mxc_v4l2_overlay.out -iw 720 -ih 480 -it 0 -il 0 -ow 720 -oh 420 -ot 50 -ol 200
+	root@freescale /unit_tests$ /unit_tests/mxc_v4l2_overlay.out -iw 720 -ih 480 -it 0 -il 0 -ow 720 -oh 480 -ot 50 -ol 200
 
 ## 1.2 TVIN ##
 	root@freescale ~$ cd /unit_tests/
-	root@freescale /unit_tests$ ./mxc_v4l2_tvin.out -ow 720 -oh 480 -ot 20 -ol 20 -c 10 -m 0 -tb -f YUYV
+	
+	root@freescale /unit_tests$ /unit_tests/mxc_v4l2_tvin.out -ow 720 -oh 480 -ot 20 -ol 20 -c 10 -m 0 -tb -f YUYV
+	root@freescale /unit_tests$ /unit_tests/mxc_v4l2_tvin.out -ow 720 -oh 480 -ot 20 -ol 20 -c 10 -m 0 -tb -f UYVY
+	
+	root@freescale /unit_tests$ /unit_tests/mxc_v4l2_tvin.out -ow 720 -oh 480 -ot 20 -ol 20 -c 10 -m 0 -tb -f NV12
+
+	root@freescale /unit_tests$ /unit_tests/mxc_v4l2_tvin.out -ow 720 -oh 480 -ot 20 -ol 20 -c 10 -m 0 -tb -f NV12
 
 
 # 2. GStreamer Test Command #
