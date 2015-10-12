@@ -4,7 +4,7 @@
   <title><![CDATA[Category: camera | Jordon Wu's Blog]]></title>
   <link href="http://jordonwu.github.io/blog/categories/camera/atom.xml" rel="self"/>
   <link href="http://jordonwu.github.io/"/>
-  <updated>2015-10-09T15:24:01+08:00</updated>
+  <updated>2015-10-12T17:59:14+08:00</updated>
   <id>http://jordonwu.github.io/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
@@ -23,13 +23,19 @@
 <h2>1.1 Overlay</h2>
 
 <pre><code>root@freescale ~$ cd /unit_tests/
-root@freescale /unit_tests$ ./mxc_v4l2_overlay.out -iw 720 -ih 480 -it 0 -il 0 -ow 720 -oh 420 -ot 50 -ol 200
+root@freescale /unit_tests$ /unit_tests/mxc_v4l2_overlay.out -iw 720 -ih 480 -it 0 -il 0 -ow 720 -oh 480 -ot 50 -ol 200
 </code></pre>
 
 <h2>1.2 TVIN</h2>
 
 <pre><code>root@freescale ~$ cd /unit_tests/
-root@freescale /unit_tests$ ./mxc_v4l2_tvin.out -ow 720 -oh 480 -ot 20 -ol 20 -c 10 -m 0 -tb -f YUYV
+
+root@freescale /unit_tests$ /unit_tests/mxc_v4l2_tvin.out -ow 720 -oh 480 -ot 20 -ol 20 -c 10 -m 0 -tb -f YUYV
+root@freescale /unit_tests$ /unit_tests/mxc_v4l2_tvin.out -ow 720 -oh 480 -ot 20 -ol 20 -c 10 -m 0 -tb -f UYVY
+
+root@freescale /unit_tests$ /unit_tests/mxc_v4l2_tvin.out -ow 720 -oh 480 -ot 20 -ol 20 -c 10 -m 0 -tb -f NV12
+
+root@freescale /unit_tests$ /unit_tests/mxc_v4l2_tvin.out -ow 720 -oh 480 -ot 20 -ol 20 -c 10 -m 0 -tb -f NV12
 </code></pre>
 
 <h1>2. GStreamer Test Command</h1>
