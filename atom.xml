@@ -4,7 +4,7 @@
   <title><![CDATA[Jordon Wu's Blog]]></title>
   <link href="http://jordonwu.github.io/atom.xml" rel="self"/>
   <link href="http://jordonwu.github.io/"/>
-  <updated>2015-10-12T17:59:14+08:00</updated>
+  <updated>2015-12-01T15:05:14+08:00</updated>
   <id>http://jordonwu.github.io/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
@@ -12,6 +12,154 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[git send-email and msmtp config]]></title>
+    <link href="http://jordonwu.github.io/blog/2015/12/01/git-send-email-and-msmtp-config/"/>
+    <updated>2015-12-01T14:40:40+08:00</updated>
+    <id>http://jordonwu.github.io/blog/2015/12/01/git-send-email-and-msmtp-config</id>
+    <content type="html"><![CDATA[<h1>1. msmtp setup and config(using gmail as example)</h1>
+
+<pre><code>$ apt-get install msmtp
+$ vim ~/.msmtprc
+#########################################################
+account default
+host smtp.gmail.com
+# it seems port 587 not works
+#port 587
+port 25
+from xx.xx@gmail.com
+tls on
+tls_starttls on
+tls_trust_file /home/vmuser/.certs/Equifax_Secure_CA.pem
+# Or use the following for the system certificates, if installed:
+# tls_trust_file /etc/ssl/certs/ca-certificates.crt
+auth on
+user xxx    #&lt;username of gmail&gt;
+logfile ~/.msmtp.log
+###########################################################
+</code></pre>
+
+<h1>2. Download the SSL Certificates</h1>
+
+<pre><code>$ mkdir -pv $HOME/.certs 
+$ cd $HOME/.certs 
+$ touch Equifax_Secure_CA.pem 
+$ wget --no-check-certificate https://github.com/bagder/curl/raw/master/lib/mk-ca-bundle.pl
+$ perl mk-ca-bundle.pl
+
+# copy extract the "Equifax Secure CA" certificate of ca-bundle.crt to Equifax_Secure_CA.pem
+
+-----BEGIN CERTIFICATE-----
+MIIDIDCCAomgAwIBAgIENd70zzANBgkqhkiG9w0BAQUFADBOMQswCQYDVQQGEwJVUzEQMA4GA1UE
+ChMHRXF1aWZheDEtMCsGA1UECxMkRXF1aWZheCBTZWN1cmUgQ2VydGlmaWNhdGUgQXV0aG9yaXR5
+MB4XDTk4MDgyMjE2NDE1MVoXDTE4MDgyMjE2NDE1MVowTjELMAkGA1UEBhMCVVMxEDAOBgNVBAoT
+B0VxdWlmYXgxLTArBgNVBAsTJEVxdWlmYXggU2VjdXJlIENlcnRpZmljYXRlIEF1dGhvcml0eTCB
+nzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAwV2xWGcIYu6gmi0fCG2RFGiYCh7+2gRvE4RiIcPR
+fM6fBeC4AfBONOziipUEZKzxa1NfBbPLZ4C/QgKO/t0BCezhABRP/PvwDN1Dulsr4R+AcJkVV5MW
+8Q+XarfCaCMczE1ZMKxRHjuvK9buY0V7xdlfUNLjUA86iOe/FP3gx7kCAwEAAaOCAQkwggEFMHAG
+A1UdHwRpMGcwZaBjoGGkXzBdMQswCQYDVQQGEwJVUzEQMA4GA1UEChMHRXF1aWZheDEtMCsGA1UE
+CxMkRXF1aWZheCBTZWN1cmUgQ2VydGlmaWNhdGUgQXV0aG9yaXR5MQ0wCwYDVQQDEwRDUkwxMBoG
+A1UdEAQTMBGBDzIwMTgwODIyMTY0MTUxWjALBgNVHQ8EBAMCAQYwHwYDVR0jBBgwFoAUSOZo+SvS
+spXXR9gjIBBPM5iQn9QwHQYDVR0OBBYEFEjmaPkr0rKV10fYIyAQTzOYkJ/UMAwGA1UdEwQFMAMB
+Af8wGgYJKoZIhvZ9B0EABA0wCxsFVjMuMGMDAgbAMA0GCSqGSIb3DQEBBQUAA4GBAFjOKer89961
+zgK5F7WF0bnj4JXMJTENAKaSbn+2kmOeUJXRmm/kEd5jhW6Y7qj/WsjTVbJmcVfewCHrPSqnI0kB
+BIZCe/zuf6IWUrVnZ9NA2zsmWLIodz2uFHdh1voqZiegDfqnc1zqcPGUIWVEX/r87yloqaKHee95
+70+sB3c4
+-----END CERTIFICATE-----
+
+# rehash the certificate so Openssl knows how to find it:
+$ c_rehash $HOME/.certs/
+
+
+# There remains a final touch, since the username and password are openly in this file you should make the file readable only by the file owner:
+$ chmod 600 ~/.fetchmailrc
+</code></pre>
+
+<h1>3. git send-email config</h1>
+
+<pre><code>$ git config --global sendemail.smtpencryption tls
+$ git config --global sendemail.confirm auto
+
+$ cat ~/.gitconfig
+######################################3333
+[user]
+    email = xx.xx@gmail.com
+    name = Xxx Xx
+[color]
+        ui = auto
+[core]
+        editor = vim
+[sendemail]
+        from = Xxx Xx &lt;xxx.xx@gmail.com&gt;
+        smtpuser =
+        smtpserver = "/usr/bin/msmtp"
+        smtpencryption = tls
+        chainreplyto = false
+        confirm = auto
+</code></pre>
+
+<h1>4. Submitting patches</h1>
+
+<pre><code>$ cd git_repo
+$ git fetch --all --tags
+$ git rebase origin/master  # or other branch
+
+# To generate it, run:
+$ git format-patch -M -n -s -o outgoing origin/master   
+# This will generate patch files in the outgoing subdirectory, automatically adding the Signed-off-by line.
+
+# Lastly, send/submit your patch set to the git-repo mailing list:
+$ git send-email --to xxx@xxx.xxx outgoing/*
+</code></pre>
+
+<h1>5. Reference link</h1>
+
+<pre><code>1) https://www.drupal.org/node/831870
+2) http://www.andrews-corner.org/mutt.html
+3) http://blog.csdn.net/orz365/article/details/9236143
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[git subtree usage and examples]]></title>
+    <link href="http://jordonwu.github.io/blog/2015/11/25/git-subtree-usage-and-examples/"/>
+    <updated>2015-11-25T15:39:29+08:00</updated>
+    <id>http://jordonwu.github.io/blog/2015/11/25/git-subtree-usage-and-examples</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[iMX L3.14.28_1.0.0 building and downloading]]></title>
+    <link href="http://jordonwu.github.io/blog/2015/10/30/imx-l3-dot-14-dot-28-1-dot-0-0-building-and-downloading/"/>
+    <updated>2015-10-30T14:29:07+08:00</updated>
+    <id>http://jordonwu.github.io/blog/2015/10/30/imx-l3-dot-14-dot-28-1-dot-0-0-building-and-downloading</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Build qt5.6 Using Vs2013]]></title>
+    <link href="http://jordonwu.github.io/blog/2015/10/12/build-qt5-dot-6-using-vs2013/"/>
+    <updated>2015-10-12T18:02:32+08:00</updated>
+    <id>http://jordonwu.github.io/blog/2015/10/12/build-qt5-dot-6-using-vs2013</id>
+    <content type="html"><![CDATA[<h1>1. Install required tools</h1>
+
+<ul>
+<li>1) Install ActivePerl-5.20.2.2001-MSWin32-x86-64int-298913.msi</li>
+<li>2) Install PowerVRSDKSetup-3.4.exe(for opengl)</li>
+<li>3) Install gingkoVG SDK (for openvg,optinal)</li>
+</ul>
+
+
+<h1>2. Get qt5.6 source code and unzip</h1>
+
+<pre><code>Version: http://qt.mirror.constant.com/development_releases/qt/5.6/5.6.0-alpha/single/qt-everywhere-opensource-src-5.6.0-alpha.zip
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[v4l and gstreamer]]></title>
@@ -3734,453 +3882,6 @@ $ls ls -l u-boot.*
     -rw-rw-r-- 1 jordon jordon   1286 Dec  7 05:44 u-boot.lds
     -rw-rw-r-- 1 jordon jordon 317244 Dec  7 05:44 u-boot.map
     -rw-rw-r-- 1 jordon jordon 994618 Dec  7 05:44 u-boot.srec
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[build openwrt firmware]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/04/15/build-openwrt-firmware/"/>
-    <updated>2015-04-15T14:51:54+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/04/15/build-openwrt-firmware</id>
-    <content type="html"><![CDATA[<h1>1. Hardware</h1>
-
-<p>wrtnode board <a href="http://cn.wrtnode.com/">http://cn.wrtnode.com/</a></p>
-
-<h1>2. Backup firmware</h1>
-
-<h2>1) ssh to wrtnode board</h2>
-
-<pre><code>root@OpenWrt:/tmp# cat /proc/mtd
-dev:    size   erasesize  name
-mtd0: 00030000 00010000 "u-boot"
-mtd1: 00010000 00010000 "u-boot-env"
-mtd2: 00010000 00010000 "factory"
-mtd3: 00fb0000 00010000 "firmware"
-mtd4: 00e96447 00010000 "rootfs"
-mtd5: 00780000 00010000 "rootfs_data"
-</code></pre>
-
-<h2>2) back up u-boot and factory partition to /tmp</h2>
-
-<pre><code>root@OpenWrt:/tmp# dd if=/dev/mtd0 of=/tmp/wrtnode_u-boot.backup
-root@OpenWrt:/tmp# dd if=/dev/mtd1 of=/tmp/wrtnode_u-boot-env.backup
-root@OpenWrt:/tmp# dd if=/dev/mtd2 of=/tmp/wrtnode_factory.backup
-root@OpenWrt:/tmp# cat /proc/mtd &gt; wrtnode_mtd_info.txt
-</code></pre>
-
-<h2>3) scp backup firmware to local pc</h2>
-
-<pre><code>$ scp root@192.168.8.1:/tmp/wrtnode_u-boot.backup .
-$ scp root@192.168.8.1:/tmp/wrtnode_u-boot-env.backup .
-$ scp root@192.168.8.1:/tmp/wrtnode_factory.backup .
-$ scp root@192.168.8.1:/tmp/wrtnode_mtd_info.txt .
-</code></pre>
-
-<h1>3. Build u-boot</h1>
-
-<h1>4. Build kernel</h1>
-
-<h1>5. Build openwrt image</h1>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress Install and Usage on Windows 7]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/04/14/install-octopress-on-windows-7/"/>
-    <updated>2015-04-14T09:15:12+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/04/14/install-octopress-on-windows-7</id>
-    <content type="html"><![CDATA[<h2>1.   Install git</h2>
-
-<pre><code>    Version : Git-1.9.2-preview20140411.exe
-</code></pre>
-
-<h2>2.   Install RubyInstaller</h2>
-
-<pre><code>    Version: rubyinstaller-2.1.5-x64
-</code></pre>
-
-<h2>3.   Add Ruby install path(Example: D:\Ruby\Ruby21-x64\bin) to user&rsquo;s PATH Environment Variable</h2>
-
-<h2>4.   Install RubyInstaller DevKit</h2>
-
-<pre><code>    Version: DevKit-mingw64-64-4.7.2-20130224-1432-sfx.exe
-</code></pre>
-
-<h2>5.   RubyInstaller DevKit configure</h2>
-
-<h3>5.1 change to DevKit install dir</h3>
-
-<pre><code>    D:\&gt; cd d:\Ruby\DevKit
-</code></pre>
-
-<h3>5.2 ruby dk.rb init</h3>
-
-<pre><code>    d:\Ruby\DevKit&gt; ruby dk.rb init
-
-    Initialization complete! Please review and modify the auto-generated
-    'config.yml' file to ensure it contains the root directories to all
-    of the installed Rubies you want enhanced by the DevKit.
-
-    Add Ruby install path to config.yml as below
-
-    #####################################################################
-    #
-    # Example:
-    #
-    # ---
-    # - C:/ruby19trunk
-    # - C:/ruby192dev
-    #
-
-    - D:\Ruby\Ruby21-x64        
-
-    ######################################################################
-</code></pre>
-
-<h3>5.3 ruby dk.rb install</h3>
-
-<pre><code>    d:\Ruby\DevKit&gt; ruby dk.rb install
-</code></pre>
-
-<h2>6.   Change ruby sources to <a href="http://ruby.taobao.org/">http://ruby.taobao.org/</a></h2>
-
-<pre><code>    D:\&gt; cd d:\Ruby\DevKit
-
-    d:\Ruby\DevKit&gt; gem sources --remove http://rubygems.org/
-
-    d:\Ruby\DevKit&gt; gem sources --remove https://rubygems.org/
-
-    d:\Ruby\DevKit&gt; gem sources -a http://ruby.taobao.org/
-
-    d:\Ruby\DevKit&gt; gem sources -l
-
-    *** CURRENT SOURCES ***
-
-    http://ruby.taobao.org/
-</code></pre>
-
-<h2>7.   Install rdoc and bundler</h2>
-
-<pre><code>    D:\&gt; cd d:\Ruby\DevKit
-
-    d:\Ruby\DevKit&gt;gem install rdoc bundler
-
-    Depending on your version of ruby, you may need to install ruby rdoc/ri data:
-
-    &lt;= 1.8.6 : unsupported
-     = 1.8.7 : gem install rdoc-data; rdoc-data --install
-     = 1.9.1 : gem install rdoc-data; rdoc-data --install
-    &gt;= 1.9.2 : nothing to do! Yay!
-    Successfully installed rdoc-4.2.0
-    Parsing documentation for rdoc-4.2.0
-    Done installing documentation for rdoc after 5 seconds
-    Successfully installed bundler-1.9.3
-    Parsing documentation for bundler-1.9.3
-    Done installing documentation for bundler after 2 seconds
-    2 gems installed
-</code></pre>
-
-<h2>8    Install Octopress blog if you first using it on github</h2>
-
-<h3>8.1 Create repo on your github</h3>
-
-<pre><code>    Create a repo named username.github.com.git on your github
-</code></pre>
-
-<h3>8.2 Clone octopress.git</h3>
-
-<pre><code>    $ git clone git://github.com/imathis/octopress.git username.github.com
-</code></pre>
-
-<h3>8.3 Modify octopress GEM Source</h3>
-
-<pre><code>    $cd username.github.com
-
-    $edit Gemfile  and change source "http://rubygems.org/"  to source "http://ruby.taobao.org/" 
-
-    source "http://ruby.taobao.org/"
-</code></pre>
-
-<h3>8.4 Install GEM component</h3>
-
-<pre><code>    $ bundle install
-
-    DL is deprecated, please use Fiddle
-    Fetching source index from http://ruby.taobao.org/
-    Resolving dependencies...............
-    Installing rake 10.4.2
-    Using RedCloth 4.2.9
-    Installing blankslate 2.1.2.4
-    Installing hitimes 1.2.2
-    Installing timers 4.0.1
-    Installing celluloid 0.16.0
-    Using chunky_png 1.3.4
-    Using fast-stemmer 1.0.2
-    Installing classifier-reborn 2.0.3
-    Installing coffee-script-source 1.9.1.1
-    Installing execjs 2.5.2
-    Installing coffee-script 2.4.1
-    Installing colorator 0.1
-    Installing multi_json 1.11.0
-    Installing sass 3.4.13
-    Installing compass-core 1.0.3
-    Installing compass-import-once 1.0.5
-    Using rb-fsevent 0.9.4
-    Installing ffi 1.9.8
-    Installing rb-inotify 0.9.5
-    Installing compass 1.0.3
-    Using tilt 2.0.1
-    Installing haml 4.0.6
-    Installing jekyll-coffeescript 1.0.1
-    Installing jekyll-gist 1.2.1
-    Installing jekyll-paginate 1.1.0
-    Installing jekyll-sass-converter 1.3.0
-    Installing listen 2.10.0
-    Installing jekyll-watch 1.2.1
-    Installing kramdown 1.6.0
-    Installing liquid 2.6.2
-    Installing mercenary 0.3.5
-    Using posix-spawn 0.3.11
-    Installing yajl-ruby 1.2.1
-    Installing pygments.rb 0.6.3
-    Installing redcarpet 3.2.3
-    Installing safe_yaml 1.0.4
-    Installing parslet 1.5.0
-    Installing toml 0.1.2
-    Installing jekyll 2.5.3
-    Installing jekyll-sitemap 0.8.1
-    Installing octopress-hooks 2.6.0
-    Installing octopress-date-format 2.0.2
-    Using rack 1.6.0
-    Using rack-protection 1.5.3
-    Installing rdiscount 2.1.8
-    Using rubypants 0.2.0
-    Using sass-globbing 1.0.0
-    Using sinatra 1.4.6
-    Using stringex 1.4.0
-    Using bundler 1.9.3
-    Bundle complete! 14 Gemfile dependencies, 51 gems now installed.
-    Use `bundle show [gemname]` to see where a bundled gem is installed.
-    Post-install message from compass:
-        Compass is charityware. If you love it, please donate on our behalf at http://umdf.org/compass Thanks!
-    Post-install message from haml:
-
-    HEADS UP! Haml 4.0 has many improvements, but also has changes that may break
-    your application:
-
-    * Support for Ruby 1.8.6 dropped
-    * Support for Rails 2 dropped
-    * Sass filter now always outputs &lt;style&gt; tags
-    * Data attributes are now hyphenated, not underscored
-    * html2haml utility moved to the html2haml gem
-    * Textile and Maruku filters moved to the haml-contrib gem
-
-    For more info see:
-
-    http://rubydoc.info/github/haml/haml/file/CHANGELOG.md
-</code></pre>
-
-<h3>8.5 Install Octopress template file</h3>
-
-<pre><code>    $ rake install
-
-    rake aborted!
-    You have already activated rake 10.1.0, but your Gemfile requires rake 0.9.6. Prepending `bundle exec` to your command may solve this.
-    e:/study/username.github.com/Rakefile:2:in `&lt;top (required)&gt;'
-    (See full trace by running task with --trace)
-
-
-    #add "aliasalias rake='bundle exec rake'" to git bash bash_profile if display error as above
-
-    $ echo "alias rake='bundle exec rake'" &gt;&gt; ~/.bash_profile
-
-    $ . ~/.bash_profile
-    $ aliasalias rake='bundle exec rake'
-    $ rake install
-</code></pre>
-
-<h3>8.6 setup octopress and github</h3>
-
-<pre><code>    $ cd username.github.com.git
-    $ rake setup_github_pages       #you need input username and password of you github account and blog url(https://github.com/username/username.github.com.git)
-</code></pre>
-
-<h2>9    Clone your Octopress if you had used it on github</h2>
-
-<h3>9.1 Clone your Octopress repo</h3>
-
-<pre><code>    $ git clone -b source https://github.com/username/username.github.com.git username.github.com.git   # replace username using yours
-
-    Cloning into 'username.github.com'...
-    remote: Counting objects: 5279, done.
-    remote: Total 5279 (delta 0), reused 0 (delta 0), pack-reused 5279R
-    Receiving objects: 100% (5279/5279), 1.37 MiB | 129.00 KiB/s, done.
-    Resolving deltas: 100% (2537/2537), done.
-    Checking connectivity... done.
-
-    $ git clone -b master https://github.com/username/username.github.com.git _deploy  # replace username using yours
-</code></pre>
-
-<h3>9.2 Install Octopress GEM component</h3>
-
-<pre><code>    $ cd username.github.com.git
-
-    $ bundle install
-
-    DL is deprecated, please use Fiddle
-    Fetching source index from http://ruby.taobao.org/
-    Resolving dependencies...
-    Installing rake 0.9.2.2
-    Installing RedCloth 4.2.9
-    Installing chunky_png 1.2.5
-    Installing fast-stemmer 1.0.1
-    Installing classifier 1.3.3
-    Installing fssm 0.2.9
-    Installing sass 3.2.9
-    Installing compass 0.12.2
-    Installing directory_watcher 1.4.1
-    Installing haml 3.1.7
-    Installing kramdown 0.13.8
-    Installing liquid 2.3.0
-    Installing syntax 1.0.0
-    Installing maruku 0.6.1
-    Installing posix-spawn 0.3.6
-    Installing yajl-ruby 1.1.0
-    Installing pygments.rb 0.3.4
-    Installing jekyll 0.12.0
-    Installing rack 1.5.2
-    Installing rack-protection 1.5.0
-    Installing rb-fsevent 0.9.1
-    Installing rdiscount 2.0.7.3
-    Installing rubypants 0.2.0
-    Installing sass-globbing 1.0.0
-    Installing tilt 1.3.7
-    Installing sinatra 1.4.2
-    Installing stringex 1.4.0
-    Using bundler 1.9.3
-    Bundle complete! 15 Gemfile dependencies, 28 gems now installed.
-    Use `bundle show [gemname]` to see where a bundled gem is installed.
-</code></pre>
-
-<h2>10   Add a remote name(default is origin) for the repository git@github.com:username/username.github.com.git</h2>
-
-<pre><code>    $ cd username.github.com.git
-    $ git remote
-
-    origin
-
-    $ git remote add origin git@github.com:username/username.github.com.git #default name is origin, you can change it       
-</code></pre>
-
-<h2>11.  Management blog</h2>
-
-<pre><code>    $ cd username.github.com.git
-</code></pre>
-
-<h3>11.1 Add blog</h3>
-
-<pre><code>    $ rake new_post["blog_name"]
-</code></pre>
-
-<h3>11.2 Generate static file</h3>
-
-<pre><code>    $ rake generate
-</code></pre>
-
-<h3>11.3 Preview blog</h3>
-
-<pre><code>    $ rake preview
-
-    #now you can preview blog using local address on any browser: http://localhost:4000
-</code></pre>
-
-<h3>11.4 Deploy blog to github</h3>
-
-<pre><code>    $rake deploy
-
-    #now you can access you blog using github address on any browser: http://username.github.com
-</code></pre>
-
-<h2>12. Management blog source code</h2>
-
-<h3>12.1 Add file to local repo</h3>
-
-<pre><code>    $ git add .
-</code></pre>
-
-<h3>12.2 Commit file to repo</h3>
-
-<pre><code>    $ git commit -m "commit file comment"
-</code></pre>
-
-<h3>12.3 Push local repo file to remote</h3>
-
-<pre><code>    $ git push origin source #origin is local repo name, source is branch name
-</code></pre>
-
-<h3>12.4 Pull last remote repo file to local</h3>
-
-<pre><code>    $ git pull orign source
-</code></pre>
-
-<h3>12.5 Add a image to your blog</h3>
-
-<pre><code>    1) add image file to source/images folder
-    2) add below code to you blog
-
-    ![a brick](../images/a_brick.png "A brick")
-</code></pre>
-
-<h3>12.6 Add attach file to your blog</h3>
-
-<pre><code>    1) add attach file to source/images folder
-    2) add a hyperlink and link address point to your file(such as ../images/test.txt)
-</code></pre>
-
-<p>=<a href="../images/test.txt">Attached file here(test.txt)</a></p>
-
-<h2>13  Enable comment</h2>
-
-<h3>13.1 Register an account on www.disqus.com</h3>
-
-<h3>13.2 Register &ldquo;unique Disqus URL&rdquo; for github blog</h3>
-
-<h3>13.3 Edit _config.yml as below</h3>
-
-<pre><code># Disqus Comments
-disqus_short_name: site_short_name_register_on_disqus
-disqus_show_comment_count: true
-</code></pre>
-
-<h3>13.4 Enable comment on your blog as below</h3>
-
-<pre><code>---
-layout: post
-title: "title name"
-date: 2015-04-15 14:51:54 +0800
-comments: true
-categories: category1, category2 
----
-</code></pre>
-
-<h2>14  Pushing changes from two different machines</h2>
-
-<p>If you want to blog from more than one computer, you need to make sure that you push everything before switching computers. From the first machine do the following whenever you’ve made changes:</p>
-
-<pre><code>$ rake generate
-$ git add .
-$ git commit -am "Some comment here." 
-$ git push origin source  # update the remote source branch 
-$ rake deploy             # update the remote master branch
-</code></pre>
-
-<p>Then on the other machine, you need to pull those changes.</p>
-
-<pre><code>$ cd octopress
-$ git pull origin source  # update the local source branch
-$ cd ./_deploy
-$ git pull origin master  # update the local master branch
 </code></pre>
 ]]></content>
   </entry>
