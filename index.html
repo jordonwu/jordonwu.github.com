@@ -9,9 +9,7 @@
   <meta name="author" content="Jordon Wu">
 
   
-  <meta name="description" content="1. msmtp setup and config(using gmail as example) $ apt-get install msmtp
-$ vim ~/.msmtprc
-######################################################### &hellip;">
+  <meta name="description" content="1. Get Buildroot $ git clone git://git.buildroot.net/buildroot.git buildroot (commit id: 986fa441e49cc180f77704699a6d2bb3627bf86a) 2. Edit config &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +64,1220 @@ $ vim ~/.msmtprc
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/04/07/buildroot-for-imx-l3-dot-14-dot-52-1-dot-1-0-ga/">Buildroot for Imx L3.14.52_1.1.0_ga</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-04-07T13:04:45+08:00" pubdate data-updated="true"></time>
+        
+         | <a href="/blog/2016/04/07/buildroot-for-imx-l3-dot-14-dot-52-1-dot-1-0-ga/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>1. Get Buildroot</h1>
+
+<pre><code>$ git clone git://git.buildroot.net/buildroot.git buildroot (commit id: 986fa441e49cc180f77704699a6d2bb3627bf86a)
+</code></pre>
+
+<h1>2. Edit config file for imx6qsabresd board</h1>
+
+<pre><code>$ vim configs/freescale_imx6qsabresd_defconfig as below
+################################################################################################################
+# architecture
+BR2_arm=y
+BR2_BINFMT_ELF=y
+BR2_cortex_a9=y
+BR2_ARM_ENABLE_NEON=y
+BR2_ARM_ENABLE_VFP=y
+BR2_ARM_EABIHF=y
+BR2_ARM_FPU_VFPV3D16=y
+BR2_ARM_INSTRUCTIONS_ARM=y
+
+#toolchain
+BR2_TOOLCHAIN_EXTERNAL=y
+BR2_TOOLCHAIN_EXTERNAL_LINARO_ARM=y
+BR2_TOOLCHAIN_EXTERNAL_DOWNLOAD=y
+
+#Build Options
+BR2_DL_DIR="/opt/buildroot/dl"
+
+# patches
+BR2_GLOBAL_PATCH_DIR="board/freescale/imx6sabre/patches"
+
+# Linux headers same as kernel, a 3.14 series
+BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_3_14=y
+
+# system
+BR2_TARGET_GENERIC_GETTY_PORT="ttymxc0"
+
+# kernel
+BR2_LINUX_KERNEL=y
+BR2_LINUX_KERNEL_CUSTOM_GIT=y
+BR2_LINUX_KERNEL_CUSTOM_REPO_URL="git://git.freescale.com/imx/linux-2.6-imx.git"
+BR2_LINUX_KERNEL_CUSTOM_REPO_VERSION="rel_imx_3.14.52_1.1.0_ga"
+BR2_LINUX_KERNEL_DEFCONFIG="imx_v7"
+#BR2_LINUX_KERNEL_UIMAGE=y
+BR2_LINUX_KERNEL_ZIMAGE=y
+BR2_LINUX_KERNEL_UIMAGE_LOADADDR="0x10008000"
+BR2_LINUX_KERNEL_DTS_SUPPORT=y
+BR2_LINUX_KERNEL_INTREE_DTS_NAME="imx6q-sabresd"
+
+# filesystem
+#BR2_TARGET_ROOTFS_EXT2=y
+BR2_TARGET_ROOTFS_TAR=y
+BR2_TARGET_ROOTFS_TAR_BZIP2=y
+
+# bootloader
+BR2_TARGET_UBOOT=y
+BR2_TARGET_UBOOT_BOARDNAME="mx6qsabresd"
+BR2_TARGET_UBOOT_FORMAT_IMX=y
+BR2_TARGET_UBOOT_CUSTOM_GIT=y
+BR2_TARGET_UBOOT_CUSTOM_REPO_URL="git://git.freescale.com/imx/uboot-imx.git"
+BR2_TARGET_UBOOT_CUSTOM_REPO_VERSION="rel_imx_3.14.52_1.1.0_ga"
+################################################################################################################
+</code></pre>
+
+<h1>3. Build image</h1>
+
+<pre><code>$ make freescale_imx6qsabresd_defconfig
+$ make -j 8
+$ ls output/images/* -alh
+-rw-r--r-- 1 vmuser vmuser  42K Apr  7 13:46 output/images/imx6q-sabresd.dtb
+-rw-r--r-- 1 vmuser vmuser 8.3M Apr  7 13:46 output/images/rootfs.ext2
+-rw-r--r-- 1 vmuser vmuser 6.7M Apr  7 13:48 output/images/rootfs.tar
+-rw-r--r-- 1 vmuser vmuser 2.7M Apr  7 13:48 output/images/rootfs.tar.bz2
+-rw-r--r-- 1 vmuser vmuser 403K Apr  7 13:34 output/images/u-boot.imx
+-rw-r--r-- 1 vmuser vmuser 5.3M Apr  7 13:46 output/images/zImage
+</code></pre>
+
+<h1>4. Config display as HMDI</h1>
+
+<pre><code>1) Enter u-boot console
+2) 
+=&gt; setenv mmcargs 'setenv bootargs console=${console},${baudrate} ${smp} root=${mmcroot} rootwait rw video=mxcfb0:dev=hdmi,1920x1080M@60,if=RGB24'
+=&gt; saveenv
+</code></pre>
+
+<h1>5. Config display as single LVDS</h1>
+
+<h1>6. Config display as dual LVDS</h1>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/02/29/shuttle-dsa2ls-hack-record/">Shuttle DSA2LS Hack Record</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-02-29T14:19:11+08:00" pubdate data-updated="true"></time>
+        
+         | <a href="/blog/2016/02/29/shuttle-dsa2ls-hack-record/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>1. Board introduction</h1>
+
+<pre><code>http://cn.shuttle.com/products/productsDetail?productId=1807
+https://item.taobao.com/item.htm?spm=a1z02.1.1998049143.d4919530.jI9o9L&amp;scm=1007.10157.22422.100200300000000&amp;id=525584959354&amp;pvid=258f64e4-9420-487b-b2e9-3450cd46b60a
+</code></pre>
+
+<h1>2. Original firmware backup info</h1>
+
+<h2>2.1 u-boot env</h2>
+
+<pre><code>U-Boot 2009.08-00737-g770329d ( 7鏈21 2014 - 19:12:29)
+
+CPU: Freescale i.MX6 family TO1.1 at 792 MHz
+Thermal sensor with ratio = 174
+Temperature:   32 C, calibration data 0x5504c169
+mx6q pll1: 792MHz
+mx6q pll2: 528MHz
+mx6q pll3: 480MHz
+mx6q pll8: 50MHz
+ipg clock     : 66000000Hz
+ipg per clock : 66000000Hz
+uart clock    : 80000000Hz
+cspi clock    : 60000000Hz
+ahb clock     : 132000000Hz
+axi clock   : 198000000Hz
+emi_slow clock: 99000000Hz
+ddr clock     : 396000000Hz
+usdhc1 clock  : 198000000Hz
+usdhc2 clock  : 198000000Hz
+usdhc3 clock  : 198000000Hz
+usdhc4 clock  : 198000000Hz
+nfc clock     : 24000000Hz
+Board: i.MX6DL/Solo-SABRESD: unknown-board Board: 0x61011 [POR ]
+Boot Device: MMC
+I2C:   ready
+DRAM:   1 GB
+MMC:   FSL_USDHC: 0,FSL_USDHC: 1,FSL_USDHC: 2,FSL_USDHC: 3
+P0 = 0, P1 = 0, P2 = 0, P3 = 0
+LCD Type = 0, clock = 7425, Div = 20
+In:    serial
+Out:   serial
+Err:   serial
+i2c: I2C4 SDA is low, start i2c recovery...
+I2C4 Recovery failed, I2C1 SDA still low!!!
+i2c: I2C4 SDA is low, start i2c recovery...
+I2C4 Recovery failed, I2C1 SDA still low!!!
+WM8326 PMIC init !
+WM8326 PMIC found ! - 0x4662
+Net:   got MAC address from IIM: 00:00:00:00:00:00
+FEC0 [PRIME]
+Hit any key to stop autoboot:  0
+MX6SDL SABRESD U-Boot &gt; printenv
+bootdelay=3
+baudrate=115200
+ipaddr=192.168.1.103
+serverip=192.168.1.101
+netmask=255.255.255.0
+loadaddr=0x10800000
+rd_loadaddr=0x11000000
+netdev=eth0
+ethprime=FEC0
+splashimage=0x30000000
+splashpos=m,m
+vga_rsl=11
+lvds_num=2
+ethact=FEC0
+mac=80EE739C561C
+stdin=serial
+stdout=serial
+stderr=serial
+fastboot_dev=mmc3
+bootcmd=booti mmc3
+ethaddr=80:EE:73:9C:56:1C
+bootargs=console=ttymxc1,115200 androidboot.console=ttymxc1 androidboot.hardware=freescale init=/init vmalloc=400M video=mxcfb0:dev=hdmi,1920x1080M@60,bpp=32 mac=80:EE:73:9C:56:1C
+
+Environment size: 535/8188 bytes
+</code></pre>
+
+<h2>2.2 Full boot log</h2>
+
+<pre><code>U-Boot 2009.08-00737-g770329d ( 7鏈21 2014 - 19:12:29)
+
+CPU: Freescale i.MX6 family TO1.1 at 792 MHz
+Thermal sensor with ratio = 174
+Temperature:   34 C, calibration data 0x5504c169
+mx6q pll1: 792MHz
+mx6q pll2: 528MHz
+mx6q pll3: 480MHz
+mx6q pll8: 50MHz
+ipg clock     : 66000000Hz
+ipg per clock : 66000000Hz
+uart clock    : 80000000Hz
+cspi clock    : 60000000Hz
+ahb clock     : 132000000Hz
+axi clock   : 198000000Hz
+emi_slow clock: 99000000Hz
+ddr clock     : 396000000Hz
+usdhc1 clock  : 198000000Hz
+usdhc2 clock  : 198000000Hz
+usdhc3 clock  : 198000000Hz
+usdhc4 clock  : 198000000Hz
+nfc clock     : 24000000Hz
+Board: i.MX6DL/Solo-SABRESD: unknown-board Board: 0x61011 [WDOG ]
+Boot Device: MMC
+I2C:   ready
+DRAM:   1 GB
+MMC:   FSL_USDHC: 0,FSL_USDHC: 1,FSL_USDHC: 2,FSL_USDHC: 3
+P0 = 0, P1 = 0, P2 = 0, P3 = 0
+LCD Type = 0, clock = 7425, Div = 20
+In:    serial
+Out:   serial
+Err:   serial
+i2c: I2C4 SDA is low, start i2c recovery...
+I2C4 Recovery failed, I2C1 SDA still low!!!
+i2c: I2C4 SDA is low, start i2c recovery...
+I2C4 Recovery failed, I2C1 SDA still low!!!
+WM8326 PMIC init !
+WM8326 PMIC found ! - 0x4662
+Net:   got MAC address from IIM: 00:00:00:00:00:00
+FEC0 [PRIME]
+Hit any key to stop autoboot:  0 
+kernel   @ 10808000 (4702408)
+ramdisk  @ 11800000 (187117)
+kernel cmdline: 
+        use uboot command line:
+        console=ttymxc1,115200 androidboot.console=ttymxc1 androidboot.hardware=freescale init=/init vmalloc=400M video=mxcfb0:dev=hdmi,1920x1080M@60,bpp=32 mac=80:EE:73:9C:56:1C 
+
+Starting kernel ...
+
+Initializing cgroup subsys cpu
+Linux version 3.0.35-06233-g7856f09-dirty (Shuttle@dc2-server) (gcc version 4.6.x-google 20120106 (prerelease) (GCC) ) #4 SMP PREEMPT Mon Jul 28 17:10:33 CST 2014
+CPU: ARMv7 Processor [412fc09a] revision 10 (ARMv7), cr=10c53c7d
+CPU: VIPT nonaliasing data cache, VIPT aliasing instruction cache
+Machine: Freescale i.MX 6Quad/DualLite/Solo Sabre-SD Board
+Ignoring unrecognised tag 0x54410008
+Memory policy: ECC disabled, Data cache writealloc
+CPU identified as i.MX6DL/SOLO, silicon rev 1.1
+PERCPU: Embedded 7 pages/cpu @c12eb000 s6592 r8192 d13888 u32768
+Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 210688
+Kernel command line: console=ttymxc1,115200 androidboot.console=ttymxc1 androidboot.hardware=freescale init=/init vmalloc=400M video=mxcfb0:dev=hdmi,1920x1080M@60,bpp=32 mac=80:EE:73:9C:56:1C
+PID hash table entries: 2048 (order: 1, 8192 bytes)
+Dentry cache hash table entries: 65536 (order: 6, 262144 bytes)
+Inode-cache hash table entries: 32768 (order: 5, 131072 bytes)
+Memory: 767MB 64MB = 831MB total
+Memory: 830928k/830928k available, 217648k reserved, 441344K highmem
+Virtual kernel memory layout:
+    vector  : 0xffff0000 - 0xffff1000   (   4 kB)
+    fixmap  : 0xfff00000 - 0xfffe0000   ( 896 kB)
+    DMA     : 0xfbe00000 - 0xffe00000   (  64 MB)
+    vmalloc : 0xd9800000 - 0xf2000000   ( 392 MB)
+    lowmem  : 0xc0000000 - 0xd9000000   ( 400 MB)
+    pkmap   : 0xbfe00000 - 0xc0000000   (   2 MB)
+    modules : 0xbf000000 - 0xbfe00000   (  14 MB)
+      .init : 0xc0008000 - 0xc0042000   ( 232 kB)
+      .text : 0xc0042000 - 0xc08c297c   (8707 kB)
+      .data : 0xc08c4000 - 0xc095a310   ( 601 kB)
+       .bss : 0xc095a334 - 0xc0ae1d88   (1567 kB)
+Preemptible hierarchical RCU implementation.
+NR_IRQS:624
+MXC GPIO hardware
+sched_clock: 32 bits at 3000kHz, resolution 333ns, wraps every 1431655ms
+Set periph_clk's parent to pll2_pfd_400M!
+arm_max_freq=1GHz
+MXC_Early serial console at MMIO 0x21e8000 (options '115200')
+bootconsole [ttymxc1] enabled
+Calibrating delay loop... 1581.05 BogoMIPS (lpj=7905280)
+pid_max: default: 32768 minimum: 301
+Mount-cache hash table entries: 512
+Initializing cgroup subsys debug
+Initializing cgroup subsys cpuacct
+Initializing cgroup subsys freezer
+CPU: Testing write buffer coherency: ok
+hw perfevents: enabled with ARMv7 Cortex-A9 PMU driver, 7 counters available
+CPU1: Booted secondary processor
+Brought up 2 CPUs
+SMP: Total of 2 processors activated (3162.11 BogoMIPS).
+print_constraints: dummy: 
+NET: Registered protocol family 16
+print_constraints: vddpu: 725 &lt;--&gt; 1300 mV at 700 mV fast normal 
+print_constraints: vddcore: 725 &lt;--&gt; 1300 mV at 1150 mV fast normal 
+print_constraints: vddsoc: 725 &lt;--&gt; 1300 mV at 1200 mV fast normal 
+print_constraints: vdd2p5: 2000 &lt;--&gt; 2775 mV at 2400 mV fast normal 
+print_constraints: vdd1p1: 800 &lt;--&gt; 1400 mV at 1100 mV fast normal 
+print_constraints: vdd3p0: 2625 &lt;--&gt; 3400 mV at 3000 mV fast normal 
+----------&gt; lvds_mode_select=0
+ram_console: got buffer at 3ff00000, size 100000
+ram_console: uncorrectable error in header
+ram_console: no valid data in buffer (sig = 0x01450204)
+console [ram-1] enabled
+hw-breakpoint: found 6 breakpoint and 1 watchpoint registers.
+hw-breakpoint: 1 breakpoint(s) reserved for watchpoint single-step.
+hw-breakpoint: maximum watchpoint size is 4 bytes.
+L310 cache controller enabled
+l2x0: 16 ways, CACHE_ID 0x410000c8, AUX_CTRL 0x02050000, Cache size: 524288 B
+bio: create slab &lt;bio-0&gt; at 0
+mxs-dma mxs-dma-apbh: initialized
+print_constraints: SPKVDD: 4200 mV 
+print_constraints: vmmc: 3300 mV 
+vgaarb: loaded
+SCSI subsystem initialized
+spi_imx imx6q-ecspi.0: probed
+usbcore: registered new interface driver usbfs
+usbcore: registered new interface driver hub
+usbcore: registered new device driver usb
+Freescale USB OTG Driver loaded, $Revision: 1.55 $
+wm831x 2-0034: WM8326 revision C
+set IRQ459(port=7, GPIO=11) to be a wakeup source......
+add wake up source irq 110
+print_constraints: vdd_arm: 600 &lt;--&gt; 1500 mV at 1350 mV at 0 mA 
+print_constraints: vdd_soc: 600 &lt;--&gt; 1500 mV at 1350 mV at 0 mA 
+print_constraints: vdd_1v8_ldo1: 1700 &lt;--&gt; 1800 mV at 1350 mV 
+print_constraints: vdd_2v5_ldo7: 2400 &lt;--&gt; 2500 mV at 1350 mV 
+imx-ipuv3 imx-ipuv3.0: IPU DMFC NORMAL mode: 1(0~1), 5B(4,5), 5F(6,7)
+MIPI CSI2 driver module loaded
+Advanced Linux Sound Architecture Driver Version 1.0.24.
+Bluetooth: Core ver 2.16
+NET: Registered protocol family 31
+Bluetooth: HCI device and connection manager initialized
+Bluetooth: HCI socket layer initialized
+Bluetooth: L2CAP socket layer initialized
+Bluetooth: SCO socket layer initialized
+Switching to clocksource mxc_timer1
+NET: Registered protocol family 2
+IP route cache hash table entries: 16384 (order: 4, 65536 bytes)
+TCP established hash table entries: 65536 (order: 7, 524288 bytes)
+TCP bind hash table entries: 65536 (order: 7, 786432 bytes)
+TCP: Hash tables configured (established 65536 bind 65536)
+TCP reno registered
+UDP hash table entries: 256 (order: 1, 8192 bytes)
+UDP-Lite hash table entries: 256 (order: 1, 8192 bytes)
+NET: Registered protocol family 1
+RPC: Registered named UNIX socket transport module.
+RPC: Registered udp transport module.
+RPC: Registered tcp transport module.
+RPC: Registered tcp NFSv4.1 backchannel transport module.
+PCI: CLS 0 bytes, default 32
+Unpacking initramfs...
+Freeing initrd memory: 180K
+PMU: registered new PMU device of type 0
+Static Power Management for Freescale i.MX6
+wait mode is enabled for i.MX6
+cpaddr = d9820000 suspend_iram_base=d98b8000
+PM driver module loaded
+IMX usb wakeup probe
+the wakeup pdata is 0xd6439420
+add wake up source irq 75
+IMX usb wakeup probe
+the wakeup pdata is 0xd64391e0
+cpu regulator mode:ldo_enable
+i.MXC CPU frequency driver
+highmem bounce pool size: 64 pages
+ashmem: initialized
+NTFS driver 2.1.30 [Flags: R/O].
+JFFS2 version 2.2. (NAND) 漏 2001-2006 Red Hat, Inc.
+fuse init (API version 7.16)
+msgmni has been set to 761
+NET: Registered protocol family 38
+cryptodev: driver loaded.
+io scheduler noop registered
+io scheduler deadline registered
+io scheduler cfq registered (default)
+mxc_sdc_fb mxc_sdc_fb.0: register mxc display driver hdmi
+mxc_hdmi mxc_hdmi: Detected HDMI controller 0x13:0x1a:0xa0:0xc1
+fbcvt: 1920x1080@60: CVT Name - 2.073M9
+imx-ipuv3 imx-ipuv3.0: IPU DMFC DP HIGH RESOLUTION: 1(0,1), 5B(2~5), 5F(6,7)
+mxc_sdc_fb mxc_sdc_fb.1: register mxc display driver hdmi
+mxc_hdmi mxc_hdmi: Error only one HDMI output support now!
+mxc_sdc_fb mxc_sdc_fb.1: NO mxc display driver found!
+imx-sdma imx-sdma: loaded firmware 1.1
+imx-sdma imx-sdma: initialized
+Serial: IMX driver
+imx-uart.1: ttymxc1 at MMIO 0x21e8000 (irq = 59) is a IMX
+console [ttymxc1] enabled, bootconsole disabled
+console [ttymxc1] enabled, bootconsole disabled
+imx-uart.0: ttymxc0 at MMIO 0x2020000 (irq = 58) is a IMX
+loop: module loaded
+m25p80 spi0.0: found m25p05-nonjedec, expected sst25vf016b
+m25p80 spi0.0: m25p05-nonjedec (64 Kbytes)
+Creating 2 MTD partitions on "m25p80":
+0x000000000000-0x000000100000 : "bootloader"
+mtd: partition "bootloader" extends beyond the end of device "m25p80" -- size truncated to 0x10000
+0x000000010000-0x000000010000 : "kernel"
+mtd: partition "kernel" is out of reach -- disabled
+GPMI NAND driver registered. (IMX)
+vcan: Virtual CAN interface driver
+CAN device driver interface
+flexcan netdevice driver
+FEC Ethernet Driver
+fec_enet_mii_bus: probed
+PPP generic driver version 2.4.2
+PPP Deflate Compression module registered
+PPP BSD Compression module registered
+PPP MPPE Compression module registered
+NET: Registered protocol family 24
+PPTP driver version 0.8.5
+tun: Universal TUN/TAP device driver, 1.6
+tun: (C) 1999-2004 Max Krasnyansky &lt;maxk@qualcomm.com&gt;
+ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+fsl-ehci fsl-ehci.0: Freescale On-Chip EHCI Host Controller
+fsl-ehci fsl-ehci.0: new USB bus registered, assigned bus number 1
+fsl-ehci fsl-ehci.0: irq 75, io base 0x02184000
+fsl-ehci fsl-ehci.0: USB 2.0 started, EHCI 1.00
+hub 1-0:1.0: USB hub found
+hub 1-0:1.0: 1 port detected
+add wake up source irq 72
+fsl-ehci fsl-ehci.1: Freescale On-Chip EHCI Host Controller
+fsl-ehci fsl-ehci.1: new USB bus registered, assigned bus number 2
+fsl-ehci fsl-ehci.1: irq 72, io base 0x02184200
+fsl-ehci fsl-ehci.1: USB 2.0 started, EHCI 1.00
+hub 2-0:1.0: USB hub found
+hub 2-0:1.0: 1 port detected
+usbcore: registered new interface driver cdc_acm
+cdc_acm: USB Abstract Control Model driver for USB modems and ISDN adapters
+Initializing USB Mass Storage driver...
+usbcore: registered new interface driver usb-storage
+USB Mass Storage support registered.
+usbcore: registered new interface driver usbserial
+usbserial: USB Serial Driver core
+USB Serial support registered for GSM modem (1-port)
+usbcore: registered new interface driver option
+option: v0.7.2:USB Driver for GSM modems
+USB Serial support registered for Qualcomm USB modem
+usbcore: registered new interface driver qcserial
+ARC USBOTG Device Controller driver (1 August 2005)
+android_usb gadget: Mass Storage Function, version: 2009/09/11
+android_usb gadget: Number of LUNs=1
+ lun0: LUN: removable file: (no medium)
+Gadget Android: controller 'fsl-usb2-udc' not recognized
+android_usb gadget: android_usb ready
+Suspend udc for OTG auto detect
+USB Host suspend begins
+will suspend roothub and its children
+ehci_fsl_bus_suspend begins, DR
+ehci_fsl_bus_suspend ends, DR
+host suspend ends
+USB Gadget resume begins
+fsl_udc_resume, Wait for wakeup thread finishes
+dr_controller_run: udc out low power mode
+USB Gadget resume ends
+fsl-usb2-udc: bind to driver android_usb 
+mousedev: PS/2 mouse device common for all mice
+input: gpio-keys as /devices/platform/gpio-keys/input/input0
+i2c-core: driver [isl29023] using legacy suspend method
+i2c-core: driver [isl29023] using legacy resume method
+using rtc device, wm831x, for alarms
+wm831x-rtc wm831x-rtc: rtc core: registered wm831x as rtc0
+i2c /dev entries driver
+lirc_dev: IR Remote Control driver registered, major 251 
+IR NEC protocol handler initialized
+IR RC5(x) protocol handler initialized
+IR RC6 protocol handler initialized
+IR JVC protocol handler initialized
+IR Sony protocol handler initialized
+IR RC5 (streamzap) protocol handler initialized
+IR LIRC bridge handler initialized
+usbcore: registered new interface driver mceusb
+Linux video capture interface: v2.00
+mxc_v4l2_output mxc_v4l2_output.0: V4L2 device registered as video16
+mxc_v4l2_output mxc_v4l2_output.0: V4L2 device registered as video17
+usbcore: registered new interface driver uvcvideo
+USB Video Class driver (v1.1.0)
+sabresd_battery: max8903_probe is called......
+sabresd_battery: register max8903-ac......
+sabresd_battery: register max8903-charger......
+imx2-wdt imx2-wdt.0: IMX2+ Watchdog Timer enabled. timeout=60s (nowayout=1)
+device-mapper: uevent: version 1.0.3
+device-mapper: ioctl: 4.20.0-ioctl (2011-02-02) initialised: dm-devel@redhat.com
+Bluetooth: Virtual HCI driver ver 1.3
+Bluetooth: HCI UART driver ver 2.2
+Bluetooth: HCIATH3K protocol initialized
+Bluetooth: Generic Bluetooth USB driver ver 0.6
+usbcore: registered new interface driver btusb
+sdhci: Secure Digital Host Controller Interface driver
+sdhci: Copyright(c) Pierre Ossman
+mmc0: SDHCI controller on platform [sdhci-esdhc-imx.3] using ADMA
+mmc1: SDHCI controller on platform [sdhci-esdhc-imx.1] using ADMA
+mxc_vdoa mxc_vdoa: i.MX Video Data Order Adapter(VDOA) driver probed
+VPU initialized
+mxc_asrc registered
+Galcore version 4.6.9.6622
+usb 2-1: new high speed USB device number 2 using fsl-ehci
+revserved_memory_account:viv_gpu registerd
+Thermal calibration data is 0x5504c169
+Thermal sensor with ratio = 174
+Anatop Thermal registered as thermal_zone0
+anatop_thermal_probe: default cooling device is cpufreq!
+Registered led device: red_led
+Registered led device: blue_led
+usbcore: registered new interface driver usbhid
+usbhid: USB HID core driver
+logger: created 256K log 'log_main'
+logger: created 256K log 'log_events'
+logger: created 256K log 'log_radio'
+logger: created 256K log 'log_system'
+usbcore: registered new interface driver snd-usb-audio
+mxc_hdmi_soc mxc_hdmi_soc.0: MXC HDMI Audio
+mxc_spdif mxc_spdif.0: MXC SPDIF Audio
+mmc0: new high speed DDR MMC card at address 0001
+mmcblk0: mmc0:0001 SEM04G 3.68 GiB 
+hub 2-1:1.0: USB hub found
+mmcblk0boot0: mmc0:0001 SEM04G partition 1 2.00 MiB
+hub 2-1:1.0: 4 ports detected
+mmcblk0boot1: mmc0:0001 SEM04G partition 2 2.00 MiB
+ mmcblk0: p1 p2 p3 &lt; p5 p6 p7 p8 &gt; p4
+mmcblk0: p4 size 5554176 extends beyond EOD, truncated
+ mmcblk0boot1: unknown partition table
+ mmcblk0boot0: unknown partition table
+wm8962 0-001a: customer id 0 revision D
+input: WM8962 Beep Generator as /devices/platform/imx-i2c.0/i2c-0/0-001a/input/input1
+asoc: wm8962 &lt;-&gt; imx-ssi.1 mapping ok
+input: wm8962-audio Headphone Jack as /devices/platform/soc-audio.5/sound/card0/input2
+asoc: mxc-spdif &lt;-&gt; imx-spdif-dai.0 mapping ok
+asoc: mxc-hdmi-soc &lt;-&gt; imx-hdmi-soc-dai.0 mapping ok
+ALSA device list:
+  #0: wm8962-audio
+  #1: imx-spdif
+  #2: imx-hdmi-soc
+oprofile: using arm/armv7-ca9
+GACT probability NOT on
+Mirror/redirect action on
+u32 classifier
+    Actions configured
+Netfilter messages via NETLINK v0.30.
+nf_conntrack version 0.5.0 (12986 buckets, 51944 max)
+ctnetlink v0.93: registering with nfnetlink.
+NF_TPROXY: Transparent proxy support initialized, version 4.1.0
+NF_TPROXY: Copyright (c) 2006-2007 BalaBit IT Ltd.
+xt_time: kernel timezone is -0000
+IPv4 over IPv4 tunneling driver
+GRE over IPv4 demultiplexor driver
+ip_tables: (C) 2000-2006 Netfilter Core Team
+arp_tables: (C) 2002 David S. Miller
+TCP cubic registered
+NET: Registered protocol family 10
+Mobile IPv6
+ip6_tables: (C) 2000-2006 Netfilter Core Team
+IPv6 over IPv4 tunneling driver
+NET: Registered protocol family 17
+NET: Registered protocol family 15
+can: controller area network core (rev 20090105 abi 8)
+NET: Registered protocol family 29
+can: raw protocol (rev 20090105)
+can: broadcast manager protocol (rev 20090105 t)
+Bluetooth: RFCOMM TTY layer initialized
+Bluetooth: RFCOMM socket layer initialized
+Bluetooth: RFCOMM ver 1.11
+Bluetooth: BNEP (Ethernet Emulation) ver 1.3
+Bluetooth: BNEP filters: protocol multicast
+Bluetooth: HIDP (Human Interface Emulation) ver 1.2
+L2TP core driver, V2.0
+PPPoL2TP kernel driver, V2.0
+L2TP IP encapsulation support (L2TPv3)
+L2TP netlink interface
+L2TP ethernet pseudowire support (L2TPv3)
+lib80211: common routines for IEEE802.11 drivers
+lib80211_crypt: registered algorithm 'NULL'
+lib80211_crypt: registered algorithm 'WEP'
+usb 2-1.2: new high speed USB device number 3 using fsl-ehci
+lib80211_crypt: registered algorithm 'CCMP'
+lib80211_crypt: registered algorithm 'TKIP'
+USB Gadget resume begins
+fsl_udc_resume, Wait for wakeup thread finishes
+VFP support v0.3: implementor 41 architecture 3 part 30 variant 9 rev 4
+Bus freq driver module loaded
+Bus freq driver Enabled
+mxc_dvfs_core_probe
+DVFS driver module loaded
+regulator_init_complete: SPKVDD: incomplete constraints, leaving on
+wm831x-rtc wm831x-rtc: setting system clock to 2014-01-01 00:34:54 UTC (1388536494)
+Freeing init memory: 232K
+init: cannot find '/system/etc/install-recovery.sh', disabling 'flash_recovery'
+init: cannot find '/system/bin/ingsvcd', disabling 'ing'
+android_usb: already disabled
+android_usb: already disabled
+mtp_bind_config
+adb_bind_config
+root@android:/ # adb_open
+eth0: Freescale FEC PHY driver [Generic PHY] (mii_bus:phy_addr=1:01, irq=-1)
+ADDRCONF(NETDEV_UP): eth0: link is not ready
+ERROR: HDMI is not ready!
+asoc: can't open platform imx-hdmi-soc-audio.0
+warning: `zygote' uses 32-bit capabilities (legacy support in use)
+request_suspend_state: wakeup (3-&gt;0) at 9798080003 (2014-01-01 00:35:02.050842335 UTC)
+eth0: Freescale FEC PHY driver [Generic PHY] (mii_bus:phy_addr=1:01, irq=-1)
+ADDRCONF(NETDEV_UP): eth0: link is not ready
+acc_open
+acc_release
+ehci_fsl_bus_resume begins, DR
+[sdhci_pre_dma_transfer] invalid cookie: data-&gt;host_cookie 1685 host-&gt;next_data.cookie 1686
+[sdhci_pre_dma_transfer] invalid cookie: data-&gt;host_cookie 1689 host-&gt;next_data.cookie 1690
+init: sys_prop: permission denied uid:1003  name:service.bootanim.exit
+
+root@android:/ # 
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/01/26/kindle-3-hack/">Kindle 3 Hack</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-01-26T21:23:32+08:00" pubdate data-updated="true"></time>
+        
+         | <a href="/blog/2016/01/26/kindle-3-hack/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>1. Prepare</h1>
+
+<h2>1.1 Open kindle 3 case and solder rs232 as below</h2>
+
+<p><img src="../images/kindle3-rs232.jpg" title="Kindle 3 rs232" alt="Kindle 3 rs232" /></p>
+
+<h2>1.2 User name and password</h2>
+
+<pre><code>login user = framework 
+password = mario 
+</code></pre>
+
+<h1>2. Bootloader</h1>
+
+<h2>2.1 Original u-boot info</h2>
+
+<pre><code>U-Boot 1.3.0-rc3-lab126 (Dec 27 2010 - 17:42:23)
+
+CPU:   Freescale i.MX35 at 532 MHz
+Board: MX35 Luigi [ WDT]
+WDOG_WCR = 0xff31
+WDOG_WMCR = 0x0
+Board Id: SP1B000000000000
+S/N: B008000000000000
+DRAM:  256 MB
+Using default environment
+
+In:    serial
+Out:   serial
+Err:   serial
+No ethernet found.
+i.MX35 CPU board version 2.0
+Net:   No ethernet found.
+Hit any key to stop autoboot:  0 
+uboot&gt; 
+uboot&gt; 
+uboot&gt; printenv
+bootdelay=1
+baudrate=115200
+loadaddr=0x80800000
+uboot_net=tftpboot 0x84000000 u-boot.bin
+uboot_serial=loady 0x84000000
+uboot_ram=go 0x84000000
+bootargs_diag=setenv bootargs tests=all
+diags_net=tftpboot 0x84000000 diagmon.uimage; run bootargs_diag; bootm 0x84000000
+diags_serial=loady 0x84000000; run bootargs_diag; bootm 0x84000000
+bootargs_base=console=ttymxc0,115200 mem=256M panic=10
+bootcmd_root_nfs=setenv bootargs $(bootargs_base) root=/dev/nfs rw nfsroot=$(nfsrootfs),v3,tcp rw ip=$(ipaddr):$(serverip):$(serverip):$(netmask):mario1 rootdelay=3
+bootcmd_root_mmc=setenv bootargs $(bootargs_base) root=/dev/mmcblk1p1 rw ip=none
+bootcmd_root_mvn=setenv bootargs $(bootargs_base) root=/dev/mmcblk0p1 rw ip=none
+bootcmd_kernel_nfs=nfs 0x87f40400 $(nfsrootfs)/uImage; bootm
+bootcmd_kernel_tftp=tftp 0x87f40400 uImage; bootm
+bootcmd_nfs=run bootcmd_root_nfs; run bootcmd_kernel_nfs
+bootcmd_flash=run bootcmd_root_mvn; run bootcmd_kernel_nor
+bootcmd_card=run bootcmd_root_mmc; run bootcmd_kernel_nor
+bootcmd_recovery=run bootcmd_root_recovery; run bootcmd_kernel_nor
+bootcmd_defaultflash=setenv bootargs; run bootcmd_kernel_nor
+bootcmd=bootm 0x87f40400
+testmem=mtest 0x80000000 0x86ffffff
+nfsrootfs=/nfsboot
+ethaddr=00:22:33:44:55:66
+cfgreset=protect off all ; erase (0xA0000000 + (128 * 1024)) +(128 * 1024)
+bootretry=-1
+stdin=serial
+stdout=serial
+stderr=serial
+
+Environment size: 1362/131068 bytes
+uboot&gt; bdinfo
+arch_number = 0x0000066D
+env_t       = 0x00000000
+boot_params = 0x80000100
+DRAM bank   = 0x00000000
+-&gt; start    = 0x80000000
+-&gt; size     = 0x10000000
+ethaddr     = 00:22:33:44:55:66
+ip_addr     = 0.0.0.0
+baudrate    = 115200 bps
+uboot&gt; help
+?       - alias for 'help'
+autoscr - run script from memory
+base    - print or set address offset
+bdinfo  - print Board Info structure
+boot    - boot default, i.e., run 'bootcmd'
+bootd   - boot default, i.e., run 'bootcmd'
+bootm   - boot application image from memory
+bootp   - boot image via network using BootP/TFTP protocol
+cmp     - memory compare
+coninfo - print console devices and information
+cp      - memory copy
+crc32   - checksum calculation
+dhcp    - invoke DHCP client to obtain IP/boot params
+echo    - echo args to console
+go      - start application at address 'addr'
+help    - print online help
+iminfo  - print header information for application image
+itest   - return true/false on integer compare
+loadb   - load binary file over serial line (kermit mode)
+loads   - load S-Record file over serial line
+loady   - load binary file over serial line (ymodem mode)
+loop    - infinite loop on address range
+md      - memory display
+mii     - MII utility commands
+mm      - memory modify (auto-incrementing)
+mtest   - simple RAM test
+mw      - memory write (fill)
+nfs     - boot image via network using NFS protocol
+nm      - memory modify (constant address)
+ping    - send ICMP ECHO_REQUEST to network host
+printenv- print environment variables
+rarpboot- boot image via network using RARP/TFTP protocol
+reset   - Perform RESET of the CPU
+run     - run commands in an environment variable
+setenv  - set environment variables
+sleep   - delay execution for some time
+tftpboot- boot image via network using TFTP protocol
+version - print monitor version
+uboot&gt; version
+
+U-Boot 1.3.0-rc3-lab126 (Dec 27 2010 - 17:42:23)
+uboot&gt; 
+</code></pre>
+
+<h1>3. Kernel</h1>
+
+<h2>3.1 Original kernel info</h2>
+
+<pre><code>uboot&gt; reset
+
+
+U-Boot 1.3.0-rc3-lab126 (Dec 27 2010 - 17:42:23)
+
+CPU:   Freescale i.MX35 at 532 MHz
+Board: MX35 Luigi [ WDT]
+WDOG_WCR = 0xff31
+WDOG_WMCR = 0x0
+Board Id: SP1B000000000000
+S/N: B008000000000000
+DRAM:  256 MB
+Using default environment
+
+In:    serial
+Out:   serial
+Err:   serial
+No ethernet found.
+i.MX35 CPU board version 2.0
+Net:   No ethernet found.
+Hit any key to stop autoboot:  0 
+## Booting image at 87f40400 ...
+   Image Name:   Linux-2.6.26-rt-lab126
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    2166568 Bytes =  2.1 MB
+   Load Address: 80008000
+   Entry Point:  80008000
+   Verifying Checksum ... OK
+   Loading Kernel Image ... OK
+
+Starting kernel ...
+
+Uncompressing Linux.......................................................................................................................... done, booting the kernel.
+boot: C def:bcut:batterycut=1:
+2.6.26-rt-lab126 #5 Sat Feb 5 19:05:05 PST 2011 armv6l
+INFO:Using default keypad setting. (not passing "kb_rev" to module)
+INFO:Loaded module /lib/modules/mxc_keyb.ko  (22508 bytes)
+Press [ENTER] for recovery menu...       0 /INFO:Partition table verified for /dev/mmcblk0
+INFO:Checking for updates... (auto-pilot mode)
+/dev/mmcblk0p4:
+CHS=4/16/100167 size=3282272256 bytes
+flag type      first       last  lba first   lba size
+Partition p1:
+0x00 0x0b         16 &lt;large&gt;            16    6410672
+    CHS: 0/1/1 - &lt;large&gt;
+Partition p2:
+Partition p3:
+Partition p4:
+INFO:Setup loop device /dev/loop0 for /dev/mmcblk0p4 + 8192
+INFO:No update*.bin found; no update needed.
+INFO:no updates found.
+BOOTING DEFAULT.
+  argc == 9
+  argv[0]: "kinit"
+  argv[1]: "console=ttymxc0,115200"
+  argv[2]: "mem=256M"
+  argv[3]: "panic=10"
+  argv[4]: "root=/dev/mmcblk0p1"
+  argv[5]: "ro"
+  argv[6]: "ip=none"
+  argv[7]: "quiet"
+  argv[8]: "lpj=2555904"
+Running ipconfig
+  argc == 4
+  argv[0]: "IP-Config"
+  argv[1]: "-i"
+  argv[2]: "Linux kinit"
+  argv[3]: "ip=none"
+IP-Config: no devices to configure
+kinit: do_mounts
+kinit: name_to_dev_t(/dev/mmcblk0p1) = dev(179,1)
+kinit: root_dev = dev(179,1)
+kinit: /dev/root appears to be a ext3 filesystem
+kinit: trying to mount /dev/root on /root with type ext3
+kinit: Mounted root (ext3 filesystem) readonly.
+Checking for init: /sbin/init
+Checking for init: /bin/init
+Checking for init: /etc/init
+Checking for init: /sbin/init.sysvinit
+INIT: version 2.86 booting
+system: I rcS:def:starting /etc/rcS.d/S02kdb
+system: I S02kdb:def:Setting boot device to mmcblk0
+kdb set: 'system/driver/filesystem/DEV_ROOT'
+system: I rcS:def:starting /etc/rcS.d/S03udev
+system: I S03udev:def:setting up virtual fs for hotplug event handling
+system: I S03udev:def:starting the hotplug events dispatcher
+system: I S03udev:def:synthesizing initial hotplug events
+lipc-send-event[380]: E lipc:con::Connection error(Failed to connect to socket /var/run/dbus/system_bus_socket: No such file or directory)
+lipc-send-event[380]: C def:dbusi::Failed to init dbus
+lipc-send-event[380]: E def:open::Failed to open LIPC
+lipc-send-event[380]: E def:fail:source=com.lab126.hal, event=usbPlugIn:Sending event failed
+lipc-send-event[481]: E lipc:con::Connection error(Failed to connect to socket /var/run/dbus/system_bus_socket: No such file or directory)
+lipc-send-event[481]: C def:dbusi::Failed to init dbus
+lipc-send-event[481]: E def:open::Failed to open LIPC
+lipc-send-event[481]: E def:fail:source=com.lab126.hal, event=audioHS:Sending event failed
+system: I rcS:def:starting /etc/rcS.d/S04rootfsresize
+system: I S04rootfsresize:def:No rootfs on /dev/mmcblk0p1 resizing needed
+system: I rcS:def:starting /etc/rcS.d/S10filesystems
+system: I rcS:def:starting /etc/rcS.d/S10hostname
+system: I rcS:def:starting /etc/rcS.d/S10network
+system: I S10filesystems:def:mounting filesystems
+system: I S10hostname:def:setting device hostname
+system: I S10network:def:initializing network configuration
+system: I S10network:def:Installed Firewall
+system: I rcS:def:starting /etc/rcS.d/S11chpriority
+system: I rcS:def:starting /etc/rcS.d/S11video
+Unknown HZ value! (85) Assume 100.
+system: W S11chpriority:def:Cannot set priority for IRQ-7
+system: I S11video:def:initializing eInk HAL for system use
+system: I S11video:def:eink_debug=0
+system: I S11video:def:Controller set to broads
+system: I rcS:def:starting /etc/rcS.d/S20syslog-ng
+system: I S20syslog-ng:def:starting syslog-ng
+system: I rcS:def:starting /etc/rcS.d/S21init_time
+system: I S21init_time:initboot:time=17100:boot time after init in milliseconds
+system: I rcS:def:starting /etc/rcS.d/S45modules
+system: I S45modules:def:loading module mwan
+system: I S45modules:def:loading module g_file_storage
+system: I S45modules:def:loading module fuse
+system: I S45modules:def:loading module uinput
+system: I S45modules:def:loading module mxc_keyb
+system: I S45modules:def:loading module fiveway
+system: I S45modules:def:loading module volume
+system: I rcS:def:starting /etc/rcS.d/S50system
+mount: mount point /proc/bus/usb does not exist
+Sat Jul 31 00:00:00 UTC 2010
+system: I rcS:def:starting /etc/rcS.d/S55scroll
+system: I S55scroll:def:skipping; no luigi-based work to do here
+system: I rcS:def:starting /etc/rcS.d/S70ethernet
+system: I rcS:def:starting /etc/rcS.d/S70userstore
+system: I S70ethernet:def:not enet
+system: I S70ethernet:def:not usbnet
+system: I S70userstore:def:Found BOOTUP flag file
+dosfsck 2.11-lab126 (1 Jun 2007)
+dosfsck 2.11-lab126, 1 Jun 2007, FAT32, LFN
+Checking we can access the last sector of the filesystem
+Boot sector contents:
+System ID "MSDOS5.0"
+Media byte 0xf8 (hard disk)
+       512 bytes per logical sector
+      8192 bytes per cluster
+      1938 reserved sectors
+First FAT starts at byte 992256 (sector 1938)
+         2 FATs, 32 bit entries
+   1601024 bytes per FAT (= 3127 sectors)
+Root directory start at cluster 2 (arbitrary size)
+Data area starts at byte 4194304 (sector 8192)
+    400155 data clusters (3278069760 bytes)
+63 sectors/track, 255 heads
+        16 hidden sectors
+   6410672 sectors total
+Checking for unused clusters.
+Checking free cluster summary.
+/dev/loop/0: 838 files, 33538/400155 clusters
+system: I rcS:def:starting /etc/rcS.d/S90video
+system: I S90video:def:initializing eInk HAL for rootfs use
+INIT: Entering runlevel: 2
+system: I lifeguard:def:starting eInk HAL lifeguard
+system: I S40diags:def:not starting Diagnostic Services
+system: I S40diags:def:/test/diags/factory does not exist
+system: I S50battcheck:def:running
+Sat Jul 31 08:00:05 2010  INFO:battery voltage: 3708 mV
+Sat Jul 31 08:00:05 2010  INFO:battery charge: 40%
+system: I S50battcheck:def:current voltage = 3703mV
+Sat Jul 31 08:00:05 2010  INFO:battery charge: 40%
+Sat Jul 31 08:00:05 2010  INFO:battery voltage: 3708 mV
+Sat Jul 31 08:00:05 2010  INFO:battery current: -235 mA
+system: I S50battcheck:def:gasgauge capacity=40% volts=3708 mV current=-235 mA
+system: I S50battcheck:def:Waiting for 3460mV or 4%
+system: I S50battcheck:def:battery sufficient, booting to normal runlevel
+INIT: Switching to runlevel: 5
+INIT: Sending processes the TERM signal
+system: I wifi:def:WiFi Device mac = 28:EF:01:4B:F1:55
+Platform set to SHASTA_NATIVEMMC-SDIO
+Platform Setup Script is: /opt/ar6k/host/support/platformscripts/plat_SHASTA_NATIVEMMC-SDIO.sh
+Image path: /sbin
+No debug record limit set
+Load Board Data from /opt/ar6k/target/AR6002/hw2.0/bin/lab126_15dBm_nodiv_WWR_CTL.bin
+Updating MAC address
+BMI Set App Start (address: 0x913950)
+BMI Bit-Wise (OR) modify Register (address: 0x500410, orig:0x8, new: 0x9,  mask:0x1)
+BMI Write compressed Memory (address: 0x502070, filename: /opt/ar6k/target/AR6002/hw2.0/bin/athwlan.bin.z77)
+BMI Write Memory (address: 0x52d6d0, filename: /opt/ar6k/target/AR6002/hw2.0/bin/data.patch.hw2_0.bin)
+BMI Write Memory (address: 0x500418, value: 0x52d6d0)
+BMI Done
+system: I wifi:def:loadAR6000 finished, args=()
+system: I wpa_supplicant:def:wpa supplicant started
+system: I S30network:def:initializing network configuration
+system: I S30network:def:Installed Firewall
+system: I S60dbus:def:starting system message bus
+system: W S64linkjail:def:couldn't run unlinkjail
+Starting Process Monitoring Daemon: Retrieved 127 keys for system/daemon/pmond/
+Starting Power Management Daemon: system: I S70cmd:def:starting CMD daemon
+system: I S70wifid:def:starting wifid
+system: I S75phd:def:Starting Phone-Home Daemon
+system: I S76mcsd:def:starting MCS server
+DK_update starts on Sat Jul 31 08:00:14 AMZ 2010
+clean_repair
+system: I volumd:def:starting Volume daemon
+find DIAGNOSTIC.log
+file 360 KB, limit 5000 KB
+do not compress it
+update_duokan
+custom_debug
+DK_update ends on Sat Jul 31 08:00:14 AMZ 2010
+system: I S80volumd:def:starting Volume daemon
+system: I S82usbnet:def:usbnet is disabled
+system: I S85audio:def:initializing audio driver defaults
+No state is present for card mx35luigi
+system: I S85audio:def:starting audio server
+system: I S87ttsd:def:starting TTS daemon
+Battery Level: 40%
+Sat Jul 31 08:00:17 2010  INFO:battery charge: 40%
+system: I S90cron:def:starting crond
+system: I S90tmd:def:Starting Transfer Manager Daemon
+Starting lipc-daemon: system: I S94browserd:def:Starting Browser Daemon
+Show menu
+system: I S95framework:def:starting booklet framework
+Run Prog
+open successfully:/dev/input/event0
+open successfully:/dev/input/event1
+open successfully:/dev/input/event2
+system: I S95framework:def:logging reset type: hard
+start.sh: starting framework
+
+DuoKan 2012 System
+Run DuoKan program
+KINDLE_VERSION BASE = 300
+stop_tmd_v3v4
+system: I S96boot_finished:def:Boot finished script running
+system: I S96boot_finished:symboot:time=45560:boot time before framework starts, in milliseconds
+system: I browserd:def:Stopping Browser Daemon
+Killed
+system: I updater:def:updater started
+system: W updater:def:Update file not found. Not updating
+system: I phd:def:Stopping Phone-Home Daemon
+system: I ttsd:def:stopping TTS daemon
+com.lab126.powerd failed to set value for property wakeUp (0x8 lipcErrNoSuchProperty)
+get_power: battery_capacity 40% 
+KINDLE_VERSION BASE = 300
+system: I wifid:def:stopping wifid
+stop_framework
+system: I framework:def:stopping booklet framework
+system: I start.sh:stop:signal=15,exitval=143:CVM stopped using SIGTERM
+Unknown HZ value! (85) Assume 100.
+Unknown HZ value! (85) Assume 100.
+[DKLogger] - No LoggerCfg.ini found in working directory!
+07-31 08:00:37:187-&lt;TID: 109667836&gt; DIAGNOSTIC: GetDeviceType(B008)
+07-31 08:00:37:200-&lt;TID: 109667836&gt; DIAGNOSTIC: Diagnostic, kindle version(xKindle_2013-10-25.30919.rtm), device type: (5), kernel version:(2.6.2.30412)
+07-31 08:00:37:209-&lt;TID: 109667836&gt; DIAGNOSTIC: Read string from shell begin: free
+Unknown HZ value! (79) Assume 100.
+07-31 08:00:37:233-&lt;TID: 109667836&gt; DIAGNOSTIC: Read string from shell end: free
+07-31 08:00:37:235-&lt;TID: 109667836&gt; DIAGNOSTIC: free space:
+             total       used       free     shared    buffers     cached
+Mem:        256536      69624     186912          0      12060      37840
+-/+ buffers/cache:      19724     236812
+Swap:            0          0          0
+
+07-31 08:00:37:236-&lt;TID: 109667836&gt; DIAGNOSTIC: Read string from shell begin: top -b -n1
+Unknown HZ value! (79) Assume 100.
+07-31 08:00:37:903-&lt;TID: 109667836&gt; DIAGNOSTIC: Read string from shell end: top -b -n1
+07-31 08:00:37:907-&lt;TID: 109667836&gt; DIAGNOSTIC: 
+top - 08:00:37 up 0 min,  0 users,  load average: 1.85, 0.52, 0.18
+Tasks:  61 total,   1 running,  60 sleeping,   0 stopped,   0 zombie
+Cpu(s): 22.2%us, 43.8%sy,  0.0%ni, 13.5%id, 19.3%wa,  0.7%hi,  0.4%si,  0.0%st
+Mem:    256536k total,    69984k used,   186552k free,    12076k buffers
+Swap:        0k total,        0k used,        0k free,    38052k cached
+
+  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND            
+ 3713 root      20   0  2380 1048  824 R  1.9  0.4   0:00.06 top                
+    1 root      20   0  1484  536  472 S  0.0  0.2   0:01.69 init.sysvinit      
+    2 root      15  -5     0    0    0 S  0.0  0.0   0:00.01 kthreadd           
+    3 root      RT  -5     0    0    0 S  0.0  0.0   0:00.00 posixcputmr/0      
+    4 root     -51  -5     0    0    0 S  0.0  0.0   0:00.00 sirq-high/0        
+    5 root     -51  -5     0    0    0 S  0.0  0.0   0:00.00 sirq-timer/0       
+    6 root     -51  -5     0    0    0 S  0.0  0.0   0:00.00 sirq-net-tx/0      
+    7 root     -51  -5     0    0    0 S  0.0  0.0   0:00.00 sirq-net-rx/0      
+    8 root     -51  -5     0    0    0 S  0.0  0.0   0:00.00 sirq-block/0       
+    9 root     -51  -5     0    0    0 S  0.0  0.0   0:00.00 sirq-tasklet/0     
+   10 root     -51  -5     0    0    0 S  0.0  0.0   0:00.00 sirq-sched/0       
+   11 root     -51  -5     0    0    0 S  0.0  0.0   0:00.00 sirq-hrtimer/0     
+   12 root     -51  -5     0    0    0 S  0.0  0.0   0:00.00 sirq-rcu/0         
+   13 root      10 -10     0    0    0 S  0.0  0.0   0:00.07 desched/0          
+   14 root      -2  -5     0    0    0 S  0.0  0.0   0:00.14 events/0           
+   15 root      15  -5     0    0    0 S  0.0  0.0   0:00.03 khelper            
+   67 root      15  -5     0    0    0 S  0.0  0.0   0:00.07 kblockd/0          
+   72 root      15  -5     0    0    0 S  0.0  0.0   0:00.01 mxc_spi.0          
+   75 root      15  -5     0    0    0 S  0.0  0.0   0:00.00 mxc_spi.1          
+   94 root      15  -5     0    0    0 S  0.0  0.0   0:00.32 kmmcd              
+  102 root      15  -5     0    0    0 S  0.0  0.0   0:00.00 pmic_spi/0         
+  174 root      20   0     0    0    0 S  0.0  0.0   0:00.00 pdflush            
+  175 root      20   0     0    0    0 S  0.0  0.0   0:00.00 pdflush            
+  176 root      15  -5     0    0    0 S  0.0  0.0   0:00.00 kswapd0            
+  177 root      15  -5     0    0    0 S  0.0  0.0   0:00.00 aio/0              
+  178 root      15  -5     0    0    0 S  0.0  0.0   0:00.00 nfsiod             
+  214 root      15  -5     0    0    0 S  0.0  0.0   0:00.00 kondemand/0        
+  225 root      15  -5     0    0    0 S  0.0  0.0   0:01.44 mmcqd              
+  256 root      15  -5     0    0    0 S  0.0  0.0   0:00.00 rpciod/0           
+  271 root      15  -5     0    0    0 S  0.0  0.0   0:00.00 kjournald          
+  373 root      16  -4  1520  540  372 S  0.0  0.2   0:00.32 udevd              
+  641 root      15  -5     0    0    0 S  0.0  0.0   0:00.00 kjournald          
+  888 root      15  -5     0    0    0 S  0.0  0.0   0:00.71 eink_fb_bt         
+  890 root      15  -5     0    0    0 S  0.0  0.0   0:00.06 eink_fb_pt         
+  966 root      20   0  1948  660  468 S  0.0  0.3   0:00.21 syslog-ng          
+ 1086 root       0 -20     0    0    0 S  0.0  0.0   0:00.00 file-storage-ga    
+ 1374 root       0 -20     0    0    0 S  0.0  0.0   0:00.23 loop0              
+ 1410 root      20   0 61328 1104  492 S  0.0  0.4   0:00.55 fsp                
+ 1489 root      20   0  2656  732  568 S  0.0  0.3   0:00.04 lifeguard          
+ 1536 root      20   0  2656  364  200 S  0.0  0.1   0:00.01 lifeguard          
+ 1696 root      20   0  2656  752  584 S  0.0  0.3   0:00.11 rc                 
+ 1969 root      20   0  1840  824  400 S  0.0  0.3   0:00.15 recEvent           
+ 1971 root      15  -5     0    0    0 S  0.0  0.0   0:00.18 AR6K Async         
+ 1994 root      -2  -5     0    0    0 S  0.0  0.0   0:00.01 ksdiorqd           
+ 2020 root      20   0  3448 1600 1276 S  0.0  0.6   0:00.06 wpa_supplicant     
+ 2210 messageb  20   0  2236  812  588 S  0.0  0.3   0:00.21 dbus-daemon        
+ 2303 root      20   0 19608 1100  868 S  0.0  0.4   0:00.04 pmond              
+ 2353 root      20   0 19680 1420 1212 S  0.0  0.6   0:00.07 powerd             
+ 2479 root      20   0 36032 1432 1188 S  0.0  0.6   0:00.08 cmd                
+ 2660 root      20   0 35784 1084  916 S  0.0  0.4   0:00.03 mcsd               
+ 2723 root      20   0 19600 1288 1100 S  0.0  0.5   0:00.06 volumd             
+ 2938 root      20   0 41792 4220 3580 S  0.0  1.6   0:00.31 audioServer        
+ 3124 root      20   0  2652  552  464 S  0.0  0.2   0:00.00 crond              
+ 3129 root      20   0 38936 2660 2240 S  0.0  1.0   0:00.09 tmd                
+ 3130 root      20   0 19324 1028  872 S  0.0  0.4   0:00.01 lipc-daemon        
+ 3400 root      20   0  2656  456  288 S  0.0  0.2   0:00.02 rc                 
+ 3419 root      20   0  2656  744  596 S  0.0  0.3   0:00.03 sh                 
+ 3470 root      20   0  2656  356  188 S  0.0  0.1   0:00.00 S96boot_finishe    
+ 3471 root      20   0 19316 1060  920 S  0.0  0.4   0:00.01 lipc-wait-event    
+ 3695 root      20   0 29340  12m 8096 S  0.0  4.9   0:00.61 KindleApp          
+ 3712 root      20   0  2652  548  472 S  0.0  0.2   0:00.01 sh                 
+
+
+
+killall: mplayer: no process killed
+07-31 08:00:38:318-&lt;TID: 109667836&gt; DIAGNOSTIC: Begin execute command: sysctl vm.overcommit_memory=1
+Unknown HZ value! (79) Assume 100.
+vm.overcommit_memory = 1
+07-31 08:00:38:342-&lt;TID: 109667836&gt; DIAGNOSTIC: End execute command: sysctl vm.overcommit_memory=1
+07-31 08:00:38:389-&lt;TID: 109667836&gt; DIAGNOSTIC: m_testLowAlarm : 0
+07-31 08:00:38:391-&lt;TID: 109667836&gt; DIAGNOSTIC: DKPowerManagerImpl::UpdatePowerLevel init power=40, voltage=3713, mAH=643
+07-31 08:00:38:393-&lt;TID: 109667836&gt; DIAGNOSTIC: DKPowerManagerImpl::StartPowerdMonitor()
+07-31 08:00:38:398-&lt;TID: 109667836&gt; DIAGNOSTIC: DKPowerManagerImpl::StartWaitEvent()
+07-31 08:00:38:400-&lt;TID: 109671336&gt; DIAGNOSTIC: Read string from shell begin: lipc-wait-event  -s 60 com.lab126.powerd outOfScreenSaver,goingToScreenSaver,userShutdown,outOfShutdown,charging,notCharging,battLevelChanged 2&gt;&gt;/mnt/us/DK_System/xKindle/powerError.log
+07-31 08:00:38:438-&lt;TID: 111349057&gt; DIAGNOSTIC: sigwaitinfo() begin wait sig
+07-31 08:00:38:448-&lt;TID: 109667836&gt; DIAGNOSTIC: Initialize BookStore Managers
+07-31 08:00:38:848-&lt;TID: 111495694&gt; DIAGNOSTIC: CStartProgress::ProgressThread (0, 80)
+07-31 08:00:38:867-&lt;TID: 109667836&gt; DIAGNOSTIC: DKPowerManagerImpl::AccquireLock, lock(0),src=9,m_lockNum=0
+07-31 08:00:38:869-&lt;TID: 109667836&gt; DIAGNOSTIC: DKPowerManagerImpl::AccquireLock:preventScreenSaver 1
+07-31 08:00:38:938-&lt;TID: 113173416&gt; DIAGNOSTIC: DKPowerManagerImpl::ReleaseLock, lock(0),src=9,m_lockNum=1
+07-31 08:00:38:939-&lt;TID: 113173416&gt; DIAGNOSTIC: DKPowerManagerImpl::ReleaseLock, preventScreenSaver 0
+07-31 08:00:38:993-&lt;TID: 109667836&gt; DIAGNOSTIC: Begin Init Keyboard
+
+
+07-31 08:00:47:843-&lt;TID: 109667836&gt; DIAGNOSTIC: SetScreenSaverStatus:0
+07-31 08:00:47:854-&lt;TID: 109667836&gt; DIAGNOSTIC: Begin Create FileManager
+07-31 08:00:47:856-&lt;TID: 109667836&gt; DIAGNOSTIC: Begin LoadFileToFileManger
+07-31 08:00:48:224-&lt;TID: 109667836&gt; DIAGNOSTIC: Main cost 1 seconds to scan all 25 files
+07-31 08:00:48:225-&lt;TID: 109667836&gt; DIAGNOSTIC: Read string from shell begin: free
+Unknown HZ value! (80) Assume 100.
+07-31 08:00:48:253-&lt;TID: 109667836&gt; DIAGNOSTIC: Read string from shell end: free
+07-31 08:00:48:255-&lt;TID: 109667836&gt; DIAGNOSTIC: free space:
+             total       used       free     shared    buffers     cached
+Mem:        256536     135400     121136          0      24824      72604
+-/+ buffers/cache:      37972     218564
+Swap:            0          0          0
+
+07-31 08:00:48:302-&lt;TID: 115133352&gt; DIAGNOSTIC: DKPowerManagerImpl::AccquireLock, lock(0),src=2,m_lockNum=0
+07-31 08:00:48:303-&lt;TID: 115133352&gt; DIAGNOSTIC: DKPowerManagerImpl::AccquireLock:preventScreenSaver 1
+07-31 08:00:48:364-&lt;TID: 111495694&gt; DIAGNOSTIC: CStartProgress::ProgressThread over!
+07-31 08:00:48:382-&lt;TID: 115133352&gt; DIAGNOSTIC: DKPowerManagerImpl::ReleaseLock, lock(0),src=2,m_lockNum=1
+07-31 08:00:48:385-&lt;TID: 115133352&gt; DIAGNOSTIC: DKPowerManagerImpl::ReleaseLock, preventScreenSaver 0
+07-31 08:00:49:513-&lt;TID: 109667836&gt; DIAGNOSTIC: m_testLowAlarm : 0
+07-31 08:00:49:515-&lt;TID: 109667836&gt; DIAGNOSTIC: Read string from file begin: /sys/devices/platform/fsl-usb2-udc/charging
+07-31 08:00:49:517-&lt;TID: 109667836&gt; DIAGNOSTIC: Read string from file end: /sys/devices/platform/fsl-usb2-udc/charging
+07-31 08:00:50:798-&lt;TID: 109667836&gt; DIAGNOSTIC: Begin Create main thread
+07-31 08:00:50:817-&lt;TID: 109667836&gt; DIAGNOSTIC: Start wait usb
+07-31 08:00:50:969-&lt;TID: 109667836&gt; DIAGNOSTIC: Back to home
+07-31 08:00:50:978-&lt;TID: 109667836&gt; DIAGNOSTIC: Read string from shell begin: free
+Unknown HZ value! (80) Assume 100.
+07-31 08:00:51:069-&lt;TID: 109667836&gt; DIAGNOSTIC: Read string from shell end: free
+07-31 08:00:51:071-&lt;TID: 109667836&gt; DIAGNOSTIC: free space:
+             total       used       free     shared    buffers     cached
+Mem:        256536     143480     113056          0      24940      73720
+-/+ buffers/cache:      44820     211716
+Swap:            0          0          0
+
+
+
+ls
+pwd
+</code></pre>
+
+<h1>4. Rootfs</h1>
+
+<h1>5. GUI</h1>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -998,486 +2210,6 @@ $ find . -name "*.c" -print | xargs grep "main("
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/06/10/sync-a-fork-of-a-repository-to-keep-it-up-to-date-with-the-upstream-repository/">Sync a Fork of a Repository to Keep It Up-to-date With the Upstream Repository</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-06-10T15:05:40+08:00" pubdate data-updated="true"></time>
-        
-         | <a href="/blog/2015/06/10/sync-a-fork-of-a-repository-to-keep-it-up-to-date-with-the-upstream-repository/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h1>1. Configuring a remote for a fork</h1>
-
-<p>To sync changes you make in a fork with the original repository, you must configure a remote that points to the upstream repository in Git.</p>
-
-<h2>1.1 Open Terminal (for Mac users) or the command prompt (for Windows and Linux users)</h2>
-
-<h2>1.2 List the current configured remote repository for your fork</h2>
-
-<pre><code>$ git remote -v
-  origin  https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch)
-  origin  https://github.com/YOUR_USERNAME/YOUR_FORK.git (push)
-</code></pre>
-
-<h2>1.3 Specify a new remote upstream repository that will be synced with the fork</h2>
-
-<pre><code>$ git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git
-</code></pre>
-
-<h2>1.4 Verify the new upstream repository you&rsquo;ve specified for your fork</h2>
-
-<pre><code>$ git remote -v
-  origin    https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch)
-  origin    https://github.com/YOUR_USERNAME/YOUR_FORK.git (push)
-  upstream  https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (fetch)
-  upstream  https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (push)
-</code></pre>
-
-<h1>2. Syncing a fork</h1>
-
-<p>Sync a fork of a repository to keep it up-to-date with the upstream repository</p>
-
-<p>2.1 Change the current working directory to your local project</p>
-
-<p>2.2 Fetch the branches and their respective commits from the upstream repository. Commits to master will be stored in a local branch, upstream/master.</p>
-
-<pre><code>$ git fetch upstream
-  remote: Counting objects: 75, done.
-  remote: Compressing objects: 100% (53/53), done.
-  remote: Total 62 (delta 27), reused 44 (delta 9)
-  Unpacking objects: 100% (62/62), done.
-  From https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY
-   * [new branch]      master     -&gt; upstream/master
-</code></pre>
-
-<p>2.3 Check out your fork&rsquo;s local master branch</p>
-
-<pre><code>$ git checkout master
-  Switched to branch 'master'
-</code></pre>
-
-<p>2.4 Merge the changes from upstream/master into your local master branch. This brings your fork&rsquo;s master branch into sync with the upstream repository, without losing your local changes.</p>
-
-<pre><code>$ git merge upstream/master
-  Updating a422352..5fdff0f
-  Fast-forward
-  README                    |    9 -------
-  README.md                 |    7 ++++++
-  2 files changed, 7 insertions(+), 9 deletions(-)
-  delete mode 100644 README
-  create mode 100644 README.md
-</code></pre>
-
-<p>2.5 If your local branch didn&rsquo;t have any unique commits, Git will instead perform a &ldquo;fast-forward&rdquo;:</p>
-
-<pre><code>$ git merge upstream/master
-  Updating 34e91da..16c56ad
-  Fast-forward
-  README.md                 |    5 +++--
-  1 file changed, 3 insertions(+), 2 deletions(-)
-</code></pre>
-
-<h1>3. Pushing to a remote</h1>
-
-<pre><code>$ git push  &lt;REMOTENAME&gt; &lt;BRANCHNAME&gt;   
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/05/28/imx6-summary-upgrade-ltib-l3-dot-0-35-4-dot-1-0-to-l3-dot-0-101-4-dot-1-1/">Imx6 Summary Upgrade Ltib L3.0.35_4.1.0 to L3.0.101_4.1.1</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-05-28T10:50:25+08:00" pubdate data-updated="true"></time>
-        
-         | <a href="/blog/2015/05/28/imx6-summary-upgrade-ltib-l3-dot-0-35-4-dot-1-0-to-l3-dot-0-101-4-dot-1-1/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h1>1. Setup and build ltib using bsp L3.0.35_4.1.0_130816</h1>
-
-<h1>2. Download L3.0.101_4.1.1 package</h1>
-
-<pre><code>Version: 
-    L3.0.101_4.1.1_141016_source.gz
-    IMX_MMCODEC_3.0.101_4.1.1_Bundle.gz
-</code></pre>
-
-<h1>3. Upgrade to L3.0.101_4.1.1</h1>
-
-<h2>3.1 Copy the following packages to host /opt/freescale/pkgs</h2>
-
-<pre><code>firmware-imx-3.0.101-4.1.1.tar.gz
-imx-vpu-lib-3.0.101-4.1.1.tar.gz
-libfslcodec-3.0.11.tar.gz
-libfslparser-3.0.11.tar.gz
-libfslvpuwrap-1.0.46.tar.gz
-gst-fsl-plugins-3.0.11.tar.gz
-gst-fsl-plugins-3.0.11-configure.patch
-glib2-2.12.1-atomic.patch
-gpu-viv-bin-mx6q-3.0.101-4.1.1.tar.gz
-gpu-viv-bin-mx6s-3.0.101-4.1.1.tar.gz
-gpu-viv-wl-bin-mx6q-3.0.101-4.1.1.tar.gz
-gpu-viv-wl-bin-mx6s-3.0.101-4.1.1.tar.gz
-linux-3.0.101.tar.bz2 
-linux-3.0.101-imx_4.1.1.bz2
-u-boot-v2009.08-imx_3.0.101_4.1.1.tar.bz2
-</code></pre>
-
-<h2>3.2 Patch ltib_config_platform_imx.patch</h2>
-
-<pre><code>$ cp ltib_config_platform_imx.patch Ltib_installed/config/platform/imx
-$ cd Ltib_installed/config/platform/imx
-$ patch -p1 –i ltib_config_platform_imx.patch
-</code></pre>
-
-<h2>3.3 Patch ltib_dist_lfs-5.1.patch</h2>
-
-<pre><code>$ cp ltib_dist_lfs-5.1.patch Ltib_installed/dist
-$ cd Ltib_installed/dist
-$ patch -p1 –i ltib_dist_lfs-5.1.patch
-</code></pre>
-
-<h1>4. Config and build ltib</h1>
-
-<pre><code>$ cd Ltib_installed/
-$ ./ltib –config
-$ ./ltib
-
-$ ./ltib -m prep -p u-boot  # fetch u-boot sourc code
-$ ./ltib -m prep -p kernel  # fetch kernel souce code
-</code></pre>
-
-<p>Done!</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/05/26/imx6-summary-build-image-for-imx6-using-yocto/">Imx6 Summary Build Image for Imx6 Using Yocto</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-05-26T17:07:56+08:00" pubdate data-updated="true"></time>
-        
-         | <a href="/blog/2015/05/26/imx6-summary-build-image-for-imx6-using-yocto/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h1>1. Install repo</h1>
-
-<pre><code>$ curl http://commondatastorage.googleapis.com/git-repo-downloads/repo &gt; ~/bin/repo
-
-or
-
-$ install a local repo (repo-local)
-
-$ export PATH=$PATH:/home/vmuser/bin
-
-$ git config --global user.email "user name@email.com"
-
-$ git config --global user.name "User Name" 
-</code></pre>
-
-<h1>2. Download freescale community bsp source code</h1>
-
-<pre><code>$ mkdir fsl-community-bsp
-$ cd fsl-community-bsp
-$ repo init -u https://github.com/Freescale/fsl-community-bsp-platform -b fido
-$ repo sync
-</code></pre>
-
-<h1>3. Change branch and sync</h1>
-
-<pre><code>$ cd fsl-community-bsp
-$ repo init -b master   //master or other branch
-$ repo sync
-</code></pre>
-
-<h1>4. First build</h1>
-
-<h2>4.1 Sync source code and setup environment</h2>
-
-<pre><code>$ cd fsl-community-bsp
-$ repo sync
-$ source setup-environment build
-$ ls
-conf
-</code></pre>
-
-<h2>4.2 Choose your board</h2>
-
-<pre><code>$ cd fsl-community-bsp
-
-$ cd build
-
-$ vim conf/local.conf #you can change MACHINE
-
-MACHINE ??= 'imx6qsabresd'
-DISTRO ?= 'poky'
-PACKAGE_CLASSES ?= "package_rpm"
-EXTRA_IMAGE_FEATURES = "debug-tweaks"
-USER_CLASSES ?= "buildstats image-mklibs image-prelink"
-PATCHRESOLVE = "noop"
-BB_DISKMON_DIRS = "\
-    STOPTASKS,${TMPDIR},1G,100K \
-    STOPTASKS,${DL_DIR},1G,100K \
-    STOPTASKS,${SSTATE_DIR},1G,100K \
-    ABORT,${TMPDIR},100M,1K \
-    ABORT,${DL_DIR},100M,1K \
-    ABORT,${SSTATE_DIR},100M,1K"
-CONF_VERSION = "1"
-
-BB_NUMBER_THREADS = '1'
-PARALLEL_MAKE = '-j 1'
-
-DL_DIR ?= "${BSPDIR}/downloads/"
-ACCEPT_FSL_EULA = "1"
-
-
-//list all freescale boards conf
-$ ls ../sources/meta-fsl-arm/conf/machine/*.conf -l
-    -rw-rw-r-- 1 vmuser vmuser  539 Apr 16 23:58 ../sources/meta-fsl-arm/conf/machine/imx23evk.conf
-    -rw-rw-r-- 1 vmuser vmuser 2440 Apr 16 23:58 ../sources/meta-fsl-arm/conf/machine/imx28evk.conf
-    -rw-rw-r-- 1 vmuser vmuser  667 Apr 16 23:58 ../sources/meta-fsl-arm/conf/machine/imx31pdk.conf
-    -rw-rw-r-- 1 vmuser vmuser  603 Apr 16 23:58 ../sources/meta-fsl-arm/conf/machine/imx35pdk.conf
-    -rw-rw-r-- 1 vmuser vmuser  333 Apr 16 23:58 ../sources/meta-fsl-arm/conf/machine/imx51evk.conf
-    -rw-rw-r-- 1 vmuser vmuser  469 Apr 16 23:58 ../sources/meta-fsl-arm/conf/machine/imx53ard.conf
-    -rw-rw-r-- 1 vmuser vmuser  460 Apr 16 23:58 ../sources/meta-fsl-arm/conf/machine/imx53qsb.conf
-    -rw-rw-r-- 1 vmuser vmuser  638 Apr 16 23:58 ../sources/meta-fsl-arm/conf/machine/imx6dlsabreauto.conf
-    -rw-rw-r-- 1 vmuser vmuser  393 Apr 16 23:58 ../sources/meta-fsl-arm/conf/machine/imx6dlsabresd.conf
-    -rw-rw-r-- 1 vmuser vmuser  533 Apr 16 23:58 ../sources/meta-fsl-arm/conf/machine/imx6qsabreauto.conf
-    -rw-rw-r-- 1 vmuser vmuser  432 Apr 16 23:58 ../sources/meta-fsl-arm/conf/machine/imx6qsabresd.conf
-    -rw-rw-r-- 1 vmuser vmuser  432 Apr 16 23:58 ../sources/meta-fsl-arm/conf/machine/imx6slevk.conf
-    -rw-rw-r-- 1 vmuser vmuser  615 Apr 16 23:58 ../sources/meta-fsl-arm/conf/machine/imx6solosabreauto.conf
-    -rw-rw-r-- 1 vmuser vmuser  468 Apr 16 23:58 ../sources/meta-fsl-arm/conf/machine/imx6solosabresd.conf
-    -rw-rw-r-- 1 vmuser vmuser  542 Apr 16 23:58 ../sources/meta-fsl-arm/conf/machine/twr-vf65gs10.conf
-
-//list all non-freescale boards conf
-$ ls ../sources/meta-fsl-arm-extra/conf/machine/*.conf -l
-    -rw-rw-r-- 1 vmuser vmuser  155 Apr 16 23:58 ../sources/meta-fsl-arm-extra/conf/machine/cfa10036.conf
-    -rw-rw-r-- 1 vmuser vmuser  199 Apr 16 23:58 ../sources/meta-fsl-arm-extra/conf/machine/cfa10037.conf
-    -rw-rw-r-- 1 vmuser vmuser  234 Apr 16 23:58 ../sources/meta-fsl-arm-extra/conf/machine/cfa10049.conf
-    -rw-rw-r-- 1 vmuser vmuser  234 Apr 16 23:58 ../sources/meta-fsl-arm-extra/conf/machine/cfa10055.conf
-    -rw-rw-r-- 1 vmuser vmuser  229 Apr 16 23:58 ../sources/meta-fsl-arm-extra/conf/machine/cfa10056.conf
-    -rw-rw-r-- 1 vmuser vmuser  255 Apr 16 23:58 ../sources/meta-fsl-arm-extra/conf/machine/cfa10057.conf
-    -rw-rw-r-- 1 vmuser vmuser  255 Apr 16 23:58 ../sources/meta-fsl-arm-extra/conf/machine/cfa10058.conf
-    -rw-rw-r-- 1 vmuser vmuser  466 Apr 16 23:58 ../sources/meta-fsl-arm-extra/conf/machine/cgtqmx6.conf
-    -rw-rw-r-- 1 vmuser vmuser  246 Apr 16 23:58 ../sources/meta-fsl-arm-extra/conf/machine/imx233-olinuxino-maxi.conf
-    -rw-rw-r-- 1 vmuser vmuser  190 Apr 16 23:58 ../sources/meta-fsl-arm-extra/conf/machine/imx233-olinuxino-micro.conf
-    -rw-rw-r-- 1 vmuser vmuser  188 Apr 16 23:58 ../sources/meta-fsl-arm-extra/conf/machine/imx233-olinuxino-mini.conf
-    -rw-rw-r-- 1 vmuser vmuser  508 Apr 16 23:58 ../sources/meta-fsl-arm-extra/conf/machine/imx6qsabrelite.conf
-    -rw-rw-r-- 1 vmuser vmuser  726 Apr 16 23:58 ../sources/meta-fsl-arm-extra/conf/machine/m28evk.conf
-    -rw-rw-r-- 1 vmuser vmuser  767 Apr 16 23:58 ../sources/meta-fsl-arm-extra/conf/machine/m53evk.conf
-    -rw-rw-r-- 1 vmuser vmuser 1641 Apr 16 23:58 ../sources/meta-fsl-arm-extra/conf/machine/nitrogen6x.conf
-    -rw-rw-r-- 1 vmuser vmuser  786 Apr 16 23:58 ../sources/meta-fsl-arm-extra/conf/machine/nitrogen6x-lite.conf
-    -rw-rw-r-- 1 vmuser vmuser  538 Apr 16 23:58 ../sources/meta-fsl-arm-extra/conf/machine/wandboard-dual.conf
-    -rw-rw-r-- 1 vmuser vmuser  529 Apr 16 23:58 ../sources/meta-fsl-arm-extra/conf/machine/wandboard-quad.conf
-    -rw-rw-r-- 1 vmuser vmuser  465 Apr 16 23:58 ../sources/meta-fsl-arm-extra/conf/machine/wandboard-solo.conf
-
-//list available images
-$ find ../sources -name *image*
-    ../sources/meta-fsl-arm/scripts/lib/image
-    ../sources/meta-fsl-arm/classes/mfgtool-initramfs-image.bbclass
-    ../sources/meta-fsl-arm/classes/image_types_fsl.bbclass
-    ../sources/meta-fsl-arm/recipes-fsl/images
-    ../sources/meta-fsl-arm/recipes-fsl/images/fsl-image-mfgtool-initramfs.bb
-    ../sources/poky/scripts/lib/image
-    ../sources/poky/scripts/lib/image/canned-wks/sdimage-bootpart.wks
-    ../sources/poky/scripts/lib/wic/plugins/imager
-    ../sources/poky/scripts/lib/wic/plugins/source/fsimage.py
-    ../sources/poky/scripts/lib/wic/imager
-    ../sources/poky/scripts/lib/wic/imager/baseimager.py
-    ../sources/poky/scripts/test-remote-image
-    ../sources/poky/scripts/contrib/ddimage
-    ../sources/poky/scripts/runqemu-addptable2image
-    ../sources/poky/documentation/ref-manual/ref-images.xml
-    ../sources/poky/documentation/ref-manual/figures/image-generation.png
-    ../sources/poky/documentation/ref-manual/figures/images.png
-    ../sources/poky/documentation/mega-manual/figures/image-generation.png
-    ../sources/poky/documentation/mega-manual/figures/images.png
-    ../sources/poky/documentation/mega-manual/figures/using-a-pre-built-image.png
-    ../sources/poky/documentation/mega-manual/figures/building-an-image.png
-    ../sources/poky/documentation/yocto-project-qs/figures/using-a-pre-built-image.png
-    ../sources/poky/documentation/yocto-project-qs/figures/building-an-image.png
-    ../sources/poky/bitbake/bin/image-writer
-    ../sources/poky/bitbake/lib/toaster/orm/migrations/0005_auto__add_target_image_file__add_target_file__add_field_variablehistor.py
-    ../sources/poky/bitbake/lib/toaster/orm/migrations/0006_auto__add_field_target_image_size__add_field_target_license_manifest_p.py
-    ../sources/poky/bitbake/lib/toaster/toastergui/static/css/images
-    ../sources/poky/bitbake/lib/bb/ui/icons/images
-    ../sources/poky/bitbake/lib/bb/ui/icons/images/images_hover.png
-    ../sources/poky/bitbake/lib/bb/ui/icons/images/images_display.png
-    ../sources/poky/bitbake/lib/bb/ui/crumbs/imagedetailspage.py
-    ../sources/poky/bitbake/lib/bb/ui/crumbs/imageconfigurationpage.py
-    ../sources/poky/bitbake/lib/bb/ui/crumbs/hig/saveimagedialog.py
-    ../sources/poky/bitbake/lib/bb/ui/crumbs/hig/retrieveimagedialog.py
-    ../sources/poky/bitbake/lib/bb/ui/crumbs/hig/imageselectiondialog.py
-    ../sources/poky/bitbake/lib/bb/ui/crumbs/hig/deployimagedialog.py
-    ../sources/poky/meta-selftest/recipes-test/images
-    ../sources/poky/meta-selftest/recipes-test/images/oe-selftest-image.bb
-    ../sources/poky/meta/recipes-extended/images
-    ../sources/poky/meta/recipes-extended/images/core-image-lsb-sdk.bb
-    ../sources/poky/meta/recipes-extended/images/core-image-full-cmdline.bb
-    ../sources/poky/meta/recipes-extended/images/core-image-kernel-dev.bb
-    ../sources/poky/meta/recipes-extended/images/core-image-lsb.bb
-    ../sources/poky/meta/recipes-extended/images/core-image-testmaster.bb
-    ../sources/poky/meta/recipes-extended/images/core-image-lsb-dev.bb
-    ../sources/poky/meta/recipes-extended/images/core-image-testmaster-initramfs.bb
-    ../sources/poky/meta/recipes-multimedia/gstreamer/gst-ffmpeg-0.10.13/0001-avcodec-msrle-use-av_image_get_linesize-to-calculate.patch
-    ../sources/poky/meta/recipes-qt/images
-    ../sources/poky/meta/recipes-qt/images/qt4e-demo-image.bb
-    ../sources/poky/meta/recipes-qt/qt4/qt4-4.8.6/0028-Don-t-crash-on-broken-GIF-images.patch
-    ../sources/poky/meta/recipes-graphics/xorg-lib/xcb-util-image_0.4.0.bb
-    ../sources/poky/meta/recipes-graphics/images
-    ../sources/poky/meta/recipes-graphics/images/core-image-x11.bb
-    ../sources/poky/meta/recipes-graphics/images/core-image-directfb.bb
-    ../sources/poky/meta/recipes-graphics/images/core-image-weston.bb
-    ../sources/poky/meta/recipes-graphics/images/core-image-clutter.bb
-    ../sources/poky/meta/recipes-devtools/mkelfimage
-    ../sources/poky/meta/recipes-devtools/mkelfimage/mkelfimage
-    ../sources/poky/meta/recipes-devtools/mkelfimage/mkelfimage_git.bb
-    ../sources/poky/meta/recipes-core/images
-    ../sources/poky/meta/recipes-core/images/core-image-minimal.bb
-    ../sources/poky/meta/recipes-core/images/core-image-base.bb
-    ../sources/poky/meta/recipes-core/images/build-appliance-image_12.0.1.bb
-    ../sources/poky/meta/recipes-core/images/build-appliance-image
-    ../sources/poky/meta/recipes-core/images/core-image-minimal-mtdutils.bb
-    ../sources/poky/meta/recipes-core/images/core-image-minimal-dev.bb
-    ../sources/poky/meta/recipes-core/images/core-image-minimal-initramfs.bb
-    ../sources/poky/meta/classes/image-buildinfo.bbclass
-    ../sources/poky/meta/classes/testimage-auto.bbclass
-    ../sources/poky/meta/classes/testimage.bbclass
-    ../sources/poky/meta/classes/image_types_uboot.bbclass
-    ../sources/poky/meta/classes/image-vmdk.bbclass
-    ../sources/poky/meta/classes/core-image.bbclass
-    ../sources/poky/meta/classes/image.bbclass
-    ../sources/poky/meta/classes/image_types.bbclass
-    ../sources/poky/meta/classes/image-prelink.bbclass
-    ../sources/poky/meta/classes/image-swab.bbclass
-    ../sources/poky/meta/classes/image-live.bbclass
-    ../sources/poky/meta/classes/image-mklibs.bbclass
-    ../sources/poky/meta/lib/oe/image.py
-    ../sources/poky/meta/lib/oeqa/controllers/masterimage.py
-    ../sources/poky/meta/recipes-bsp/u-boot/u-boot-mkimage_2015.01.bb
-    ../sources/poky/meta/recipes-rt/images
-    ../sources/poky/meta/recipes-rt/images/core-image-rt.bb
-    ../sources/poky/meta/recipes-rt/images/core-image-rt-sdk.bb
-    ../sources/poky/meta/recipes-connectivity/connman/connman-gnome/images
-    ../sources/poky/meta/recipes-sato/images
-    ../sources/poky/meta/recipes-sato/images/core-image-sato.bb
-    ../sources/poky/meta/recipes-sato/images/core-image-sato-dev.bb
-    ../sources/poky/meta/recipes-sato/images/core-image-sato-sdk.bb
-    ../sources/poky/meta-skeleton/recipes-multilib/images
-    ../sources/poky/meta-skeleton/recipes-multilib/images/core-image-multilib-example.bb
-    ../sources/meta-openembedded/meta-oe/recipes-multimedia/libsdl-image
-    ../sources/meta-openembedded/meta-oe/recipes-multimedia/libsdl-image/libsdl-image
-    ../sources/meta-openembedded/meta-oe/recipes-multimedia/libsdl-image/libsdl-image_1.2.12.bb
-    ../sources/meta-openembedded/meta-oe/recipes-graphics/lxdm/lxdm/0001-lxdm.conf.in-blacklist-root-for-release-images.patch
-    ../sources/meta-openembedded/meta-oe/recipes-graphics/nonworking/slim/slim/0002-Fix-image-handling-integer-overflows.patch
-    ../sources/meta-openembedded/meta-oe/recipes-support/imagemagick
-    ../sources/meta-openembedded/meta-oe/recipes-support/imagemagick/imagemagick_6.8.9.bb
-    ../sources/meta-openembedded/meta-initramfs/recipes-bsp/images
-    ../sources/meta-openembedded/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-klibc-image.bb
-    ../sources/meta-openembedded/meta-initramfs/recipes-bsp/images/initramfs-debug-image.bb
-    ../sources/meta-openembedded/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb
-    ../sources/Documentation/release-notes/source/images.inc
-    ../sources/Documentation/user-guide/source/images.rst
-    ../sources/Documentation/user-guide/source/image-list.inc
-    ../sources/meta-fsl-demos/recipes-qt/images
-    ../sources/meta-fsl-demos/recipes-qt/images/qt-in-use-image.bb
-    ../sources/meta-fsl-demos/recipes-qt/images/qte-in-use-image.bb
-    ../sources/meta-fsl-demos/recipes-fsl/images
-    ../sources/meta-fsl-demos/recipes-fsl/images/fsl-image-machine-test.bb
-    ../sources/meta-fsl-demos/recipes-fsl/images/fsl-image-multimedia-full.bb
-    ../sources/meta-fsl-demos/recipes-fsl/images/fsl-image-multimedia.bb
-</code></pre>
-
-<h2>4.3 Start to build</h2>
-
-<pre><code>//list core-image-base all task 
-$ bitbake -c listtasks core-image-base
-
-// download all source only 
-$ bitbake -c fetchall core-image-base
-
-//build
-$ bitbake core-image-base
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="2">&larr; Older</a>
@@ -1493,23 +2225,23 @@ $ bitbake core-image-base
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/04/07/buildroot-for-imx-l3-dot-14-dot-52-1-dot-1-0-ga/">Buildroot for imx L3.14.52_1.1.0_ga</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/02/29/shuttle-dsa2ls-hack-record/">Shuttle DSA2LS hack record</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/01/26/kindle-3-hack/">kindle 3 hack</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/12/01/git-send-email-and-msmtp-config/">git send-email and msmtp config</a>
       </li>
     
       <li class="post">
         <a href="/blog/2015/11/25/git-subtree-usage-and-examples/">git subtree usage and examples</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/10/30/imx-l3-dot-14-dot-28-1-dot-0-0-building-and-downloading/">iMX L3.14.28_1.0.0 building and downloading</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/10/12/build-qt5-dot-6-using-vs2013/">Build qt5.6 Using Vs2013</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/09/29/v4l-and-gstreamer/">v4l and gstreamer</a>
       </li>
     
   </ul>
@@ -1525,7 +2257,7 @@ $ bitbake core-image-base
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - Jordon Wu -
+  Copyright &copy; 2016 - Jordon Wu -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a>. Design by <a href="http://octopressthemes.com">Octopress Themes</a>. Background image by <a href="http://www.flickr.com/photos/rhysasplundh/">Rhys Asplundh</a></span>
 </p>
 
