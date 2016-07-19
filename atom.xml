@@ -4,7 +4,7 @@
   <title><![CDATA[Jordon Wu's Blog]]></title>
   <link href="http://jordonwu.github.io/atom.xml" rel="self"/>
   <link href="http://jordonwu.github.io/"/>
-  <updated>2016-05-04T14:22:40+08:00</updated>
+  <updated>2016-07-19T09:41:30+08:00</updated>
   <id>http://jordonwu.github.io/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
@@ -1864,6 +1864,13 @@ rm -rf $RPM_BUILD_ROOT
 
 <pre><code>$ find "main(" string in *.c file of current path
 $ find . -name "*.c" -print | xargs grep "main("
+</code></pre>
+
+<h1>2. Check process memory status</h1>
+
+<pre><code>$ top                   #using top to get process id
+$ cat /proc/70/status   #70 is the process id
+$ watch -n 10 cat /proc/70/status #check process memory status per 10s
 </code></pre>
 ]]></content>
   </entry>
