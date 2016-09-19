@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: freescale | Jordon Wu's Blog]]></title>
-  <link href="http://jordonwu.github.io/blog/categories/freescale/atom.xml" rel="self"/>
-  <link href="http://jordonwu.github.io/"/>
-  <updated>2016-07-19T09:41:30+08:00</updated>
-  <id>http://jordonwu.github.io/</id>
+  <link href="http://jordonwu.github.com/blog/categories/freescale/atom.xml" rel="self"/>
+  <link href="http://jordonwu.github.com/"/>
+  <updated>2016-09-19T14:25:22+08:00</updated>
+  <id>http://jordonwu.github.com/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[MFGTool Emmc mksdcard.sh]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/05/14/mfgtool-emmc-mksdcard-dot-sh/"/>
+    <link href="http://jordonwu.github.com/blog/2015/05/14/mfgtool-emmc-mksdcard-dot-sh/"/>
     <updated>2015-05-14T19:07:18+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/05/14/mfgtool-emmc-mksdcard-dot-sh</id>
+    <id>http://jordonwu.github.com/blog/2015/05/14/mfgtool-emmc-mksdcard-dot-sh</id>
     <content type="html"><![CDATA[<h1>MFGTool Emmc mksdcard.sh comment</h1>
 
 <h2>1.烧写脚本：</h2>

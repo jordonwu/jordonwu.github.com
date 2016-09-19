@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: linux | Jordon Wu's Blog]]></title>
-  <link href="http://jordonwu.github.io/blog/categories/linux/atom.xml" rel="self"/>
-  <link href="http://jordonwu.github.io/"/>
-  <updated>2016-07-19T09:41:30+08:00</updated>
-  <id>http://jordonwu.github.io/</id>
+  <link href="http://jordonwu.github.com/blog/categories/linux/atom.xml" rel="self"/>
+  <link href="http://jordonwu.github.com/"/>
+  <updated>2016-09-19T14:25:22+08:00</updated>
+  <id>http://jordonwu.github.com/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Buildroot for imx L3.14.52_1.1.0_ga]]></title>
-    <link href="http://jordonwu.github.io/blog/2016/04/07/buildroot-for-imx-l3-dot-14-dot-52-1-dot-1-0-ga/"/>
+    <link href="http://jordonwu.github.com/blog/2016/04/07/buildroot-for-imx-l3-dot-14-dot-52-1-dot-1-0-ga/"/>
     <updated>2016-04-07T13:04:45+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2016/04/07/buildroot-for-imx-l3-dot-14-dot-52-1-dot-1-0-ga</id>
+    <id>http://jordonwu.github.com/blog/2016/04/07/buildroot-for-imx-l3-dot-14-dot-52-1-dot-1-0-ga</id>
     <content type="html"><![CDATA[<h1>1. Get Buildroot</h1>
 
 <pre><code>$ git clone git://git.buildroot.net/buildroot.git buildroot (commit id: 986fa441e49cc180f77704699a6d2bb3627bf86a)
@@ -110,9 +110,9 @@ $ ls output/images/* -alh
   
   <entry>
     <title type="html"><![CDATA[kindle 3 hack]]></title>
-    <link href="http://jordonwu.github.io/blog/2016/01/26/kindle-3-hack/"/>
+    <link href="http://jordonwu.github.com/blog/2016/01/26/kindle-3-hack/"/>
     <updated>2016-01-26T21:23:32+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2016/01/26/kindle-3-hack</id>
+    <id>http://jordonwu.github.com/blog/2016/01/26/kindle-3-hack</id>
     <content type="html"><![CDATA[<h1>1. Prepare</h1>
 
 <h2>1.1 Open kindle 3 case and solder rs232 as below</h2>
@@ -640,9 +640,9 @@ pwd
   
   <entry>
     <title type="html"><![CDATA[imx6 summary linux host environment setup]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/05/26/imx6-summary-linux-host-environment-setup/"/>
+    <link href="http://jordonwu.github.com/blog/2015/05/26/imx6-summary-linux-host-environment-setup/"/>
     <updated>2015-05-26T08:52:12+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/05/26/imx6-summary-linux-host-environment-setup</id>
+    <id>http://jordonwu.github.com/blog/2015/05/26/imx6-summary-linux-host-environment-setup</id>
     <content type="html"><![CDATA[<h1>1.  Install Host OS</h1>
 
 <h2>1.1 Install VMware</h2>
@@ -702,9 +702,9 @@ $ /etc/init.d/smbd restart  //restart smbd service
   
   <entry>
     <title type="html"><![CDATA[build linux for imx6]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/04/16/build-linux-for-imx6/"/>
+    <link href="http://jordonwu.github.com/blog/2015/04/16/build-linux-for-imx6/"/>
     <updated>2015-04-16T19:26:06+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/04/16/build-linux-for-imx6</id>
+    <id>http://jordonwu.github.com/blog/2015/04/16/build-linux-for-imx6</id>
     <content type="html"><![CDATA[<h1>1.      Install Host OS</h1>
 
 <h2>1.1     Install VMware</h2>
@@ -1489,9 +1489,9 @@ $ make menuconfig
   
   <entry>
     <title type="html"><![CDATA[build openwrt firmware]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/04/15/build-openwrt-firmware/"/>
+    <link href="http://jordonwu.github.com/blog/2015/04/15/build-openwrt-firmware/"/>
     <updated>2015-04-15T14:51:54+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/04/15/build-openwrt-firmware</id>
+    <id>http://jordonwu.github.com/blog/2015/04/15/build-openwrt-firmware</id>
     <content type="html"><![CDATA[<h1>1. Hardware</h1>
 
 <p>wrtnode board <a href="http://cn.wrtnode.com/">http://cn.wrtnode.com/</a></p>

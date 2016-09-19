@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: riot | Jordon Wu's Blog]]></title>
-  <link href="http://jordonwu.github.io/blog/categories/riot/atom.xml" rel="self"/>
-  <link href="http://jordonwu.github.io/"/>
-  <updated>2016-07-19T09:41:30+08:00</updated>
-  <id>http://jordonwu.github.io/</id>
+  <link href="http://jordonwu.github.com/blog/categories/riot/atom.xml" rel="self"/>
+  <link href="http://jordonwu.github.com/"/>
+  <updated>2016-09-19T14:25:22+08:00</updated>
+  <id>http://jordonwu.github.com/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[build u-boot for riot board]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/04/15/build-u-boot-for-riot-board/"/>
+    <link href="http://jordonwu.github.com/blog/2015/04/15/build-u-boot-for-riot-board/"/>
     <updated>2015-04-15T14:52:23+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/04/15/build-u-boot-for-riot-board</id>
+    <id>http://jordonwu.github.com/blog/2015/04/15/build-u-boot-for-riot-board</id>
     <content type="html"><![CDATA[<h2>1. Get u-boot source</h2>
 
 <pre><code>git clone https://github.com/Freescale/u-boot-fslc.git

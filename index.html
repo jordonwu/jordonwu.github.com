@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://jordonwu.github.io/">
+  <link rel="canonical" href="http://jordonwu.github.com/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -37,7 +37,7 @@
   <header role="banner"><hgroup>
   <h1><a href="/">Jordon Wu&#8217;s Blog</a></h1>
   
-    <h2>A blog for recording something</h2>
+    <h2>A blog to record something</h2>
   
 </hgroup>
 
@@ -49,7 +49,7 @@
   
 <form action="https://www.google.com/search" method="get">
   <fieldset role="search">
-    <input type="hidden" name="q" value="site:jordonwu.github.io" />
+    <input type="hidden" name="q" value="site:jordonwu.github.com" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
@@ -2209,6 +2209,25 @@ $ find . -name "*.c" -print | xargs grep "main("
 <pre><code>$ top                   #using top to get process id
 $ cat /proc/70/status   #70 is the process id
 $ watch -n 10 cat /proc/70/status #check process memory status per 10s
+</code></pre>
+
+<h1>3. Iterate all PID</h1>
+
+<pre><code>$ for pid in `ps -ef | grep your_search_term | awk '{print $2}'` ; do kill $pid ; done
+
+Refer : http://stackoverflow.com/questions/21470362/find-the-pids-of-running-processes-and-store-as-an-array
+
+Just replace your_search_term with the process name you want to kill.
+
+You could also make it into a script and swap your_search_term for $1
+
+EDIT: I suppose I should explain how this works.
+
+The back ticks `` collects the output from the expression inside it. In this case it will return a list of pids for a process name.
+
+Using a for loop we can iterate through each pid and kill the process.
+
+EDIT2: replaced kill -9 with kill
 </code></pre>
 </div>
   

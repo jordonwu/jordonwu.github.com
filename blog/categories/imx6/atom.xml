@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: imx6 | Jordon Wu's Blog]]></title>
-  <link href="http://jordonwu.github.io/blog/categories/imx6/atom.xml" rel="self"/>
-  <link href="http://jordonwu.github.io/"/>
-  <updated>2016-07-19T09:41:30+08:00</updated>
-  <id>http://jordonwu.github.io/</id>
+  <link href="http://jordonwu.github.com/blog/categories/imx6/atom.xml" rel="self"/>
+  <link href="http://jordonwu.github.com/"/>
+  <updated>2016-09-19T14:25:22+08:00</updated>
+  <id>http://jordonwu.github.com/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Buildroot for imx L3.14.52_1.1.0_ga]]></title>
-    <link href="http://jordonwu.github.io/blog/2016/04/07/buildroot-for-imx-l3-dot-14-dot-52-1-dot-1-0-ga/"/>
+    <link href="http://jordonwu.github.com/blog/2016/04/07/buildroot-for-imx-l3-dot-14-dot-52-1-dot-1-0-ga/"/>
     <updated>2016-04-07T13:04:45+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2016/04/07/buildroot-for-imx-l3-dot-14-dot-52-1-dot-1-0-ga</id>
+    <id>http://jordonwu.github.com/blog/2016/04/07/buildroot-for-imx-l3-dot-14-dot-52-1-dot-1-0-ga</id>
     <content type="html"><![CDATA[<h1>1. Get Buildroot</h1>
 
 <pre><code>$ git clone git://git.buildroot.net/buildroot.git buildroot (commit id: 986fa441e49cc180f77704699a6d2bb3627bf86a)
@@ -110,9 +110,9 @@ $ ls output/images/* -alh
   
   <entry>
     <title type="html"><![CDATA[imx6 summary upgrade ltib L3.0.35_4.1.0 to L3.0.101_4.1.1]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/05/28/imx6-summary-upgrade-ltib-l3-dot-0-35-4-dot-1-0-to-l3-dot-0-101-4-dot-1-1/"/>
+    <link href="http://jordonwu.github.com/blog/2015/05/28/imx6-summary-upgrade-ltib-l3-dot-0-35-4-dot-1-0-to-l3-dot-0-101-4-dot-1-1/"/>
     <updated>2015-05-28T10:50:25+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/05/28/imx6-summary-upgrade-ltib-l3-dot-0-35-4-dot-1-0-to-l3-dot-0-101-4-dot-1-1</id>
+    <id>http://jordonwu.github.com/blog/2015/05/28/imx6-summary-upgrade-ltib-l3-dot-0-35-4-dot-1-0-to-l3-dot-0-101-4-dot-1-1</id>
     <content type="html"><![CDATA[<h1>1. Setup and build ltib using bsp L3.0.35_4.1.0_130816</h1>
 
 <h1>2. Download L3.0.101_4.1.1 package</h1>
@@ -173,9 +173,9 @@ $ ./ltib -m prep -p kernel  # fetch kernel souce code
   
   <entry>
     <title type="html"><![CDATA[Imx6 Summary Build Image for Imx6 Using Yocto]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/05/26/imx6-summary-build-image-for-imx6-using-yocto/"/>
+    <link href="http://jordonwu.github.com/blog/2015/05/26/imx6-summary-build-image-for-imx6-using-yocto/"/>
     <updated>2015-05-26T17:07:56+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/05/26/imx6-summary-build-image-for-imx6-using-yocto</id>
+    <id>http://jordonwu.github.com/blog/2015/05/26/imx6-summary-build-image-for-imx6-using-yocto</id>
     <content type="html"><![CDATA[<h1>1. Install repo</h1>
 
 <pre><code>$ curl http://commondatastorage.googleapis.com/git-repo-downloads/repo &gt; ~/bin/repo
@@ -420,9 +420,9 @@ $ bitbake core-image-base
   
   <entry>
     <title type="html"><![CDATA[imx6 summary linux host environment setup]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/05/26/imx6-summary-linux-host-environment-setup/"/>
+    <link href="http://jordonwu.github.com/blog/2015/05/26/imx6-summary-linux-host-environment-setup/"/>
     <updated>2015-05-26T08:52:12+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/05/26/imx6-summary-linux-host-environment-setup</id>
+    <id>http://jordonwu.github.com/blog/2015/05/26/imx6-summary-linux-host-environment-setup</id>
     <content type="html"><![CDATA[<h1>1.  Install Host OS</h1>
 
 <h2>1.1 Install VMware</h2>
@@ -482,9 +482,9 @@ $ /etc/init.d/smbd restart  //restart smbd service
   
   <entry>
     <title type="html"><![CDATA[MFGTool Emmc mksdcard.sh]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/05/14/mfgtool-emmc-mksdcard-dot-sh/"/>
+    <link href="http://jordonwu.github.com/blog/2015/05/14/mfgtool-emmc-mksdcard-dot-sh/"/>
     <updated>2015-05-14T19:07:18+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/05/14/mfgtool-emmc-mksdcard-dot-sh</id>
+    <id>http://jordonwu.github.com/blog/2015/05/14/mfgtool-emmc-mksdcard-dot-sh</id>
     <content type="html"><![CDATA[<h1>MFGTool Emmc mksdcard.sh comment</h1>
 
 <h2>1.烧写脚本：</h2>

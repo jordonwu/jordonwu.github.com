@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: github | Jordon Wu's Blog]]></title>
-  <link href="http://jordonwu.github.io/blog/categories/github/atom.xml" rel="self"/>
-  <link href="http://jordonwu.github.io/"/>
-  <updated>2016-07-19T09:41:30+08:00</updated>
-  <id>http://jordonwu.github.io/</id>
+  <link href="http://jordonwu.github.com/blog/categories/github/atom.xml" rel="self"/>
+  <link href="http://jordonwu.github.com/"/>
+  <updated>2016-09-19T14:25:22+08:00</updated>
+  <id>http://jordonwu.github.com/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[sync a fork of a repository to keep it up-to-date with the upstream repository]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/06/10/sync-a-fork-of-a-repository-to-keep-it-up-to-date-with-the-upstream-repository/"/>
+    <link href="http://jordonwu.github.com/blog/2015/06/10/sync-a-fork-of-a-repository-to-keep-it-up-to-date-with-the-upstream-repository/"/>
     <updated>2015-06-10T15:05:40+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/06/10/sync-a-fork-of-a-repository-to-keep-it-up-to-date-with-the-upstream-repository</id>
+    <id>http://jordonwu.github.com/blog/2015/06/10/sync-a-fork-of-a-repository-to-keep-it-up-to-date-with-the-upstream-repository</id>
     <content type="html"><![CDATA[<h1>1. Configuring a remote for a fork</h1>
 
 <p>To sync changes you make in a fork with the original repository, you must configure a remote that points to the upstream repository in Git.</p>
@@ -98,9 +98,9 @@
   
   <entry>
     <title type="html"><![CDATA[Adding an existing project to Github]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/05/26/adding-an-existing-project-to-github/"/>
+    <link href="http://jordonwu.github.com/blog/2015/05/26/adding-an-existing-project-to-github/"/>
     <updated>2015-05-26T08:12:55+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/05/26/adding-an-existing-project-to-github</id>
+    <id>http://jordonwu.github.com/blog/2015/05/26/adding-an-existing-project-to-github</id>
     <content type="html"><![CDATA[<p>Ref: <a href="https://help.github.com/articles/pushing-to-a-remote/">https://help.github.com/articles/pushing-to-a-remote/</a></p>
 
 <h1>1. Create a new repository on Github</h1>
@@ -256,9 +256,9 @@ git push origin placeholder
   
   <entry>
     <title type="html"><![CDATA[Octopress Install and Usage on Windows 7]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/04/14/install-octopress-on-windows-7/"/>
+    <link href="http://jordonwu.github.com/blog/2015/04/14/install-octopress-on-windows-7/"/>
     <updated>2015-04-14T09:15:12+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/04/14/install-octopress-on-windows-7</id>
+    <id>http://jordonwu.github.com/blog/2015/04/14/install-octopress-on-windows-7</id>
     <content type="html"><![CDATA[<h2>1.   Install git</h2>
 
 <pre><code>    Version : Git-1.9.2-preview20140411.exe

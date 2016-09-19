@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: ltib | Jordon Wu's Blog]]></title>
-  <link href="http://jordonwu.github.io/blog/categories/ltib/atom.xml" rel="self"/>
-  <link href="http://jordonwu.github.io/"/>
-  <updated>2016-07-19T09:41:30+08:00</updated>
-  <id>http://jordonwu.github.io/</id>
+  <link href="http://jordonwu.github.com/blog/categories/ltib/atom.xml" rel="self"/>
+  <link href="http://jordonwu.github.com/"/>
+  <updated>2016-09-19T14:25:22+08:00</updated>
+  <id>http://jordonwu.github.com/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[upgrade ltib gstreamer]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/09/28/upgrade-ltib-gstreamer/"/>
+    <link href="http://jordonwu.github.com/blog/2015/09/28/upgrade-ltib-gstreamer/"/>
     <updated>2015-09-28T15:54:48+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/09/28/upgrade-ltib-gstreamer</id>
+    <id>http://jordonwu.github.com/blog/2015/09/28/upgrade-ltib-gstreamer</id>
     <content type="html"><![CDATA[<h1>1. Upgrade glib2 to 2.28.8</h1>
 
 <h2>1.1 Copy glib2 spec to dist/lfs/5.1/glib2/glib2.spec</h2>
@@ -524,9 +524,9 @@ rm -rf $RPM_BUILD_ROOT
   
   <entry>
     <title type="html"><![CDATA[imx6 summary upgrade ltib L3.0.35_4.1.0 to L3.0.101_4.1.1]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/05/28/imx6-summary-upgrade-ltib-l3-dot-0-35-4-dot-1-0-to-l3-dot-0-101-4-dot-1-1/"/>
+    <link href="http://jordonwu.github.com/blog/2015/05/28/imx6-summary-upgrade-ltib-l3-dot-0-35-4-dot-1-0-to-l3-dot-0-101-4-dot-1-1/"/>
     <updated>2015-05-28T10:50:25+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/05/28/imx6-summary-upgrade-ltib-l3-dot-0-35-4-dot-1-0-to-l3-dot-0-101-4-dot-1-1</id>
+    <id>http://jordonwu.github.com/blog/2015/05/28/imx6-summary-upgrade-ltib-l3-dot-0-35-4-dot-1-0-to-l3-dot-0-101-4-dot-1-1</id>
     <content type="html"><![CDATA[<h1>1. Setup and build ltib using bsp L3.0.35_4.1.0_130816</h1>
 
 <h1>2. Download L3.0.101_4.1.1 package</h1>
@@ -587,9 +587,9 @@ $ ./ltib -m prep -p kernel  # fetch kernel souce code
   
   <entry>
     <title type="html"><![CDATA[using ltib's u-boot kernel and rootfs to boot board step by step]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/05/14/using-ltibs-u-boot-kernel-and-rootfs-to-boot-board-step-by-step/"/>
+    <link href="http://jordonwu.github.com/blog/2015/05/14/using-ltibs-u-boot-kernel-and-rootfs-to-boot-board-step-by-step/"/>
     <updated>2015-05-14T14:47:48+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/05/14/using-ltibs-u-boot-kernel-and-rootfs-to-boot-board-step-by-step</id>
+    <id>http://jordonwu.github.com/blog/2015/05/14/using-ltibs-u-boot-kernel-and-rootfs-to-boot-board-step-by-step</id>
     <content type="html"><![CDATA[<h1>1. Config and build ltib for sabre sdb imx6q</h1>
 
 <h1>2. Get source code</h1>
@@ -831,9 +831,9 @@ $ sudo tar -cjvf ../rootfs.tar.bz2 ./*
   
   <entry>
     <title type="html"><![CDATA[build linux for imx6]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/04/16/build-linux-for-imx6/"/>
+    <link href="http://jordonwu.github.com/blog/2015/04/16/build-linux-for-imx6/"/>
     <updated>2015-04-16T19:26:06+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/04/16/build-linux-for-imx6</id>
+    <id>http://jordonwu.github.com/blog/2015/04/16/build-linux-for-imx6</id>
     <content type="html"><![CDATA[<h1>1.      Install Host OS</h1>
 
 <h2>1.1     Install VMware</h2>

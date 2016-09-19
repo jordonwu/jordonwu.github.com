@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: u-boot | Jordon Wu's Blog]]></title>
-  <link href="http://jordonwu.github.io/blog/categories/u-boot/atom.xml" rel="self"/>
-  <link href="http://jordonwu.github.io/"/>
-  <updated>2016-07-19T09:41:30+08:00</updated>
-  <id>http://jordonwu.github.io/</id>
+  <link href="http://jordonwu.github.com/blog/categories/u-boot/atom.xml" rel="self"/>
+  <link href="http://jordonwu.github.com/"/>
+  <updated>2016-09-19T14:25:22+08:00</updated>
+  <id>http://jordonwu.github.com/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Buildroot for imx L3.14.52_1.1.0_ga]]></title>
-    <link href="http://jordonwu.github.io/blog/2016/04/07/buildroot-for-imx-l3-dot-14-dot-52-1-dot-1-0-ga/"/>
+    <link href="http://jordonwu.github.com/blog/2016/04/07/buildroot-for-imx-l3-dot-14-dot-52-1-dot-1-0-ga/"/>
     <updated>2016-04-07T13:04:45+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2016/04/07/buildroot-for-imx-l3-dot-14-dot-52-1-dot-1-0-ga</id>
+    <id>http://jordonwu.github.com/blog/2016/04/07/buildroot-for-imx-l3-dot-14-dot-52-1-dot-1-0-ga</id>
     <content type="html"><![CDATA[<h1>1. Get Buildroot</h1>
 
 <pre><code>$ git clone git://git.buildroot.net/buildroot.git buildroot (commit id: 986fa441e49cc180f77704699a6d2bb3627bf86a)
@@ -110,9 +110,9 @@ $ ls output/images/* -alh
   
   <entry>
     <title type="html"><![CDATA[build u-boot for riot board]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/04/15/build-u-boot-for-riot-board/"/>
+    <link href="http://jordonwu.github.com/blog/2015/04/15/build-u-boot-for-riot-board/"/>
     <updated>2015-04-15T14:52:23+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/04/15/build-u-boot-for-riot-board</id>
+    <id>http://jordonwu.github.com/blog/2015/04/15/build-u-boot-for-riot-board</id>
     <content type="html"><![CDATA[<h2>1. Get u-boot source</h2>
 
 <pre><code>git clone https://github.com/Freescale/u-boot-fslc.git
@@ -137,9 +137,9 @@ $ls ls -l u-boot.*
   
   <entry>
     <title type="html"><![CDATA[build openwrt firmware]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/04/15/build-openwrt-firmware/"/>
+    <link href="http://jordonwu.github.com/blog/2015/04/15/build-openwrt-firmware/"/>
     <updated>2015-04-15T14:51:54+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/04/15/build-openwrt-firmware</id>
+    <id>http://jordonwu.github.com/blog/2015/04/15/build-openwrt-firmware</id>
     <content type="html"><![CDATA[<h1>1. Hardware</h1>
 
 <p>wrtnode board <a href="http://cn.wrtnode.com/">http://cn.wrtnode.com/</a></p>

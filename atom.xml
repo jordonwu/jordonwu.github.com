@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Jordon Wu's Blog]]></title>
-  <link href="http://jordonwu.github.io/atom.xml" rel="self"/>
-  <link href="http://jordonwu.github.io/"/>
-  <updated>2016-07-19T09:41:30+08:00</updated>
-  <id>http://jordonwu.github.io/</id>
+  <link href="http://jordonwu.github.com/atom.xml" rel="self"/>
+  <link href="http://jordonwu.github.com/"/>
+  <updated>2016-09-19T14:25:22+08:00</updated>
+  <id>http://jordonwu.github.com/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Buildroot for imx L3.14.52_1.1.0_ga]]></title>
-    <link href="http://jordonwu.github.io/blog/2016/04/07/buildroot-for-imx-l3-dot-14-dot-52-1-dot-1-0-ga/"/>
+    <link href="http://jordonwu.github.com/blog/2016/04/07/buildroot-for-imx-l3-dot-14-dot-52-1-dot-1-0-ga/"/>
     <updated>2016-04-07T13:04:45+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2016/04/07/buildroot-for-imx-l3-dot-14-dot-52-1-dot-1-0-ga</id>
+    <id>http://jordonwu.github.com/blog/2016/04/07/buildroot-for-imx-l3-dot-14-dot-52-1-dot-1-0-ga</id>
     <content type="html"><![CDATA[<h1>1. Get Buildroot</h1>
 
 <pre><code>$ git clone git://git.buildroot.net/buildroot.git buildroot (commit id: 986fa441e49cc180f77704699a6d2bb3627bf86a)
@@ -110,9 +110,9 @@ $ ls output/images/* -alh
   
   <entry>
     <title type="html"><![CDATA[Shuttle DSA2LS hack record]]></title>
-    <link href="http://jordonwu.github.io/blog/2016/02/29/shuttle-dsa2ls-hack-record/"/>
+    <link href="http://jordonwu.github.com/blog/2016/02/29/shuttle-dsa2ls-hack-record/"/>
     <updated>2016-02-29T14:19:11+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2016/02/29/shuttle-dsa2ls-hack-record</id>
+    <id>http://jordonwu.github.com/blog/2016/02/29/shuttle-dsa2ls-hack-record</id>
     <content type="html"><![CDATA[<h1>1. Board introduction</h1>
 
 <pre><code>http://cn.shuttle.com/products/productsDetail?productId=1807
@@ -612,9 +612,9 @@ root@android:/ #
   
   <entry>
     <title type="html"><![CDATA[kindle 3 hack]]></title>
-    <link href="http://jordonwu.github.io/blog/2016/01/26/kindle-3-hack/"/>
+    <link href="http://jordonwu.github.com/blog/2016/01/26/kindle-3-hack/"/>
     <updated>2016-01-26T21:23:32+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2016/01/26/kindle-3-hack</id>
+    <id>http://jordonwu.github.com/blog/2016/01/26/kindle-3-hack</id>
     <content type="html"><![CDATA[<h1>1. Prepare</h1>
 
 <h2>1.1 Open kindle 3 case and solder rs232 as below</h2>
@@ -1142,9 +1142,9 @@ pwd
   
   <entry>
     <title type="html"><![CDATA[git send-email and msmtp config]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/12/01/git-send-email-and-msmtp-config/"/>
+    <link href="http://jordonwu.github.com/blog/2015/12/01/git-send-email-and-msmtp-config/"/>
     <updated>2015-12-01T14:40:40+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/12/01/git-send-email-and-msmtp-config</id>
+    <id>http://jordonwu.github.com/blog/2015/12/01/git-send-email-and-msmtp-config</id>
     <content type="html"><![CDATA[<h1>1. msmtp setup and config(using gmail as example)</h1>
 
 <pre><code>$ apt-get install msmtp
@@ -1251,27 +1251,27 @@ $ git send-email --to xxx@xxx.xxx outgoing/*
   
   <entry>
     <title type="html"><![CDATA[git subtree usage and examples]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/11/25/git-subtree-usage-and-examples/"/>
+    <link href="http://jordonwu.github.com/blog/2015/11/25/git-subtree-usage-and-examples/"/>
     <updated>2015-11-25T15:39:29+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/11/25/git-subtree-usage-and-examples</id>
+    <id>http://jordonwu.github.com/blog/2015/11/25/git-subtree-usage-and-examples</id>
     <content type="html"><![CDATA[
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[iMX L3.14.28_1.0.0 building and downloading]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/10/30/imx-l3-dot-14-dot-28-1-dot-0-0-building-and-downloading/"/>
+    <link href="http://jordonwu.github.com/blog/2015/10/30/imx-l3-dot-14-dot-28-1-dot-0-0-building-and-downloading/"/>
     <updated>2015-10-30T14:29:07+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/10/30/imx-l3-dot-14-dot-28-1-dot-0-0-building-and-downloading</id>
+    <id>http://jordonwu.github.com/blog/2015/10/30/imx-l3-dot-14-dot-28-1-dot-0-0-building-and-downloading</id>
     <content type="html"><![CDATA[
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Build qt5.6 Using Vs2013]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/10/12/build-qt5-dot-6-using-vs2013/"/>
+    <link href="http://jordonwu.github.com/blog/2015/10/12/build-qt5-dot-6-using-vs2013/"/>
     <updated>2015-10-12T18:02:32+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/10/12/build-qt5-dot-6-using-vs2013</id>
+    <id>http://jordonwu.github.com/blog/2015/10/12/build-qt5-dot-6-using-vs2013</id>
     <content type="html"><![CDATA[<h1>1. Install required tools</h1>
 
 <ul>
@@ -1290,9 +1290,9 @@ $ git send-email --to xxx@xxx.xxx outgoing/*
   
   <entry>
     <title type="html"><![CDATA[v4l and gstreamer]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/09/29/v4l-and-gstreamer/"/>
+    <link href="http://jordonwu.github.com/blog/2015/09/29/v4l-and-gstreamer/"/>
     <updated>2015-09-29T11:05:58+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/09/29/v4l-and-gstreamer</id>
+    <id>http://jordonwu.github.com/blog/2015/09/29/v4l-and-gstreamer</id>
     <content type="html"><![CDATA[<h1>1. V4L Test commmand</h1>
 
 <h2>1.1 Overlay</h2>
@@ -1348,9 +1348,9 @@ $ gst-launch -v tvsrc device=/dev/video0 ! mfw_v4lsink axis-top=50 axis-left=100
   
   <entry>
     <title type="html"><![CDATA[upgrade ltib gstreamer]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/09/28/upgrade-ltib-gstreamer/"/>
+    <link href="http://jordonwu.github.com/blog/2015/09/28/upgrade-ltib-gstreamer/"/>
     <updated>2015-09-28T15:54:48+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/09/28/upgrade-ltib-gstreamer</id>
+    <id>http://jordonwu.github.com/blog/2015/09/28/upgrade-ltib-gstreamer</id>
     <content type="html"><![CDATA[<h1>1. Upgrade glib2 to 2.28.8</h1>
 
 <h2>1.1 Copy glib2 spec to dist/lfs/5.1/glib2/glib2.spec</h2>
@@ -1857,9 +1857,9 @@ rm -rf $RPM_BUILD_ROOT
   
   <entry>
     <title type="html"><![CDATA[linux command summary]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/09/07/linux-command-summary/"/>
+    <link href="http://jordonwu.github.com/blog/2015/09/07/linux-command-summary/"/>
     <updated>2015-09-07T09:18:08+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/09/07/linux-command-summary</id>
+    <id>http://jordonwu.github.com/blog/2015/09/07/linux-command-summary</id>
     <content type="html"><![CDATA[<h1>1. How to find files by content</h1>
 
 <pre><code>$ find "main(" string in *.c file of current path
@@ -1872,14 +1872,33 @@ $ find . -name "*.c" -print | xargs grep "main("
 $ cat /proc/70/status   #70 is the process id
 $ watch -n 10 cat /proc/70/status #check process memory status per 10s
 </code></pre>
+
+<h1>3. Iterate all PID</h1>
+
+<pre><code>$ for pid in `ps -ef | grep your_search_term | awk '{print $2}'` ; do kill $pid ; done
+
+Refer : http://stackoverflow.com/questions/21470362/find-the-pids-of-running-processes-and-store-as-an-array
+
+Just replace your_search_term with the process name you want to kill.
+
+You could also make it into a script and swap your_search_term for $1
+
+EDIT: I suppose I should explain how this works.
+
+The back ticks `` collects the output from the expression inside it. In this case it will return a list of pids for a process name.
+
+Using a for loop we can iterate through each pid and kill the process.
+
+EDIT2: replaced kill -9 with kill
+</code></pre>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[sync a fork of a repository to keep it up-to-date with the upstream repository]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/06/10/sync-a-fork-of-a-repository-to-keep-it-up-to-date-with-the-upstream-repository/"/>
+    <link href="http://jordonwu.github.com/blog/2015/06/10/sync-a-fork-of-a-repository-to-keep-it-up-to-date-with-the-upstream-repository/"/>
     <updated>2015-06-10T15:05:40+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/06/10/sync-a-fork-of-a-repository-to-keep-it-up-to-date-with-the-upstream-repository</id>
+    <id>http://jordonwu.github.com/blog/2015/06/10/sync-a-fork-of-a-repository-to-keep-it-up-to-date-with-the-upstream-repository</id>
     <content type="html"><![CDATA[<h1>1. Configuring a remote for a fork</h1>
 
 <p>To sync changes you make in a fork with the original repository, you must configure a remote that points to the upstream repository in Git.</p>
@@ -1960,9 +1979,9 @@ $ watch -n 10 cat /proc/70/status #check process memory status per 10s
   
   <entry>
     <title type="html"><![CDATA[imx6 summary upgrade ltib L3.0.35_4.1.0 to L3.0.101_4.1.1]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/05/28/imx6-summary-upgrade-ltib-l3-dot-0-35-4-dot-1-0-to-l3-dot-0-101-4-dot-1-1/"/>
+    <link href="http://jordonwu.github.com/blog/2015/05/28/imx6-summary-upgrade-ltib-l3-dot-0-35-4-dot-1-0-to-l3-dot-0-101-4-dot-1-1/"/>
     <updated>2015-05-28T10:50:25+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/05/28/imx6-summary-upgrade-ltib-l3-dot-0-35-4-dot-1-0-to-l3-dot-0-101-4-dot-1-1</id>
+    <id>http://jordonwu.github.com/blog/2015/05/28/imx6-summary-upgrade-ltib-l3-dot-0-35-4-dot-1-0-to-l3-dot-0-101-4-dot-1-1</id>
     <content type="html"><![CDATA[<h1>1. Setup and build ltib using bsp L3.0.35_4.1.0_130816</h1>
 
 <h1>2. Download L3.0.101_4.1.1 package</h1>
@@ -2023,9 +2042,9 @@ $ ./ltib -m prep -p kernel  # fetch kernel souce code
   
   <entry>
     <title type="html"><![CDATA[Imx6 Summary Build Image for Imx6 Using Yocto]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/05/26/imx6-summary-build-image-for-imx6-using-yocto/"/>
+    <link href="http://jordonwu.github.com/blog/2015/05/26/imx6-summary-build-image-for-imx6-using-yocto/"/>
     <updated>2015-05-26T17:07:56+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/05/26/imx6-summary-build-image-for-imx6-using-yocto</id>
+    <id>http://jordonwu.github.com/blog/2015/05/26/imx6-summary-build-image-for-imx6-using-yocto</id>
     <content type="html"><![CDATA[<h1>1. Install repo</h1>
 
 <pre><code>$ curl http://commondatastorage.googleapis.com/git-repo-downloads/repo &gt; ~/bin/repo
@@ -2270,9 +2289,9 @@ $ bitbake core-image-base
   
   <entry>
     <title type="html"><![CDATA[imx6 summary linux host environment setup]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/05/26/imx6-summary-linux-host-environment-setup/"/>
+    <link href="http://jordonwu.github.com/blog/2015/05/26/imx6-summary-linux-host-environment-setup/"/>
     <updated>2015-05-26T08:52:12+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/05/26/imx6-summary-linux-host-environment-setup</id>
+    <id>http://jordonwu.github.com/blog/2015/05/26/imx6-summary-linux-host-environment-setup</id>
     <content type="html"><![CDATA[<h1>1.  Install Host OS</h1>
 
 <h2>1.1 Install VMware</h2>
@@ -2332,9 +2351,9 @@ $ /etc/init.d/smbd restart  //restart smbd service
   
   <entry>
     <title type="html"><![CDATA[Adding an existing project to Github]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/05/26/adding-an-existing-project-to-github/"/>
+    <link href="http://jordonwu.github.com/blog/2015/05/26/adding-an-existing-project-to-github/"/>
     <updated>2015-05-26T08:12:55+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/05/26/adding-an-existing-project-to-github</id>
+    <id>http://jordonwu.github.com/blog/2015/05/26/adding-an-existing-project-to-github</id>
     <content type="html"><![CDATA[<p>Ref: <a href="https://help.github.com/articles/pushing-to-a-remote/">https://help.github.com/articles/pushing-to-a-remote/</a></p>
 
 <h1>1. Create a new repository on Github</h1>
@@ -2490,18 +2509,18 @@ git push origin placeholder
   
   <entry>
     <title type="html"><![CDATA[Build Qt5.5.0 for Imx6]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/05/15/build-qt5-dot-5-0-for-imx6/"/>
+    <link href="http://jordonwu.github.com/blog/2015/05/15/build-qt5-dot-5-0-for-imx6/"/>
     <updated>2015-05-15T16:18:48+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/05/15/build-qt5-dot-5-0-for-imx6</id>
+    <id>http://jordonwu.github.com/blog/2015/05/15/build-qt5-dot-5-0-for-imx6</id>
     <content type="html"><![CDATA[
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[MFGTool Emmc mksdcard.sh]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/05/14/mfgtool-emmc-mksdcard-dot-sh/"/>
+    <link href="http://jordonwu.github.com/blog/2015/05/14/mfgtool-emmc-mksdcard-dot-sh/"/>
     <updated>2015-05-14T19:07:18+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/05/14/mfgtool-emmc-mksdcard-dot-sh</id>
+    <id>http://jordonwu.github.com/blog/2015/05/14/mfgtool-emmc-mksdcard-dot-sh</id>
     <content type="html"><![CDATA[<h1>MFGTool Emmc mksdcard.sh comment</h1>
 
 <h2>1.烧写脚本：</h2>
@@ -2569,9 +2588,9 @@ EOF
   
   <entry>
     <title type="html"><![CDATA[using ltib's u-boot kernel and rootfs to boot board step by step]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/05/14/using-ltibs-u-boot-kernel-and-rootfs-to-boot-board-step-by-step/"/>
+    <link href="http://jordonwu.github.com/blog/2015/05/14/using-ltibs-u-boot-kernel-and-rootfs-to-boot-board-step-by-step/"/>
     <updated>2015-05-14T14:47:48+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/05/14/using-ltibs-u-boot-kernel-and-rootfs-to-boot-board-step-by-step</id>
+    <id>http://jordonwu.github.com/blog/2015/05/14/using-ltibs-u-boot-kernel-and-rootfs-to-boot-board-step-by-step</id>
     <content type="html"><![CDATA[<h1>1. Config and build ltib for sabre sdb imx6q</h1>
 
 <h1>2. Get source code</h1>
@@ -2813,9 +2832,9 @@ $ sudo tar -cjvf ../rootfs.tar.bz2 ./*
   
   <entry>
     <title type="html"><![CDATA[build ltib for sabre sdb on ubuntu14.04]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/05/11/build-ltib-for-sabre-sdb-on-ubuntu14-dot-04/"/>
+    <link href="http://jordonwu.github.com/blog/2015/05/11/build-ltib-for-sabre-sdb-on-ubuntu14-dot-04/"/>
     <updated>2015-05-11T14:48:34+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/05/11/build-ltib-for-sabre-sdb-on-ubuntu14-dot-04</id>
+    <id>http://jordonwu.github.com/blog/2015/05/11/build-ltib-for-sabre-sdb-on-ubuntu14-dot-04</id>
     <content type="html"><![CDATA[<h1>1. Package</h1>
 
 <pre><code>1) L3.0.35_4.1.0_130816_source.gz
@@ -3725,9 +3744,9 @@ ttymxc0::respawn:/sbin/getty -L  ttymxc0 0 vt100 # GENERIC_SERIAL
   
   <entry>
     <title type="html"><![CDATA[build qt5.4.1 and qt3d using vs2013]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/05/07/build-qt5.4.1-and-qt3d-using-vs2013/"/>
+    <link href="http://jordonwu.github.com/blog/2015/05/07/build-qt5.4.1-and-qt3d-using-vs2013/"/>
     <updated>2015-05-07T09:55:40+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/05/07/build-qt5.4.1-and-qt3d-using-vs2013</id>
+    <id>http://jordonwu.github.com/blog/2015/05/07/build-qt5.4.1-and-qt3d-using-vs2013</id>
     <content type="html"><![CDATA[<h1>1. Install required tools</h1>
 
 <ul>

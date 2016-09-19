@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: kindle | Jordon Wu's Blog]]></title>
-  <link href="http://jordonwu.github.io/blog/categories/kindle/atom.xml" rel="self"/>
-  <link href="http://jordonwu.github.io/"/>
-  <updated>2016-07-19T09:41:30+08:00</updated>
-  <id>http://jordonwu.github.io/</id>
+  <link href="http://jordonwu.github.com/blog/categories/kindle/atom.xml" rel="self"/>
+  <link href="http://jordonwu.github.com/"/>
+  <updated>2016-09-19T14:25:22+08:00</updated>
+  <id>http://jordonwu.github.com/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[kindle 3 hack]]></title>
-    <link href="http://jordonwu.github.io/blog/2016/01/26/kindle-3-hack/"/>
+    <link href="http://jordonwu.github.com/blog/2016/01/26/kindle-3-hack/"/>
     <updated>2016-01-26T21:23:32+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2016/01/26/kindle-3-hack</id>
+    <id>http://jordonwu.github.com/blog/2016/01/26/kindle-3-hack</id>
     <content type="html"><![CDATA[<h1>1. Prepare</h1>
 
 <h2>1.1 Open kindle 3 case and solder rs232 as below</h2>

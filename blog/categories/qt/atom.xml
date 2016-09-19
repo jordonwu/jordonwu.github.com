@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: qt | Jordon Wu's Blog]]></title>
-  <link href="http://jordonwu.github.io/blog/categories/qt/atom.xml" rel="self"/>
-  <link href="http://jordonwu.github.io/"/>
-  <updated>2016-07-19T09:41:30+08:00</updated>
-  <id>http://jordonwu.github.io/</id>
+  <link href="http://jordonwu.github.com/blog/categories/qt/atom.xml" rel="self"/>
+  <link href="http://jordonwu.github.com/"/>
+  <updated>2016-09-19T14:25:22+08:00</updated>
+  <id>http://jordonwu.github.com/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[build linux for imx6]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/04/16/build-linux-for-imx6/"/>
+    <link href="http://jordonwu.github.com/blog/2015/04/16/build-linux-for-imx6/"/>
     <updated>2015-04-16T19:26:06+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/04/16/build-linux-for-imx6</id>
+    <id>http://jordonwu.github.com/blog/2015/04/16/build-linux-for-imx6</id>
     <content type="html"><![CDATA[<h1>1.      Install Host OS</h1>
 
 <h2>1.1     Install VMware</h2>

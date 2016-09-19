@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: octopress | Jordon Wu's Blog]]></title>
-  <link href="http://jordonwu.github.io/blog/categories/octopress/atom.xml" rel="self"/>
-  <link href="http://jordonwu.github.io/"/>
-  <updated>2016-07-19T09:41:30+08:00</updated>
-  <id>http://jordonwu.github.io/</id>
+  <link href="http://jordonwu.github.com/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://jordonwu.github.com/"/>
+  <updated>2016-09-19T14:25:22+08:00</updated>
+  <id>http://jordonwu.github.com/</id>
   <author>
     <name><![CDATA[Jordon Wu]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Octopress Install and Usage on Windows 7]]></title>
-    <link href="http://jordonwu.github.io/blog/2015/04/14/install-octopress-on-windows-7/"/>
+    <link href="http://jordonwu.github.com/blog/2015/04/14/install-octopress-on-windows-7/"/>
     <updated>2015-04-14T09:15:12+08:00</updated>
-    <id>http://jordonwu.github.io/blog/2015/04/14/install-octopress-on-windows-7</id>
+    <id>http://jordonwu.github.com/blog/2015/04/14/install-octopress-on-windows-7</id>
     <content type="html"><![CDATA[<h2>1.   Install git</h2>
 
 <pre><code>    Version : Git-1.9.2-preview20140411.exe
