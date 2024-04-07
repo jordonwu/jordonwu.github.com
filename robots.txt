@@ -1,4 +1,0 @@
-User-agent: *
-Disallow: 
-
-Sitemap: http://jordonwu.github.com/sitemap.xml 

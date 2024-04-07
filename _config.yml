@@ -1,0 +1,34 @@
+# Site settings
+title: Jordon Wu's Blog Site
+email: jordon.wu AT gmail.com
+description: Jordon Wu's Ideas & Blogs
+# > # this means to ignore newlines until "baseurl:"
+#   Write an awesome description for your new site here. You can edit this
+#   line in _config.yml. It will appear in your document head meta (for
+#   Google search results) and in your feed.xml site description.
+
+# baseurl: "" # the subpath of your site, e.g. /blog/
+baseurl: ""
+
+# url: "http://yourdomain.com" # the base hostname & protocol for your site
+url: "http://jordonwu.github.io/"
+
+# twitter_username: jekyllrb
+github_username: jordonwu
+permalink: /:year/:month/:day/:title/
+# this is the url root of the view source link on the footer page.
+viewsourceroot: https://github.com/jordonwu/jordonwu.github.com/blob/master/
+# this is the url root of the create page link on the footer page.
+newsourceroot: https://github.com/jordonwu/jordonwu.github.com/new/master/
+#########################################
+
+disqus_url: "http://jordonwu.github.io"
+#########################################
+
+# Build settings
+markdown: kramdown
+
+# highlight
+# highlighter: pygments
+# highlighter: rouge
+# highlighter: false
