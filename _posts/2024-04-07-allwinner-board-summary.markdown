@@ -9,4 +9,4 @@ categories: allwinner v3s
 # allwinner board summary
 
 ## 1. jbox board(base on v3s chip)
-![JBox Board](/static/2024-04-07-allwinner-board-summary/jbox/jbox.png)
+![JBox Board](/static/img/2024-04-07-allwinner-board-summary/jbox/jbox.png)
