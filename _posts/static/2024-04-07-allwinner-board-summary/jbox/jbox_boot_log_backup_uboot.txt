@@ -1,0 +1,101 @@
+U-Boot SPL 2017.01-rc2-00057-g32ab1804cd-dirty (Dec 14 2021 - 11:16:59)
+DRAM: 64 MiB
+Trying to boot from MMC1
+
+U-Boot 2017.01-rc2-00057-g32ab1804cd-dirty (Dec 14 2021 - 11:16:59 +0800) Allwinner Technology
+
+CPU:   Allwinner V3s (SUN8I 1681)
+Model: Lichee Pi Zero
+DRAM:  64 MiB
+MMC:   SUNXI SD/MMC: 0
+*** Warning - bad CRC, using default environment
+
+In:    serial@01c28000
+Out:   serial@01c28000
+Err:   serial@01c28000
+
+
+U-Boot 2017.01-rc2-00057-g32ab1804cd-dirty (Dec 14 2021 - 11:16:59 +0800) Allwinner Technology
+
+CPU:   Allwinner V3s (SUN8I 1681)
+Model: Lichee Pi Zero
+DRAM:  64 MiB
+MMC:   SUNXI SD/MMC: 0
+*** Warning - bad CRC, using default environment
+
+In:    serial@01c28000
+Out:   serial@01c28000
+Err:   serial@01c28000
+Net:   No ethernet found.
+starting USB...
+No controllers found
+Hit any key to stop autoboot:  0
+=> printenv
+arch=arm
+baudrate=115200
+board=sunxi
+board_name=sunxi
+boot_a_script=load ${devtype} ${devnum}:${distro_bootpart} ${scriptaddr} ${prefix}${script}; source ${scriptaddr}
+boot_efi_binary=load ${devtype} ${devnum}:${distro_bootpart} ${kernel_addr_r} efi/boot/bootarm.efi; if fdt addr ${fdt_addr_r}; then bootefi ${kernel_addr_r} ${fdt_add      r_r};else bootefi ${kernel_addr_r} ${fdtcontroladdr};fi
+boot_extlinux=sysboot ${devtype} ${devnum}:${distro_bootpart} any ${scriptaddr} ${prefix}extlinux/extlinux.conf
+boot_net_usb_start=usb start
+boot_prefixes=/ /boot/
+boot_script_dhcp=boot.scr.uimg
+boot_scripts=boot.scr.uimg boot.scr
+boot_targets=fel mmc0 usb0 pxe dhcp
+bootcmd=run distro_bootcmd
+bootcmd_dhcp=run boot_net_usb_start; if dhcp ${scriptaddr} ${boot_script_dhcp}; then source ${scriptaddr}; fi;setenv efi_fdtfile ${fdtfile}; if test -z "${fdtfile}" -      a -n "${soc}"; then setenv efi_fdtfile ${soc}-${board}${boardver}.dtb; fi; setenv efi_old_vci ${bootp_vci};setenv efi_old_arch ${bootp_arch};setenv bootp_vci PXEClien      t:Arch:00010:UNDI:003000;setenv bootp_arch 0xa;if dhcp ${kernel_addr_r}; then tftpboot ${fdt_addr_r} dtb/${efi_fdtfile};if fdt addr ${fdt_addr_r}; then bootefi ${kern      el_addr_r} ${fdt_addr_r}; else bootefi ${kernel_addr_r} ${fdtcontroladdr};fi;fi;setenv bootp_vci ${efi_old_vci};setenv bootp_arch ${efi_old_arch};setenv efi_fdtfile;s      etenv efi_old_arch;setenv efi_old_vci;
+bootcmd_fel=if test -n ${fel_booted} && test -n ${fel_scriptaddr}; then echo '(FEL boot)'; source ${fel_scriptaddr}; fi
+bootcmd_mmc0=setenv devnum 0; run mmc_boot
+bootcmd_pxe=run boot_net_usb_start; dhcp; if pxe get; then pxe boot; fi
+bootcmd_usb0=setenv devnum 0; run usb_boot
+bootdelay=2
+bootm_size=0x2e00000
+console=ttyS0,115200
+cpu=armv7
+dfu_alt_info_ram=kernel ram 0x41000000 0x800000;fdt ram 0x41800000 0x100000;ramdisk ram 0x41B00000 0x1000000
+distro_bootcmd=for target in ${boot_targets}; do run bootcmd_${target}; done
+efi_dtb_prefixes=/ /dtb/ /dtb/current/
+fdt_addr_r=0x41800000
+fdtcontroladdr=43b44508
+fdtfile=sun8i-v3s-licheepi-zero.dtb
+kernel_addr_r=0x41000000
+load_efi_dtb=load ${devtype} ${devnum}:${distro_bootpart} ${fdt_addr_r} ${prefix}${efi_fdtfile}
+mmc_boot=if mmc dev ${devnum}; then setenv devtype mmc; run scan_dev_for_boot_part; fi
+preboot=usb start
+pxefile_addr_r=0x41A00000
+ramdisk_addr_r=0x41B00000
+scan_dev_for_boot=echo Scanning ${devtype} ${devnum}:${distro_bootpart}...; for prefix in ${boot_prefixes}; do run scan_dev_for_extlinux; run scan_dev_for_scripts; do      ne;run scan_dev_for_efi;
+scan_dev_for_boot_part=part list ${devtype} ${devnum} -bootable devplist; env exists devplist || setenv devplist 1; for distro_bootpart in ${devplist}; do if fstype $      {devtype} ${devnum}:${distro_bootpart} bootfstype; then run scan_dev_for_boot; fi; done
+scan_dev_for_efi=setenv efi_fdtfile ${fdtfile}; if test -z "${fdtfile}" -a -n "${soc}"; then setenv efi_fdtfile ${soc}-${board}${boardver}.dtb; fi; for prefix in ${ef      i_dtb_prefixes}; do if test -e ${devtype} ${devnum}:${distro_bootpart} ${prefix}${efi_fdtfile}; then run load_efi_dtb; fi;done;if test -e ${devtype} ${devnum}:${distr      o_bootpart} efi/boot/bootarm.efi; then echo Found EFI removable media binary efi/boot/bootarm.efi; run boot_efi_binary; echo EFI LOAD FAILED: continuing...; fi; seten      v efi_fdtfile
+scan_dev_for_extlinux=if test -e ${devtype} ${devnum}:${distro_bootpart} ${prefix}extlinux/extlinux.conf; then echo Found ${prefix}extlinux/extlinux.conf; run boot_ex      tlinux; echo SCRIPT FAILED: continuing...; fi
+scan_dev_for_scripts=for script in ${boot_scripts}; do if test -e ${devtype} ${devnum}:${distro_bootpart} ${prefix}${script}; then echo Found U-Boot script ${prefix}$      {script}; run boot_a_script; echo SCRIPT FAILED: continuing...; fi; done
+scriptaddr=0x41900000
+serial#=12c00003c456a41b
+soc=sunxi
+stderr=serial@01c28000
+stdin=serial@01c28000
+stdout=serial@01c28000
+usb_boot=usb start; if usb dev ${devnum}; then setenv devtype usb; run scan_dev_for_boot_part; fi
+
+Environment size: 4039/131068 bytes
+=> mmcinfo
+Device: SUNXI SD/MMC
+Manufacturer ID: 0
+OEM: 0
+Name: 00000
+Tran Speed: 50000000
+Rd Block Len: 512
+SD version 3.0
+High Capacity: Yes
+Capacity: 3.7 GiB
+Bus Width: 4-bit
+Erase Group Size: 512 Bytes
+=> fatls mmc 0:1
+      350   boot.scr
+    11306   sun8i-v3s-licheepi-zero.dtb
+  5102840   zimage
+            .trash-1000/
+            system volume information/
+
+3 file(s), 2 dir(s)

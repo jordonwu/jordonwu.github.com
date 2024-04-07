@@ -1,0 +1,654 @@
+=> boot
+switch to partitions #0, OK
+mmc0 is current device
+Scanning mmc 0:1...
+Found U-Boot script /boot.scr
+reading /boot.scr
+350 bytes read in 16 ms (20.5 KiB/s)
+## Executing script at 41900000
+reading zImage
+5102840 bytes read in 278 ms (17.5 MiB/s)
+reading sun8i-v3s-licheepi-zero.dtb
+11306 bytes read in 27 ms (408.2 KiB/s)
+## Flattened Device Tree blob at 41800000
+   Booting using the fdt blob at 0x41800000
+   Loading Device Tree to 42dfa000, end 42dffc29 ... OK
+
+Starting kernel ...
+
+[    0.000000] Booting Linux on physical CPU 0x0
+[    0.000000] Linux version 5.10.81 (twzy@ubuntu) (arm-linux-gnueabihf-gcc (Linaro GCC 7.5-2019.12) 7.5.0, GNU ld (Linaro_Binutils-2019.12) 2.28.2.20170706) #21 SMP Thu Jan 6 08:26:23 CST 2022
+[    0.000000] CPU: ARMv7 Processor [410fc075] revision 5 (ARMv7), cr=10c5387d
+[    0.000000] CPU: div instructions available: patching division code
+[    0.000000] CPU: PIPT / VIPT nonaliasing data cache, VIPT aliasing instruction cache
+[    0.000000] OF: fdt: Machine model: Lichee Pi Zero
+[    0.000000] Memory policy: Data cache writealloc
+[    0.000000] Zone ranges:
+[    0.000000]   Normal   [mem 0x0000000040000000-0x0000000043ffffff]
+[    0.000000]   HighMem  empty
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000040000000-0x0000000043ffffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000040000000-0x0000000043ffffff]
+[    0.000000] percpu: Embedded 15 pages/cpu s30988 r8192 d22260 u61440
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 16256
+[    0.000000] Kernel command line: console=ttyS0,115200 root=/dev/mmcblk0p2 rootwait panic=10 earlyprintk rw
+[    0.000000] Dentry cache hash table entries: 8192 (order: 3, 32768 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 4096 (order: 2, 16384 bytes, linear)
+[    0.000000] mem auto-init: stack:off, heap alloc:off, heap free:off
+[    0.000000] Memory: 51572K/65536K available (8192K kernel code, 704K rwdata, 1968K rodata, 1024K init, 267K bss, 13964K reserved, 0K cma-reserved, 0K highmem)
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] rcu: Hierarchical RCU implementation.
+[    0.000000] rcu:     RCU event tracing is enabled.
+[    0.000000] rcu:     RCU restricting CPUs from NR_CPUS=8 to nr_cpu_ids=1.
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 10 jiffies.
+[    0.000000] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=1
+[    0.000000] NR_IRQS: 16, nr_irqs: 16, preallocated irqs: 16
+[    0.000000] random: get_random_bytes called from start_kernel+0x328/0x4c0 with crng_init=0
+[    0.000000] arch_timer: cp15 timer(s) running at 24.00MHz (virt).
+[    0.000000] clocksource: arch_sys_counter: mask: 0xffffffffffffff max_cycles: 0x588fe9dc0, max_idle_ns: 440795202592 ns
+[    0.000007] sched_clock: 56 bits at 24MHz, resolution 41ns, wraps every 4398046511097ns
+[    0.000020] Switching to timer-based delay loop, resolution 41ns
+[    0.000238] clocksource: timer: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 79635851949 ns
+[    0.000499] Console: colour dummy device 80x30
+[    0.000568] Calibrating delay loop (skipped), value calculated using timer frequency.. 48.00 BogoMIPS (lpj=240000)
+[    0.000591] pid_max: default: 32768 minimum: 301
+[    0.000761] Mount-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.000780] Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.001660] CPU: Testing write buffer coherency: ok
+[    0.002102] /cpus/cpu@0 missing clock-frequency property
+[    0.002131] CPU0: thread -1, cpu 0, socket 0, mpidr 80000000
+[    0.002992] Setting up static identity map for 0x40100000 - 0x40100060
+[    0.003231] rcu: Hierarchical SRCU implementation.
+[    0.003770] smp: Bringing up secondary CPUs ...
+[    0.003797] smp: Brought up 1 node, 1 CPU
+[    0.003810] SMP: Total of 1 processors activated (48.00 BogoMIPS).
+[    0.003818] CPU: All CPU(s) started in SVC mode.
+[    0.004506] devtmpfs: initialized
+[    0.007914] VFP support v0.3: implementor 41 architecture 2 part 30 variant 7 rev 5
+[    0.008258] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    0.008292] futex hash table entries: 256 (order: 2, 16384 bytes, linear)
+[    0.008514] pinctrl core: initialized pinctrl subsystem
+[    0.009648] NET: Registered protocol family 16
+[    0.010309] DMA: preallocated 256 KiB pool for atomic coherent allocations
+[    0.011497] thermal_sys: Registered thermal governor 'step_wise'
+[    0.011837] hw-breakpoint: found 5 (+1 reserved) breakpoint and 4 watchpoint registers.
+[    0.011863] hw-breakpoint: maximum watchpoint size is 8 bytes.
+[    0.032513] SCSI subsystem initialized
+[    0.032689] usbcore: registered new interface driver usbfs
+[    0.032765] usbcore: registered new interface driver hub
+[    0.032835] usbcore: registered new device driver usb
+[    0.033071] mc: Linux media interface: v0.10
+[    0.033117] videodev: Linux video capture interface: v2.00
+[    0.033367] Advanced Linux Sound Architecture Driver Initialized.
+[    0.035148] clocksource: Switched to clocksource arch_sys_counter
+[    0.046512] NET: Registered protocol family 2
+[    0.046725] IP idents hash table entries: 2048 (order: 2, 16384 bytes, linear)
+[    0.047467] tcp_listen_portaddr_hash hash table entries: 512 (order: 0, 6144 bytes, linear)
+[    0.047516] TCP established hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.047541] TCP bind hash table entries: 1024 (order: 1, 8192 bytes, linear)
+[    0.047566] TCP: Hash tables configured (established 1024 bind 1024)
+[    0.047723] UDP hash table entries: 256 (order: 1, 8192 bytes, linear)
+[    0.047778] UDP-Lite hash table entries: 256 (order: 1, 8192 bytes, linear)
+[    0.048072] NET: Registered protocol family 1
+[    0.050953] Initialise system trusted keyrings
+[    0.051357] workingset: timestamp_bits=30 max_order=14 bucket_order=0
+[    0.154311] Key type asymmetric registered
+[    0.154349] Asymmetric key parser 'x509' registered
+[    0.154450] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 250)
+[    0.154465] io scheduler mq-deadline registered
+[    0.154475] io scheduler kyber registered
+[    0.155640] sun4i-usb-phy 1c19400.phy: Couldn't request ID GPIO
+[    0.159579] sun8i-v3s-pinctrl 1c20800.pinctrl: initialized sunXi PIO driver
+[    0.227620] Serial: 8250/16550 driver, 8 ports, IRQ sharing disabled
+[    0.230174] sun8i-v3s-pinctrl 1c20800.pinctrl: supply vcc-pb not found, using dummy regulator
+[    0.231436] printk: console [ttyS0] disabled
+[    0.251780] 1c28000.serial: ttyS0 at MMIO 0x1c28000 (irq = 43, base_baud = 1500000) is a U6_16550A
+[    0.806409] printk: console [ttyS0] enabled
+[    0.837612] sun8i-v3s-pinctrl 1c20800.pinctrl: supply vcc-pc not found, using dummy regulator
+[    0.847942] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+[    0.854488] ehci-platform: EHCI generic platform driver
+[    0.860139] ehci-platform 1c1a000.usb: EHCI Host Controller
+[    0.865829] ehci-platform 1c1a000.usb: new USB bus registered, assigned bus number 1
+[    0.873759] ehci-platform 1c1a000.usb: irq 34, io mem 0x01c1a000
+[    0.905163] ehci-platform 1c1a000.usb: USB 2.0 started, EHCI 1.00
+[    0.912420] hub 1-0:1.0: USB hub found
+[    0.916387] hub 1-0:1.0: 1 port detected
+[    0.920990] ohci_hcd: USB 1.1 'Open' Host Controller (OHCI) Driver
+[    0.927356] ohci-platform: OHCI generic platform driver
+[    0.932929] ohci-platform 1c1a400.usb: Generic Platform OHCI controller
+[    0.939692] ohci-platform 1c1a400.usb: new USB bus registered, assigned bus number 2
+[    0.947726] ohci-platform 1c1a400.usb: irq 35, io mem 0x01c1a400
+[    1.020227] hub 2-0:1.0: USB hub found
+[    1.024069] hub 2-0:1.0: 1 port detected
+[    1.028926] usbcore: registered new interface driver usb-storage
+[    1.037055] sun6i-rtc 1c20400.rtc: registered as rtc0
+[    1.042178] sun6i-rtc 1c20400.rtc: setting system clock to 1970-01-01T00:04:53 UTC (293)
+[    1.050385] sun6i-rtc 1c20400.rtc: RTC enabled
+[    1.055017] i2c /dev entries driver
+[    1.060075] sun8i-v3s-pinctrl 1c20800.pinctrl: pin PB6 already requested by 1c2ac00.i2c; cannot claim for 1c2b000.i2c
+[    1.070792] sun8i-v3s-pinctrl 1c20800.pinctrl: pin-38 (1c2b000.i2c) status -22
+[    1.078037] sun8i-v3s-pinctrl 1c20800.pinctrl: could not request pin 38 (PB6) from group PB6  on device 1c20800.pinctrl
+[    1.088820] mv64xxx_i2c 1c2b000.i2c: Error applying setting, reverse things back
+[    1.096244] mv64xxx_i2c: probe of 1c2b000.i2c failed with error -22
+[    1.102668] usbcore: registered new interface driver zr364xx
+[    1.108467] usbcore: registered new interface driver stkwebcam
+[    1.114348] usbcore: registered new interface driver s2255
+[    1.119987] usbcore: registered new interface driver uvcvideo
+[    1.125781] USB Video Class driver (1.1.1)
+[    1.129940] usbcore: registered new interface driver Philips webcam
+[    1.137176] sunxi-wdt 1c20ca0.watchdog: Watchdog enabled (timeout=16 sec, nowayout=0)
+[    1.145986] hid: raw HID events driver (C) Jiri Kosina
+[    1.151549] sun8i-v3s-pinctrl 1c20800.pinctrl: supply vcc-pf not found, using dummy regulator
+[    1.161558] sun8i-v3s-pinctrl 1c20800.pinctrl: supply vcc-pg not found, using dummy regulator
+[    1.171889] usbcore: registered new interface driver usbkbd
+[    1.177641] usbcore: registered new interface driver usbmouse
+[    1.183515] fb_st7789v spi0.0: fbtft_property_value: buswidth = 8
+[    1.189674] fb_st7789v spi0.0: fbtft_property_value: debug = 0
+[    1.195530] fb_st7789v spi0.0: fbtft_property_value: rotate = 90
+[    1.201534] fb_st7789v spi0.0: fbtft_property_value: fps = 60
+[    1.233155] sunxi-mmc 1c10000.mmc: initialized, max. request size: 16384 KB
+[    1.240812] sunxi-mmc 1c0f000.mmc: initialized, max. request size: 16384 KB
+[    1.264369] mmc1: new high speed SDIO card at address 0001
+[    1.283402] mmc0: host does not support reading read-only switch, assuming write-enable
+[    1.293235] mmc0: Problem switching card into high-speed mode!
+[    1.299263] mmc0: new SDHC card at address 0001
+[    1.304867] mmcblk0: mmc0:0001 00000 3.72 GiB
+[    1.312461]  mmcblk0: p1 p2
+[    2.298412] random: fast init done
+[    2.324402] Console: switching to colour frame buffer device 40x30
+[    2.332638] graphics fb0: fb_st7789v frame buffer, 320x240, 150 KiB video memory, 4 KiB buffer memory, fps=100, spi0.0 at 96 MHz
+[    2.367539] sun4i-codec 1c22c00.codec: Failed to register our card
+[    2.375328] Initializing XFRM netlink socket
+[    2.379661] NET: Registered protocol family 17
+[    2.385394] Registering SWP/SWPB emulation handler
+[    2.390293] Loading compiled-in X.509 certificates
+[    2.403716] usb_phy_generic usb_phy_generic.1.auto: supply vcc not found, using dummy regulator
+[    2.413909] musb-hdrc musb-hdrc.2.auto: MUSB HDRC host driver
+[    2.419795] musb-hdrc musb-hdrc.2.auto: new USB bus registered, assigned bus number 3
+[    2.429252] hub 3-0:1.0: USB hub found
+[    2.433106] hub 3-0:1.0: 1 port detected
+[    2.439528] debugfs: Directory '1c22c00.codec' with parent 'V3s Audio Codec' already present!
+[    2.452572] cfg80211: Loading compiled-in X.509 certificates for regulatory database
+[    2.464627] cfg80211: Loaded X.509 cert 'sforshee: 00b28ddf47aef9cea7'
+[    2.471446] ALSA device list:
+[    2.474428]   #0: V3s Audio Codec
+[    2.478574] platform regulatory.0: Direct firmware load for regulatory.db failed with error -2
+[    2.487308] cfg80211: failed to load regulatory.db
+[    2.555605] EXT4-fs (mmcblk0p2): warning: mounting fs with errors, running e2fsck is recommended
+[    2.567333] EXT4-fs (mmcblk0p2): mounted filesystem with ordered data mode. Opts: (null)
+[    2.575666] VFS: Mounted root (ext4 filesystem) on device 179:2.
+[    2.596083] devtmpfs: mounted
+[    2.600296] Freeing unused kernel memory: 1024K
+[    2.605052] Run /sbin/init as init process
+[    3.549338] systemd[1]: System time before build time, advancing clock.
+[    3.596604] systemd[1]: Failed to find module 'autofs4'
+[    3.658114] systemd[1]: systemd 241 running in system mode. (+PAM +AUDIT +SELINUX +IMA +APPARMOR +SMACK +SYSVINIT +UTMP +LIBCRYPTSETUP +GCRYPT +GNUTLS +ACL +XZ +LZ4 +SECCOMP +BLKID +ELFUTILS +KMOD -IDN2 +IDN -PCRE2 default-hierarchy=hybrid)
+[    3.680328] systemd[1]: Detected architecture arm.
+
+Welcome to Debian GNU/Linux 10 (buster)!
+
+[    3.717048] systemd[1]: Set hostname to <SnailPi>.
+[    4.631724] systemd[1]: File /lib/systemd/system/systemd-journald.service:12 configures an IP firewall (IPAddressDeny=any), but the local system does not support BPF/cgroup based firewalling.
+[    4.650214] systemd[1]: Proceeding WITHOUT firewalling in effect! (This warning is only shown for the first loaded unit using IP firewalling.)
+[    5.125637] random: systemd: uninitialized urandom read (16 bytes read)
+[    5.140766] random: systemd: uninitialized urandom read (16 bytes read)
+[    5.148761] systemd[1]: Listening on Syslog Socket.
+[  OK  ] Listening on Syslog Socket.
+[    5.185532] random: systemd: uninitialized urandom read (16 bytes read)
+[    5.193284] systemd[1]: Listening on udev Control Socket.
+[  OK  ] Listening on udev Control Socket.
+[    5.236168] systemd[1]: Started Dispatch Password Requests to Console Directory Watch.
+[  OK  ] Started Dispatch Password …ts to Console Directory Watch.
+[    5.278081] systemd[1]: Created slice system-getty.slice.
+[  OK  ] Created slice system-getty.slice.
+[    5.315560] systemd[1]: Reached target Remote File Systems.
+[  OK  ] Reached target Remote File Systems.
+[  OK  ] Started Forward Password R…uests to Wall Directory Watch.
+[  OK  ] Created slice User and Session Slice.
+[  OK  ] Created slice system-serial\x2dgetty.slice.
+[  OK  ] Listening on Journal Socket.
+         Starting Remount Root and Kernel File Systems...
+         Starting Load Kernel Modules...
+[  OK  ] Reached target Local Encrypted Volumes.
+[  OK  ] Listening on Journal Socket (/dev/log).
+         Starting Journal Service...
+         Mounting Kernel Debug File System...
+[  OK  ] Listening on udev Kernel Socket.
+         Starting udev Coldplug all Devices...
+[  OK  ] Reached target Paths.
+[  OK  ] Listening on initctl Compatibility Named Pipe.
+[  OK  ] Reached target Slices.
+[  OK  ] Started Remount Root and Kernel File Systems.
+[  OK  ] Started Journal Service.
+[  OK  ] Started Load Kernel Modules.
+[  OK  ] Mounted Kernel Debug File System.
+         Mounting Kernel Configuration File System...
+         Starting Apply Kernel Variables...
+         Starting Flush Journal to Persistent Storage...
+         Starting Load/Save Random Seed...
+         Starting Create System Users...
+         Activating swap /swap1...
+[  OK  ] Mounted Kernel Configuration File System.
+[  OK  ] Started Apply Kernel Variables.
+[    6.508163] Adding 524284k swap on /swap1.  Priority:-2 extents:3 across:655356k SS
+[  OK  ] Activated swap /swap1.
+[  OK  ] Started Load/Save Random Seed.
+[  OK  ] Started Create System Users.
+[    6.679321] systemd-journald[83]: Received request to flush runtime journal from PID 1
+         Starting Create Static Device Nodes in /dev...
+[  OK  ] Reached target Swap.
+[  OK  ] Started Flush Journal to Persistent Storage.
+[  OK  ] Started Create Static Device Nodes in /dev.
+[  OK  ] Reached target Local File Systems (Pre).
+[  OK  ] Reached target Local File Systems.
+         Starting Create Volatile Files and Directories...
+         Starting udev Kernel Device Manager...
+[  OK  ] Started udev Kernel Device Manager.
+[  OK  ] Started Create Volatile Files and Directories.
+[    7.417261] EXT4-fs error (device mmcblk0p2): ext4_mb_generate_buddy:805: group 0, block bitmap and bg descriptor inconsistent: 6 vs 7 free clusters
+[    7.507924] EXT4-fs error (device mmcblk0p2): ext4_validate_block_bitmap:390: comm systemd: bg 2: bad block bitmap checksum
+         Starting Network Time Synchronization...
+         Starting Update UTMP about System Boot/Shutdown...
+[  OK  ] Started Update UTMP about System Boot/Shutdown.
+[    8.710049] r8723bs: module is from the staging directory, the quality is unknown, you have been warned.
+[    8.995581] RTL8723BS: module init start
+[    8.999543] RTL8723BS: rtl8723bs v4.3.5.5_12290.20140916_BTCOEX20140507-4E40
+[    9.006786] RTL8723BS: rtl8723bs BT-Coex version = BTCOEX20140507-4E40
+[  OK  ] Started Network Time Synchronization.
+[  OK  ] Started udev Coldplug all Devices.
+[    9.118314] pnetdev = (ptrval)
+[    9.685838] random: crng init done
+[    9.689277] random: 7 urandom warning(s) missed due to ratelimiting
+[   10.278227] RTL8723BS: rtw_ndev_init(wlan0)
+[   10.297333] RTL8723BS: module init ret =0
+[  OK  ] Found device /dev/ttyS0.
+[  OK  ] Listening on Load/Save RF …itch Status /dev/rfkill Watch.
+         Starting Helper to synchronize boot up for ifupdown...
+[  OK  ] Reached target System Time Synchronized.
+[  OK  ] Reached target System Initialization.
+[  OK  ] Listening on D-Bus System Message Bus Socket.
+[  OK  ] Reached target Sockets.
+[  OK  ] Reached target Basic System.
+         Starting Initialize hardware monitoring sensors...
+         Starting LSB: Start Motion detection...
+         Starting Login Service...
+[  OK  ] Started Manage Sound Card State (restore and store).
+         Starting System Logging Service...
+[  OK  ] Started Daily apt download activities.
+[  OK  ] Started Daily apt upgrade and clean activities.
+[  OK  ] Started Regular background program processing daemon.
+         Starting Save/Restore Sound Card State...
+[  OK  ] Started D-Bus System Message Bus.
+         Starting WPA supplicant...
+[  OK  ] Started Daily rotation of log files.
+[  OK  ] Started Daily Cleanup of Temporary Directories.
+[  OK  ] Reached target Timers.
+[  OK  ] Started System Logging Service.
+[  OK  ] Started Helper to synchronize boot up for ifupdown.
+[  OK  ] Started Save/Restore Sound Card State.
+[  OK  ] Started Initialize hardware monitoring sensors.
+         Starting Load/Save RF Kill Switch Status...
+[  OK  ] Reached target Sound Card.
+         Starting Raise network interfaces...
+[  OK  ] Started LSB: Start Motion detection.
+[  OK  ] Started WPA supplicant.
+[  OK  ] Started Login Service.
+[  OK  ] Started Load/Save RF Kill Switch Status.
+[  OK  ] Started Raise network interfaces.
+[  OK  ] Reached target Network.
+         Starting A high performanc… and a reverse proxy server...
+         Starting Permit User Sessions...
+         Starting /etc/rc.local Compatibility...
+         Starting OpenBSD Secure Shell server...
+[   18.222092] rtl8723bs: acquire FW from file:rtlwifi/rtl8723bs_nic.bin
+[  OK  ] Started Permit User Sessions.
+[   19.799450] sunxi-mmc 1c10000.mmc: data error, sending stop command
+[   19.806001] sunxi-mmc 1c10000.mmc: data error, sending stop command
+[   19.968644] sunxi-mmc 1c10000.mmc: data error, sending stop command
+[   19.975068] sunxi-mmc 1c10000.mmc: data error, sending stop command
+[  OK  ] Started OpenBSD Secure Shell server.
+[  OK  ] Started A high performance…er and a reverse proxy server.
+[   21.044133] rc.local[171]: Successfully initialized wpa_supplicant
+[   21.664947] sunxi-mmc 1c10000.mmc: data error, sending stop command
+[   24.594389] rc.local[171]: udhcpc: started, v1.30.1
+[   24.657772] rc.local[171]: udhcpc: sending discover
+[   27.663053] rc.local[171]: udhcpc: sending discover
+[   30.587914] rc.local[171]: /dev/mem opened.
+[   30.642408] rc.local[171]: Memory mapped at address 0xb6f95000.
+[   30.681181] rc.local[171]: Value at address 0x1C20890 (0xb6f95890): 0x77777777
+[   30.721319] rc.local[171]: Written 0x0; readback 0x0
+[   30.758847] rc.local[171]: /dev/mem opened.
+[   30.773532] rc.local[171]: Memory mapped at address 0xb6f90000.
+[   30.976025] rc.local[171]: Value at address 0x1C20894 (0xb6f90894): 0x77777777
+[   30.989044] rc.local[171]: Written 0x0; readback 0x0
+[   31.004129] rc.local[171]: SEGGER J-Link Remote Server V7.94l
+[   31.016104] rc.local[171]: Compiled Feb 29 2024 10:34:19
+[   31.030210] rc.local[171]: 'q' to quit '?' for help
+[   31.054919] rc.local[171]: Cannot connect to J-Link. Retrying in 5 seconds...
+[   31.067502] rc.local[171]: /dev/mem opened.
+[   31.080905] rc.local[171]: Memory mapped at address 0xb6fc4000.
+[   31.093832] rc.local[171]: Value at address 0x1C20898 (0xb6fc4898): 0x77777777
+[   31.107071] rc.local[171]: Written 0x0; readback 0x0
+[   31.144481] rc.local[171]: /dev/mem opened.
+[   31.157344] rc.local[171]: Memory mapped at address 0xb6faf000.
+[   31.170817] rc.local[171]: Value at address 0x1C208AC (0xb6faf8ac): 0x0
+[   31.184379] rc.local[171]: Written 0x55555555; readback 0x55555555
+[   31.197402] rc.local[171]: udhcpc: sending discover
+[   31.213092] rc.local[171]: /dev/mem opened.
+[   31.225406] rc.local[171]: Memory mapped at address 0xb6f3f000.
+[   31.238752] rc.local[171]: Value at address 0x1C208B0 (0xb6f3f8b0): 0x0
+[   31.252627] rc.local[171]: Written 0x15555; readback 0x15555
+[   32.170195] rc.local[171]: ZMDZ ELEC
+[   32.485201] vcc3v0: disabling
+[   32.488207] vcc5v0: disabling
+[  OK  ] Started /etc/rc.local Compatibility.
+[  OK  ] Started Getty on tty1.
+[  OK  ] Started Serial Getty on ttyS0.
+[  OK  ] Reached target Login Prompts.
+[  OK  ] Reached target Multi-User System.
+[  OK  ] Reached target Graphical Interface.
+         Starting Update UTMP about System Runlevel Changes...
+[  OK  ] Started Update UTMP about System Runlevel Changes.
+[   36.485297] rc.local[171]: Cannot connect to J-Link. Retrying in 5 seconds...
+
+Debian GNU/Linux 10 SnailPi ttyS0
+
+SnailPi login: root
+密码：[   42.048985] rc.local[171]: Cannot connect to J-Link. Retrying in 5 seconds...
+
+上一次登录：二 4月  2 14:39:18 CST 2024ttyS0 上
+Linux SnailPi 5.10.81 #21 SMP Thu Jan 6 08:26:23 CST 2022 armv7l
+
+---------------------------------------------
+                               ;
+                           , 8
+                           88
+      @0@@@@@@@@.          @0
+   G0 0@@@@ 0@@@@@C      8@@@0
+  @  @00L@@@00@@@@0@  @@@@@@000
+ @001@L00@@@01@@@@@@@@@@@@0@L 0,
+ @@:000@L@@@@C@@@@@@@@@@08
+ @@@@@@@00@@,@@@@@@@@@@@.
+  @@@0@@@L,0@@@@@@@@0@0
+    0@@@0@@@@0@0@0@000
+    ,::;;,:..
+
+ _____             _ _ _____               _
+/  ___|           (_) /  __ \             | |
+\ `--. _ __   __ _ _| | /  \/ __ _ _ __ __| |
+ `--. \ '_ \ / _` | | | |    / _` | '__/ _` |
+/\__/ / | | | (_| | | | \__/\ (_| | | | (_| |
+\____/|_| |_|\__,_|_|_|\____/\__,_|_|  \__,_|
+
+---------------------------------------------
+Allwinnertech-V3s / Power by Debian-buster
+作者：墨云
+---------------------------------------------
+[   47.776228] rc.local[171]: Cannot connect to J-Link. Retrying in 5 seconds...
+root@SnailPi:~# dmesg
+[    0.000000] Booting Linux on physical CPU 0x0
+[    0.000000] Linux version 5.10.81 (twzy@ubuntu) (arm-linux-gnueabihf-gcc (Linaro GCC 7.5-2019.12) 7.5.0, GNU ld (Linaro_Binutils-2019.12) 2.28.2.20170706) #21 SMP Thu Jan 6 08:26:23 CST 2022
+[    0.000000] CPU: ARMv7 Processor [410fc075] revision 5 (ARMv7), cr=10c5387d
+[    0.000000] CPU: div instructions available: patching division code
+[    0.000000] CPU: PIPT / VIPT nonaliasing data cache, VIPT aliasing instruction cache
+[    0.000000] OF: fdt: Machine model: Lichee Pi Zero
+[    0.000000] Memory policy: Data cache writealloc
+[    0.000000] Zone ranges:
+[    0.000000]   Normal   [mem 0x0000000040000000-0x0000000043ffffff]
+[    0.000000]   HighMem  empty
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000040000000-0x0000000043ffffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000040000000-0x0000000043ffffff]
+[    0.000000] On node 0 totalpages: 16384
+[    0.000000]   Normal zone: 128 pages used for memmap
+[    0.000000]   Normal zone: 0 pages reserved
+[    0.000000]   Normal zone: 16384 pages, LIFO batch:3
+[    0.000000] percpu: Embedded 15 pages/cpu s30988 r8192 d22260 u61440
+[    0.000000] pcpu-alloc: s30988 r8192 d22260 u61440 alloc=15*4096
+[    0.000000] pcpu-alloc: [0] 0
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 16256
+[    0.000000] Kernel command line: console=ttyS0,115200 root=/dev/mmcblk0p2 rootwait panic=10 earlyprintk rw
+[    0.000000] Dentry cache hash table entries: 8192 (order: 3, 32768 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 4096 (order: 2, 16384 bytes, linear)
+[    0.000000] mem auto-init: stack:off, heap alloc:off, heap free:off
+[    0.000000] Memory: 51572K/65536K available (8192K kernel code, 704K rwdata, 1968K rodata, 1024K init, 267K bss, 13964K reserved, 0K cma-reserved, 0K highmem)
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] rcu: Hierarchical RCU implementation.
+[    0.000000] rcu:     RCU event tracing is enabled.
+[    0.000000] rcu:     RCU restricting CPUs from NR_CPUS=8 to nr_cpu_ids=1.
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 10 jiffies.
+[    0.000000] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=1
+[    0.000000] NR_IRQS: 16, nr_irqs: 16, preallocated irqs: 16
+[    0.000000] random: get_random_bytes called from start_kernel+0x328/0x4c0 with crng_init=0
+[    0.000000] arch_timer: cp15 timer(s) running at 24.00MHz (virt).
+[    0.000000] clocksource: arch_sys_counter: mask: 0xffffffffffffff max_cycles: 0x588fe9dc0, max_idle_ns: 440795202592 ns
+[    0.000007] sched_clock: 56 bits at 24MHz, resolution 41ns, wraps every 4398046511097ns
+[    0.000020] Switching to timer-based delay loop, resolution 41ns
+[    0.000238] clocksource: timer: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 79635851949 ns
+[    0.000499] Console: colour dummy device 80x30
+[    0.000568] Calibrating delay loop (skipped), value calculated using timer frequency.. 48.00 BogoMIPS (lpj=240000)
+[    0.000591] pid_max: default: 32768 minimum: 301
+[    0.000761] Mount-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.000780] Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.001660] CPU: Testing write buffer coherency: ok
+[    0.002102] /cpus/cpu@0 missing clock-frequency property
+[    0.002131] CPU0: thread -1, cpu 0, socket 0, mpidr 80000000
+[    0.002992] Setting up static identity map for 0x40100000 - 0x40100060
+[    0.003231] rcu: Hierarchical SRCU implementation.
+[    0.003770] smp: Bringing up secondary CPUs ...
+[    0.003797] smp: Brought up 1 node, 1 CPU
+[    0.003810] SMP: Total of 1 processors activated (48.00 BogoMIPS).
+[    0.003818] CPU: All CPU(s) started in SVC mode.
+[    0.004506] devtmpfs: initialized
+[    0.007914] VFP support v0.3: implementor 41 architecture 2 part 30 variant 7 rev 5
+[    0.008258] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    0.008292] futex hash table entries: 256 (order: 2, 16384 bytes, linear)
+[    0.008514] pinctrl core: initialized pinctrl subsystem
+[    0.009648] NET: Registered protocol family 16
+[    0.010309] DMA: preallocated 256 KiB pool for atomic coherent allocations
+[    0.011497] thermal_sys: Registered thermal governor 'step_wise'
+[    0.011837] hw-breakpoint: found 5 (+1 reserved) breakpoint and 4 watchpoint registers.
+[    0.011863] hw-breakpoint: maximum watchpoint size is 8 bytes.
+[    0.032513] SCSI subsystem initialized
+[    0.032689] usbcore: registered new interface driver usbfs
+[    0.032765] usbcore: registered new interface driver hub
+[    0.032835] usbcore: registered new device driver usb
+[    0.033071] mc: Linux media interface: v0.10
+[    0.033117] videodev: Linux video capture interface: v2.00
+[    0.033367] Advanced Linux Sound Architecture Driver Initialized.
+[    0.035148] clocksource: Switched to clocksource arch_sys_counter
+[    0.046512] NET: Registered protocol family 2
+[    0.046725] IP idents hash table entries: 2048 (order: 2, 16384 bytes, linear)
+[    0.047467] tcp_listen_portaddr_hash hash table entries: 512 (order: 0, 6144 bytes, linear)
+[    0.047516] TCP established hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.047541] TCP bind hash table entries: 1024 (order: 1, 8192 bytes, linear)
+[    0.047566] TCP: Hash tables configured (established 1024 bind 1024)
+[    0.047723] UDP hash table entries: 256 (order: 1, 8192 bytes, linear)
+[    0.047778] UDP-Lite hash table entries: 256 (order: 1, 8192 bytes, linear)
+[    0.048072] NET: Registered protocol family 1
+[    0.050953] Initialise system trusted keyrings
+[    0.051357] workingset: timestamp_bits=30 max_order=14 bucket_order=0
+[    0.154311] Key type asymmetric registered
+[    0.154349] Asymmetric key parser 'x509' registered
+[    0.154450] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 250)
+[    0.154465] io scheduler mq-deadline registered
+[    0.154475] io scheduler kyber registered
+[    0.155640] sun4i-usb-phy 1c19400.phy: Couldn't request ID GPIO
+[    0.159579] sun8i-v3s-pinctrl 1c20800.pinctrl: initialized sunXi PIO driver
+[    0.227620] Serial: 8250/16550 driver, 8 ports, IRQ sharing disabled
+[    0.230174] sun8i-v3s-pinctrl 1c20800.pinctrl: supply vcc-pb not found, using dummy regulator
+[    0.231436] printk: console [ttyS0] disabled
+[    0.251780] 1c28000.serial: ttyS0 at MMIO 0x1c28000 (irq = 43, base_baud = 1500000) is a U6_16550A
+[    0.806409] printk: console [ttyS0] enabled
+[    0.837612] sun8i-v3s-pinctrl 1c20800.pinctrl: supply vcc-pc not found, using dummy regulator
+[    0.847942] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+[    0.854488] ehci-platform: EHCI generic platform driver
+[    0.860139] ehci-platform 1c1a000.usb: EHCI Host Controller
+[    0.865829] ehci-platform 1c1a000.usb: new USB bus registered, assigned bus number 1
+[    0.873759] ehci-platform 1c1a000.usb: irq 34, io mem 0x01c1a000
+[    0.905163] ehci-platform 1c1a000.usb: USB 2.0 started, EHCI 1.00
+[    0.912420] hub 1-0:1.0: USB hub found
+[    0.916387] hub 1-0:1.0: 1 port detected
+[    0.920990] ohci_hcd: USB 1.1 'Open' Host Controller (OHCI) Driver
+[    0.927356] ohci-platform: OHCI generic platform driver
+[    0.932929] ohci-platform 1c1a400.usb: Generic Platform OHCI controller
+[    0.939692] ohci-platform 1c1a400.usb: new USB bus registered, assigned bus number 2
+[    0.947726] ohci-platform 1c1a400.usb: irq 35, io mem 0x01c1a400
+[    1.020227] hub 2-0:1.0: USB hub found
+[    1.024069] hub 2-0:1.0: 1 port detected
+[    1.028926] usbcore: registered new interface driver usb-storage
+[    1.037055] sun6i-rtc 1c20400.rtc: registered as rtc0
+[    1.042178] sun6i-rtc 1c20400.rtc: setting system clock to 1970-01-01T00:04:53 UTC (293)
+[    1.050385] sun6i-rtc 1c20400.rtc: RTC enabled
+[    1.055017] i2c /dev entries driver
+[    1.060075] sun8i-v3s-pinctrl 1c20800.pinctrl: pin PB6 already requested by 1c2ac00.i2c; cannot claim for 1c2b000.i2c
+[    1.070792] sun8i-v3s-pinctrl 1c20800.pinctrl: pin-38 (1c2b000.i2c) status -22
+[    1.078037] sun8i-v3s-pinctrl 1c20800.pinctrl: could not request pin 38 (PB6) from group PB6  on device 1c20800.pinctrl
+[    1.088820] mv64xxx_i2c 1c2b000.i2c: Error applying setting, reverse things back
+[    1.096244] mv64xxx_i2c: probe of 1c2b000.i2c failed with error -22
+[    1.102668] usbcore: registered new interface driver zr364xx
+[    1.108467] usbcore: registered new interface driver stkwebcam
+[    1.114348] usbcore: registered new interface driver s2255
+[    1.119987] usbcore: registered new interface driver uvcvideo
+[    1.125781] USB Video Class driver (1.1.1)
+[    1.129940] usbcore: registered new interface driver Philips webcam
+[    1.137176] sunxi-wdt 1c20ca0.watchdog: Watchdog enabled (timeout=16 sec, nowayout=0)
+[    1.145986] hid: raw HID events driver (C) Jiri Kosina
+[    1.151549] sun8i-v3s-pinctrl 1c20800.pinctrl: supply vcc-pf not found, using dummy regulator
+[    1.161558] sun8i-v3s-pinctrl 1c20800.pinctrl: supply vcc-pg not found, using dummy regulator
+[    1.171889] usbcore: registered new interface driver usbkbd
+[    1.177641] usbcore: registered new interface driver usbmouse
+[    1.183515] fb_st7789v spi0.0: fbtft_property_value: buswidth = 8
+[    1.189674] fb_st7789v spi0.0: fbtft_property_value: debug = 0
+[    1.195530] fb_st7789v spi0.0: fbtft_property_value: rotate = 90
+[    1.201534] fb_st7789v spi0.0: fbtft_property_value: fps = 60
+[    1.233155] sunxi-mmc 1c10000.mmc: initialized, max. request size: 16384 KB
+[    1.240812] sunxi-mmc 1c0f000.mmc: initialized, max. request size: 16384 KB
+[    1.264369] mmc1: new high speed SDIO card at address 0001
+[    1.283402] mmc0: host does not support reading read-only switch, assuming write-enable
+[    1.293235] mmc0: Problem switching card into high-speed mode!
+[    1.299263] mmc0: new SDHC card at address 0001
+[    1.304867] mmcblk0: mmc0:0001 00000 3.72 GiB
+[    1.312461]  mmcblk0: p1 p2
+[    2.298412] random: fast init done
+[    2.324402] Console: switching to colour frame buffer device 40x30
+[    2.332638] graphics fb0: fb_st7789v frame buffer, 320x240, 150 KiB video memory, 4 KiB buffer memory, fps=100, spi0.0 at 96 MHz
+[    2.367539] sun4i-codec 1c22c00.codec: Failed to register our card
+[    2.375328] Initializing XFRM netlink socket
+[    2.379661] NET: Registered protocol family 17
+[    2.385394] Registering SWP/SWPB emulation handler
+[    2.390293] Loading compiled-in X.509 certificates
+[    2.403716] usb_phy_generic usb_phy_generic.1.auto: supply vcc not found, using dummy regulator
+[    2.413909] musb-hdrc musb-hdrc.2.auto: MUSB HDRC host driver
+[    2.419795] musb-hdrc musb-hdrc.2.auto: new USB bus registered, assigned bus number 3
+[    2.429252] hub 3-0:1.0: USB hub found
+[    2.433106] hub 3-0:1.0: 1 port detected
+[    2.439528] debugfs: Directory '1c22c00.codec' with parent 'V3s Audio Codec' already present!
+[    2.452572] cfg80211: Loading compiled-in X.509 certificates for regulatory database
+[    2.464627] cfg80211: Loaded X.509 cert 'sforshee: 00b28ddf47aef9cea7'
+[    2.471446] ALSA device list:
+[    2.474428]   #0: V3s Audio Codec
+[    2.478574] platform regulatory.0: Direct firmware load for regulatory.db failed with error -2
+[    2.487308] cfg80211: failed to load regulatory.db
+[    2.555605] EXT4-fs (mmcblk0p2): warning: mounting fs with errors, running e2fsck is recommended
+[    2.567333] EXT4-fs (mmcblk0p2): mounted filesystem with ordered data mode. Opts: (null)
+[    2.575666] VFS: Mounted root (ext4 filesystem) on device 179:2.
+[    2.596083] devtmpfs: mounted
+[    2.600296] Freeing unused kernel memory: 1024K
+[    2.605052] Run /sbin/init as init process
+[    2.609237]   with arguments:
+[    2.609244]     /sbin/init
+[    2.609249]     earlyprintk
+[    2.609253]   with environment:
+[    2.609258]     HOME=/
+[    2.609261]     TERM=linux
+[    3.549338] systemd[1]: System time before build time, advancing clock.
+[    3.596604] systemd[1]: Failed to find module 'autofs4'
+[    3.658114] systemd[1]: systemd 241 running in system mode. (+PAM +AUDIT +SELINUX +IMA +APPARMOR +SMACK +SYSVINIT +UTMP +LIBCRYPTSETUP +GCRYPT +GNUTLS +ACL +XZ +LZ4 +SECCOMP +BLKID +ELFUTILS +KMOD -IDN2 +IDN -PCRE2 default-hierarchy=hybrid)
+[    3.680328] systemd[1]: Detected architecture arm.
+[    3.717048] systemd[1]: Set hostname to <SnailPi>.
+[    4.631724] systemd[1]: File /lib/systemd/system/systemd-journald.service:12 configures an IP firewall (IPAddressDeny=any), but the local system does not support BPF/cgroup based firewalling.
+[    4.650214] systemd[1]: Proceeding WITHOUT firewalling in effect! (This warning is only shown for the first loaded unit using IP firewalling.)
+[    5.125637] random: systemd: uninitialized urandom read (16 bytes read)
+[    5.140766] random: systemd: uninitialized urandom read (16 bytes read)
+[    5.148761] systemd[1]: Listening on Syslog Socket.
+[    5.185532] random: systemd: uninitialized urandom read (16 bytes read)
+[    5.193284] systemd[1]: Listening on udev Control Socket.
+[    5.236168] systemd[1]: Started Dispatch Password Requests to Console Directory Watch.
+[    5.278081] systemd[1]: Created slice system-getty.slice.
+[    5.315560] systemd[1]: Reached target Remote File Systems.
+[    6.508163] Adding 524284k swap on /swap1.  Priority:-2 extents:3 across:655356k SS
+[    6.679321] systemd-journald[83]: Received request to flush runtime journal from PID 1
+[    7.417261] EXT4-fs error (device mmcblk0p2): ext4_mb_generate_buddy:805: group 0, block bitmap and bg descriptor inconsistent: 6 vs 7 free clusters
+[    7.507924] EXT4-fs error (device mmcblk0p2): ext4_validate_block_bitmap:390: comm systemd: bg 2: bad block bitmap checksum
+[    8.710049] r8723bs: module is from the staging directory, the quality is unknown, you have been warned.
+[    8.995581] RTL8723BS: module init start
+[    8.999543] RTL8723BS: rtl8723bs v4.3.5.5_12290.20140916_BTCOEX20140507-4E40
+[    9.006786] RTL8723BS: rtl8723bs BT-Coex version = BTCOEX20140507-4E40
+[    9.118314] pnetdev = (ptrval)
+[    9.685838] random: crng init done
+[    9.689277] random: 7 urandom warning(s) missed due to ratelimiting
+[   10.278227] RTL8723BS: rtw_ndev_init(wlan0)
+[   10.297333] RTL8723BS: module init ret =0
+[   18.222092] rtl8723bs: acquire FW from file:rtlwifi/rtl8723bs_nic.bin
+[   19.799450] sunxi-mmc 1c10000.mmc: data error, sending stop command
+[   19.806001] sunxi-mmc 1c10000.mmc: data error, sending stop command
+[   19.968644] sunxi-mmc 1c10000.mmc: data error, sending stop command
+[   19.975068] sunxi-mmc 1c10000.mmc: data error, sending stop command
+[   21.664947] sunxi-mmc 1c10000.mmc: data error, sending stop command
+[   32.485201] vcc3v0: disabling
+[   32.488207] vcc5v0: disabling
+root@SnailPi:~# [   53.477165] rc.local[171]: Cannot connect to J-Link. Retrying in 5 seconds...
+c[   53.973491] rc.local[171]: udhcpc: sending discover
+
+-bash: c：未找到命令
+root@SnailPi:~# cd /etc/ini[   56.979897] rc.local[171]: udhcpc: sending discover
+t.d/
+root@SnailPi:/etc/init.d# ls[   58.674813] rc.local[171]: Cannot connect to J-Link. Retrying in 5 seconds...
+
+alsa-utils  hwclock.sh  lm-sensors  nginx    ssh   x11-common
+cron        kmod        motion      procps   sudo
+dbus        leanote.sh  networking  rsyslog  udev
+root@SnailPi:/etc/init.d# [   59.988413] rc.local[171]: udhcpc: sending discover
+[   64.151773] rc.local[171]: Cannot connect to J-Link. Retrying in 5 seconds...
+
+root@SnailPi:/etc/init.d#
+root@SnailPi:/etc/init.d#
+root@SnailPi:/etc/init.d# cat leanote.sh
+
+#!/bin/sh
+
+### BEGIN INIT INFO
+    # Provides:Leanote
+    # Required-Start: $network $remote_fs $local_fs
+    # Required-Stop: $network $remote_fs $local_fs
+    # Default-Start: 2 3 4 5
+    # Default-Stop: 0 1 6
+    # Short-Description: Leanote
+    # Description: Leanote start
+### END INIT INFO
+
+ifconfig wlan0 up
+sleep 1
+wpa_supplicant -B -i wlan0 -c /etc/wpa_supplicant.conf
+sleep 3
+udhcpc -i wlan0
+sleep 5
+JLinkRemoteServerCLExe -Port 19020
+
+exit 0
+root@SnailPi:/etc/init.d# [   69.651039] rc.local[171]: Cannot connect to J-Link. Retrying in 5 seconds...
+[   75.146503] rc.local[171]: Cannot connect to J-Link. Retrying in 5 seconds...
+[   80.336511] rc.local[171]: Cannot connect to J-Link. Retrying in 5 seconds...
+[   83.140312] rc.local[171]: udhcpc: sending discover
+[   85.841555] rc.local[171]: Cannot connect to J-Link. Retrying in 5 seconds...
+[   86.144007] rc.local[171]: udhcpc: sending discover
+[   89.154511] rc.local[171]: udhcpc: sending discover
+[   91.296702] rc.local[171]: Cannot connect to J-Link. Retrying in 5 seconds...
+[   96.794770] rc.local[171]: Cannot connect to J-Link. Retrying in 5 seconds...
+[  101.994044] rc.local[171]: Cannot connect to J-Link. Retrying in 5 seconds...
+
+# uname -a
+Linux SnailPi 5.10.81 #21 SMP Thu Jan 6 08:26:23 CST 2022 armv7l GNU/Linux
