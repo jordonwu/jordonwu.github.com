@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "TI Board Guide"
+title: "TI Board Usage Guide"
 date: 2024-12-20 12:00:00 +0800
 comments: true
 categories: ti am62x am62ax
@@ -37,6 +37,7 @@ Be sure to select “No” when you are asked to use dash as the default system 
 
 ####    1.1.2 Setting proxy if need
 Assume your proxy as below:
+
 ```
 http://127.0.0.1:7890
 ```
@@ -62,6 +63,7 @@ ftp_proxy=http://127.0.0.1:7890
 no_proxy = 127.0.0.1
 use_proxy=on
 ```
+
 * apt proxy
 ```
 $ sudo apt-get -o Acquire::http::proxy="http://127.0.0.1:7890" update

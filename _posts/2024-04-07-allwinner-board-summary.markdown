@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "allwinner board summary"
+title: " Allwinner Board Usage Guide"
 date: 2024-04-07 15:00:00 +0800
 comments: true
 categories: allwinner v3s
 ---
 
-# allwinner board summary
+# <center> Allwinner Board Usage Guide
 
 ## 1. licheepi nano board(base on F1C100s)
 ### 1.1 uboot
