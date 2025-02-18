@@ -50,3 +50,8 @@ $ bitbake <package_name>
 
 ## 99. Reference Link
 
+1> [Framos implementation of image sensor drivers for NXP platform](https://github.com/framosimaging/framos-nxp-drivers/tree/lf-6.6.3_1.0.0)
+
+2> [A Quick Tour into I.MX8MP Media Subsystem](https://gist.github.com/Scott31393/077a10024a6058536d3f2fdde476265a)
+
+3> [alvium_drv](https://github.com/avs-sas/linux/tree/tm/media_stage/master/master/alvium_drv)
