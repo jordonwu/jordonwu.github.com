@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Windows Usage Summary"
-date: 2025-02-12 10:00:00 +0800
+date: 2024-03-01 10:00:00 +0800
 comments: true
 categories: windows cmd wmim
 ---

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Git Usage Summary"
-date: 2025-03-02 10:00:00 +0800
+date: 2024-03-01 10:00:00 +0800
 comments: true
 categories: git github
 ---
