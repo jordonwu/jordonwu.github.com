@@ -19,4 +19,6 @@ categories: windows cmd wmim
 ```
 
 ## 99. Reference Link
+1> [xcopy - Handy tool on windows](https://www.petefreitag.com/blog/xcopy-tool-windows/)
+
 
