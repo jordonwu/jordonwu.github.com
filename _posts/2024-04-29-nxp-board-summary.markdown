@@ -55,4 +55,7 @@ $ bitbake <package_name>
 2> [A Quick Tour into I.MX8MP Media Subsystem](https://gist.github.com/Scott31393/077a10024a6058536d3f2fdde476265a)
 
 3> [alvium_drv](https://github.com/avs-sas/linux/tree/tm/media_stage/master/master/alvium_drv)
+
 4> [OS08A20 ISP Sensor on i.MX 8M Plus EVK - NXP](https://www.nxp.com.cn/docs/en/application-note/AN13712.pdf)
+
+5> [S32G399ARDB3-Yocto/Bitbake error](https://community.nxp.com/t5/S32G/S32G399ARDB3-Yocto-Bitbake-error/m-p/1980570?profile.language=zh-CN)
