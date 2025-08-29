@@ -106,6 +106,22 @@ proxy="127.0.0.1:7890"
 proxy="127.0.0.1:7890"
 ```
 
+## 90. Linux command usage
+### 90.1 find command
+* To find files larger than 100MB
+```
+find . -type f -size +100M
+```
+
+* To find files larger than 100MB of current dir only
+```
+find . -maxdepth 1 -type f -size +100M
+```
+
+* find files larger than 100M of /foo/bar dir and delete it
+```
+$ find /foo/bar -type f -size +100M -print | xargs rm
+```
 ## 99. Reference Link
 1) [How to Install and Configure Samba on Ubuntu 24.04](https://www.veeble.com/kb/how-to-install-and-configure-samba-on-ubuntu-24-04/)
 
