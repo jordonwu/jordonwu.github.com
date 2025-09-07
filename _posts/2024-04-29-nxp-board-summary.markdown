@@ -8,15 +8,23 @@ categories: nxp imx8 imx9
 
 # <center> NXP Board Usage Guide
 
-## 1. imx8mpevk board
-### 1.1 build yocto image
+## Host Env for Yocto build
 ```
 $ sudo apt install -y gawk wget git-core diffstat unzip texinfo \
     gcc-multilib build-essential chrpath socat file cpio python3 \
     python3-pip python3-pexpect xz-utils debianutils iputils-ping \
     libsdl1.2-dev xterm tar locales net-tools rsync sudo vim curl zstd \
     liblz4-tool libssl-dev bc lzop libgnutls28-dev efitools git-lfs
+$ mkdir ~/bin
+$ curl http://commondatastorage.googleapis.com/git-repo-downloads/repo  > ~/bin/repo
+$ chmod a+x ~/bin/repo
+$ export PATH=${PATH}:~/bin
+```
 
+
+## imx8mpevk board
+### build yocto image base on imx-6.6.52-2.2.0_custom.xml
+```
 $ repo init -u https://github.com/jordonwu/nxp-imx_imx-manifest.git -b imx-linux-scarthgap -m imx-6.6.52-2.2.0_custom.xml
 $ repo sync -j`nproc`
 $ EULA=1 MACHINE=imx8mpevk DISTRO=fsl-imx-xwayland source ./imx-setup-release.sh -b bld-xwayland
@@ -42,10 +50,64 @@ $ bitbake -ccleansstate <package_name>
 $ bitbake <package_name>
 ```
 
-### 1.2 build buildroot image
-```
+## imx95evk board
+### build yocto image base on imx-6.12.20-2.0.0.xml
 
 ```
+$ mkdir imx_yocto_bsp
+$ repo init -u https://github.com/nxp-imx/imx-manifest -b imx-linux-walnascar -m imx-6.12.20-2.0.0.xml
+$ repo sync -j`nproc`
+$ EULA=1 MACHINE=imx95evk DISTRO=fsl-imx-wayland source ./imx-setup-release.sh -b bld-wayland
+
+//modify local.conf if need
+$ cat conf/local.conf
+MACHINE ??= 'imx95evk'
+DISTRO ?= 'fsl-imx-wayland'
+EXTRA_IMAGE_FEATURES ?= "allow-empty-password empty-root-password allow-root-login"
+USER_CLASSES ?= "buildstats"
+PATCHRESOLVE = "noop"
+BB_DISKMON_DIRS ??= "\
+    STOPTASKS,${TMPDIR},1G,100K \
+    STOPTASKS,${DL_DIR},1G,100K \
+    STOPTASKS,${SSTATE_DIR},1G,100K \
+    STOPTASKS,/tmp,100M,100K \
+    HALT,${TMPDIR},100M,1K \
+    HALT,${DL_DIR},100M,1K \
+    HALT,${SSTATE_DIR},100M,1K \
+    HALT,/tmp,10M,1K"
+PACKAGECONFIG:append:pn-qemu-system-native = " sdl"
+CONF_VERSION = "2"
+
+#DL_DIR ?= "${BSPDIR}/downloads/"
+DL_DIR="${BSPDIR}/../yocto_downloads"
+SSTATE_DIR="${BSPDIR}/../yocto_sstate-cache"
+
+INHERIT += "rm_work"
+RM_WORK_EXCLUDE += "u-boot-imx"
+RM_WORK_EXCLUDE += "linux-imx"
+
+ACCEPT_FSL_EULA = "1"
+
+# Switch to Debian packaging and include package-management in the image
+PACKAGE_CLASSES = "package_deb"
+EXTRA_IMAGE_FEATURES += "package-management"
+
+//build minimal image
+$ bitbake -k core-image-minimal
+//download source only
+$ bitbake -k core-image-minimal --runall=fetch
+
+//build core image
+$ bitbake -k imx-image-core
+
+//build multimedia and graphics image
+$ bitbake -k imx-image-multimedia
+
+//build image with multimedia and machine learning and Qt
+$ bitbake -k imx-image-full
+```
+
+### flash image to board
 
 
 ## 99. Reference Link

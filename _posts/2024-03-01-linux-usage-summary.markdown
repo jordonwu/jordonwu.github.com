@@ -91,9 +91,28 @@ use_proxy=on
 ```
 
 * apt proxy
+For console
 ```
 $ sudo apt-get -o Acquire::http::proxy="http://127.0.0.1:7890" update
 $ sudo apt-get -o Acquire::http::proxy="http://127.0.0.1:7890" install xxx
+```
+
+For configure file
+```
+$ cat /etc/apt/apt.conf.d/proxy.conf
+
+Acquire::http::Proxy "http://127.0.0.1:7890";
+Acquire::https::Proxy "http://127.0.0.1:7890";
+or
+Acquire::http::Proxy "http://username:password@yourproxyaddress:proxyport";
+Acquire::https::Proxy "http://username:password@yourproxyaddress:proxyport";
+```
+
+* curl proxy
+```
+$ curl -x "http://user:pwd@127.0.0.1:1234" "http://httpbin.org/ip"
+$ curl --proxy "http://user:pwd@127.0.0.1:1234" "http://httpbin.org/ip"
+$ curl --socks5 socks5_proxy:port http://www.example.com
 ```
 
 ## 3. Rust cargo http proxy configure
