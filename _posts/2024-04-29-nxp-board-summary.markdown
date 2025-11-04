@@ -109,6 +109,68 @@ $ bitbake -k imx-image-full
 
 ### flash image to board
 
+## imx95-15x15-frdm board
+### build yocto image base on imx-6.12.34-2.1.0.xml
+
+```
+$ mkdir imx_yocto_bsp
+$ repo init -u https://github.com/nxp-imx/imx-manifest -b imx-linux-walnascar -m imx-6.12.34-2.1.0.xml
+$ repo sync -j`nproc`
+$ EULA=1 MACHINE=imx95-15x15-lpddr4x-frdm DISTRO=fsl-imx-xwayland source ./imx-setup-release.sh -b bld-xwayland
+
+//modify local.conf if need
+$ cat conf/local.conf
+MACHINE ??= 'imx95-15x15-lpddr4x-frdm'
+DISTRO ?= 'fsl-imx-xwayland'
+EXTRA_IMAGE_FEATURES ?= "allow-empty-password empty-root-password allow-root-login"
+USER_CLASSES ?= "buildstats"
+PATCHRESOLVE = "noop"
+BB_DISKMON_DIRS ??= "\
+    STOPTASKS,${TMPDIR},1G,100K \
+    STOPTASKS,${DL_DIR},1G,100K \
+    STOPTASKS,${SSTATE_DIR},1G,100K \
+    STOPTASKS,/tmp,100M,100K \
+    HALT,${TMPDIR},100M,1K \
+    HALT,${DL_DIR},100M,1K \
+    HALT,${SSTATE_DIR},100M,1K \
+    HALT,/tmp,10M,1K"
+PACKAGECONFIG:append:pn-qemu-system-native = " sdl"
+CONF_VERSION = "2"
+
+#DL_DIR ?= "${BSPDIR}/downloads/"
+DL_DIR="${BSPDIR}/../yocto_dl"
+SSTATE_DIR="${BSPDIR}/../yocto_sstate-cache"
+
+INHERIT += "rm_work"
+RM_WORK_EXCLUDE += "u-boot-imx"
+RM_WORK_EXCLUDE += "linux-imx"
+
+BB_NUMBER_THREADS = "8"
+PARALLEL_MAKE = "-j 8"
+
+ACCEPT_FSL_EULA = "1"
+
+# Switch to Debian packaging and include package-management in the image
+PACKAGE_CLASSES = "package_deb"
+EXTRA_IMAGE_FEATURES += "package-management"
+
+
+
+//build minimal image
+$ bitbake -k core-image-minimal
+//download source only
+$ bitbake -k core-image-minimal --runall=fetch
+
+//build core image
+$ bitbake -k imx-image-core
+
+//build multimedia and graphics image
+$ bitbake -k imx-image-multimedia
+
+//build image with multimedia and machine learning and Qt
+$ bitbake -k imx-image-full
+```
+
 
 ## 99. Reference Link
 
@@ -121,3 +183,17 @@ $ bitbake -k imx-image-full
 4> [OS08A20 ISP Sensor on i.MX 8M Plus EVK - NXP](https://www.nxp.com.cn/docs/en/application-note/AN13712.pdf)
 
 5> [S32G399ARDB3-Yocto/Bitbake error](https://community.nxp.com/t5/S32G/S32G399ARDB3-Yocto-Bitbake-error/m-p/1980570?profile.language=zh-CN)
+
+6> [TechNexion Developer Portal](https://developer.technexion.com)
+
+7> [Embedded Linux for i.MX Applications Processors](https://www.nxp.com/design/design-center/software/embedded-software/i-mx-software/embedded-linux-for-i-mx-applications-processors:IMXLINUX)
+
+
+## 100. FAQ
+1> ERROR: User namespaces are not usable by BitBake, possibly due to AppArmor
+What works for me is running the following command:
+```
+$ sudo apparmor_parser -R /etc/apparmor.d/unprivileged_userns
+```
+and then running bitbake.
+Ref: https://community.nxp.com/t5/S32G/S32G399ARDB3-Yocto-Bitbake-error/m-p/1980570?profile.language=zh-CN
